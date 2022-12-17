@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+        <meta name="author" content="Sen">
+        <meta name="keywords" content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
+        Aquilegia, autrice, LGBTQ, Senzen, Senzen_Travers, romans">
+        <meta name="description" content="Découvrez les romans et les nouvelles de Sen. Au menu :
+            du M/M, de la fantasy et de l'action !">
+
+        <title>{% block title %}Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}</title>
+        <link rel="stylesheet" href="">
+        <link rel="icon" href="" type="image/icon">
+    </head>
+
+    <body>
+        <header>
+            <section class="bannerTitle">
+                <p class="bannerTitle">Sen Senestre</p>
+                <p class="bannerSubTitle">Autrice M/M & fantasy</p>
+            </section>
+
+            <nav>
+                <ul>
+                    <li><a href="{% url 'homepage' %}">Accueil</a></li>
+                    <li><a href="{% url 'about' %}">À propos</a></li>
+                    <li><a href="{% url 'archives:index' %}">Me lire</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="content">
+            <h1>
+            {% block pageTitle %}
+            Sen Senestre, Autrice M/M & fantasy
+            {% endblock %}
+            </h1>
+
+            {% block content %}
+            {% endblock %}
+        </section>
+
+        <footer>
+            Copyright 2022 by Sen
+        </footer>
+    </body>
+</html>
