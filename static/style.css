@@ -1,0 +1,292 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0%;
+    padding: 0%;
+    width: 100%;
+    min-height: 100vh;
+    font-family: "Libre Baskerville", "PT Serif", serif;
+    line-height: 2em;
+    background-color: #4C223D;
+    color: #D3B1C2;
+}
+
+h1 {
+    /*IM Fell DW Pica for more*/ 
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    text-align: center;
+    font-size: 2em;
+    color: #E7E6E1;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    color: #E7E6E1;
+}
+
+li {
+    list-style: none;
+}
+
+strong, a {
+    color:#E7E6E1;
+}
+
+a:hover {
+    color: #E7E6E1;
+}
+
+header {
+    font-family: 'IM Fell DW Pica', "Libre Baskerville", serif;    
+    color:#E7E6E1;
+    background: rgb(76,34,61);
+    background: linear-gradient(180deg, rgba(76,34,61,1) 0%, rgba(112,58,75,1) 42%, rgba(76,34,61,1) 100%);
+
+}
+
+header a {
+    text-decoration: none;
+    color: #D3B1C2;
+}
+
+.bannerBlockTitle p {
+    margin: 0;
+}
+
+.bannerTitle {
+    font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
+    font-size: 4em;
+    text-align: center;
+}
+
+.bannerSubtitle {
+    margin: none;
+    font-family: 'IM Fell DW Pica', serif;
+    font-size: larger;
+    font-style: italic;
+    text-align: center;
+}
+
+@media screen and (min-width: 1001px) {
+    header {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+        font-size: 1.5em;
+    }
+
+    .bannerSubtitle {
+        font-size: larger;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+        justify-content: space-around;
+    }
+
+    header nav li {
+        margin: 0.5em;
+        font-size: 2em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 4em;
+    }
+
+    h1 {
+        font-size: 3em;
+    }
+
+    h2 {
+        margin-top: 2em;
+        margin-left: 2em;
+    }
+    
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    header {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+        justify-content: space-around;
+    }
+
+    header nav li {
+        margin: 0.5em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 4em;
+    }
+
+    h2 {
+        margin-top: 2em;
+        margin-left: 2em;
+    }
+    
+}
+
+/*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
+@media screen and (min-width: 601px) and (max-width: 800px) {
+    header {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header nav li {
+        margin: 0.5em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 0%;
+    }
+}
+    
+@media screen and (max-width: 600px) {
+    header {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 1.5em;
+        padding-bottom: 1.5em;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: end;
+        font-size: larger;
+        margin-right: 0em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+    }
+}

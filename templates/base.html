@@ -5,7 +5,6 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
         <meta name="author" content="Sen">
         <meta name="keywords" content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
         Aquilegia, autrice, LGBTQ, Senzen, Senzen_Travers, romans">
@@ -13,15 +12,23 @@
             du M/M, de la fantasy et de l'action !">
 
         <title>{% block title %}Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}</title>
-        <link rel="stylesheet" href="">
         <link rel="icon" href="" type="image/icon">
-    </head>
+        <link rel="stylesheet" href="static/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
+            rel="stylesheet"> 
+        <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+        {% block custom_css %}{% endblock %}
+        </head>
 
     <body>
         <header>
-            <section class="bannerTitle">
+            <section class="bannerBlockTitle">
                 <p class="bannerTitle">Sen Senestre</p>
-                <p class="bannerSubTitle">Autrice M/M & fantasy</p>
+                <p class="bannerSubtitle">Autrice M/M & fantasy</p>
             </section>
 
             <nav>
@@ -32,20 +39,14 @@
                 </ul>
             </nav>
         </header>
-
-        <section class="content">
-            <h1>
-            {% block pageTitle %}
-            Sen Senestre, Autrice M/M & fantasy
-            {% endblock %}
-            </h1>
-
+            
             {% block content %}
             {% endblock %}
-        </section>
 
         <footer>
-            Copyright 2022 by Sen
+            Copyright 2022 by Sen |
+            Pour me contacter : <a href="https://www.instagram.com/sen_senestre/">Instagram</a>
+            ou par mail (gmail) @sentheseventh.
         </footer>
     </body>
 </html>
