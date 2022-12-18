@@ -28,10 +28,19 @@ h2 {
     color: #E7E6E1;
 }
 
+h3 {
+    font-style: italic;        
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-size: larger;
+}
+
 li {
     list-style: none;
 }
 
+p {
+    text-indent: 3ch;
+}
 strong, a {
     color:#E7E6E1;
 }
@@ -140,7 +149,46 @@ header a {
         margin-left: 2em;
     }
     
+    /* PAGE SPECIFICS: ABOUT */
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 2em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+        margin-top: 1em;
+        margin-left: 0;
+    }
+
+    .about > .bibliography {
+        font-size: 1em;
+    }
+
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
 }
+
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
     header {
@@ -201,6 +249,37 @@ header a {
         margin-left: 2em;
     }
     
+    /* PAGE SPECIFICS: ABOUT */
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 1.5em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+    }
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
 }
 
 /*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
@@ -250,7 +329,7 @@ header a {
         margin: 0%;
     }
 }
-    
+
 @media screen and (max-width: 600px) {
     header {
         display: grid;
@@ -289,4 +368,17 @@ header a {
         padding-right: 2em;
         text-align: justify;
     }
+}
+
+/* PAGE SPECIFICS */
+@counter-style thumbs {
+    system: cyclic;
+    symbols: "✯";
+    suffix: " ";
+  }
+
+
+.list-books > li {
+    list-style: thumbs !important;
+    line-height: 2.5em;
 }
