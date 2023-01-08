@@ -2,7 +2,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home2/jutn1003/repositories/senestre/public_html/
-    - /bin/cp -R .git/core/ $DEPLOYPATH
+    - /bin/cp -R ./core/ $DEPLOYPATH
     - /bin/cp -R ./accounts/ $DEPLOYPATH
     - /bin/cp -R ./archives/ $DEPLOYPATH
     - /bin/cp -R ./static/ $DEPLOYPATH
