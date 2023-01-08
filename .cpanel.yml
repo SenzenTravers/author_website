@@ -1,3 +1,13 @@
 ---
 deployment:
   tasks:
+    - export DEPLOYPATH=/home2/jutn1003/public_html/
+    - /bin/cp -R core $DEPLOYPATH
+    - /bin/cp -R accounts $DEPLOYPATH
+    - /bin/cp -R archives $DEPLOYPATH
+    - /bin/cp -R static $DEPLOYPATH
+    - /bin/cp -R staticfiles $DEPLOYPATH
+    - /bin/cp -R templates $DEPLOYPATH
+    - /bin/cp -R writer $DEPLOYPATH
+    - /bin/cp manage.py $DEPLOYPATH
+    - /bin/cp passenger_wsgi.py $DEPLOYPATH
