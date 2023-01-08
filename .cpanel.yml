@@ -9,5 +9,5 @@ deployment:
     - /bin/cp -R staticfiles $DEPLOYPATH
     - /bin/cp -R templates $DEPLOYPATH
     - /bin/cp -R writer $DEPLOYPATH
-    - /bin/cp -R manage.py $DEPLOYPATH
-    - /bin/cp -R passenger_wsgi.py $DEPLOYPATH
+    - /bin/cp manage.py $DEPLOYPATH
+    - /bin/cp passenger_wsgi.py $DEPLOYPATH
