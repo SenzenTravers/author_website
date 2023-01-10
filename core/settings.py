@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'www.yourdomain.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'senestre-coquecigrues.fr']
 
 
 # Application definition
