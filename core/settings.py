@@ -18,9 +18,9 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'blebleble'),
-    DB_NAME=(str, 'aname'),
-    DB_USER_NAME=(str, 'another_name'),
-    DB_USER_PASSWORD=(str, 'password')
+    DB_NAME=(str, 'bleh'),
+    DB_USER_NAME=(str, 'bleh'),
+    DB_USER_PASSWORD=(str, 'bleh')
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -105,10 +105,9 @@ else:
             'USER': env('DB_USER_NAME'),
             'PASSWORD': env('DB_USER_PASSWORD'),
             'HOST': '127.0.0.1',
-            'PORT': '3306',
+            'PORT': '5432',
         }
     }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
