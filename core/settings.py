@@ -16,7 +16,11 @@ from pathlib import Path
 
 env = environ.Env(
     # set casting, default value
-    DEBUG=(bool, False)
+    DEBUG=(bool, True),
+    SECRET_KEY=(str, 'blebleble'),
+    DB_NAME=(str, 'aname'),
+    DB_USER_NAME=(str, 'another_name'),
+    DB_USER_PASSWORD=(str, 'password')
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,9 +32,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-# SECRET_KEY = env('SECRET_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['127.0.0.1', 'senestre-coquecigrues.fr']
 
@@ -86,12 +90,24 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if DEBUG == True:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER_NAME'),
+            'PASSWORD': env('DB_USER_PASSWORD'),
+            'HOST': '127.0.0.1',
+            'PORT': '3306',
+        }
+    }
 
 
 # Password validation
@@ -126,8 +142,6 @@ LANGUAGES = [
 ]
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
