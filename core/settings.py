@@ -100,12 +100,12 @@ if DEBUG == True:
 else:
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'ENGINE': 'django.db.backends.mysql',
             'NAME': env('DB_NAME'),
             'USER': env('DB_USER_NAME'),
             'PASSWORD': env('DB_USER_PASSWORD'),
             'HOST': '127.0.0.1',
-            'PORT': '5432',
+            'PORT': '3306',
         }
     }
 
