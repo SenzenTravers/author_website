@@ -9,31 +9,18 @@
 </section>
 
 <section class="content-block news">
-    <h1>Quoi de neuf ? (12/01/2023)</h1>
-    <h2>Pourquoi ce site ?</h2>
-    <p>Comme vous l'avez peut-être lu, Aquilegia n'est plus. Le monde n'étant hélas pas prêt à accueillir des romans en bonhomme bâtonnet (QUOIQUE... ??),
-    j'ai donc décidé de construire un site où héberger mes projets : romans, nouvelles, et qui sait ? Peut-être visual novels (mais sans visual, du coup).</p>
+    <h1>Quoi de neuf ? ({{ latest_posts.0.date }})</h1>
 
-    <h2>Projets d'avenir</h2>
-    <p>Soyons honnêtes : pour l'instant, je compte me remettre doucement de la fin de presque neuf ans de projet et d'enthousiasme.
-    J'ai quelques projets en tête, mais rien de concret pour le moment.
-    </p>
-    <p>En attendant, je vais continuer à améliorer ce site au fil du/des mois et vous invite
-         donc à nous revoir le <strong>31 janvier</strong>
-        pour plus de nouvelles, voire un peu de lecture !</p>
+    <div>
+    {% for post in latest_posts %}
+        {% if post != latest_posts.0 %}
+            <p style="text-align:right;">{{ post.date }}</p>
+        {% endif %}
 
-    <h2>Vous avez des questions, des projets de collaboration...</h2>
-    <p>Je vous invite à me contacter sur gmail à @sentheseventh ou, si vous êtes d'humeur sociable,
-        à joindre <a href="https://discord.gg/fBjc6H3Rbd">le serveur Discord très zen</a> que j'administre (?)
-        et où l'on discute occasionnellement écriture.
-    </p>
-
-    <h2>Le mot de la fin</h2>
-    <p>
-        Je l’ai beaucoup redit, mais c’était sincère : si vous étiez lecteur d'Aquilegia, merci infiniment pour votre soutien !
-        je trouve peu de choses plus gratifiantes que de voir quelqu’un revenir après avoir aimé l’un de mes livres. 
-        Aujourd’hui, mes plus beaux souvenirs restent toutes les interactions avec nos lecteurs – vos retours,
-        votre enthousiasme, vos encouragements et vos remarques… 
-        Encore une fois, merci mille fois à tous !</p>
+        {% autoescape off %}
+        {{ post.body }}
+        {% endautoescape %}    
+    {% endfor %}
+    </div>
 </section>
     {% endblock %}
