@@ -382,3 +382,38 @@ header a {
     list-style: thumbs !important;
     line-height: 2.5em;
 }
+
+.fic_details {
+    background-color: #E7E6E1;
+    color: #4C223D;
+    text-align: justify;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 1em;
+    border-radius: 15px;
+    border: thick double #703A4B;
+    display: flex 1;
+    flex-flow: column;
+    
+    justify-content: baseline;
+    height: fit-content;
+    block-size: fit-content;
+    
+}
+
+.fic_details h2 {
+    color: #4C223D;
+    margin-top: 1%;
+    margin-bottom: 0%;
+}
+
+.fic_details a {
+    color: #4C223D;
+}
+
+.fic_details .detail_line {
+    margin: 0%;
+    margin-left: 4%;
+    font-style: italic;
+    font-size: 0.9em;
+}

@@ -5,9 +5,11 @@ from django.db import models
 class Author(models.Model):
     member = models.ForeignKey(Member,
         on_delete=models.CASCADE,
-        )
+        null=True)
     nickname = models.CharField(max_length=100, unique=True)
 
+    def __str__(self):
+        return self.nickname
 
 class Fic(models.Model):
     GEN = 'gen'
@@ -43,10 +45,11 @@ class Fic(models.Model):
         null=True
     )
     clap = models.IntegerField(default=0)
+    date = models.DateField(null=True)
     title = models.CharField(max_length=150)
     summary = models.TextField(max_length=1000)
-    author_note = models.TextField(max_length=1000)
-    pairing = models.CharField(max_length=200)
+    author_note = models.TextField(max_length=2000)
+    pairing = models.CharField(max_length=200, null=True)
     pairing_type = models.CharField(
         max_length=10,
         choices=PAIRING_CHOICES,
@@ -59,10 +62,18 @@ class Fic(models.Model):
     )
     complete = models.BooleanField(default=True)
 
+    def __str__(self):
+        return f"{self.author} : {self.title}"
+
+
 class Chapter(models.Model):
     fic = models.ForeignKey(Fic, on_delete=models.CASCADE)
-    title = models.CharField(max_length=150, default='')
+    title = models.CharField(max_length=150, null=True, blank=True)
+    author_note = models.TextField(max_length=2000, null=True, blank=True)
     content = models.TextField(max_length=50000)
+
+    def __str__(self):
+        return f"{self.fic}, chapter number"
 
 
 class Comment(models.Model):
@@ -78,3 +89,6 @@ class Comment(models.Model):
     content = models.TextField(
         max_length=3000
         )
+
+# TO ADD: concept de série
+# chapter_number (= automatiquement d'après le compte de chapitre précédent, mais peut être réglé à la main)

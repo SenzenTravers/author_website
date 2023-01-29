@@ -5,16 +5,32 @@ Romans, nouvelles et créations diverses
 {% endblock %}
 
 {% block content %}
-<p>À venir...</p>
-<div class="fic_details">
-<div>
-    
-    <h2>Title de fic par Auteur</h2>
-    <p class="details">M/M | Terminée</p>
-    <P>Un résumé est un résumé qui résume
-        mon résumé, ce qui fait un bon résumé
-    </P>
-</div>
 
-</div>
+<section>
+    <p>Vous trouverez ici mes fics, mais également celles d'auteurs et d'autrices
+        qui m'ont honorée de leurs textes !</p>
+</section>
+
+<section class="fics-list">
+
+    {% for fic in fics %}
+        <div class="fic_details">
+
+            <h2><a href="https://archiveofourown.org/works/4289976">{{ fic.title }}</a>, par {{ fic.author }}</h2>
+            <p class="detail_line">{{ fic.pairing_type }} | 
+                {{ fic.rating|capfirst }} 
+                | {% if fic.complete == True %}
+                    Complète
+                {% else %}
+                En cours
+                {% endif %}
+            </p>
+            <P>
+                {{ fic.summary }}
+            </P>
+
+        </div>
+    {% endfor %}
+
+</section>
 {% endblock %}
