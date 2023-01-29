@@ -21,3 +21,6 @@ urlpatterns = [
     path('', include('writer.urls')),
     path('archives', include('archives.urls', namespace='archives'))
 ]
+
+handler404 = "core.views.error_404"
+handler500 = "core.views.error_500"

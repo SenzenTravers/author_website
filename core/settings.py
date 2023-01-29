@@ -18,9 +18,9 @@ env = environ.Env(
     # set casting, default value
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'blebleble'),
-    DB_NAME=(str, 'bleh'),
-    DB_USER_NAME=(str, 'bleh'),
-    DB_USER_PASSWORD=(str, 'bleh')
+    DB_NAME=(str, 'bleble'),
+    DB_USER_NAME=(str, 'bleble'),
+    DB_USER_PASSWORD=(str, 'bleble')
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

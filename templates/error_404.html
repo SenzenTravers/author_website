@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block pageTitle %}
+Erreur 404 !
+{% endblock %}
+
+{% block content %}
+<div class="erreur">
+<p>Malheureusement, cette page n'existe pas !</p>
+<p>Je vous suggère de <a href="{% url 'homepage' %}">retourner sur la page d'accueil du site.</a></p>
+</div>
+{% endblock %}
