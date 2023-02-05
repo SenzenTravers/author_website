@@ -1,0 +1,24 @@
+{% extends '../base.html' %}
+
+{% block title %}
+{{ fic.title }}, par {{ fic.author }}
+{% endblock %}
+
+{% block content %}
+<section class="story">
+    <!-- <div class="story-buttons">
+        <button>Télécharger</button>
+    </div> -->
+    <h1>{{ fic.title }}</h1>
+    <h2>par {{ fic.author }}</h2>
+
+    <section class="story-body">
+        {% autoescape off %}
+        {{ current_chapter.content }}
+        {% endautoescape %}
+    </section>
+
+    <!-- {{ fic.clap }} -->
+</section>
+
+{% endblock %}

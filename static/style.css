@@ -417,3 +417,50 @@ header a {
     font-style: italic;
     font-size: 0.9em;
 }
+
+.fic_details .date {
+    text-align: right;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.story {
+    background-color: #E7E6E1;
+    color: #4C223D;
+    text-align: justify;
+    margin: 2em;
+    margin-top: 7%;
+    padding: 5%;
+    border: thin dotted #703A4B;
+    border-radius: 15px;
+}
+
+.story h1, h2 {
+    color: #4C223D;
+    text-align: center;
+    margin: 1%
+}
+
+.story .story-body {
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+.story .story-buttons {
+    display: flex;
+    flex-flow: row;
+    justify-content: end;
+    margin-bottom: 5%;
+    margin-right: 2%;
+}
+
+.story-buttons button {
+    color: #E7E6E1;
+    background-color: #703A4B;
+    padding: 2%;
+    border: #D3B1C2 medium double;
+    border-radius: 10px;
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-size: 1.5em;
+}

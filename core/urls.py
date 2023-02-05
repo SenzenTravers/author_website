@@ -19,7 +19,7 @@ from django.urls import include, path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('writer.urls')),
-    path('archives', include('archives.urls', namespace='archives'))
+    path('archives/', include('archives.urls', namespace='archives'))
 ]
 
 handler404 = "core.views.error_404"
