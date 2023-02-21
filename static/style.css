@@ -17,7 +17,7 @@ h1 {
     /*IM Fell DW Pica for more*/ 
     font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
     text-align: center;
-    font-size: 2em;
+    font-size: 3em;
     color: #E7E6E1;
     margin-top: 2em;
     margin-bottom: 1em;
@@ -26,6 +26,8 @@ h1 {
 h2 {
     font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
     color: #E7E6E1;
+    margin-top: 2em;
+    margin-left: 2em;
 }
 
 h3 {
@@ -43,6 +45,14 @@ p {
 }
 strong, a {
     color:#E7E6E1;
+}
+
+hr {
+    border-top: #703A4B thin dotted;
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-top: 3%;
+    margin-bottom: 3%;
 }
 
 a:hover {
@@ -139,15 +149,6 @@ header a {
         text-align: justify;
         margin: 4em;
     }
-
-    h1 {
-        font-size: 3em;
-    }
-
-    h2 {
-        margin-top: 2em;
-        margin-left: 2em;
-    }
     
     /* PAGE SPECIFICS: ABOUT */
     .about {
@@ -243,12 +244,12 @@ header a {
         text-align: justify;
         margin: 4em;
     }
-
-    h2 {
-        margin-top: 2em;
-        margin-left: 2em;
-    }
     
+    /* PAGE SPECIFICS: NEWS */
+    .content-block h1 {
+        color: red;
+        font-style: italic;
+    }
     /* PAGE SPECIFICS: ABOUT */
     .about {
         display: flex;
@@ -436,7 +437,13 @@ header a {
     border-radius: 15px;
 }
 
-.story h1, h2 {
+.story h1 {
+    color: #4C223D;
+    text-align: center;
+    margin: 1%
+}
+
+.story h2 {
     color: #4C223D;
     text-align: center;
     margin: 1%

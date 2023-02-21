@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from . import views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('writer.urls')),
-    path('archives/', include('archives.urls', namespace='archives'))
+    path('archives/', include('archives.urls', namespace='archives')),
+    path("favicon.ico", views.favicon),
 ]
 
 handler404 = "core.views.error_404"
