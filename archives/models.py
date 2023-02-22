@@ -70,7 +70,7 @@ class Chapter(models.Model):
     fic = models.ForeignKey(Fic, on_delete=models.CASCADE)
     title = models.CharField(max_length=150, null=True, blank=True)
     author_note = models.TextField(max_length=2000, null=True, blank=True)
-    content = models.TextField(max_length=200000)
+    content = models.TextField(max_length=1000000)
 
     def __str__(self):
         return f"{self.fic}, chapter number"
