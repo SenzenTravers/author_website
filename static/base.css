@@ -1,0 +1,421 @@
+@import "./banner.css"; /* Using a string */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin:0%;
+    padding: 0%;
+    width: 100%;
+    min-height: 100vh;
+    font-family: "Libre Baskerville", "PT Serif", serif;
+    line-height: 2em;
+    background-color: #4C223D;
+    color: #D3B1C2;
+}
+
+h1 {
+    /*IM Fell DW Pica for more*/ 
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    text-align: center;
+    font-size: 3em;
+    color: #E7E6E1;
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+h2 {
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    color: #E7E6E1;
+    margin-top: 2em;
+    margin-left: 2em;
+}
+
+h3 {
+    font-style: italic;        
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-size: larger;
+}
+
+li {
+    list-style: none;
+}
+
+p {
+    text-indent: 3ch;
+}
+strong, a {
+    color:#E7E6E1;
+}
+
+hr {
+    border-top: #703A4B thin dotted;
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+
+a:hover {
+    color: #E7E6E1;
+}
+
+@media screen and (min-width: 1001px) {
+    header {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+        font-size: 1.5em;
+    }
+
+    .bannerSubtitle {
+        font-size: larger;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+        justify-content: space-around;
+    }
+
+    header nav li {
+        margin: 0.5em;
+        font-size: 2em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 4em;
+    }
+    
+    /* PAGE SPECIFICS: ABOUT */
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 2em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+        margin-top: 1em;
+        margin-left: 0;
+    }
+
+    .about > .bibliography {
+        font-size: 1em;
+    }
+
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    header {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header ul {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        align-content: space-around;
+        justify-content: space-around;
+    }
+
+    header nav li {
+        margin: 0.5em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 4em;
+    }
+    
+    /* PAGE SPECIFICS: NEWS */
+    .content-block h1 {
+        color: red;
+        font-style: italic;
+    }
+    /* PAGE SPECIFICS: ABOUT */
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 1.5em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+    }
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
+}
+
+/*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
+@media screen and (min-width: 601px) and (max-width: 800px) {
+    header {
+        display: grid;
+        grid-template-columns: 60% 40%;
+        margin-bottom: 2em;
+        padding-left: 2em;
+        padding-right: 2em;
+    }
+
+    .bannerBlockTitle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        padding-top: 2.5em;
+        padding-bottom: 2.5em;
+        line-height: 3em;
+    }
+
+    header nav {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin-right: 2em;
+        font-size: larger;
+    }
+
+    header nav li {
+        margin: 0.5em;
+    }
+
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+        margin: 0%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    footer {
+        margin-top: 2em;
+        margin-bottom: 1em;
+        font-size: small;
+        font-style: italic;
+        text-align: center;
+        line-height: 1.5;
+    }
+
+    .content-block {
+        padding-left: 2em;
+        padding-right: 2em;
+        text-align: justify;
+    }
+}
+
+/* PAGE SPECIFICS */
+@counter-style thumbs {
+    system: cyclic;
+    symbols: "✯";
+    suffix: " ";
+  }
+
+
+.list-books > li {
+    list-style: thumbs !important;
+    line-height: 2.5em;
+}
+
+.fic_details {
+    background-color: #E7E6E1;
+    color: #4C223D;
+    text-align: justify;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 1em;
+    border-radius: 15px;
+    border: thick double #703A4B;
+    display: flex 1;
+    flex-flow: column;
+    
+    justify-content: baseline;
+    height: fit-content;
+    block-size: fit-content;
+    
+}
+
+.fic_details h2 {
+    color: #4C223D;
+    margin-top: 1%;
+    margin-bottom: 0%;
+}
+
+.fic_details a {
+    color: #4C223D;
+}
+
+.fic_details .detail_line {
+    margin: 0%;
+    margin-left: 4%;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
+.fic_details .date {
+    text-align: right;
+    font-style: italic;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.story {
+    background-color: #E7E6E1;
+    color: #4C223D;
+    text-align: justify;
+    margin: 2em;
+    margin-top: 7%;
+    padding: 5%;
+    border: thin dotted #703A4B;
+    border-radius: 15px;
+}
+
+.story h1 {
+    color: #4C223D;
+    text-align: center;
+    margin: 1%
+}
+
+.story h2 {
+    color: #4C223D;
+    text-align: center;
+    margin: 1%
+}
+
+.story .story-body {
+    margin-top: 7%;
+    margin-bottom: 5%;
+}
+
+.story .story-buttons {
+    display: flex;
+    flex-flow: row;
+    justify-content: end;
+    margin-bottom: 5%;
+    margin-right: 2%;
+}
+
+.story-buttons button {
+    color: #E7E6E1;
+    background-color: #703A4B;
+    padding: 2%;
+    border: #D3B1C2 medium double;
+    border-radius: 10px;
+    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-size: 1.5em;
+}

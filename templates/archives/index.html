@@ -8,8 +8,6 @@ Romans, nouvelles et créations diverses
 
 <section>
     <h1>Fics M/M et F/F</h1>
-    <p>Vous trouverez ici mes fics, mais également celles d'auteurs et d'autrices
-        qui m'ont honorée de leurs textes !</p>
 </section>
 
 <section class="fics-list">
@@ -27,7 +25,9 @@ Romans, nouvelles et créations diverses
                 {% endif %}
             </p>
             <P>
+                {% autoescape off %}
                 {{ fic.summary }}
+                {% endautoescape %}
             </P>
 
         </div>

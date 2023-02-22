@@ -48,7 +48,7 @@ class Fic(models.Model):
     date = models.DateField(null=True)
     title = models.CharField(max_length=150)
     summary = models.TextField(max_length=1000)
-    author_note = models.TextField(max_length=2000, null=True)
+    author_note = models.TextField(max_length=2000, null=True, blank=True)
     pairing = models.CharField(max_length=200, null=True)
     pairing_type = models.CharField(
         max_length=10,
