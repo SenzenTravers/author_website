@@ -6,6 +6,8 @@
 
 body {
     margin:0%;
+
+    margin-top: 50%;
     padding: 0%;
     width: 100%;
     min-height: 100vh;
@@ -61,59 +63,16 @@ a:hover {
     color: #E7E6E1;
 }
 
+footer {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: small;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
+}
+
 @media screen and (min-width: 1001px) {
-    header {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        margin-bottom: 2em;
-        padding-left: 2em;
-        padding-right: 2em;
-    }
-
-    .bannerBlockTitle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding-top: 2.5em;
-        padding-bottom: 2.5em;
-        line-height: 3em;
-        font-size: 1.5em;
-    }
-
-    .bannerSubtitle {
-        font-size: larger;
-    }
-
-    header nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 2em;
-        font-size: larger;
-    }
-
-    header ul {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-content: space-around;
-        justify-content: space-around;
-    }
-
-    header nav li {
-        margin: 0.5em;
-        font-size: 2em;
-    }
-
-    footer {
-        margin-top: 2em;
-        margin-bottom: 1em;
-        font-size: small;
-        font-style: italic;
-        text-align: center;
-        line-height: 1.5;
-    }
-
     .content-block {
         padding-left: 2em;
         padding-right: 2em;
@@ -163,52 +122,6 @@ a:hover {
 
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
-    header {
-        display: grid;
-        grid-template-columns: 40% 60%;
-        margin-bottom: 2em;
-        padding-left: 2em;
-        padding-right: 2em;
-    }
-
-    .bannerBlockTitle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding-top: 2.5em;
-        padding-bottom: 2.5em;
-        line-height: 3em;
-    }
-
-    header nav {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-right: 2em;
-        font-size: larger;
-    }
-
-    header ul {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        align-content: space-around;
-        justify-content: space-around;
-    }
-
-    header nav li {
-        margin: 0.5em;
-    }
-
-    footer {
-        margin-top: 2em;
-        margin-bottom: 1em;
-        font-size: small;
-        font-style: italic;
-        text-align: center;
-        line-height: 1.5;
-    }
-
     .content-block {
         padding-left: 2em;
         padding-right: 2em;
@@ -256,44 +169,6 @@ a:hover {
 
 /*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
 @media screen and (min-width: 601px) and (max-width: 800px) {
-    header {
-        display: grid;
-        grid-template-columns: 60% 40%;
-        margin-bottom: 2em;
-        padding-left: 2em;
-        padding-right: 2em;
-    }
-
-    .bannerBlockTitle {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding-top: 2.5em;
-        padding-bottom: 2.5em;
-        line-height: 3em;
-    }
-
-    header nav {
-        display: flex;
-        justify-content: end;
-        align-items: center;
-        margin-right: 2em;
-        font-size: larger;
-    }
-
-    header nav li {
-        margin: 0.5em;
-    }
-
-    footer {
-        margin-top: 2em;
-        margin-bottom: 1em;
-        font-size: small;
-        font-style: italic;
-        text-align: center;
-        line-height: 1.5;
-    }
-
     .content-block {
         padding-left: 2em;
         padding-right: 2em;
@@ -303,15 +178,6 @@ a:hover {
 }
 
 @media screen and (max-width: 600px) {
-    footer {
-        margin-top: 2em;
-        margin-bottom: 1em;
-        font-size: small;
-        font-style: italic;
-        text-align: center;
-        line-height: 1.5;
-    }
-
     .content-block {
         padding-left: 2em;
         padding-right: 2em;

@@ -1,15 +1,25 @@
 /* LOGO */
-.bannerBlockTitle img {
-    width: 40vh;
-    position: absolute;
+.bannerTitle {
+    font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
+    text-align: center;
+    color: #f5deb3;
+    
 }
 
+.bannerSubtitle {
+    font-family: 'IM Fell DW Pica', serif;
+    font-style: italic;
+    text-align: center;
+    color: #f5deb3;
+    /* background: #E6BE8A;
+    background: linear-gradient(to right, #E6BE8A 0%, #f5deb3 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; */    
+}
 
-
-
+/* GENERAL HEADER THINGS */
 header {
-    font-family: 'IM Fell DW Pica', "Libre Baskerville", serif;    
-    color:#E7E6E1;
+    font-family: 'IM Fell DW Pica', "Libre Baskerville", serif;
     /* background: rgb(76,34,61);
     background: linear-gradient(180deg, rgba(76,34,61,1) 0%, rgba(112,58,75,1) 42%, rgba(76,34,61,1) 100%); */
 
@@ -17,54 +27,221 @@ header {
 
 header a {
     text-decoration: none;
-    color: #D3B1C2;
+    text-transform: uppercase;
+    background: #E6BE8A;
+    background: linear-gradient(to right, #e6be8a 0%, #f5deb3 50%, #E6BE8A 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
 }
 
-.bannerBlockTitle p {
-    margin: 0;
+header a:hover {
+    text-shadow: 0px 0px 10px #f8de7e;
+    filter: dropshadow(color=#f8de7e, offx=2, offy=2);
+    font-weight: bold;
 }
 
-.bannerTitle {
-    font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
-    font-size: 4em;
-    text-align: center;
-}
+@media screen and (max-width: 700px) {
+    @counter-style thum {
+        system: cyclic;
+        symbols: "➢ ";
+        suffix: " ";
+      }
 
-.bannerSubtitle {
-    margin: none;
-    font-family: 'IM Fell DW Pica', serif;
-    font-size: larger;
-    font-style: italic;
-    text-align: center;
-}
-
-@media screen and (max-width: 600px) {
-    header {
-        display: grid;
-        grid-template-columns: 60% 40%;
-        margin-bottom: 2em;
-        padding-left: 2em;
-        padding-right: 2em;
+    /* LOGO */
+    .bannerBlockTitle img {
+        position: absolute;
+        top: 35px;
+        left: 10px;
+        width: 300px;
     }
 
-    .bannerBlockTitle {
+    .bannerTitle {
+        position: absolute;
+        top: 128px;
+        left: 10px;
+        margin: 0;
+        max-width: 300px;
+        font-size: 55px;
+        text-indent: 0.2ch;        
+    }
+
+    .bannerSubtitle {
+        position: absolute;
+        top: 200px;
+        left: 63px;
+        margin: 0;
+        max-width: 300px;
+        text-indent: 0ch;
+        font-size: 22px;
+    }
+
+    /* REST OF HEADER */
+    header {
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        padding-top: 1.5em;
-        padding-bottom: 1.5em;
+        flex-flow: row;
+        justify-content: end;
+        margin-bottom: 9em;
+        padding-left: 1em;
+        padding-right: 1em;
     }
 
     header nav {
+        position: absolute;
+        top: 85px;
         display: flex;
         justify-content: end;
-        font-size: larger;
-        margin-right: 0em;
+        font-size: 22px;
+        margin: auto;
+        line-height: 4.5ch;
+
+    }
+
+    header li {
+        list-style-type: thum;
+        color: #e6be8a ;
+        text-align: justify;
     }
 }
 
-@media screen and (min-width: 601px) {
-    body {
-        background-color: red;
+@media screen and (min-width: 701px) and (max-width: 1200px){
+    /* **************************** TABLETTES ************************************ */
+    @counter-style thum {
+        system: cyclic;
+        symbols: "➢ ";
+        suffix: " ";
+      }
+
+    /* LOGO */
+    .bannerBlockTitle img {
+        position: absolute;
+        top: 35px;
+        left: 25px;
+        width: 400px;
+    }
+
+    .bannerTitle {
+        position: absolute;
+        top: 130px;
+        left: 45px;
+        margin: 0;
+        max-width: 350px;
+        font-size: 75px;
+        text-indent: 0.2ch;     
+        background: #E6BE8A;
+        background: linear-gradient(to right, #E6BE8A 0%, #FAF0BE 50%, #e6be8a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 65px;
+    }
+
+    .bannerSubtitle {
+        position: absolute;
+        top: 265px;
+        left: 115px;
+        margin: 0;
+        max-width: 300px;
+        text-indent: 0ch;
+        font-size: 25px;
+    }
+
+       /* !! REST OF HEADER !! */
+       header {
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        margin-bottom: 9em;
+        margin-right: 3em;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    header nav {
+        position: absolute;
+        top: 40px;
+        font-size: 32px;
+        line-height: 5.5ch;
+
+    }
+
+    header li {
+        list-style-type: thum;
+        color: #e6be8a ;
+        text-align: justify;
+    }
+}
+
+
+@media screen and (min-width: 1201px) {
+    /* **************************** ORDI ************************************ */
+
+    @counter-style thum {
+        system: cyclic;
+        symbols: " ✯   ";
+        suffix: "";
+      }
+
+    /* LOGO */
+    .bannerBlockTitle img {
+        position: absolute;
+        top: 45px;
+        left: 35px;
+        width: 450px;
+    }
+
+    .bannerTitle {
+        position: absolute;
+        top: 150px;
+        left: 80px;
+        margin: 0;
+        max-width: 350px;
+        font-size: 80px;
+        text-indent: 0.2ch;     
+        background: #E6BE8A;
+        background: linear-gradient(to right, #E6BE8A 0%, #FAF0BE 50%, #e6be8a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        line-height: 65px;
+    }
+
+    .bannerSubtitle {
+        position: absolute;
+        top: 290px;
+        left: 145px;
+        margin: 0;
+        max-width: 300px;
+        text-indent: 0ch;
+        font-size: 25px;
+    }
+
+       /* !! REST OF HEADER !! */
+       header {
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        margin-bottom: 9em;
+        margin-right: 3em;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    header nav {
+        position: absolute;
+        top: 100px;
+        font-size: 40px;
+        line-height: 5.5ch;
+
+    }
+
+    header ul {
+        display: flex;
+        flex-flow: row;
+    }
+
+    header li {
+        list-style-type: thum;
+        color: #e6be8a ;
+        text-align: justify;
+        margin: 1em;
     }
 }
