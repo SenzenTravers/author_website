@@ -1,5 +1,9 @@
 {% extends '../base.html' %}
 
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/about.css">
+{% endblock %}
+
 {% block pageTitle %}
 Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
 {% endblock %}
@@ -12,30 +16,40 @@ Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
     <section class="content-block bibliography">
 
         <h2>Bibliographie</h2>
-        <h3>Pour le compte d'Aquilegia</h3>
+        <img
+            class="img-about-sections"
+            src="/static/images/macrovector_bookshelf.svg"
+            alt="Illustration figurant un rangée de livres"
+        >
+        <h3>Collectif Aquilegia</h3>
         <ul class="list-books">
-            <li>Les Cendres de l'Hiver (trilogie mêlant romans et BDs, avec Eldarianne)</li>
-            <li>Collection Nemesis : L'Homme Noyé, Vivarium, Purusha, Vindicte.</li>
-            <li>Ceux Qui Servent (recueil de nouvelles/roman, avec Eldarianne).</li>
-            <li>Contes du Miroir Brisé (recueil de nouvelles).</li>
-            <li>Contes de l'Aube Écarlate (recueil de nouvelles, avec Lev).</li>
-            <li>Pépin (roman).</li>
-            <li>Princes de Sang (roman).</li>
+            <li><em>Les Cendres de l'Hiver</em> (trilogie hybride texte/BD, avec Eldarianne)</li>
+            <li><em>Collection Nemesis</em> : <em>L'Homme Noyé, Vivarium, Purusha, Vindicte</em>.</li>
+            <li><em>Ceux Qui Servent</em> (recueil de nouvelles/roman, avec Eldarianne).</li>
+            <li><em>Contes du Miroir Brisé</em> (recueil de nouvelles).</li>
+            <li><em>Contes de l'Aube Écarlate</em> (recueil de nouvelles, avec Lev).</li>
+            <li><em>Pépin</em> (roman).</li>
+            <li><em>Princes de Sang</em> (roman).</li>
         </ul>
 
         <h3>Lointain passé (Fictionpress)</h3>
         <ul class="list-books">
-            <li>L'Aigle et le Safran (roman)</li>
-            <li>Vincent le Vampire (roman).</li>
+            <li><em>L'Aigle et le Safran</em> (roman)</li>
+            <li><em>Vincent le Vampire</em> (roman).</li>
             <li>Quelques nouvelles plus ou moins assumables.</li>
         </ul>
     </section>
 
     <section class="content-block biography">
-        <h2>À propos de Sen Senestre</h2>
+        <h2>Sen Senestre</h2>
+        <img
+            class="img-about-sections"
+            src="/static/images/macrovector_open_book.svg"
+            alt="Illustration figurant un livre ouvert"
+        >
         <p>
             Jadis connue sous le pseudonyme de Corenn, Sen est une femme douée pour choisir des noms
-            difficiles à googler et à référencer (et elle en est désolée). Elle parle d'elle à la
+            difficiles à googler et à référencer (et elle en est navrée). Elle parle d'elle à la
             troisième personne pour faire semblant de savoir quoi dire à son propre sujet,
             mais ce n'est qu'un leurre.
         </p>
@@ -45,8 +59,7 @@ Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
             contes détournés ou non... Le tout souvent assorti de M/M, BL, yaoi ou tout 
             autre terme à la mode pour désigner les romances gay. J'adore quand le scénario influe
             sur la romance et inversement ; j'aime l'action et le suspense, l'humour et l'horreur,
-            les couples conflictuels comme tendres (mais avouons-le : l'enemies to lovers a ma 
-            préférence...)
+            les couples conflictuels ou hauts en couleur.
         </p>
         <p>
             J'ai d'abord publié principalement sur Internet (sur feue l'Écurie des Shets - les 
@@ -54,17 +67,42 @@ Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
             collectif Aquilegia. Pendant presque neuf ans, j'y ai publié plusieurs romans et nouvelles
             avant de revenir au format web.
         </p>
-        <p>
-            Aujourd'hui, je me laisse le temps d'explorer de nouvelles directions et de voir 
-            où le vent m'emportera. Plus de nouvelles le 31 janvier 2023 !
-        </p>
+    </section>
 
+    <section class="content-block credit">
         <h2>Crédits</h2>
 
-        <p>
-            L'icône de ce site a été réalisée par <a href="https://www.flaticon.com/fr/icones-gratuites/chrysantheme" title="chrysanthème icônes">Muhammad_Usman - Flaticon</a>.
-        </p>
-        </section>
+        <ul>
+            <li>
+                Icône du site par
+                <a href="https://fr.freepik.com/vecteurs-libre/collection-plumes-dessinees-main_1159019.htm#&position=25&from_view=author">
+                    Bimbimkha
+                </a>
+                .
+            </li>
+            <li>
+                Visuel de la bannière par
+                <a href="https://www.freepik.com/free-vector/elegant-background-with-gold-glittery-frame_26176795.htm#query=gold%20round%20frame&position=1&from_view=search&track=ais">
+                    kjpargeter
+                </a>
+                .
+            </li>
+            <li>
+                Séparateurs d'articles de la page d'accueil par
+                <a href="https://www.freepik.com/free-vector/collection-set-label-ornament-vector-illustration_3374305.htm#query=frame&position=19&from_view=keyword&track=sph">
+                    Rawpixel
+                </a>
+                .
+            </li>
+            <li>
+                Illustrations de la page <i>À propos</i> par
+                <a href="https://www.freepik.com/free-vector/vintage-book-elements-collection-with-different-books_9397979.htm#query=pen%20vintage&position=7&from_view=search&track=ais">
+                    Macrovector
+                </a>
+                .
+            </li>
+        </ul>
+    </section>
 
 </section>
     {% endblock %}

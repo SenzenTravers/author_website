@@ -1,0 +1,146 @@
+@import "./base.css";
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: 0em;
+    background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
+    font-size: 1.8em;
+
+}
+@counter-style thumbs {
+    system: cyclic;
+    symbols: "✯";
+    suffix: " ";
+  }
+
+
+.list-books > li {
+    list-style: thumbs !important;
+    line-height: 2.5em;
+    text-align: left;
+}
+
+@media screen and (min-width: 1001px) {
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 2em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+        margin-top: 1em;
+        margin-left: 0;
+    }
+
+    .about > .bibliography {
+        font-size: 1em;
+    }
+
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    /* PAGE SPECIFICS: ABOUT */
+    .about {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .about h3 {
+        font-size: 1.5em;
+    }
+
+    .about > .bibliography {
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+    }
+
+    .about > .bibliography > h2 {
+        font-size: 2em;
+        text-align: center;
+    }
+    .about > .biography {
+        margin-left: 0;
+        padding: 0%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
+}
+
+/*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
+@media screen and (min-width: 601px) and (max-width: 800px) {
+}
+
+@media screen and (max-width: 600px) {
+    .about {
+        display: flex;
+        flex-flow: column;
+    }
+    .about :nth-child(1) { order: 2; }
+    .about :nth-child(2) { order: 1; }
+    .about :nth-child(3) { order: 3; }
+
+    h3 {
+        text-align: center;
+    }
+
+    .img-about-sections {
+        width: 75vw;
+        margin: auto;
+        display: block;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .credit {
+        padding: 1em;
+        margin: 2em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;        
+    }
+
+    .credit h2 {
+        margin: 1vh;
+    }
+
+    .credit li {
+        list-style: none;
+        margin-left: -3vw;
+    }
+}
