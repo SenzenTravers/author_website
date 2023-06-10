@@ -6,8 +6,6 @@
 
 body {
     margin:0%;
-
-    margin-top: 50%;
     padding: 0%;
     width: 100%;
     min-height: 100vh;
@@ -15,6 +13,15 @@ body {
     line-height: 2em;
     background-color: #4C223D;
     color: #D3B1C2;
+}
+
+footer {
+    margin-top: 2em;
+    margin-bottom: 1em;
+    font-size: small;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.5;
 }
 
 h1 {
@@ -52,27 +59,26 @@ strong, a {
 }
 
 hr {
-    border-top: #703A4B thin dotted;
-    margin-left: 20em;
-    margin-right: 20em;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+    height:33px;
+    border:0;
+    background-image:url('./images/sep-56311.svg');
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+    background-position: center;
 }
 
 a:hover {
     color: #E7E6E1;
 }
 
-footer {
-    margin-top: 2em;
-    margin-bottom: 1em;
-    font-size: small;
-    font-style: italic;
-    text-align: center;
-    line-height: 1.5;
-}
 
 @media screen and (min-width: 1001px) {
+    .main-page-content {
+        margin-top: 63vh;
+    }
+
     .content-block {
         padding-left: 2em;
         padding-right: 2em;
@@ -122,6 +128,10 @@ footer {
 
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
+    .main-page-content {
+        margin-top: 60vh;
+    }
+
     .content-block {
         padding-left: 2em;
         padding-right: 2em;
@@ -175,14 +185,25 @@ footer {
         text-align: justify;
         margin: 0%;
     }
+
+    .main-page-content {
+        margin-top: 47vh;
+    }
+
 }
 
 @media screen and (max-width: 600px) {
     .content-block {
+        margin-top: 12em;
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
     }
+
+    .main-page-content {
+        /* background-color: red; */
+        margin-top: 47vh;
+    }    
 }
 
 /* PAGE SPECIFICS */

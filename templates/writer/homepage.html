@@ -1,21 +1,12 @@
 {% extends '../base.html' %}
 {% block content %}
 
-<section id="homepage-intro" class="content-block">
-<p>
-    Bienvenue ! Je suis Sen, une autrice de romans et nouvelles mêlant yaoi et fantasy - de l'urban fantasy au merveilleux en passant
-    par la parodie ou l'horreur.
-</p>
-</section>
-
 <section class="content-block news">
-    <h1>Quoi de neuf ? ({{ latest_posts.0.date }})</h1>
+    <h1>Aux nouvelles</h1>
 
     <div>
     {% for post in latest_posts %}
-        {% if post != latest_posts.0 %}
-            <p style="text-align:right;">{{ post.date }}</p>
-        {% endif %}
+    <p style="text-align:right;">{{ post.date }}</p>
 
         {% autoescape off %}
         {{ post.body }}
