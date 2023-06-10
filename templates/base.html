@@ -13,7 +13,9 @@
 
         <title>{% block title %}Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}</title>
         <!-- <link rel="stylesheet" href="/static/style.css"> -->
-        <link rel="stylesheet" href="/static/news.css">
+        {% block stylesheet %}
+        <link rel="stylesheet" href="/static/base.css">
+        {% endblock %}
         <link rel=icon href=favicon.ico type=image/ico>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

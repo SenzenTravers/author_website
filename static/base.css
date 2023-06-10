@@ -12,7 +12,7 @@ body {
     font-family: "Libre Baskerville", "PT Serif", serif;
     line-height: 2em;
     background-color: #4C223D;
-    color: #D3B1C2;
+    color: #e3d5b5;
 }
 
 footer {
@@ -29,22 +29,30 @@ h1 {
     font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
     text-align: center;
     font-size: 3em;
-    color: #E7E6E1;
+    background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e1a95f 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
     margin-top: 2em;
     margin-bottom: 1em;
+    line-height: 2em;
 }
 
 h2 {
     font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
-    color: #E7E6E1;
+    background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
     margin-top: 2em;
     margin-left: 2em;
 }
 
 h3 {
-    font-style: italic;        
     font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
-    font-size: larger;
+    font-size: 1.3em;
+    text-transform: uppercase;
+    color: #e6be8a;
 }
 
 li {
@@ -55,12 +63,12 @@ p {
     text-indent: 3ch;
 }
 strong, a {
-    color:#E7E6E1;
+    color:#e6be8a;
 }
 
 hr {
-    margin-top: 5vh;
-    margin-bottom: 5vh;
+    margin-top: 8vh;
+    margin-bottom: 8vh;
     height:33px;
     border:0;
     background-image:url('./images/sep-56311.svg');
@@ -70,7 +78,7 @@ hr {
 }
 
 a:hover {
-    color: #E7E6E1;
+    color: #e5aa70;
 }
 
 
@@ -141,7 +149,6 @@ a:hover {
     
     /* PAGE SPECIFICS: NEWS */
     .content-block h1 {
-        color: red;
         font-style: italic;
     }
     /* PAGE SPECIFICS: ABOUT */
@@ -194,7 +201,7 @@ a:hover {
 
 @media screen and (max-width: 600px) {
     .content-block {
-        margin-top: 12em;
+        margin-top: 15em;
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
@@ -202,7 +209,7 @@ a:hover {
 
     .main-page-content {
         /* background-color: red; */
-        margin-top: 47vh;
+        margin-top: 49vh;
     }    
 }
 

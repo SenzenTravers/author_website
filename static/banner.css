@@ -41,7 +41,58 @@ header a:hover {
     font-weight: bold;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 460px) {
+    /* LOGO */
+    .bannerBlockTitle img {
+        position: absolute;
+        top: 35px;
+        left: 10px;
+        width: 300px;
+    }
+
+    .bannerTitle {
+        position: absolute;
+        top: 128px;
+        left: 10px;
+        margin: 0;
+        max-width: 300px;
+        font-size: 55px;
+        text-indent: 0.2ch;        
+    }
+
+    .bannerSubtitle {
+        position: absolute;
+        top: 200px;
+        left: 63px;
+        margin: 0;
+        max-width: 300px;
+        text-indent: 0ch;
+        font-size: 22px;
+    }
+
+    /* REST OF HEADER */
+    header {
+        display: flex;
+        flex-flow: row;
+        justify-content: end;
+        margin-bottom: 9em;
+        padding-left: 1em;
+        padding-right: 1em;
+    }
+
+    header nav {
+        position: absolute;
+        top: 85px;
+        display: flex;
+        justify-content: end;
+        font-size: 22px;
+        margin: auto;
+        line-height: 4.5ch;
+
+    }
+}
+
+@media screen and (min-width: 461px) and (max-width: 700px) {
     @counter-style thum {
         system: cyclic;
         symbols: "➢ ";

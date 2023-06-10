@@ -1,0 +1,26 @@
+@import "./base.css"; /* Using a string */
+
+
+
+.post-date {
+    text-align: end;
+    font-size: 2.4em;
+    line-height: normal;
+}
+
+@media screen and (min-width: 1001px) {
+}
+
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+}
+
+/*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
+@media screen and (min-width: 601px) and (max-width: 800px) {
+}
+
+@media screen and (max-width: 600px) {
+    .img-feather {
+        display: none;
+    }
+}

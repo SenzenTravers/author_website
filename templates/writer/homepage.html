@@ -1,4 +1,9 @@
 {% extends '../base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/homepage.css">
+{% endblock %}
+
 {% block content %}
 
 <section class="content-block news">
@@ -6,11 +11,19 @@
 
     <div>
     {% for post in latest_posts %}
-    <p style="text-align:right;">{{ post.date }}</p>
+    <h2 class="post-date">{{ post.date }}</h2>
+
+    <div class="post-block">
+        <img 
+        class="img-feather"
+        src="/static/images/bimbimka_feather-ai2.svg"
+        alt="Un dessin de plume composite en noir et blanc"
+        >
 
         {% autoescape off %}
         {{ post.body }}
         {% endautoescape %}
+    </div>
 
         <hr>
     {% endfor %}
