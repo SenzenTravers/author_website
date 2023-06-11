@@ -13,5 +13,5 @@ def error_500(request):
 @require_GET
 @cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day
 def favicon(request: HttpRequest) -> HttpResponse:
-    file = (settings.BASE_DIR / "static" / "favicon2.png").open("rb")
+    file = (settings.BASE_DIR / "static" / "images/bimbimka_feather-ai2.svg").open("rb")
     return FileResponse(file)

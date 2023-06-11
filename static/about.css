@@ -1,0 +1,201 @@
+@import "./base.css";
+
+h2 {
+    text-align: center;
+    text-transform: uppercase;
+    margin-left: 0em;
+    background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
+    font-size: 1.8em;
+}
+
+h3 {
+    text-align: center;
+}
+
+@counter-style thumbs {
+    system: cyclic;
+    symbols: "✯";
+    suffix: " ";
+  }
+
+
+.list-books > li {
+    list-style: thumbs !important;
+    line-height: 2.5em;
+    text-align: left;
+}
+
+.credit-hr {
+    display: none;
+}
+
+@media screen and (min-width: 1001px) {
+    /* COMPUTER SCREEN */
+    h2 {
+        font-size: 2.8em;
+        line-height: normal;
+    }
+    .about {
+        margin-top: -4em;
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr; 
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr; 
+        gap: 0px 0px; 
+        grid-template-areas: 
+          "bibliography biography biography"
+          "bibliography biography biography"
+          "bibliography biography biography"
+          "bibliography credit credit"
+          "bibliography credit credit"; 
+      }
+      .credit { grid-area: credit; }
+      .bibliography { grid-area: bibliography; }
+      .biography { grid-area: biography; }
+
+    .about h3 {
+        font-size: 2em;
+        margin-top: 1.2em;
+    }
+
+    .about > .bibliography {
+        display: flex;
+        flex-flow: column;
+        padding: 1em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        margin-right: 2em;
+        /* margin-bottom: 40em; */
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;
+        font-size: 1em;
+    }
+
+    .about > .bibliography h2 {
+        margin-top: 2.5em;
+        margin-bottom: 1.4em;
+        margin-left: 0;
+    }
+
+    .bibliography .img-about-sections {
+        width: 75%;
+        align-self: center;
+        justify-self: center;
+    }
+
+    .biography {
+        display: flex;
+        flex-flow: column;
+        margin-top: 0em;
+        margin-bottom: 0em;
+    }
+
+    .about > .biography {
+        margin-left: 0;
+        padding: 7%;
+        flex-grow: 3;
+        flex-basis: 60%;
+    }
+
+    .biography .img-about-sections {
+        width: 50%;
+        align-self: center;
+        justify-self: center;
+
+    }
+
+    .biography h2 {
+        font-size: 4em;
+        margin-bottom: 2em;
+    }
+
+    .credit {
+        align-self: start;
+        justify-self: center;
+        max-width: 600px;
+        padding: 7em;
+        margin: 5em;
+        margin-top: 0em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 7% ;        
+    }
+
+    .credit h2 {
+        margin: 1vh;
+    }
+
+    .credit li {
+        list-style: thumbs;
+        margin-left: -3vw;
+    }
+
+    .credit-hr {
+        display: block;
+        margin-top: 3%;
+        margin-bottom: 10%;
+        max-width: 250px;
+        
+    }
+}
+
+
+@media screen and (min-width: 751px) and (max-width: 1000px) {
+    .img-about-sections {
+        width: 55vw !important;
+    }
+
+    .biography {
+        margin-left: 5em;
+        margin-right: 5em;
+    }
+}
+
+@media screen and (min-width: 550px) and (max-width: 750px) {
+    .biography {
+        margin-left: 2em;
+        margin-right: 2em;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .about {
+        display: flex;
+        flex-flow: column;
+    }
+    .about :nth-child(1) { order: 2; }
+    .about :nth-child(2) { order: 1; }
+    .about :nth-child(3) { order: 3; }
+
+    .img-about-sections {
+        width: 75vw;
+        margin: auto;
+        display: block;
+        margin-top: 5vh;
+        margin-bottom: 5vh;
+    }
+
+    .credit {
+        padding: 1em;
+        margin: 2em;
+        flex-shrink: 3;
+        flex-basis: 40%;
+        font-size: small;
+        text-align: left;
+        border: 0.5em double #703A4B;
+        border-radius: 1% ;        
+    }
+
+    .credit h2 {
+        margin: 1vh;
+    }
+
+    .credit li {
+        list-style: none;
+        margin-left: -3vw;
+    }
+}

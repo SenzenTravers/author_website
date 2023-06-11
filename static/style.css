@@ -245,11 +245,6 @@ header a {
         margin: 4em;
     }
     
-    /* PAGE SPECIFICS: NEWS */
-    .content-block h1 {
-        color: red;
-        font-style: italic;
-    }
     /* PAGE SPECIFICS: ABOUT */
     .about {
         display: flex;
