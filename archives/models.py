@@ -27,16 +27,12 @@ class Fic(models.Model):
         (OTHER, 'Autre')
     ]
     G = 'g'
-    PG = 'pg'
-    PG13 = 'pg-13'
-    R = 'r'
-    NC17 = 'nc-17'
+    T = 't'
+    E = 'e'
     RATING_CHOICES = [
         (G, 'G'),
-        (PG, 'PG'),
-        (PG13, 'PG-13'),
-        (R, 'R'),
-        (NC17, 'NC-17')
+        (T, 'T'),
+        (E, 'E')
     ]
 
     author = models.ForeignKey(

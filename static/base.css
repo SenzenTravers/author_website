@@ -33,7 +33,7 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 500ms linear;
-    margin-top: 2em;
+    margin-top: max(350px, 2em);
     margin-bottom: 1em;
     line-height: normal;
 }
@@ -84,6 +84,12 @@ a:hover {
 transition: 500ms linear; */
 
 @media screen and (min-width: 1001px) {
+    h1 {
+        font-size: 4em;
+        margin-top: max(350px, 0em);
+        margin-bottom: 1em;
+    }
+
     .main-page-content {
         margin-top: 63vh;
     }
@@ -98,6 +104,10 @@ transition: 500ms linear; */
 
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
+    h1 {
+        font-size: 3.6em;
+        margin-bottom: 0.2em;
+    }
     .main-page-content {
         margin-top: 60vh;
     }
@@ -136,48 +146,6 @@ transition: 500ms linear; */
         /* background-color: red; */
         margin-top: 49vh;
     }    
-}
-
-.fic_details {
-    background-color: #E7E6E1;
-    color: #4C223D;
-    text-align: justify;
-    margin-left: 5%;
-    margin-right: 5%;
-    padding: 1em;
-    border-radius: 15px;
-    border: thick double #703A4B;
-    display: flex 1;
-    flex-flow: column;
-    
-    justify-content: baseline;
-    height: fit-content;
-    block-size: fit-content;
-    
-}
-
-.fic_details h2 {
-    color: #4C223D;
-    margin-top: 1%;
-    margin-bottom: 0%;
-}
-
-.fic_details a {
-    color: #4C223D;
-}
-
-.fic_details .detail_line {
-    margin: 0%;
-    margin-left: 4%;
-    font-style: italic;
-    font-size: 0.9em;
-}
-
-.fic_details .date {
-    text-align: right;
-    font-style: italic;
-    margin-top: 0;
-    margin-bottom: 0;
 }
 
 .story {

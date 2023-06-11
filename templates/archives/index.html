@@ -1,28 +1,54 @@
 {% extends '../base.html' %}
 
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/archives_index.css">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+{% endblock %}
+
 {% block pageTitle %}
 Romans, nouvelles et créations diverses
 {% endblock %}
 
 {% block content %}
 
-<section>
-    <h1>Fics M/M et F/F</h1>
-</section>
+<h1 class="h1-archives">Fics M/M et F/F</h1>
 
-<section class="fics-list">
+<section class="fics-list archives-index">
+    <img
+    class="img-archives-index"
+    src="/static/images/rawpixel_typewriter.svg"
+    alt="Illustration de machine à écrire"
+>
 
     {% for fic in fics %}
         <div class="fic_details">
-            <p class="date">{{fic.date}}</p>
             <h2><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
-            <p class="detail_line">{{ fic.pairing_type }} | 
-                {{ fic.rating|capfirst }} 
-                | {% if fic.complete == True %}
-                    Complète
-                {% else %}
-                    En cours
-                {% endif %}
+
+
+            <p class="detail_line"> 
+            {% if fic.pairing_type == "M/M" %}
+                M/M
+            {% elif fic.pairing_type == "F/F" %}
+                F/F
+            {% elif fic.pairing_type == "F/M" %}
+                F/M
+            {% elif fic.pairing_type == "autre" %}
+                Autre
+            {% endif %}
+
+            {% if fic.rating == "g" %}
+            • Tout public
+
+            {% elif fic.rating == "t" %}
+            • Public averti
+
+            {% elif fic.rating == "e" %}
+            • Explicite
+            {% endif %}
+
+            {% if fic.complete == True %}
+            • Complète
+            {% endif %}
             </p>
             <P>
                 {% autoescape off %}
