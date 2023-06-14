@@ -22,7 +22,6 @@ header {
     font-family: 'IM Fell DW Pica', "Libre Baskerville", serif;
     /* background: rgb(76,34,61);
     background: linear-gradient(180deg, rgba(76,34,61,1) 0%, rgba(112,58,75,1) 42%, rgba(76,34,61,1) 100%); */
-
 }
 
 header a {
@@ -41,7 +40,67 @@ header a:hover {
     font-weight: bold;
 }
 
-@media screen and (max-width: 460px) {
+@media screen and (max-width: 450px) {
+    /* LOGO */
+    .bannerBlockTitle img {
+        position: absolute;
+        top: 35px;
+        left: 30px;
+        width: 300px;
+    }
+
+    .bannerTitle {
+        position: absolute;
+        top: 128px;
+        left: 30px;
+        margin: 0;
+        max-width: 300px;
+        font-size: 55px;
+        text-indent: 0.2ch;        
+    }
+
+    .bannerSubtitle {
+        position: absolute;
+        top: 200px;
+        left: 83px;
+        margin: 0;
+        max-width: 300px;
+        text-indent: 0ch;
+        font-size: 22px;
+    }
+
+    /* REST OF HEADER */
+    header {
+        display: flex;
+        flex-flow: column;
+        margin-bottom: 9em;
+    }
+
+    header nav {
+        position: absolute;
+        top: 305px;
+        display: flex;
+        font-size: 20px;
+        line-height: 4.5ch;
+
+    }
+
+    header ul {
+        display: flex;
+        flex-flow: row;
+        gap: 1px;
+        left: -500px;
+    }
+
+    header li {
+        list-style-type: none;
+        color: #e6be8a ;
+        margin: 12px;
+    }
+
+}
+
+@media screen and (min-width: 451px) and (max-width: 700px) {
     /* LOGO */
     .bannerBlockTitle img {
         position: absolute;
@@ -90,63 +149,12 @@ header a:hover {
         line-height: 4.5ch;
 
     }
-}
 
-@media screen and (min-width: 461px) and (max-width: 700px) {
     @counter-style thum {
         system: cyclic;
         symbols: "➢ ";
         suffix: " ";
       }
-
-    /* LOGO */
-    .bannerBlockTitle img {
-        position: absolute;
-        top: 35px;
-        left: 10px;
-        width: 300px;
-    }
-
-    .bannerTitle {
-        position: absolute;
-        top: 128px;
-        left: 10px;
-        margin: 0;
-        max-width: 300px;
-        font-size: 55px;
-        text-indent: 0.2ch;        
-    }
-
-    .bannerSubtitle {
-        position: absolute;
-        top: 200px;
-        left: 63px;
-        margin: 0;
-        max-width: 300px;
-        text-indent: 0ch;
-        font-size: 22px;
-    }
-
-    /* REST OF HEADER */
-    header {
-        display: flex;
-        flex-flow: row;
-        justify-content: end;
-        margin-bottom: 9em;
-        padding-left: 1em;
-        padding-right: 1em;
-    }
-
-    header nav {
-        position: absolute;
-        top: 85px;
-        display: flex;
-        justify-content: end;
-        font-size: 22px;
-        margin: auto;
-        line-height: 4.5ch;
-
-    }
 
     header li {
         list-style-type: thum;

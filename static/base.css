@@ -33,9 +33,10 @@ h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 500ms linear;
-    margin-top: max(350px, 2em);
+    margin-top: max(365px, 2em);
     margin-bottom: 1em;
     line-height: normal;
+
 }
 
 h2 {
