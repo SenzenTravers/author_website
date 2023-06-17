@@ -26,6 +26,7 @@ class Fic(models.Model):
         (POLY, 'Polyamour'),
         (OTHER, 'Autre')
     ]
+
     G = 'g'
     T = 't'
     E = 'e'
@@ -33,6 +34,13 @@ class Fic(models.Model):
         (G, 'G'),
         (T, 'T'),
         (E, 'E')
+    ]
+
+    SHORT = 'nouvelle'
+    NOVEL = 'roman'
+    LENGTH_CHOICES = [
+        (SHORT, 'Nouvelle'),
+        (NOVEL, 'Roman'),
     ]
 
     author = models.ForeignKey(
@@ -55,6 +63,11 @@ class Fic(models.Model):
         max_length=6,
         choices=RATING_CHOICES,
         default=G
+    )
+    text_length = models.CharField(
+        max_length=20,
+        choices=LENGTH_CHOICES,
+        default=SHORT
     )
     complete = models.BooleanField(default=True)
 

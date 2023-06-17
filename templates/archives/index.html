@@ -22,18 +22,17 @@ Romans, nouvelles et créations diverses
 
     {% for fic in fics %}
         <div class="fic_details">
-            <h2><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
-
+            <section class="fic_details_header">
+                <h2><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
+                <p class="fic-date">{{ fic.date }}</p>
+            </section>
 
             <p class="detail_line"> 
-            {% if fic.pairing_type == "M/M" %}
-                M/M
-            {% elif fic.pairing_type == "F/F" %}
-                F/F
-            {% elif fic.pairing_type == "F/M" %}
-                F/M
-            {% elif fic.pairing_type == "autre" %}
+            {% if fic.pairing_type == "autre" %}
                 Autre
+
+            {% else %}
+            {{ fic.pairing_type }}
             {% endif %}
 
             {% if fic.rating == "g" %}
@@ -45,6 +44,8 @@ Romans, nouvelles et créations diverses
             {% elif fic.rating == "e" %}
             • Explicite
             {% endif %}
+
+            • {{ fic.text_length.capitalize }}
 
             {% if fic.complete == True %}
             • Complète
