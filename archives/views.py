@@ -2,9 +2,9 @@ import os
 import tempfile
 
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.views import generic
-
 # Create your views here.
 
 from .models import Fic, Chapter
@@ -49,6 +49,18 @@ def download_html(request, fic_id):
 
     return response
 
+def clap(request, chapter_id):
+    chapter = Chapter.objects.get(id=chapter_id)
+    fic = chapter.fic
+    fic.clap=fic.clap+1
+    fic.save()
+
+    return render(
+        request,
+        'archives/story.html',
+        {'fic':fic,
+        'current_chapter': chapter
+        })
 # def download_epub(request, fic_id):
 #     digester = FicDigester(fic_id)
 #     title = digester.return_title()

@@ -15,7 +15,8 @@
 {% block content %}
 <section class="story">
     <div class="story-buttons">
-        <form action="{% url 'archives:download_html' fic.id %}" method="GET">
+        <form action="{% url 'archives:download_html' fic.id %}" method="POST">
+            {% csrf_token %}
             <button type="submit">Télécharger</button>
           </form>
     </div>
@@ -28,7 +29,11 @@
         {% endautoescape %}
     </section>
 
-    <!-- {{ fic.clap }} -->
+    <form action="{% url 'archives:clap' current_chapter.id %}" method="POST"
+    class="story-buttons">
+        {% csrf_token %}
+        <button type="submit" id="clap" alt="Applaudir" title="Applaudir">♥</button>
+      </form>
 </section>
 
 {% endblock %}
