@@ -1,7 +1,7 @@
 {% extends '../base.html' %}
 
 {% block page_desc %}
-    {{ fic.pairing_type }} • {{ fic.title }}, par {{ fic.author }} | {{ fic.summary }}    
+    {{ fic.pairing_type }} • {{ fic.title }}, par {{ fic.author }} | {{ fic.summary | striptags}}
 {% endblock %}
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/archives_story.css">
