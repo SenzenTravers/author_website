@@ -1,3 +1,5 @@
+# import pypub
+
 from .models import Fic, Chapter
 
 
@@ -49,6 +51,7 @@ class FicDigester:
             fic=self.fic.id).order_by('id')
         formatted_chapters = []
         i = 1
+
         if len(chapters) == 1:
             return chapters[0].content
         else:
@@ -60,7 +63,19 @@ class FicDigester:
 
             return "".join(formatted_chapters)
 
+    # def epub_fic(self):
+    #     all_chapters = self.html_chapter()
+    #     epub_book = pypub.Epub("self.return_title()")
 
+    #     if type(all_chapters) == str:
+    #         chap = pypub.create_chapter_from_text("bob")
+    #         epub_book.add_chapter("chap")
+    #     else:
+    #         for chap in all_chapters:
+    #             chap = pypub.create_chapter_from_text(chap)
+    #             epub_book.add_chapter(chap)
+
+    #     epub_book.create('./my-first-epub.epub')
 
 
 # class FicDigester:

@@ -49,17 +49,15 @@ def download_html(request, fic_id):
 
     return response
 
-texte = """
- <!DOCTYPE html>
-<html>
-<head>
-<title>Page Title</title>
-</head>
-<body>
+# def download_epub(request, fic_id):
+#     digester = FicDigester(fic_id)
+#     title = digester.return_title()
 
-<h1>This is a Heading</h1>
-<p>This is a paragraph.</p>
-Ceci est un texte <i>temporaire</i> et <b>audàçiéux</b>.
-</body>
-</html> 
-"""
+#     epub = digester.epub_fic()
+#     response = HttpResponse(
+#         # digester.html_fic(),
+#         content_type='text/html',
+#         headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
+#     )
+
+#     return response

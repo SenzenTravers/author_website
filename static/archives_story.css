@@ -22,7 +22,6 @@
     text-align: justify;
     margin: 2em;
     margin-top: 7%;
-    padding: 5%;
     border: thin dotted #703A4B;
     border-radius: 15px;
 }
@@ -38,22 +37,27 @@
     flex-flow: row;
     justify-content: end;
     margin-bottom: 5%;
-    margin-right: 2%;
 }
 
 .story-buttons button {
-    color: #E7E6E1;
-    background-color: #703A4B;
-    padding: 2%;
+    background-color: #35182b;
+    color: #F4F3F1;
+    font-family: 'Courier Prime', "Libre Baskerville", serif;
+    text-transform: uppercase;
+    padding: 2vh;
+    margin: 0px;
     border: #D3B1C2 medium double;
     border-radius: 10px;
-    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
-    font-size: 1.5em;
+}
+
+.story-buttons button:hover {
+    background-color: #603952;
+    color: #F4F3F1;
 }
 
 @media screen and (min-width: 1001px) {
     .story {
-        padding-top: 11vh;
+        padding-top: 5vh;
         padding-left: 8vw;
         padding-right: 8vw;
         margin-left: 15vw;
@@ -63,12 +67,26 @@
     .story .fic-title {
         margin-bottom: 10vh;
     }
+
+    .story-buttons {
+        margin-right: -4vw;
+        margin-bottom: 10vh;
+    }
+
+    .author-name {
+        margin-top: 9vh !important;
+    }
+
+    .story-buttons button {
+        font-size: 1em;
+        padding: 17px;
+    }
 }
 
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
     .story {
-        padding-top: 11vh;
+        padding-top: 4vh;
         padding-left: 10vw;
         padding-right: 10vw;
     }
@@ -76,13 +94,28 @@
     .story .fic-title {
         margin-bottom: 10vh;
     }
+
+    .story-buttons {
+        margin-right: -5vw;
+        margin-bottom: 10vh;
+        font-size: 1.1em;
+    }
+
+    .author-name {
+        margin-top: 5vh !important;
+    }
+
+    .story-buttons button {
+        font-size: 1em;
+        padding: 17px;
+    }
 }
 
 /*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
 @media screen and (min-width: 601px) and (max-width: 800px) {
     .story {
-        margin-top: -6vh;
-        padding-top: 11vh;
+        margin-top: -4vh;
+        padding-top: 2vh;
         padding-left: 10vw;
         padding-right: 10vw;
     }
@@ -90,7 +123,35 @@
     .story .fic-title {
         margin-bottom: 8vh;
     }
+
+    .story-buttons {
+        margin-right: -6vw;
+    }
+
+    .story-buttons button {
+        font-size: 0.9em;
+        padding: 16px;
+    }
 }
 
 @media screen and (max-width: 600px) {
+    .story {
+        margin-top: -6vh;
+        padding-top: 2vh;
+        padding-left: 10vw;
+        padding-right: 10vw;
+    }
+
+    .story .fic-title {
+        margin-bottom: 8vh;
+    }
+
+    .story-buttons {
+        margin-right: -7vw;
+    }
+
+    .story-buttons button {
+        font-size: 0.9em;
+        padding: 12px;
+    }
 }
