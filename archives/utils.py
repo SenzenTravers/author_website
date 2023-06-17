@@ -13,7 +13,7 @@ base_fic = """<!DOCTYPE html>
 
     </head>
 
-    <body style="background-color: #fffffa">
+    <body style="background-color: #fffffa; padding: 3em">
         <section style="border: black thin solid; padding: 1.4em; margin: 1em; margin-bottom: 4em;">
             <header style="text-align: center">
                 <h1 style="font-size: 3em; margin-bottom: 0px">{title}</h1>

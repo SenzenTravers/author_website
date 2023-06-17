@@ -1,5 +1,8 @@
 {% extends '../base.html' %}
 
+{% block page_desc %}
+    {{ fic.pairing_type }} • {{ fic.title }}, par {{ fic.author }} | {{ fic.summary }}    
+{% endblock %}
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/archives_story.css">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
