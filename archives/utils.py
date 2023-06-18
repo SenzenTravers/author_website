@@ -16,7 +16,7 @@ base_fic = """<!DOCTYPE html>
     <body style="background-color: #fffffa; padding: 3em; line-height: 2em">
         <section style="border: black thin solid; padding: 1.4em; margin: 1em; margin-bottom: 4em;">
             <header style="text-align: center">
-                <h1 style="font-size: 3em; margin-bottom: 0px">{title}</h1>
+                <h1 style="font-size: 3em; margin-bottom: 0px;line-height: normal;">{title}</h1>
                 <p style="font-size: 1.8em; margin-top: 0px">par {author}</p>
             </header>
 

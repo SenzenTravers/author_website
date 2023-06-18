@@ -9,7 +9,10 @@ class ChapterAdmin(admin.ModelAdmin):
 
 
 class FicAdmin(admin.ModelAdmin):
-    fields = ['author', 'title', 'date', 'summary', 'author_note', 'pairing_type', 'rating', 'text_length', 'complete']
+    fields = ['author', 'title', 'date', 'summary',
+        'author_note', 'pairing_type', 'rating',
+        'text_length', 'complete',
+        'clap']
 
 admin.site.register(Author)
 admin.site.register(Chapter, ChapterAdmin)

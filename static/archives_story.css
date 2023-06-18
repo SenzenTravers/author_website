@@ -21,7 +21,7 @@
     font-family: 'Courier Prime', "Libre Baskerville", serif;
     text-align: justify;
     margin: 2em;
-    margin-top: 7%;
+    margin-top: max(383px, 7%) !important;
     border: thin dotted #703A4B;
     border-radius: 15px;
 }
@@ -30,6 +30,8 @@
     margin-top: 7%;
     margin-bottom: 5%;
     font-size: 20px;
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .story .story-buttons {

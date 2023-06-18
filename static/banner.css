@@ -279,17 +279,16 @@ header a:hover {
         flex-flow: row;
         justify-content: end;
         margin-bottom: 9em;
-        margin-right: 3em;
         padding-left: 1em;
         padding-right: 1em;
     }
 
     header nav {
         position: absolute;
-        top: 100px;
+        top: 150px;
         font-size: 40px;
-        line-height: 5.5ch;
-
+        line-height: normal;
+        margin-left: max(475px);
     }
 
     header ul {
@@ -300,7 +299,7 @@ header a:hover {
     header li {
         list-style-type: thum;
         color: #e6be8a ;
-        text-align: justify;
+        text-align: center;
         margin: 1em;
     }
 }

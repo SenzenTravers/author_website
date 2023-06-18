@@ -4,10 +4,16 @@
 
 .post-date {
     text-align: end;
-    font-size: 2em;
+    font-size: 1.6em;
+    font-weight: 300;
     line-height: normal;
     color: #e6be8a;
     opacity: 0.7;
+}
+
+.post-block {
+    word-break: break-word;
+    hyphens: auto;
 }
 
 .bookstack {
@@ -21,6 +27,15 @@
         height: 25vh;
         margin-bottom: -2em;
     }
+
+    .post-block {
+        margin-left: 17vw;
+        margin-right: 17vw;    
+    }
+
+    .post-date {
+        margin-right: 17vw;
+    }
 }
 
 
@@ -29,6 +44,15 @@
         height: 23vh;
         margin-top: -0.5em;
         margin-bottom: -4em;
+    }
+
+    .post-block {
+        margin-left: 6vw;
+        margin-right: 6vw;    
+    }
+
+    .post-date {
+        margin-right: 6vw;
     }
 }
 
