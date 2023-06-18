@@ -4,8 +4,8 @@
     {{ fic.pairing_type }} • {{ fic.title }}, par {{ fic.author }} • {{ fic.rating }}
 {% endblock %}
 {% block stylesheet %}
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/static/archives_story.css">
-<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
 {% endblock %}
 
 {% block title %}
@@ -29,11 +29,28 @@
         {% endautoescape %}
     </section>
 
+    <section id="after-reading-actions">
+    {% if messages %}
+    <script>
+    function Scrolldown() {
+        window.scrollTo(0, document.body.scrollHeight); 
+    }
+    
+    window.onload = Scrolldown;</script>
+    {% for message in messages %}
+    <p class="thanks">Merci pour votre soutien ! ♥ </p>
+    {% endfor %}
+    {% endif %}
     <form action="{% url 'archives:clap' current_chapter.id %}" method="POST"
     class="story-buttons">
         {% csrf_token %}
-        <button type="submit" id="clap" alt="Applaudir" title="Applaudir">♥</button>
+        <button
+            type="submit"
+            id="clap"
+            alt="Applaudir"
+            title="Applaudir">♥</button>
       </form>
+    </section>
 </section>
 
 {% endblock %}

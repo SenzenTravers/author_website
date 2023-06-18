@@ -1,6 +1,7 @@
 import os
 import tempfile
 
+from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
@@ -54,13 +55,11 @@ def clap(request, chapter_id):
     fic = chapter.fic
     fic.clap=fic.clap+1
     fic.save()
+    messages.success(request, "Merci pour votre support !")
 
-    return render(
-        request,
-        'archives/story.html',
-        {'fic':fic,
-        'current_chapter': chapter
-        })
+    return redirect(
+        "archives:first_chapter", fic_id=fic.id
+        )
 # def download_epub(request, fic_id):
 #     digester = FicDigester(fic_id)
 #     title = digester.return_title()
