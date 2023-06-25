@@ -17,9 +17,14 @@
     <div class="story-buttons">
         <form action="{% url 'archives:download_html' fic.id %}" method="POST">
             {% csrf_token %}
-            <button type="submit">Télécharger</button>
+            <button type="submit">HTML</button>
           </form>
-    </div>
+          <form action="{% url 'archives:download_pdf' fic.id %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">PDF</button>
+          </form>
+
+        </div>
     <p class="author-name">{{ fic.author }}</p>
     <h1 class="fic-title">{{ fic.title }}</h1>
 

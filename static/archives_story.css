@@ -48,6 +48,7 @@
     text-transform: uppercase;
     padding: 2vh;
     margin: 0px;
+    margin-left: 5px;
     border: #D3B1C2 medium double;
     border-radius: 10px;
 }
@@ -99,7 +100,7 @@
 
     .story-buttons button {
         font-size: 1em;
-        padding: 17px;
+        padding: 14px;
     }
 }
 

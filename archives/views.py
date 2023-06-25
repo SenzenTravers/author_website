@@ -6,7 +6,8 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
-# Create your views here.
+from xhtml2pdf import pisa
+
 
 from .models import Fic, Chapter
 from .utils import FicDigester
@@ -47,6 +48,25 @@ def download_html(request, fic_id):
         content_type='text/html',
         headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
     )
+
+    return response
+
+def download_pdf(request, fic_id):
+    digester = FicDigester(fic_id)
+    title = digester.return_title()
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{title}.pdf"'
+
+    transformer = pisa.CreatePDF(
+        digester.pdf_fic(),
+        dest=response,
+    )
+
+    if transformer.err:
+        return render(
+        request,
+        'error_500.html'
+        )
 
     return response
 

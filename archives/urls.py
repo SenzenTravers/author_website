@@ -10,6 +10,7 @@ urlpatterns = [
     # path('stories/<int:pk>', views.firstChapter.as_view(), name='first_chapter'),
     path("stories/chapter/<int:pk>", views.ChapterView.as_view(), name='chapter'),
     path("<int:fic_id>/html", views.download_html, name="download_html"),
+    path("<int:fic_id>/pdf", views.download_pdf, name="download_pdf"),
     # path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     path("<int:chapter_id>/clap", views.clap, name="clap")
 ]
