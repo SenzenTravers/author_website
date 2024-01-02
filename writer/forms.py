@@ -5,4 +5,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ["date", "body"]
+        widgets = {
+          'body': forms.Textarea(attrs={'rows':280, 'cols':40}),
+        }
