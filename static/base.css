@@ -1,12 +1,7 @@
+@import "./normalize.css";
 @import "./banner.css"; /* Using a string */
 
-* {
-    box-sizing: border-box;
-}
-
 body {
-    margin:0%;
-    padding: 0%;
     width: 100%;
     min-height: 100vh;
     font-family: "Libre Baskerville", "PT Serif", serif;
@@ -91,7 +86,7 @@ transition: 500ms linear; */
         margin-bottom: 1em;
     }
 
-    .main-page-content {
+    main {
         margin-top: 63vh;
     }
 
@@ -109,7 +104,7 @@ transition: 500ms linear; */
         font-size: 3.6em;
         margin-bottom: 0.2em;
     }
-    .main-page-content {
+    main {
         margin-top: 60vh;
     }
 
@@ -130,7 +125,7 @@ transition: 500ms linear; */
         margin: 0%;
     }
 
-    .main-page-content {
+    main {
         margin-top: 60vh;
     }
 
@@ -143,7 +138,7 @@ transition: 500ms linear; */
         text-align: justify;
     }
 
-    .main-page-content {
+    main {
         margin-top: 49vh;
     }
 
