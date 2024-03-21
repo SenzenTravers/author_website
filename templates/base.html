@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Sen" />
+        <meta
+            name="keywords"
+            content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
+            Aquilegia, autrice, LGBTQ, Sen, Senzen, Senzen_Travers, romans"
+        />
+        <meta
+            name="description"
+            content="{% block page_desc %}Découvrez les romans et les nouvelles de Sen. Au menu : du M/M, de la fantasy et de l'action !{% endblock %}"
+        />
 
-        <meta name="author" content="Sen">
-        <meta name="keywords" content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
-        Aquilegia, autrice, LGBTQ, Sen, Senzen, Senzen_Travers, romans">
-        <meta name="description" content="{% block page_desc %}Découvrez les romans et les nouvelles de Sen. Au menu : du M/M, de la fantasy et de l'action !{% endblock %}">
-
-        <title>{% block title %}Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}</title>
-        <!-- <link rel="stylesheet" href="/static/style.css"> -->
+        <title>
+            {% block title %} Sen Senestre, Autrice M/M | Romans BL et fantasy
+            {% endblock %}
+        </title>
         {% block stylesheet %}
-        <link rel="stylesheet" href="/static/base.css">
-        {% endblock %}
-        <link rel=icon href=favicon.ico type=image/ico>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
-            rel="stylesheet"> 
-        <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/static/base.css" />
+        {% endblock %} <link rel=icon href=favicon.ico type=image/ico>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap"
+            rel="stylesheet"
+        />
     </head>
 
     <body>
-        <header>
-            <section class="bannerBlockTitle">
-                <img src="/static/images/elegant_background_with_gold_glittery_frame.svg"></img>
-                <p class="bannerTitle">Sen Senestre</p>
-                <p class="bannerSubtitle">Autrice M/M & fantasy</p>
-            </section>
+        {% include "bannerBase.html" %}
 
-            <nav>
-                <ul>
-                    <li><a href="{% url 'homepage' %}">Accueil</a></li>
-                    <li><a href="{% url 'about' %}">À propos</a></li>
-                    <li><a href="{% url 'archives:index' %}">Lire</a></li>
-                </ul>
-            </nav>
-        </header>
+        <main>{% block content %} {% endblock %}</main>
 
-        <section class="main-page-content">
-            {% block content %}
-            {% endblock %}
-        </section>
-
-        <footer>
-            Copyright 2022 by une femme fabuleuse.
-        </footer>
+        <footer>Copyright 2024 by une femme fabuleuse.</footer>
     </body>
 </html>

@@ -1,34 +1,39 @@
 /* LOGO */
 .bannerTitle {
-    font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
+    font-family: "IM Fell English SC", "IM Fell DW Pica", serif;
     text-align: center;
     color: #f5deb3;
-    
 }
 
 .bannerSubtitle {
-    font-family: 'IM Fell DW Pica', serif;
+    font-family: "IM Fell DW Pica", serif;
     font-style: italic;
     text-align: center;
     color: #f5deb3;
     /* background: #E6BE8A;
     background: linear-gradient(to right, #E6BE8A 0%, #f5deb3 100%);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; */    
+    -webkit-text-fill-color: transparent; */
 }
 
 /* GENERAL HEADER THINGS */
 header {
-    font-family: 'IM Fell DW Pica', "Libre Baskerville", serif;
+    font-family: "IM Fell DW Pica", "Libre Baskerville", serif;
     /* background: rgb(76,34,61);
     background: linear-gradient(180deg, rgba(76,34,61,1) 0%, rgba(112,58,75,1) 42%, rgba(76,34,61,1) 100%); */
+    height: 250px;
 }
 
 header a {
     text-decoration: none;
     text-transform: uppercase;
-    background: #E6BE8A;
-    background: linear-gradient(to right, #e6be8a 0%, #f5deb3 50%, #E6BE8A 100%);
+    background: #e6be8a;
+    background: linear-gradient(
+        to right,
+        #e6be8a 0%,
+        #f5deb3 50%,
+        #e6be8a 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 500ms linear;
@@ -56,7 +61,7 @@ header a:hover {
         margin: 0;
         max-width: 300px;
         font-size: 55px;
-        text-indent: 0.2ch;        
+        text-indent: 0.2ch;
     }
 
     .bannerSubtitle {
@@ -82,7 +87,6 @@ header a:hover {
         display: flex;
         font-size: 20px;
         line-height: 4.5ch;
-
     }
 
     header ul {
@@ -94,10 +98,9 @@ header a:hover {
 
     header li {
         list-style-type: none;
-        color: #e6be8a ;
+        color: #e6be8a;
         margin: 12px;
     }
-
 }
 
 @media screen and (min-width: 451px) and (max-width: 700px) {
@@ -116,7 +119,7 @@ header a:hover {
         margin: 0;
         max-width: 300px;
         font-size: 55px;
-        text-indent: 0.2ch;        
+        text-indent: 0.2ch;
     }
 
     .bannerSubtitle {
@@ -134,9 +137,9 @@ header a:hover {
         display: flex;
         flex-flow: row;
         justify-content: end;
-        margin-bottom: 9em;
         padding-left: 1em;
         padding-right: 1em;
+        height: 350px;
     }
 
     header nav {
@@ -147,29 +150,28 @@ header a:hover {
         font-size: 22px;
         margin: auto;
         line-height: 4.5ch;
-
     }
 
     @counter-style thum {
         system: cyclic;
         symbols: "➢ ";
         suffix: " ";
-      }
+    }
 
     header li {
         list-style-type: thum;
-        color: #e6be8a ;
+        color: #e6be8a;
         text-align: justify;
     }
 }
 
-@media screen and (min-width: 701px) and (max-width: 1200px){
+@media screen and (min-width: 701px) and (max-width: 1200px) {
     /* **************************** TABLETTES ************************************ */
     @counter-style thum {
         system: cyclic;
         symbols: "➢ ";
         suffix: " ";
-      }
+    }
 
     /* LOGO */
     .bannerBlockTitle img {
@@ -186,9 +188,14 @@ header a:hover {
         margin: 0;
         max-width: 350px;
         font-size: 75px;
-        text-indent: 0.2ch;     
-        background: #E6BE8A;
-        background: linear-gradient(to right, #E6BE8A 0%, #FAF0BE 50%, #e6be8a 100%);
+        text-indent: 0.2ch;
+        background: #e6be8a;
+        background: linear-gradient(
+            to right,
+            #e6be8a 0%,
+            #faf0be 50%,
+            #e6be8a 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 65px;
@@ -204,8 +211,8 @@ header a:hover {
         font-size: 25px;
     }
 
-       /* !! REST OF HEADER !! */
-       header {
+    /* !! REST OF HEADER !! */
+    header {
         display: flex;
         flex-flow: row;
         justify-content: end;
@@ -213,6 +220,7 @@ header a:hover {
         margin-right: 3em;
         padding-left: 1em;
         padding-right: 1em;
+        width: 460px;
     }
 
     header nav {
@@ -220,16 +228,14 @@ header a:hover {
         top: 40px;
         font-size: 32px;
         line-height: 5.5ch;
-
     }
 
     header li {
         list-style-type: thum;
-        color: #e6be8a ;
+        color: #e6be8a;
         text-align: justify;
     }
 }
-
 
 @media screen and (min-width: 1201px) {
     /* **************************** ORDI ************************************ */
@@ -238,7 +244,7 @@ header a:hover {
         system: cyclic;
         symbols: " ✯   ";
         suffix: "";
-      }
+    }
 
     /* LOGO */
     .bannerBlockTitle img {
@@ -255,9 +261,14 @@ header a:hover {
         margin: 0;
         max-width: 350px;
         font-size: 80px;
-        text-indent: 0.2ch;     
-        background: #E6BE8A;
-        background: linear-gradient(to right, #E6BE8A 0%, #FAF0BE 50%, #e6be8a 100%);
+        text-indent: 0.2ch;
+        background: #e6be8a;
+        background: linear-gradient(
+            to right,
+            #e6be8a 0%,
+            #faf0be 50%,
+            #e6be8a 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         line-height: 70px;
@@ -273,14 +284,15 @@ header a:hover {
         font-size: 25px;
     }
 
-       /* !! REST OF HEADER !! */
-       header {
+    /* !! REST OF HEADER !! */
+    header {
         display: flex;
         flex-flow: row;
         justify-content: end;
         margin-bottom: 9em;
         padding-left: 1em;
         padding-right: 1em;
+        width: 520px;
     }
 
     header nav {
@@ -298,7 +310,7 @@ header a:hover {
 
     header li {
         list-style-type: thum;
-        color: #e6be8a ;
+        color: #e6be8a;
         text-align: center;
         margin: 1em;
     }
@@ -314,5 +326,6 @@ header a:hover {
         margin-right: 3em;
         padding-left: 1em;
         padding-right: 1em;
+        width: 550px;
     }
 }

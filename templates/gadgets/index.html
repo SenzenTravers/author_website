@@ -1,0 +1,46 @@
+{% extends '../base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/archives_index.css">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+{% endblock %}
+
+{% block pageTitle %}
+Coquecigrues
+{% endblock %}
+
+{% block content %}
+
+<h1 class="h1-archives">Coquecigrues : trucs, gadgets et machins</h1>
+
+<section class="fics-list archives-index">
+    <img
+    class="img-archives-index"
+    src="/static/images/rawpixel_typewriter.svg"
+    alt="Illustration de machine à écrire"
+    >
+
+    <article>
+        Pourquoi ai-je fait une formation dans 
+        l'informatique ? Pour ceci.
+    </article>
+
+    <details>
+        <summary>
+            <button id="blorbo-modal">Le sélectionneur de blorbos</button>
+        </summary>
+        Entrez une liste de personnage et laissez notre IA ultraperformante
+        les trier par degré de blorbitude/babygirlitude/malewifitude/etc.
+    </details>
+      
+    <details>
+        <summary><a href="">L'appaireur </a></summary>
+        Jouez les Cupidon en apparairant des personnages de 
+        Jujutsu Kaisen. Questionnez-vous sur mon degré de 
+        temps libre.
+    </details>
+
+    {% include "./blorbo.html" %}
+</section>
+{% endblock %}

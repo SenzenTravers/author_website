@@ -1,18 +1,15 @@
+@import "./normalize.css";
 @import "./banner.css"; /* Using a string */
 
-* {
-    box-sizing: border-box;
-}
-
 body {
-    margin:0%;
-    padding: 0%;
-    width: 100%;
-    min-height: 100vh;
     font-family: "Libre Baskerville", "PT Serif", serif;
     line-height: 2em;
-    background-color: #4C223D;
+    background-color: #4c223d;
     color: #e3d5b5;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
 }
 
 footer {
@@ -25,28 +22,27 @@ footer {
 }
 
 h1 {
-    /*IM Fell DW Pica for more*/ 
-    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    /*IM Fell DW Pica for more*/
+    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
     text-align: center;
     font-size: 3em;
     background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e1a95f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     transition: 500ms linear;
-    margin-top: max(383px, 2em);
     margin-bottom: 1em;
     line-height: normal;
     font-weight: 400;
 }
 
 h2 {
-    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
     margin-top: 2em;
     margin-left: 2em;
 }
 
 h3 {
-    font-family: 'IM Fell Double Pica', "Libre Baskerville", serif;
+    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
     font-size: 1.3em;
     text-transform: uppercase;
     color: #e6be8a;
@@ -59,16 +55,17 @@ li {
 p {
     text-indent: 3ch;
 }
-strong, a {
-    color:#e6be8a;
+strong,
+a {
+    color: #e6be8a;
 }
 
 hr {
     margin-top: 8vh;
     margin-bottom: 8vh;
-    height:33px;
-    border:0;
-    background-image:url('./images/sep-56311.svg');
+    height: 33px;
+    border: 0;
+    background-image: url("./images/sep-56311.svg");
     background-repeat: no-repeat;
     /* background-attachment: fixed; */
     background-position: center;
@@ -87,64 +84,50 @@ transition: 500ms linear; */
 @media screen and (min-width: 1001px) {
     h1 {
         font-size: 4em;
-        margin-top: max(350px, 0em);
+        /* margin-top: max(350px, 0em); */
         margin-bottom: 1em;
     }
 
-    .main-page-content {
+    main {
         margin-top: 63vh;
-    }
-
-    .content-block {
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
         margin: 4em;
     }
 }
-
 
 @media screen and (min-width: 801px) and (max-width: 1000px) {
     h1 {
         font-size: 3.6em;
         margin-bottom: 0.2em;
     }
-    .main-page-content {
-        margin-top: 60vh;
-    }
-
-    .content-block {
+    main {
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
         margin: 4em;
+        margin-top: 60vh;
     }
 }
 
 /*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
 @media screen and (min-width: 601px) and (max-width: 800px) {
-    .content-block {
+    main {
+        margin-top: 60vh;
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
         margin: 0%;
     }
-
-    .main-page-content {
-        margin-top: 60vh;
-    }
-
 }
 
 @media screen and (max-width: 600px) {
-    .content-block {
+    main {
+        /* margin-top: 49vh; */
         padding-left: 2em;
         padding-right: 2em;
         text-align: justify;
-    }
-
-    .main-page-content {
-        margin-top: 49vh;
     }
 
     h1 {
