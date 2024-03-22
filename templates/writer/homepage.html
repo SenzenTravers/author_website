@@ -1,31 +1,22 @@
-{% extends '../base.html' %}
+{% extends '../base.html' %} {% block stylesheet %}
+<link rel="stylesheet" href="/static/homepage.css" />
+{% endblock %} {% block content %}
+<h1>Aux nouvelles</h1>
+<img
+    class="bookstack"
+    src="/static/images/macrovector_book_stack.svg"
+    alt="Illustration d'une pile de livres"
+/>
 
-{% block stylesheet %}
-<link rel="stylesheet" href="/static/homepage.css">
-{% endblock %}
-
-{% block content %}
-
-<section class="content-block news">
-    <h1>Aux nouvelles</h1>
-    <img
-        class="bookstack"
-        src="/static/images/macrovector_book_stack.svg"
-        alt="Illustration d'une pile de livres"
-    >
-
-    <div>
+<article>
     {% for post in latest_posts %}
     <h2 class="post-date">{{ post.date }}</h2>
 
     <div class="post-block">
-        {% autoescape off %}
-        {{ post.body }}
-        {% endautoescape %}
+        {% autoescape off %} {{ post.body }} {% endautoescape %}
     </div>
 
-        <hr>
+    <hr />
     {% endfor %}
-    </div>
-</section>
-    {% endblock %}
+</article>
+{% endblock %}
