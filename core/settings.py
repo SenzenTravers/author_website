@@ -44,6 +44,7 @@ ALLOWED_HOSTS = ['127.0.0.1', 'senestre-coquecigrues.fr']
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'archives.apps.ArchivesConfig',
+    'gadgets.apps.GadgetsConfig',
     'writer.apps.WriterConfig',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',

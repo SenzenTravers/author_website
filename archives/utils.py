@@ -1,4 +1,4 @@
-# import pypub
+# from ebooklib import epub
 
 from .models import Fic, Chapter
 from .utils_constants import *
@@ -68,3 +68,50 @@ class FicDigester:
             )
 
         return results
+    
+    def epub_fic(self):
+        fic = self.fic
+        book = epub.EpubBook()
+        book.set_title(fic.title)
+        book.set_language("fr")
+        book.add_author(fic.author)
+        chapters = self.epub_chapters()
+
+        for chapter in chapters:
+            book.add_item(chapter)
+
+        if len(chapters) > 1:
+            for chapter in enumerate(chapters, start=1):
+                book.toc = (
+                    epub.Link("chap_{number}.xhtml", "{number}.", "intro"),
+                    (epub.Section(fic.title), chapters),
+                )
+
+        book.add_item(epub.EpubNcx())
+        book.add_item(epub.EpubNav())
+
+        return book
+
+        
+
+
+    # def epub_chapters(self):
+    #     chapters = Chapter.objects.filter(
+    #         fic=self.fic.id).order_by('id')
+    #     formatted_chapters = []
+
+    #     for number, chapter in enumerate(chapters, start=1):
+    #         if chapter.title:
+    #             chap = epub.EpubHtml(
+    #                 title=chapter.title,
+    #                 file_name=f"chap_{number}.xhtml",
+    #                 lang="fr")
+    #             chap.content = chapter.content
+    #         else:
+    #             chap = epub.EpubHtml(title=f"Chapitre {number}")
+    #             chap.content = chapter.content
+
+    #         formatted_chapters.append(chap)
+
+    #     return formatted_chapters
+

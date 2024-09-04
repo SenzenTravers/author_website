@@ -12,12 +12,12 @@ Coquecigrues
 
 {% block content %}
 
-<h1 class="h1-archives">Coquecigrues : trucs, gadgets et machins</h1>
+<h1 class="h1-gadgets">Coquecigrues : trucs, gadgets et machins</h1>
 
-<section class="fics-list archives-index">
+<section class="gadgets-section">
     <img
-    class="img-archives-index"
-    src="/static/images/rawpixel_typewriter.svg"
+    class="gadgets-illustration"
+    src="/static/images/bimbimka_feather-ai2.svg"
     alt="Illustration de machine à écrire"
     >
 
@@ -27,6 +27,30 @@ Coquecigrues
     </article>
 
     <details>
+        <summary>
+            <button id="prompt-btn">Le filtreur de thèmes</button>
+        </summary>
+        <p>
+            Le filtreur de prompt vise à aider à filtrer les thèmes listés dans 
+            les tagsets originaux d'AO3.
+        </p>
+        <p>
+            À titre d'exemple, vous pouvez utiliser les tagsets de 
+            <a href="https://archiveofourown.org/tag_sets/16669">Fic in a Box 2023</a>,
+            <a href="https://archiveofourown.org/tag_sets/20326">FFFX24</a>,
+            <a href="https://archiveofourown.org/tag_sets/16279">FFFX23</a>,
+            <a href="https://archiveofourown.org/tag_sets/12096">FFFX22</a>,
+            <a href="https://archiveofourown.org/tag_sets/19846">Rare Male Slash Exchange</a>,
+            <a href="https://archiveofourown.org/tag_sets/11190">Rare Male Slash Exchange 2022</a>,
+            <a href="https://archiveofourown.org/tag_sets/15631">Rare Male Slash Exchange 2023</a>,
+            <a href="https://archiveofourown.org/tag_sets/20086">Relationshipping 2024</a>,
+            <a href="https://archiveofourown.org/tag_sets/16171">Relationshipping 2023</a>,
+            <a href="https://archiveofourown.org/tag_sets/20122">Ennemies to Lover 2024</a>,
+            <a href="https://archiveofourown.org/tag_sets/14770">Fandom5k2022</a>...
+        </p>
+
+    </details>
+    <!-- <details>
         <summary>
             <button id="blorbo-modal">Le sélectionneur de blorbos</button>
         </summary>
@@ -41,6 +65,6 @@ Coquecigrues
         temps libre.
     </details>
 
-    {% include "./blorbo.html" %}
+    {% include "./blorbo.html" %} -->
 </section>
 {% endblock %}

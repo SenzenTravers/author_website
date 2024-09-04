@@ -8,7 +8,6 @@ from django.urls import reverse_lazy
 from django.views import generic
 from xhtml2pdf import pisa
 
-
 from .models import Fic, Chapter
 from .utils import FicDigester
 
@@ -70,6 +69,18 @@ def download_pdf(request, fic_id):
 
     return response
 
+def download_epub(request, fic_id):
+    digester = FicDigester(fic_id)
+    title = digester.return_title()
+
+    response = HttpResponse(
+        digester.epub_fic(),
+        content_type='application/epub',
+        headers={'Content-Disposition': f'attachment; filename="{title}.epub"'},
+    )
+
+    return response
+
 def clap(request, chapter_id):
     chapter = Chapter.objects.get(id=chapter_id)
     fic = chapter.fic
@@ -80,15 +91,3 @@ def clap(request, chapter_id):
     return redirect(
         "archives:first_chapter", fic_id=fic.id
         )
-# def download_epub(request, fic_id):
-#     digester = FicDigester(fic_id)
-#     title = digester.return_title()
-
-#     epub = digester.epub_fic()
-#     response = HttpResponse(
-#         # digester.html_fic(),
-#         content_type='text/html',
-#         headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
-#     )
-
-#     return response

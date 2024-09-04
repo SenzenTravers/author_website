@@ -1,11 +1,14 @@
+import pytest
+
 from django.urls import reverse
 
+@pytest.mark.django_db(True)
 def test_homepage(client):
     url = reverse('homepage')
     response = client.get(url)
     assert response.status_code == 200
     assert b"Autrice M/M & fantasy" in response.content
-    assert b"Quoi de neuf ?" in response.content
+    assert b"Aux nouvelles" in response.content
 
 def test_about(client):
     url = reverse('about')
@@ -14,11 +17,12 @@ def test_about(client):
     assert b"propos" in response.content
     assert b"Bibliographie" in response.content
 
+@pytest.mark.django_db(True)
 def test_archives_index(client):
     url = reverse('archives:index')
     response = client.get(url)
     assert response.status_code == 200
-    assert b"venir" in response.content
+    assert b"Fics M/M et F/F" in response.content
 
 def test_404(client):
     url = '/wrong_url'

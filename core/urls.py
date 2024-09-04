@@ -15,13 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+# from rest_framework import routers
 
+# router = routers.DefaultRouter()
+# router.register(r'users', views.UserViewSet)
+# router.register(r'groups', views.GroupViewSet)
 from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('writer.urls')),
     path('archives/', include('archives.urls', namespace='archives')),
+    path('gadgets/', include('gadgets.urls', namespace='gadgets')),
     path("favicon.ico", views.favicon),
 ]
 
