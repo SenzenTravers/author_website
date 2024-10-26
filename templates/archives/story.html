@@ -24,9 +24,12 @@
             <button type="submit">PDF</button>
           </form>
 
-        </div>
-    <p class="author-name">{{ fic.author }}</p>
-    <h1 class="fic-title">{{ fic.title }}</h1>
+    </div>
+
+    <div class="block-story-title">
+        <p class="author-name">{{ fic.author }}</p>
+        <h1 class="fic-title">{{ fic.title }}</h1>
+    </div>
 
     <section class="story-body">
         {% autoescape off %}

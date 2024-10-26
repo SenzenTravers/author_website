@@ -40,9 +40,9 @@ li {
     list-style: none;
 }
 
-p {
+/* p {
     text-indent: 3ch;
-}
+} */
 strong, a {
     color:#E7E6E1;
 }
@@ -72,24 +72,6 @@ header a {
     color: #D3B1C2;
 }
 
-.bannerBlockTitle p {
-    margin: 0;
-}
-
-.bannerTitle {
-    font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
-    font-size: 4em;
-    text-align: center;
-}
-
-.bannerSubtitle {
-    margin: none;
-    font-family: 'IM Fell DW Pica', serif;
-    font-size: larger;
-    font-style: italic;
-    text-align: center;
-}
-
 @media screen and (min-width: 1001px) {
     header {
         display: grid;
@@ -99,7 +81,7 @@ header a {
         padding-right: 2em;
     }
 
-    .bannerBlockTitle {
+    .logo-title {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -109,7 +91,7 @@ header a {
         font-size: 1.5em;
     }
 
-    .bannerSubtitle {
+    .logo-subtitle {
         font-size: larger;
     }
 
@@ -318,7 +300,7 @@ header a {
     line-height: 2.5em;
 }
 
-.fic_details {
+.fic-card {
     background-color: #E7E6E1;
     color: #4C223D;
     text-align: justify;
@@ -336,24 +318,24 @@ header a {
     
 }
 
-.fic_details h2 {
+.fic-card h2 {
     color: #4C223D;
     margin-top: 1%;
     margin-bottom: 0%;
 }
 
-.fic_details a {
+.fic-card a {
     color: #4C223D;
 }
 
-.fic_details .detail_line {
+.fic-card .detail_line {
     margin: 0%;
     margin-left: 4%;
     font-style: italic;
     font-size: 0.9em;
 }
 
-.fic_details .date {
+.fic-card .date {
     text-align: right;
     font-style: italic;
     margin-top: 0;

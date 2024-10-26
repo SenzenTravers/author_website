@@ -11,19 +11,20 @@ Romans, nouvelles et créations diverses
 
 {% block content %}
 
-<h1 class="h1-archives">Fics M/M et F/F</h1>
-
 <section class="fics-list archives-index">
-    <img
-    class="img-archives-index"
-    src="/static/images/rawpixel_typewriter.svg"
-    alt="Illustration de machine à écrire"
->
+    <div class="archives-index-title-block">
+        <h1 id="library-title">Fics M/M et F/F</h1>
+        <img
+            class="img-archives-index"
+            src="/static/images/simpler_typewriter.svg"
+            alt="Illustration de machine à écrire"
+        >
+    </div>
 
     {% for fic in fics %}
-        <div class="fic_details">
-            <section class="fic_details_header">
-                <h2><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
+        <div class="fic-card">
+            <section class="fic-card_header">
+                <h2 class="fic-card-title"><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
                 <p class="fic-date">{{ fic.date }}</p>
             </section>
 

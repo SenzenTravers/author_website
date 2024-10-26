@@ -2,14 +2,22 @@
 @import "./banner.css"; /* Using a string */
 
 body {
+    --very-dark-purple: #35182b;
+    --dark-purple: #4c223d;
+    --dull-purple: #703A4B;
+
     font-family: "Libre Baskerville", "PT Serif", serif;
     line-height: 2em;
-    background-color: #4c223d;
+    background-color: var(--dark-purple);
     color: #e3d5b5;
 
     display: flex;
     flex-flow: column;
     justify-content: space-between;
+}
+
+main {
+    margin-top: 3em;
 }
 
 footer {
@@ -22,10 +30,10 @@ footer {
 }
 
 h1 {
-    /*IM Fell DW Pica for more*/
     font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
     text-align: center;
     font-size: 3em;
+    text-transform: uppercase;
     background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e1a95f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -35,10 +43,14 @@ h1 {
     font-weight: 400;
 }
 
-h2 {
+.h2-writer {
     font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
-    margin-top: 2em;
-    margin-left: 2em;
+    text-align: center;
+    background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: 500ms linear;
+    font-size: 1.8em;
 }
 
 h3 {
@@ -48,13 +60,13 @@ h3 {
     color: #e6be8a;
 }
 
-li {
+/* li {
     list-style: none;
-}
+} */
 
-p {
+/* p {
     text-indent: 3ch;
-}
+} */
 strong,
 a {
     color: #e6be8a;
@@ -75,62 +87,30 @@ a:hover {
     color: #e5aa70;
 }
 
-/* SEN, CAREFUL*/
-/* background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-transition: 500ms linear; */
-
-@media screen and (min-width: 1001px) {
-    h1 {
-        font-size: 4em;
-        /* margin-top: max(350px, 0em); */
-        margin-bottom: 1em;
-    }
-
+@media screen and (max-width: 700px) {
     main {
-        margin-top: 63vh;
-        padding-left: 2em;
-        padding-right: 2em;
-        text-align: justify;
-        margin: 4em;
+        margin-left: 1.5em;
+        margin-right: 1.5em;
     }
 }
 
-@media screen and (min-width: 801px) and (max-width: 1000px) {
-    h1 {
-        font-size: 3.6em;
-        margin-bottom: 0.2em;
-    }
+@media screen and (min-width: 701px) and (max-width: 1000px) {
     main {
-        padding-left: 2em;
-        padding-right: 2em;
-        text-align: justify;
-        margin: 4em;
-        margin-top: 60vh;
+        margin-left: 6em;
+        margin-right: 6em;
     }
 }
 
-/*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
-@media screen and (min-width: 601px) and (max-width: 800px) {
+@media screen and (min-width: 1001px) and (max-width: 1300px){
     main {
-        margin-top: 60vh;
-        padding-left: 2em;
-        padding-right: 2em;
-        text-align: justify;
-        margin: 0%;
+        margin-left: 10em;
+        margin-right: 10em;
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (min-width: 1301px){
     main {
-        /* margin-top: 49vh; */
-        padding-left: 2em;
-        padding-right: 2em;
-        text-align: justify;
-    }
-
-    h1 {
-        font-size: 2.3em;
+        margin-left: 20vw;
+        margin-right: 20vw;
     }
 }

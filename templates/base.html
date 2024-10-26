@@ -45,4 +45,21 @@
 
         <footer>Copyright 2024 by une femme fabuleuse.</footer>
     </body>
+
+    <script>
+        window.addEventListener('load', function () {
+            const title = document.getElementsByTagName("h1")[0]
+            indicateSelectedPage(title)
+        })
+
+        function indicateSelectedPage(title) {
+            const pageName = title.id.slice(0, -6)
+            console.log(pageName)
+
+            const liName = `${pageName}-li`
+            const li = document.getElementById(liName)
+            let a = li.childNodes[0]
+            a.classList.add("selected")
+        }
+    </script>
 </html>

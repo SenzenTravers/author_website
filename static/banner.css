@@ -1,325 +1,169 @@
-/* LOGO */
-.bannerTitle {
-    font-family: "IM Fell English SC", "IM Fell DW Pica", serif;
-    text-align: center;
-    color: #f5deb3;
-}
+/* GENERAL HEADER QUALITIES */
+.main-site-header {
+    --banner-height: 250px;
+    --logo-height: calc(var(--banner-height) - 1vh);
 
-.bannerSubtitle {
-    font-family: "IM Fell DW Pica", serif;
-    font-style: italic;
-    text-align: center;
-    color: #f5deb3;
-}
-
-/* GENERAL HEADER THINGS */
-header {
     font-family: "IM Fell DW Pica", "Libre Baskerville", serif;
-    height: 250px;
-}
+    height: var(--banner-height);
+    line-height: 2em;
 
-header a {
-    text-decoration: none;
-    text-transform: uppercase;
-    background: #e6be8a;
-    background: linear-gradient(
-        to right,
-        #e6be8a 0%,
-        #f5deb3 50%,
-        #e6be8a 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    transition: 500ms linear;
-}
-
-header a:hover {
-    text-shadow: 0px 0px 10px #f8de7e;
-    filter: dropshadow(color=#f8de7e, offx=2, offy=2);
-    font-weight: bold;
-}
-
-@media screen and (max-width: 450px) {
-    /* LOGO */
-    .bannerBlockTitle img {
-        position: absolute;
-        top: 35px;
-        left: 30px;
-        width: 300px;
+    li {
+        list-style: none;
     }
 
-    .bannerTitle {
-        position: absolute;
-        top: 128px;
-        left: 30px;
-        margin: 0;
-        max-width: 300px;
-        font-size: 55px;
-        text-indent: 0.2ch;
-    }
-
-    .bannerSubtitle {
-        position: absolute;
-        top: 200px;
-        left: 83px;
-        margin: 0;
-        max-width: 300px;
-        text-indent: 0ch;
-        font-size: 22px;
-    }
-
-    /* REST OF HEADER */
-    header {
-        display: flex;
-        flex-flow: column;
-        margin-bottom: 9em;
-    }
-
-    header nav {
-        position: absolute;
-        top: 305px;
-        display: flex;
-        font-size: 20px;
-        line-height: 4.5ch;
-    }
-
-    header ul {
-        display: flex;
-        flex-flow: row;
-        gap: 1px;
-        left: -500px;
-    }
-
-    header li {
-        list-style-type: none;
-        color: #e6be8a;
-        margin: 12px;
-    }
-}
-
-@media screen and (min-width: 451px) and (max-width: 700px) {
-    /* LOGO */
-    .bannerBlockTitle img {
-        position: absolute;
-        top: 35px;
-        left: 10px;
-        width: 300px;
-    }
-
-    .bannerTitle {
-        position: absolute;
-        top: 128px;
-        left: 10px;
-        margin: 0;
-        max-width: 300px;
-        font-size: 55px;
-        text-indent: 0.2ch;
-    }
-
-    .bannerSubtitle {
-        position: absolute;
-        top: 200px;
-        left: 63px;
-        margin: 0;
-        max-width: 300px;
-        text-indent: 0ch;
-        font-size: 22px;
-    }
-
-    /* REST OF HEADER */
-    header {
-        display: flex;
-        flex-flow: row;
-        justify-content: end;
-        padding-left: 1em;
-        padding-right: 1em;
-        height: 350px;
-    }
-
-    header nav {
-        position: absolute;
-        top: 85px;
-        display: flex;
-        justify-content: end;
-        font-size: 22px;
-        margin: auto;
-        line-height: 4.5ch;
-    }
-
-    @counter-style thum {
-        system: cyclic;
-        symbols: "➢ ";
-        suffix: " ";
-    }
-
-    header li {
-        list-style-type: thum;
-        color: #e6be8a;
-        text-align: justify;
-    }
-}
-
-@media screen and (min-width: 701px) and (max-width: 1200px) {
-    /* **************************** TABLETTES ************************************ */
-    @counter-style thum {
-        system: cyclic;
-        symbols: "➢ ";
-        suffix: " ";
-    }
-
-    /* LOGO */
-    .bannerBlockTitle img {
-        position: absolute;
-        top: 35px;
-        left: 25px;
-        width: 400px;
-    }
-
-    .bannerTitle {
-        position: absolute;
-        top: 130px;
-        left: 45px;
-        margin: 0;
-        max-width: 350px;
-        font-size: 75px;
-        text-indent: 0.2ch;
-        background: #e6be8a;
+    a {
+        text-decoration: none;
+        text-transform: uppercase;
         background: linear-gradient(
             to right,
             #e6be8a 0%,
-            #faf0be 50%,
+            #f5deb3 50%,
             #e6be8a 100%
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        line-height: 65px;
-    }
+        transition: 500ms linear;
 
-    .bannerSubtitle {
-        position: absolute;
-        top: 265px;
-        left: 115px;
-        margin: 0;
-        max-width: 300px;
-        text-indent: 0ch;
-        font-size: 25px;
-    }
+        &:hover {
+            text-shadow: 0px 0px 10px #f8de7e;
+            filter: dropshadow(color=#f8de7e, offx=2, offy=2);
+            font-weight: bold;
+        }
 
-    /* !! REST OF HEADER !! */
-    header {
-        display: flex;
-        flex-flow: row;
-        justify-content: end;
-        margin-bottom: 9em;
-        margin-right: 3em;
-        padding-left: 1em;
-        padding-right: 1em;
-        height: 460px;
-    }
-
-    header nav {
-        position: absolute;
-        top: 40px;
-        font-size: 32px;
-        line-height: 5.5ch;
-    }
-
-    header li {
-        list-style-type: thum;
-        color: #e6be8a;
-        text-align: justify;
+        &.selected {
+            text-shadow: 0px 0px 10px #f8de7e;
+            filter: dropshadow(color=#f8de7e, offx=2, offy=2);
+            font-weight: bold;
+        }
     }
 }
 
-@media screen and (min-width: 1201px) {
-    /* **************************** ORDI ************************************ */
+.nav-underliner {
+    display: none;
+}
 
-    @counter-style thum {
-        system: cyclic;
-        symbols: " ✯   ";
-        suffix: "";
+/************************** LOGO *********************************/
+.logo-block {
+    position: relative;
+    height: inherit;
+    width: calc(var(--logo-height)*1.04);
+
+    img {
+        height: var(--logo-height);
+        margin: calc(1vh/2);
     }
 
-    /* LOGO */
-    .bannerBlockTitle img {
+    .logo-title {
         position: absolute;
-        top: 45px;
-        left: 35px;
-        width: 450px;
-    }
-
-    .bannerTitle {
-        position: absolute;
-        top: 150px;
-        left: 80px;
+        top: 60px;
+        left: 3px;
         margin: 0;
-        max-width: 350px;
-        font-size: 80px;
-        text-indent: 0.2ch;
-        background: #e6be8a;
-        background: linear-gradient(
-            to right,
-            #e6be8a 0%,
-            #faf0be 50%,
-            #e6be8a 100%
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        line-height: 70px;
-    }
-
-    .bannerSubtitle {
-        position: absolute;
-        top: 290px;
-        left: 145px;
-        margin: 0;
-        max-width: 300px;
-        text-indent: 0ch;
-        font-size: 25px;
-    }
-
-    /* !! REST OF HEADER !! */
-    header {
-        display: flex;
-        flex-flow: row;
-        justify-content: end;
-        margin-bottom: 9em;
-        padding-left: 1em;
-        padding-right: 1em;
-        height: 520px;
-    }
-
-    header nav {
-        position: absolute;
-        top: 150px;
-        font-size: 40px;
-        line-height: normal;
-        margin-left: max(475px);
-    }
-
-    header ul {
-        display: flex;
-        flex-flow: row;
-    }
-
-    header li {
-        list-style-type: thum;
-        color: #e6be8a;
+        padding-top: 8px;
         text-align: center;
-        margin: 1em;
+        font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
+        font-size: 50px;
+        color: #f5deb3;
+        background: #e6be8a;
+        background: linear-gradient(
+            to right,
+            #e6be8a 0%,
+            #faf0be 50%,
+            #e6be8a 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+
+    }
+
+    .logo-subtitle {
+        position: absolute;
+        top: 111px;
+        left: 42px;
+        font-size: 19px;
+        font-style: italic;
+        text-align: center;
+        color: #f5deb3;
+    
     }
 }
 
-@media screen and (min-width: 1601px) {
-    /* **************************** ORDI ************************************ */
-    header {
+
+/********************** MEDIA QUERIES ***************************/
+/********* PHONES */
+@media screen and (max-width: 700px) {
+    .main-site-header {
         display: flex;
         flex-flow: row;
-        justify-content: center;
-        margin-bottom: 9em;
-        margin-right: 3em;
-        padding-left: 1em;
-        padding-right: 1em;
-        height: 550px;
+        margin-bottom: 2em;
+        justify-content: space-between;
+
+        nav {
+            padding-right: 8%;
+            font-size: 1.2em;
+            line-height: 2.2em;
+        }
+    }
+
+    .main-site-header ul {
+        padding-left: 0;
+        margin-top: 30px;
+        text-align: right;
+    }
+}
+
+@media screen and (min-width: 601px) and (max-width: 700px) {
+    @counter-style arrow {
+        system: cyclic;
+        symbols: " 𒌋";
+        suffix: " ";
+    }
+
+    .main-site-header {
+        li {
+            list-style-type: none;
+            margin: 12px;
+            direction: rtl; 
+            list-style-type: arrow;
+        }
+    }
+}
+/********* TABLETS & MORE */
+@media screen and (min-width: 701px) {
+    .main-site-header {
+        display: flex;
+        flex-flow: row;
+
+        nav {
+            width: 100%;
+            display: flex;
+            flex-flow: column;
+            font-size: 1.5em;
+            justify-content: space-between;
+        }
+
+        ul {
+            width: 100%;
+            display: flex;
+            flex-flow: row;
+            /* flex-grow: 1; */
+            margin: 0;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0;
+            margin-top: 100px;
+        }
+
+        .nav-underliner {
+            display: block;
+            width: 60%;
+            align-self: center;
+            max-width: 500px;
+        }
+    }
+
+    @media screen and (min-width: 1601px) {
+        .main-site-header ul li {
+            font-size: 1.8em;
+        }
     }
 }

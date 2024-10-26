@@ -6,6 +6,7 @@ __pycache__
 db.sqlite3
 media
 migrations/*
+*/migrations/*
 
 # Python # 
 *.py[cod] 
@@ -56,3 +57,7 @@ pytest.ini
 
 # Perplexitude
 */tmp/*
+aaa.py
+api_eriza/
+gadgets/
+utils/
