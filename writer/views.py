@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.shortcuts import render
 from django.views import generic
 
@@ -9,7 +11,7 @@ class Homepage(generic.ListView):
     context_object_name = 'latest_posts'
 
     def get_queryset(self):
-        return Post.objects.order_by('-date')[:5]
+        return Post.objects.filter(date__lte=datetime.now()).order_by('-date')
 
 def homepage(request):
     return render(request, 'writer/homepage.html')

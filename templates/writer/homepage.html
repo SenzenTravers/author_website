@@ -15,13 +15,15 @@
 
 <section class="homepage-body">
     {% for post in latest_posts %}
-    <article class="post-block">
-        <h2 class="h2-writer post-date">{{ post.date }}</h2>
+        <article class="post-block">
+            <h2 class="h2-writer post-date">
+                {% if post.title %} <em>{{ post.title }}</em> — {% endif %} {{ post.date }}
+            </h2>
 
-        {% autoescape off %} {{ post.body }} {% endautoescape %}
-    </article>
+            {% autoescape off %} {{ post.body }} {% endautoescape %}
+        </article>
 
-    <hr />
+        <hr />
     {% endfor %}
 </section>
 {% endblock %}

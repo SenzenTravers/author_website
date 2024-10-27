@@ -24,7 +24,7 @@ Romans, nouvelles et créations diverses
     {% for fic in fics %}
         <div class="fic-card">
             <section class="fic-card_header">
-                <h2 class="fic-card-title"><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}</a>, par {{ fic.author }}</h2>
+                <h2 class="fic-card-title"><a href="{% url 'archives:first_chapter' fic.id %}">{{ fic.title }}, par {{ fic.author }}</a></h2>
                 <p class="fic-date">{{ fic.date }}</p>
             </section>
 
