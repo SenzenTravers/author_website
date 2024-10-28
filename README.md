@@ -5,6 +5,20 @@
 -  Add HTML support for multiple chapters
 -  Add buttons to filter rants
 
+## Install it in o2switch
+### Package
+
+Pick Python 11.x.
+
+> pip install -r requirements.txt
+> pip install mysqlclient.
+
+Indicate core/wsgi.py as the entrance point of your app.
+
+Check that all migrations are applied.
+
+You're done!
+
 ## Change staticfiles (images, CSS, etc)
 1. Run `python manage.py collectstatic`
 2. Restart the app

@@ -30,6 +30,13 @@
         <h1 class="fic-title">{{ fic.title }}</h1>
     </div>
 
+
+    <section class="story-body">
+        {% autoescape off %}
+        {{ current_chapter.content }}
+        {% endautoescape %}
+    </section>
+
     {% if chapters|length > 1 %}
     <div class="story-chapters-block">
         {% if number != 1 %}
@@ -38,32 +45,11 @@
             </button>
         {% endif %}
 
-        <label for="chapter-select" hidden >Sélectionnez un chapitre</label>
-        <select name="chapters" id="chapter-select">
-            {% for chap in chapters %}
-                <option
-                    onclick="window.location = '{% url 'archives:show_chapter' fic.id chap.number %}'"
-                    value="{{ chap.number }}">
-                    {% if chap.title == none %}
-                        Chapitre {{ chap.number }}
-                    {% else %}
-                        {{ chap.number }}. {{ chap.title }}
-                    {% endif %}
-                </option>
-            {% endfor %}
-          </select>
-
         {% if number|add:1 <= chapters|length %}
             <button class="story-button"><a href="{% url 'archives:show_chapter' fic.id number|add:1 %}">Suivant</a></button>
         {% endif %}        
     </div>
     {% endif %}
-
-    <section class="story-body">
-        {% autoescape off %}
-        {{ current_chapter.content }}
-        {% endautoescape %}
-    </section>
 
     <section id="after-reading-actions">
     {% if messages %}
