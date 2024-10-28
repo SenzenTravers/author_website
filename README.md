@@ -1,8 +1,9 @@
 # Site d'autrice
 
 ## TO-DO
--  Add support for multiple chapters
--  Add support for rants
+-  Add PDF support for multiple chapters
+-  Add HTML support for multiple chapters
+-  Add buttons to filter rants
 
 ## Change staticfiles (images, CSS, etc)
 1. Run `python manage.py collectstatic`

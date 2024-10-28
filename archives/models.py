@@ -71,18 +71,42 @@ class Fic(models.Model):
     )
     complete = models.BooleanField(default=True)
 
+
+    @property
+    def has_multiple_chapters(self):
+        if Chapter.objects.filter(fic=self).count() > 1:
+            return True
+        return False
+
     def __str__(self):
         return f"{self.author} : {self.title}"
 
 
 class Chapter(models.Model):
+    def return_next_number(self, fic):
+        return Chapter.objects.filter(fic=fic).count() + 1
+
     fic = models.ForeignKey(Fic, on_delete=models.CASCADE)
     title = models.CharField(max_length=150, null=True, blank=True)
+    number = models.PositiveSmallIntegerField(null=True, blank=True)
     author_note = models.TextField(max_length=2000, null=True, blank=True)
     content = models.TextField(max_length=1000000)
 
     def __str__(self):
-        return f"{self.fic}, chapter number"
+        return f"{self.fic}, chapter {self.number}"
+    
+    def save(self, *args, **kwargs):
+        if self.number == None:
+            self.number = self.return_next_number(self.fic)
+            super(Chapter, self).save(*args, **kwargs)
+        else:
+            super(Chapter, self).save(*args, **kwargs)
+
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['fic', 'number'], name="unique_chapter_number_for_fic")
+        ]
 
 
 class Comment(models.Model):

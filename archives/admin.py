@@ -5,7 +5,7 @@ from .models import Author, Chapter, Fic
 
 
 class ChapterAdmin(admin.ModelAdmin):
-    fields = ['fic', 'title', 'content', 'author_note']
+    fields = ['fic', 'title', 'number', 'content', 'author_note']
 
 
 class FicAdmin(admin.ModelAdmin):

@@ -18,22 +18,29 @@ class Index(generic.ListView):
     def get_queryset(self):
         return Fic.objects.order_by('-date')
 
-def first_chapter(request, fic_id):
+def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)
-    chapters = Chapter.objects.filter(fic=fic_id).order_by('id')
-    current_chapter = chapters[0]
+    chapters = Chapter.objects.filter(fic=fic_id).order_by('number')
+
+    current_chapter = chapters[int(number-1)]
 
     return render(
         request,
         'archives/story.html',
         {'fic':fic,
         'chapters': chapters,
-        'current_chapter': current_chapter
+        'current_chapter': current_chapter,
+        'number': number
         })
 
-# class firstChapter(generic.DetailView):
-#     model = Chapter
-#     template_name = 'archives/story.html'
+# TODO: REMOVE THESE TWO THINGS
+def next_chapter(request, chapter_id):
+    chapter = get_object_or_404(Chapter, pk=chapter_id)
+    return Chapter.filter(fic=chapter.fic).filter(number=chapter.number + 1)
+
+def previous_chapter(request, chapter_id):
+    chapter = get_object_or_404(Chapter, pk=chapter_id)
+    return Chapter.filter(fic=chapter.fic).filter(number=chapter.number - 1)
 
 class ChapterView(generic.DetailView):
     model = Chapter

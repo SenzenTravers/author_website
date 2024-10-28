@@ -12,6 +12,8 @@ body:has(.story) {
     text-align: justify;
     border: thin dotted var(--dull-purple);
     border-radius: 15px;
+
+    padding-top: 1em;
 }
 
 .block-story-title {
@@ -51,18 +53,33 @@ body:has(.story) {
 }
 
 .story-buttons button {
+    margin: 2px;
+}
+
+.story-button {
     background-color: var(--very-dark-purple);
     color: #F4F3F1;
     font-family: 'Courier Prime', "Libre Baskerville", serif;
     text-transform: uppercase;
     padding: 2vh;
-    margin: 2px;
     border: #D3B1C2 medium double;
     border-radius: 10px;
 
     &:hover {
         background-color: #603952;
         color: #F4F3F1;
+    }
+}
+
+.story-chapters-block {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 2em;
+
+    select {
+        max-width: 10ch;
     }
 }
 
@@ -85,10 +102,6 @@ body:has(.story) {
 
 /************************ MEDIA QUERIES */
 @media screen and (max-width: 600px) {
-    .story {
-        padding-top: 2vh;
-    }
-
     .story-buttons button {
         font-size: 0.9em;
         padding: 12px;
@@ -97,10 +110,6 @@ body:has(.story) {
 
 /*Autres tailles : 480px, 768px, 1024px, 1200px, ouch*/
 @media screen and (min-width: 601px) and (max-width: 800px) {
-    .story {
-        padding-top: 2vh;
-    }
-
     .story-body {
         padding-left: 10vw;
         padding-right: 10vw;
@@ -117,10 +126,6 @@ body:has(.story) {
         margin-bottom: 4.5em;
     }
 
-    .story {
-        padding-top: 4vh;
-    }
-
     .story-buttons button {
         font-size: 1em;
         padding: 17px;
@@ -130,10 +135,6 @@ body:has(.story) {
 @media screen and (min-width: 1001px) {
     .block-story-title {
         margin-bottom: 7em;
-    }
-
-    .story {
-        padding-top: 5vh;
     }
 
     .story-buttons button {
