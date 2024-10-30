@@ -1,5 +1,15 @@
 @import "./base.css"; /* Using a string */
 
+.icon-rss {
+    display: block;
+    margin-left: auto;
+    height: 26px;
+
+    &:hover {
+        height: 28px;
+    }
+}
+
 .block-news-page-title {
     position: relative;
     padding-top: 2.3em;

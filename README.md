@@ -29,3 +29,7 @@ You're done!
 [CONVERT HTML TO PDF - PYTHON](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#python-library) => note que y a un argument pour gérer les pages !!
 
 [pdf WITH A PAGE-AT RULE](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
+
+[Add an RSS feed](https://docs.djangoproject.com/en/5.1/ref/contrib/syndication/)
+
+[Suscribe to a RSS feed](https://support.mozilla.org/fr/kb/comment-s-abonner-aux-flux-de-nouvelles-et-blogs)
