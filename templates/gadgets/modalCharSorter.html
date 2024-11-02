@@ -85,7 +85,14 @@
 
     window.onclick = function(event) {
         if (!charSorterModal.contains(event.target) & event.target != document.getElementById("character-sorter-btn")) {
-            charSorterModal.style.display = "none";
+            try {
+                document.getElementById("result-form").remove()
+                } catch (error) {
+                    
+                } finally {
+                    charSorterModal.style.display = "none";
+                    charSorterModal.childNodes[1].style.display = "block"
+            }
         }
     }
 
@@ -124,6 +131,7 @@
         ulChildren = Array.from(ul.children)
         let allChars = fisherYatesShuffle(ulChildren)
         
+        let formCopy = charSorterModal.childNodes[1].cloneNode()
         let header = document.createElement("div")
         let body = document.createElement("div")
 
@@ -149,16 +157,16 @@
         modalFooter.appendChild(closeBtn)
 
         header.appendChild(title)
-        charSorterModal.appendChild(header)
-        charSorterModal.appendChild(subtitles)
-        charSorterModal.appendChild(newList)
-        charSorterModal.appendChild(modalFooter)
+        formCopy.innerHTML = ""
+        formCopy.id = "result-form"
+        charSorterModal.appendChild(formCopy)
+        formCopy.appendChild(header)
+        formCopy.appendChild(subtitles)
+        formCopy.appendChild(newList)
+        formCopy.appendChild(modalFooter)
+
 
         charSorterModal.childNodes[1].style.display = "none"
-
-        // Select modal content
-        // Show sorted list
-        // Show a "close" button (qui appuie sur le bouton "montrer la modale", en vrai)
     }
 
     function fisherYatesShuffle(arr) {

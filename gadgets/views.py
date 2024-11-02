@@ -6,14 +6,7 @@ from django.views import generic
 
 from .ressources import YaoiGenerator
 
-
 def index(request):
-    return render(
-        request,
-        'gadgets/index.html'
-        )
-
-def grenier(request):
     return render(
         request,
         'gadgets/grenier.html'
