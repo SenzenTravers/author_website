@@ -45,6 +45,7 @@
             >
                 <option value="">--</option>
                 <option value="babygirl">Babygirl</option>
+                <option value="babygirl">Boywife</option>
                 <option value="cinnamon-roll">Cinnamon roll</option>
                 <option value="husbando">Husbando</option>
                 <option value="problematic">Problématique</option>
@@ -86,10 +87,13 @@
     window.onclick = function(event) {
         if (!charSorterModal.contains(event.target) & event.target != document.getElementById("character-sorter-btn")) {
             try {
+                document.getElementById("result-form").style.display = "none"
                 document.getElementById("result-form").remove()
-                } catch (error) {
-                    
+                window.location.reload();
+                } catch (error) {            
+                    console.log(error)
                 } finally {
+                    document.getElementsByClassName("char-sorter-list")[0].innerHTML = ""
                     charSorterModal.style.display = "none";
                     charSorterModal.childNodes[1].style.display = "block"
             }
