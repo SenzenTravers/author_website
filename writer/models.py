@@ -13,7 +13,7 @@ class Post(models.Model):
         default="NE"
     )
     date = models.DateField()
-    title = models.CharField(null=True, max_length=200)
+    title = models.CharField(null=True, blank=True, max_length=200)
     body = models.TextField(max_length=6000)
     
     def __str__(self):

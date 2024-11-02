@@ -1,0 +1,171 @@
+<section class="gadgets-modal" id="char-sorter-modal">
+    <form>
+        <div class="gadgets-modal-header">
+            <h3>Trieur de personnages</h3>
+
+            <p class="gadget-modal-instruction">
+                Ajoutez un personnage en appuyant sur la touche <em>Entrée</em> 
+                ou sur « Ajouter », choisissez un critère, puis soumettez
+                votre liste au tri impitoyable de l'INTELLIGENCE ARTIFICIELLE(TM).
+            </p>
+        </div>
+
+        <div>
+            <h4 class="char-sorter-h4"></h4>
+            <ul class="char-sorter-list">
+
+            </ul>
+        </div>
+        <div class="char-sorter-char-picker">
+            <div>
+                <label for="char-picker-input">Ajouter un personnage : </label>
+                <input
+                    type="text"
+                    id="char-picker-input"
+                    name="char-picker-input"
+                    class="char-sorter-input"
+                    maxlength="50"
+                />
+            </div>
+            <button
+                type="button"
+                id="char-picker-btn"
+                onclick="addCharToSortList()"
+                >Ajouter
+            </button>
+        </div>
+
+        <div class="char-sorter-div-criteria">
+            <label for="criteria-select">Critère : </label>
+            <select
+                name="criteria"
+                id="criteria-select"
+                class="char-sorter-input"
+                oninput="checkInputsAreOk()"
+            >
+                <option value="">--</option>
+                <option value="babygirl">Babygirl</option>
+                <option value="cinnamon-roll">Cinnamon roll</option>
+                <option value="husbando">Husbando</option>
+                <option value="problematic">Problématique</option>
+                <option value="waifu">Waifu</option>
+                <option value="woke">Woke</option>
+            </select>
+        </div>
+
+        <div class="char-sorter-modal-footer">
+            <button
+                type="button"
+                id="char-sorter-submit-button"
+                onclick="showSortedList()"
+            >
+                Soumettre
+            </button>
+        </div>
+    </form>
+</section>
+
+<script>
+    const charPickerField = document.getElementById("char-picker-input");
+    const charSorterModal = document.getElementById("char-sorter-modal");
+    
+    // GENERAL MODAL THINGS
+    window.onload = (event) => {
+        checkInputsAreOk()
+    };
+
+    charPickerField.addEventListener("keypress", function(event) {
+        if (event.key === "Enter" & charPickerField.value != "") {
+            event.preventDefault();
+            document.getElementById("char-picker-btn").click();
+        } else if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    });
+
+    window.onclick = function(event) {
+        if (!charSorterModal.contains(event.target) & event.target != document.getElementById("character-sorter-btn")) {
+            charSorterModal.style.display = "none";
+        }
+    }
+
+    function checkInputsAreOk() {
+        const btn = document.getElementById("char-sorter-submit-button")
+        const ulChars = document.getElementsByClassName("char-sorter-list")[0]
+        const liChars = ulChars.childNodes
+        let selectInput = document.getElementById("criteria-select")
+
+        if (liChars.length > 2 & selectInput.options[selectInput.selectedIndex].value != "") {
+            btn.disabled = false
+        } else {
+            btn.disabled = true
+        }
+    }
+
+    function addCharToSortList() {
+        const charPickerField = document.getElementById("char-picker-input");
+        const charAddedList = document.getElementsByClassName("char-sorter-list")[0]
+        const charAddedListTitle = document.getElementsByClassName("char-sorter-h4")[0]
+
+        const name = charPickerField.value
+        const liElement = document.createElement("li");
+
+        charAddedListTitle.innerHTML = "Personnages";
+        liElement.innerHTML = name;
+        charPickerField.value = ""
+        charAddedList.appendChild(liElement);
+        checkInputsAreOk()
+    }
+
+    function showSortedList() {
+        let selectInput = document.getElementById("criteria-select")
+        let characteristic = selectInput.options[selectInput.selectedIndex].label.toLowerCase()
+        let ul = document.getElementsByClassName("char-sorter-list")[0]
+        ulChildren = Array.from(ul.children)
+        let allChars = fisherYatesShuffle(ulChildren)
+        
+        let header = document.createElement("div")
+        let body = document.createElement("div")
+
+        const title = document.createElement("h3");
+        title.innerHTML = "Résultats"
+        header.classList.add("gadgets-modal-header")
+
+        let subtitles = document.createElement("p")
+        subtitles.classList.add("gadget-modal-instruction")
+        subtitles.innerHTML = `L'IA a parlé ! Voici la liste de vos personnages classés du plus ${characteristic} au moins ${characteristic} :`
+
+        let newList = document.createElement("ul")
+        newList.classList.add("char-sorter-list")
+        ulChildren.forEach((element) => newList.appendChild(element))
+
+        let modalFooter = document.createElement("div")
+        modalFooter.classList.add("char-sorter-modal-footer")
+        let closeBtn = document.createElement("button")
+        closeBtn.type = "button"
+        closeBtn.classList.add = "char-sorter-submit-button"
+        closeBtn.innerText = "Fermer"
+        closeBtn.onclick = () => {charSorterModal.style.display = "none";}
+        modalFooter.appendChild(closeBtn)
+
+        header.appendChild(title)
+        charSorterModal.appendChild(header)
+        charSorterModal.appendChild(subtitles)
+        charSorterModal.appendChild(newList)
+        charSorterModal.appendChild(modalFooter)
+
+        charSorterModal.childNodes[1].style.display = "none"
+
+        // Select modal content
+        // Show sorted list
+        // Show a "close" button (qui appuie sur le bouton "montrer la modale", en vrai)
+    }
+
+    function fisherYatesShuffle(arr) {
+        for (var i = arr.length - 1; i > 0; i--) {
+            var j = Math.floor(Math.random() * (i + 1));  // random index
+            [arr[i], arr[j]] = [arr[j], arr[i]];          // swap
+        }
+    }
+
+</script>

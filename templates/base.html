@@ -49,12 +49,16 @@
     <script>
         window.addEventListener('load', function () {
             const title = document.getElementsByTagName("h1")[0]
+
+            if (title.id == 'gadgets-title') {
+                let header = document.getElementsByClassName("main-site-header")[0]
+                header.id = "gadgets-header"
+            }
             indicateSelectedPage(title)
         })
 
         function indicateSelectedPage(title) {
             const pageName = title.id.slice(0, -6)
-            console.log(pageName)
 
             const liName = `${pageName}-li`
             const li = document.getElementById(liName)

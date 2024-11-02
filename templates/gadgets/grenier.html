@@ -1,9 +1,9 @@
 {% extends '../base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/archives_index.css">
+<link rel="stylesheet" href="/static/gadgets_index.css">
+<link rel="stylesheet" href="/static/gadgets_modal.css">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 {% endblock %}
 
 {% block pageTitle %}
@@ -11,22 +11,76 @@ Coquecigrues
 {% endblock %}
 
 {% block content %}
-
-<h1 class="h1-gadgets">Coquecigrues : trucs, gadgets et machins</h1>
+<h1
+    class="h1-gadgets"
+    id="gadgets-title"
+    >Coquecigrues : trucs, gadgets et machins</h1>
 
 <section class="gadgets-section">
     <!-- <img
     class="gadgets-illustration"
     src="/static/images/bimbimka_feather-ai2.svg"
-    alt="Illustration de machine à écrire"
+    alt="Illustration de plume étrange"
     > -->
 
-    <article>
-        Pourquoi ai-je fait une formation dans 
-        l'informatique ? Pour ceci.
+    <article class="gadget-disclaimer">
+        <p>
+            La section gadget a pour objectif de partager deux types de choses : les outils et ressources 
+            d'écriture que je trouve chouettes et le nonsense absolu que je m'amuse parfois à coder.
+        </p>
+        <p>
+            Vous êtes prévenus.
+        </p>
     </article>
 
-    <details>
+    <article>
+        <h2 class="gadget-subtitles">Littératurages & productivité</h2>
+
+        <ul>
+            <li>
+                <p><span>Relecture</span> : 
+                <a href="https://extensions.libreoffice.org/en/extensions/show/grammalecte">Grammalecte</a> est une extension gratuite mais vitale pour 
+                LibreOffice, la petite sœur prodige d'OpenOffice. Non seulement elle vérifie l'orthographe et la grammaire à un niveau supérieur
+                 à celui de Google Doc, mais en plus elle s'occupe d'harmoniser votre ponctuation et vos paragraphes comme vous le souhaitez,
+                  repère répétition ou pléonasme... Bref, une invention divine.</p>
+            </li>
+            <li>
+                <p><span>Productivité</span> : 
+                Besoin d'un logiciel d'écriture qui vous laisse vous concentrer sur l'essentiel ? <a href="https://gottcode.org/focuswriter/">FocusWriter</a>
+                se concentre sur l'essentiel : votre texte et votre productivité. Le mode plein écran est tout spécialement efficace, et vous 
+                pouvez vous mettre des objectifs en mots ou en temps passé ! Un calendrier vous laisse suivre les jours où vous avez atteint vos 
+                objectifs.<br>
+                Le bonus : vous pouvez choisir un fond d'écran ou opter pour faire des bruits de machine à écrire quand vous tapez. Es-sen-tiel.</p>
+            </li>
+            <li>
+                <p><span>Édition</span> :
+                    si vous avez pour ambition d'être publiée dans le monde de l'édition traditionnelle, le site 
+                    <a href="https://textes-a-la-pelle.fr/">Textes à la pelle</a> est là pour vous ! Spécialisé dans les concours ou appels à texte,
+                     il permet de trier les appels disponibles par date d'ajout ou de rendu et de découvrir d'incroyables noms de patelins.
+                </p>
+            </li>
+        </ul>
+    </article>
+
+    <article>
+        <h2 class="gadget-subtitles">Gaies inepties</h2>
+        <ul>
+            <li>
+                <button
+                    id="character-sorter-btn"
+                    type="button"
+                    onclick="displayCharSorterModal()"
+                >
+                    Le trieur de blorbos
+                </button>
+                <p>Entrez une liste de personnage et laissez notre IA ultraperformante
+                les trier par degré de babygirlitude/boywifitude/etc.</p>
+            </li>
+        </ul>
+    </article>
+    {% include "./modalCharSorter.html" %}
+
+    <!-- <details>
         <summary>
             <button id="prompt-btn">Le filtreur de thèmes</button>
         </summary>
@@ -50,82 +104,17 @@ Coquecigrues
         </p>
 
     </details>
-
-    <details class="yaoi-generator">
-        <summary>
-            <button id="yaoi-generator">Le générateur-à-thèmes-yaoi-ou-damnei</button>
-        </summary>
-        <p>
-            Le filtreur de prompt vise à aider à filtrer les thèmes listés dans 
-            les tagsets originaux d'AO3.
-        </p>
-    <!-- <details>
-        <summary>
-            <button id="blorbo-modal">Le sélectionneur de blorbos</button>
-        </summary>
-        Entrez une liste de personnage et laissez notre IA ultraperformante
-        les trier par degré de blorbitude/babygirlitude/malewifitude/etc.
-    </details>
-      
     <details>
         <summary><a href="">L'appaireur </a></summary>
         Jouez les Cupidon en apparairant des personnages de 
         Jujutsu Kaisen. Questionnez-vous sur mon degré de 
         temps libre.
     </details> -->
-
-    <!-- { include "./blorbo.html" } -->
-
-    <!-- MODAL -->
-    <section class="gadget-modal" hidden>
-        <h2>Filtreur de thème</h2>
-        <form>
-            {% csrf_token %}
-            <!-- NOTE : ne pas oublier le machin assainissant -->
-            <label for="prompts-url">Adresse complète du tagset :</label>
-            <input 
-                type="text"
-                id="prompts-url" name="prompts-url"
-                required
-                minlength="37"
-                size="45"
-            />
-            <fieldset>
-                <legend>Vous voulez récupérer...</legend>
-              
-                <div>
-                  <input type="checkbox" id="scales" name="scales" checked />
-                  <label for="scales">Scales</label>
-                </div>
-              
-                <div>
-                  <input type="checkbox" id="horns" name="horns" />
-                  <label for="horns">Horns</label>
-                </div>
-            </fieldset>
-
-            <label for="prompts-field-name">Nom de la catégorie Original (si applicable):</label>
-            <input 
-                type="text"
-                id="prompts-field-name" name="prompts-field-name"
-                minlength="5"
-                size="45"
-            />
-            <label for="prompts-exclude-words">Mots à exclure (séparés par le caractère /) :</label>
-            <input 
-                type="text"
-                id="prompts-exclude-words" name="prompts-exclude-words"
-                size="45"
-            />
-            <label for="prompts-include-words">Mots à chercher (séparés par le caractère /) :</label>
-            <input 
-                type="text"
-                id="prompts-include-words" name="prompts-include-words"
-                required
-                size="45"
-            />
-                <!-- https://archiveofourown.org/tag_sets/ -->
-        </form>
-    </section>
+    <script>
+        function displayCharSorterModal() {
+            console.log("aaaaaaa")
+            document.getElementById('char-sorter-modal').style.display = "flex";
+        }
+    </script>
 </section>
 {% endblock %}

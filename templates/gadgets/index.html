@@ -1,9 +1,8 @@
 {% extends '../base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/archives_index.css">
+<link rel="stylesheet" href="/static/gadgets_index.css">
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
-<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 {% endblock %}
 
 {% block pageTitle %}
@@ -11,8 +10,10 @@ Coquecigrues
 {% endblock %}
 
 {% block content %}
-
-<h1 class="h1-gadgets">Coquecigrues : trucs, gadgets et machins</h1>
+<h1
+    class="h1-gadgets"
+    id="gadgets-title"
+    >Coquecigrues : trucs, gadgets et machins</h1>
 
 <section class="gadgets-section">
     <img
@@ -21,50 +22,6 @@ Coquecigrues
     alt="Illustration de machine à écrire"
     >
 
-    <article>
-        Pourquoi ai-je fait une formation dans 
-        l'informatique ? Pour ceci.
-    </article>
 
-    <details>
-        <summary>
-            <button id="prompt-btn">Le filtreur de thèmes</button>
-        </summary>
-        <p>
-            Le filtreur de prompt vise à aider à filtrer les thèmes listés dans 
-            les tagsets originaux d'AO3.
-        </p>
-        <p>
-            À titre d'exemple, vous pouvez utiliser les tagsets de 
-            <a href="https://archiveofourown.org/tag_sets/16669">Fic in a Box 2023</a>,
-            <a href="https://archiveofourown.org/tag_sets/20326">FFFX24</a>,
-            <a href="https://archiveofourown.org/tag_sets/16279">FFFX23</a>,
-            <a href="https://archiveofourown.org/tag_sets/12096">FFFX22</a>,
-            <a href="https://archiveofourown.org/tag_sets/19846">Rare Male Slash Exchange</a>,
-            <a href="https://archiveofourown.org/tag_sets/11190">Rare Male Slash Exchange 2022</a>,
-            <a href="https://archiveofourown.org/tag_sets/15631">Rare Male Slash Exchange 2023</a>,
-            <a href="https://archiveofourown.org/tag_sets/20086">Relationshipping 2024</a>,
-            <a href="https://archiveofourown.org/tag_sets/16171">Relationshipping 2023</a>,
-            <a href="https://archiveofourown.org/tag_sets/20122">Ennemies to Lover 2024</a>,
-            <a href="https://archiveofourown.org/tag_sets/14770">Fandom5k2022</a>...
-        </p>
-
-    </details>
-    <!-- <details>
-        <summary>
-            <button id="blorbo-modal">Le sélectionneur de blorbos</button>
-        </summary>
-        Entrez une liste de personnage et laissez notre IA ultraperformante
-        les trier par degré de blorbitude/babygirlitude/malewifitude/etc.
-    </details>
-      
-    <details>
-        <summary><a href="">L'appaireur </a></summary>
-        Jouez les Cupidon en apparairant des personnages de 
-        Jujutsu Kaisen. Questionnez-vous sur mon degré de 
-        temps libre.
-    </details>
-
-    {% include "./blorbo.html" %} -->
 </section>
 {% endblock %}
