@@ -8,7 +8,7 @@
             position: inside;    
         }
 
-body:has(#gadgets-title) {
+body:has(#gadgets-section) {
     --gadget-whitish:  #F0F9F9;
     --gadget-yellow: #F7F9A7;
     --gadget-turquoise: #68CDE7;

@@ -16,100 +16,110 @@
 
 <h1 class="h1-gadgets" id="gadgets-title">Coquecigrues : l'Écritoire</h1>
 
-<section class="rich-text-editor-block">
-    <section class="numbers-block">
-      <div>
-        <label for="timer-length"></label>
-        <input
-          name="timer-length"
-          id="timer-length"
-          type="number"
-          min="0"
-        />  
+<section id="rich-text-editor-block" class="mode-warm">  
+    <section class="editor-header">
+      <section class="command-btns-wrapper">
+        <!-- Text Format -->
+        <button id="bold" class="option-button format">
+          <i class="fa-solid fa-bold"></i>
+        </button>
+        <button id="italic" class="option-button format">
+          <i class="fa-solid fa-italic"></i>
+        </button>
+        <button id="underline" class="option-button format">
+          <i class="fa-solid fa-underline"></i>
+        </button>
+        <button id="strikethrough" class="option-button format">
+          <i class="fa-solid fa-strikethrough"></i>
+        </button>
+        <button id="superscript" class="option-button script">
+          <i class="fa-solid fa-superscript"></i>
+        </button>
+        <button id="subscript" class="option-button script">
+          <i class="fa-solid fa-subscript"></i>
+        </button>
+
+        <!-- Link -->
+        <button id="createLink" class="adv-option-button">
+          <i class="fa fa-link"></i>
+        </button>
+        <button id="unlink" class="option-button">
+          <i class="fa fa-unlink"></i>
+        </button>
+
+        <!-- Alignment -->
+        <button id="justifyLeft" class="option-button align">
+          <i class="fa-solid fa-align-left"></i>
+        </button>
+        <button id="justifyCenter" class="option-button align">
+          <i class="fa-solid fa-align-center"></i>
+        </button>
+        <button id="justifyRight" class="option-button align">
+          <i class="fa-solid fa-align-right"></i>
+        </button>
+        <button id="justifyFull" class="option-button align">
+          <i class="fa-solid fa-align-justify"></i>
+        </button>
+
+        <!-- Headings -->
+        <select id="formatBlock" class="adv-option-button">
+          <option value="H1">H1</option>
+          <option value="H2">H2</option>
+          <option value="H3">H3</option>
+          <option value="H4">H4</option>
+          <option value="H5">H5</option>
+          <option value="H6">H6</option>
+        </select>
+
+        <!-- Font -->
+        <select id="fontName" class="adv-option-button"></select>
+        <select id="fontSize" class="adv-option-button"></select>
+
+        <!-- Color -->
+        <div class="input-wrapper">
+          <label for="foreColor">Texte</label>
+          <input type="color" id="foreColor" class="adv-option-button" />
+        </div>
+        <div class="input-wrapper">
+          <label for="backColor">Fond</label>
+          <input type="color" id="backColor" class="adv-option-button" />
+        </div>
+      </section>
+
+      <div class="timer-block">
+        <div class="btn-mode-wrapper">
+          <button type="button" id="heavenModeBtn" onclick="changeMode('mode-heaven')"><i class="fa-solid fa-cloud"></i></button>
+          <button type="button" id="warmModeBtn" onclick="changeMode('mode-warm')"><i class="fa-solid fa-sun"></i></button>
+          <button type="button" id="nightModeBtn" onclick="changeMode('mode-night')"><i class="fa-solid fa-moon"></i></button>
+        </div>
+        <div class="timer-input">
+          <label for="timer-length">Session (en min.)</label>
+          <input
+            name="timer-length"
+            id="timer-length"
+            type="number"
+            min="0"
+            onchange="handleTimerLengthChange()"
+          />  
+        </div>
+    
+        <div class="timer-btns">
+          <button type="button" id="startCdBtn" onclick="handleCountDown()" disabled><i class="fa-solid fa-play"></i></button>
+          <!-- <button><i class="fa-solid fa-pause"></i></button> -->
+          <button type="button" id="stopCdBtn" onclick="stopCountdown()" disabled><i class="fa-solid fa-stop"></i></button>
+        </div>    
       </div>
-
-      <div>
-        <button type="button" id="startCdBtn" onclick="handleCountDown()"><i class="fa-solid fa-play"></i></button>
-        <!-- <button><i class="fa-solid fa-pause"></i></button> -->
-        <button type="button" id="stopCdBtn" onclick="stopCountdown()" disabled><i class="fa-solid fa-stop"></i></button>
-      </div>
-
-      <p id="visible-timer">Aucun marathon en cours pour l'instant...</p>
-
-      <p>
-          Compte-mot : <span id="nb-of-words">0</span>
-      </p>    
     </section>
 
-    <div class="options">
-      <!-- Text Format -->
-      <button id="bold" class="option-button format">
-        <i class="fa-solid fa-bold"></i>
-      </button>
-      <button id="italic" class="option-button format">
-        <i class="fa-solid fa-italic"></i>
-      </button>
-      <button id="underline" class="option-button format">
-        <i class="fa-solid fa-underline"></i>
-      </button>
-      <button id="strikethrough" class="option-button format">
-        <i class="fa-solid fa-strikethrough"></i>
-      </button>
-      <button id="superscript" class="option-button script">
-        <i class="fa-solid fa-superscript"></i>
-      </button>
-      <button id="subscript" class="option-button script">
-        <i class="fa-solid fa-subscript"></i>
-      </button>
+    <section id="text-input-wrapper">
+      <section id="text-input" contenteditable="true"></section>
+      <p id="visible-timer">Aucune session en cours pour l'instant.</p>
+      <p class="word-counter">
+        Compte-mot : <span id="nb-of-words">0</span>
+      </p>
 
-      <!-- Link -->
-      <button id="createLink" class="adv-option-button">
-        <i class="fa fa-link"></i>
-      </button>
-      <button id="unlink" class="option-button">
-        <i class="fa fa-unlink"></i>
-      </button>
+    </section>
 
-      <!-- Alignment -->
-      <button id="justifyLeft" class="option-button align">
-        <i class="fa-solid fa-align-left"></i>
-      </button>
-      <button id="justifyCenter" class="option-button align">
-        <i class="fa-solid fa-align-center"></i>
-      </button>
-      <button id="justifyRight" class="option-button align">
-        <i class="fa-solid fa-align-right"></i>
-      </button>
-      <button id="justifyFull" class="option-button align">
-        <i class="fa-solid fa-align-justify"></i>
-      </button>
-
-      <!-- Headings -->
-      <select id="formatBlock" class="adv-option-button">
-        <option value="H1">H1</option>
-        <option value="H2">H2</option>
-        <option value="H3">H3</option>
-        <option value="H4">H4</option>
-        <option value="H5">H5</option>
-        <option value="H6">H6</option>
-      </select>
-
-      <!-- Font -->
-      <select id="fontName" class="adv-option-button"></select>
-      <select id="fontSize" class="adv-option-button"></select>
-
-      <!-- Color -->
-      <div class="input-wrapper">
-        <input type="color" id="foreColor" class="adv-option-button" />
-        <label for="foreColor">Font Color</label>
-      </div>
-      <div class="input-wrapper">
-        <input type="color" id="backColor" class="adv-option-button" />
-        <label for="backColor">Highlight Color</label>
-      </div>
-    </div>
-
-    <section id="text-input" contenteditable="true"></section>
 </section>
 
 <script>
@@ -171,7 +181,7 @@
     function handleCdEnding(timerInterval) {
       clearInterval(timerInterval);
 
-      document.getElementById("visible-timer").innerHTML = ""
+      document.getElementById("visible-timer").innerHTML = "Aucune session en cours pour l'instant."
       document.getElementById("startCdBtn").disabled = false
       document.getElementById("stopCdBtn").disabled = true
 
@@ -184,6 +194,18 @@
       lastEditDate = ""
       lastKnownValue = ""
       timeSpentWriting = 0
+    }
+
+    function handleTimerLengthChange() {
+        let value = returnDelayValue()
+        let btn = document.getElementById("startCdBtn")
+
+        if (value != 0) {
+          btn.disabled = false
+        } else {
+          btn.disabled = true
+        }
+
     }
 
     function handleWorkingTime(currentTime) {
@@ -243,6 +265,15 @@
             document.getElementById('nb-of-words').textContent = newLength;
         }
     });
+
+    function changeMode(modeName) {
+      console.log("aaa")
+      let layout = document.getElementById("rich-text-editor-block")
+      layout.classList.remove(layout.classList[0])
+
+      console.log(layout.classList)
+      layout.classList.add(modeName)
+    }
 </script>
 
 <script src="/static/scripts/rich_text_editor.js"></script>
