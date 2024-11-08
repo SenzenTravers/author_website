@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"> 
 {% endblock %}
 
-{% block pageTitle %}
+{% block title %}
 Coquecigrues
 {% endblock %}
 
@@ -75,6 +75,17 @@ Coquecigrues
                 </button>
                 <p>Entrez une liste de personnage et laissez notre IA ultraperformante
                 les trier par degré de babygirlitude/boywifitude/etc.</p>
+            </li>
+        </ul>
+                <ul>
+            <li>
+                <a href="{% url 'gadgets:ecritoire' %}">
+                    L'écritoire
+                </a>
+                <p>
+                    Organisez une session d'écriture en solo. Gardez le compte de vos mots et du temps
+                    réellement travaillé. 
+                </p>
             </li>
         </ul>
     </article>

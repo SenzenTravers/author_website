@@ -1,0 +1,249 @@
+{% extends '../base.html' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/static/gadgets_index.css">
+    <link rel="stylesheet" href="/static/gadgets_ecritoire.css">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+{% endblock %}
+
+{% block title %}
+  Sen Senestre | L'Écritoire
+{% endblock %}
+{% block content %}
+
+<h1 class="h1-gadgets" id="gadgets-title">Coquecigrues : l'Écritoire</h1>
+
+<section class="rich-text-editor-block">
+    <section class="numbers-block">
+      <div>
+        <label for="timer-length"></label>
+        <input
+          name="timer-length"
+          id="timer-length"
+          type="number"
+          min="0"
+        />  
+      </div>
+
+      <div>
+        <button type="button" id="startCdBtn" onclick="handleCountDown()"><i class="fa-solid fa-play"></i></button>
+        <!-- <button><i class="fa-solid fa-pause"></i></button> -->
+        <button type="button" id="stopCdBtn" onclick="stopCountdown()" disabled><i class="fa-solid fa-stop"></i></button>
+      </div>
+
+      <p id="visible-timer">Aucun marathon en cours pour l'instant...</p>
+
+      <p>
+          Compte-mot : <span id="nb-of-words">0</span>
+      </p>    
+    </section>
+
+    <div class="options">
+      <!-- Text Format -->
+      <button id="bold" class="option-button format">
+        <i class="fa-solid fa-bold"></i>
+      </button>
+      <button id="italic" class="option-button format">
+        <i class="fa-solid fa-italic"></i>
+      </button>
+      <button id="underline" class="option-button format">
+        <i class="fa-solid fa-underline"></i>
+      </button>
+      <button id="strikethrough" class="option-button format">
+        <i class="fa-solid fa-strikethrough"></i>
+      </button>
+      <button id="superscript" class="option-button script">
+        <i class="fa-solid fa-superscript"></i>
+      </button>
+      <button id="subscript" class="option-button script">
+        <i class="fa-solid fa-subscript"></i>
+      </button>
+
+      <!-- Link -->
+      <button id="createLink" class="adv-option-button">
+        <i class="fa fa-link"></i>
+      </button>
+      <button id="unlink" class="option-button">
+        <i class="fa fa-unlink"></i>
+      </button>
+
+      <!-- Alignment -->
+      <button id="justifyLeft" class="option-button align">
+        <i class="fa-solid fa-align-left"></i>
+      </button>
+      <button id="justifyCenter" class="option-button align">
+        <i class="fa-solid fa-align-center"></i>
+      </button>
+      <button id="justifyRight" class="option-button align">
+        <i class="fa-solid fa-align-right"></i>
+      </button>
+      <button id="justifyFull" class="option-button align">
+        <i class="fa-solid fa-align-justify"></i>
+      </button>
+
+      <!-- Headings -->
+      <select id="formatBlock" class="adv-option-button">
+        <option value="H1">H1</option>
+        <option value="H2">H2</option>
+        <option value="H3">H3</option>
+        <option value="H4">H4</option>
+        <option value="H5">H5</option>
+        <option value="H6">H6</option>
+      </select>
+
+      <!-- Font -->
+      <select id="fontName" class="adv-option-button"></select>
+      <select id="fontSize" class="adv-option-button"></select>
+
+      <!-- Color -->
+      <div class="input-wrapper">
+        <input type="color" id="foreColor" class="adv-option-button" />
+        <label for="foreColor">Font Color</label>
+      </div>
+      <div class="input-wrapper">
+        <input type="color" id="backColor" class="adv-option-button" />
+        <label for="backColor">Highlight Color</label>
+      </div>
+    </div>
+
+    <section id="text-input" contenteditable="true"></section>
+</section>
+
+<script>
+    // STARTING VARIABLES
+    let currentLength = 0;
+    let ongoingSprint = 0;
+    let lastEditDate = ""
+    let lastKnownValue = ""
+    let timeSpentWriting = 0
+
+        ///////////////// MAIN COUNTDOWN HANDLING FUNCTION
+    function handleCountDown() {
+      let minutes = returnDelayValue()
+      document.getElementById("startCdBtn").disabled = true      
+      document.getElementById("stopCdBtn").disabled = false
+
+      if (minutes == 0) { // Then, do nothing
+        return 0
+      }
+
+      ongoingSprint = 1
+      let countDownDate = addSecondsToNow(minutes*60)
+
+      // Update the count down every 1 second
+      // TODO: for a "pause" button, just add one second to countDownDate every second
+      let timerInterval = setInterval(function() {
+
+        if (ongoingSprint == 0) {
+          handleCdEnding(timerInterval)
+          return
+        }
+
+        let now = new Date().getTime();
+        // Find the distance between now and the count down date
+        let distance = countDownDate - now;
+
+        let visibleTimerContent = returnVisibleTimerContent(distance)
+
+        watchAndHandleChanges()
+        handleWorkingTime(now)
+
+        document.getElementById("visible-timer").innerHTML = visibleTimerContent
+
+        if (distance < 0) {
+          handleCdEnding(timerInterval)
+        }
+      }, 1000);
+    }
+
+
+    // UTILS FUNCTIONS
+    function addSecondsToNow(value) {
+      let nowTimeObject = new Date();
+      const milliseconds = value * 1000; // 10 seconds = 10000 milliseconds
+
+      return new Date(nowTimeObject.getTime() + milliseconds);
+    }
+
+    function handleCdEnding(timerInterval) {
+      clearInterval(timerInterval);
+
+      document.getElementById("visible-timer").innerHTML = ""
+      document.getElementById("startCdBtn").disabled = false
+      document.getElementById("stopCdBtn").disabled = true
+
+      const minutes = Math.floor((timeSpentWriting/60))
+      const seconds = Math.floor((timeSpentWriting % 60));
+      const visibleMinutes = minutes? minutes + "mn et ": ""
+      const visibleSeconds = seconds + "s"
+      console.log("Vous avez écrit " + visibleMinutes + visibleSeconds + ".")
+
+      lastEditDate = ""
+      lastKnownValue = ""
+      timeSpentWriting = 0
+    }
+
+    function handleWorkingTime(currentTime) {
+      if ((currentTime - lastEditDate) < 15000) {
+        timeSpentWriting += 1
+      }
+    }
+
+    function returnNumberOfWords(contentBlock){
+        const regex = /[\p{L}\p{M}\d-]+/ugm;
+        const found = contentBlock.textContent.match(regex);
+
+        return found? found.length: 0
+
+    }
+
+    function returnVisibleTimerContent(distance) {
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      let visibleHours = hours? hours + "h": ""
+
+      return visibleHours + minutes + "m" + seconds + "s";
+    }
+
+    function watchAndHandleChanges() {
+      let newText = document.getElementById("text-input").textContent
+      
+      if (newText != lastKnownValue) {
+        lastKnownValue = newText
+        lastEditDate = new Date().getTime();
+      }
+    }
+
+    function stopCountdown() {
+      ongoingSprint = 0
+    }
+
+    //////////////// UTILS DOM-RELATED FUNCTIONS
+    function returnDelayValue() {
+      let valueInput = document.getElementById("timer-length").value
+      valueInput = Number(valueInput)
+
+      if (Number.isFinite(valueInput)) {
+        return valueInput
+      } else {
+        return 0
+      }
+    }
+
+    /////////////////////// LISTENERS/DOM-RELATED FUNCTIONS
+    document.getElementById('text-input').addEventListener('input', function () {
+        const newLength = returnNumberOfWords(this)
+
+        if (currentLength != newLength) {
+            currentLength = newLength
+            document.getElementById('nb-of-words').textContent = newLength;
+        }
+    });
+</script>
+
+<script src="/static/scripts/rich_text_editor.js"></script>
+{% endblock %}

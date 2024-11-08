@@ -23,9 +23,26 @@ You're done!
 1. Run `python manage.py collectstatic`
 2. Restart the app
 
+## TODO
+-  Put in productivity check with time
+-  Export text for posting: when there's a </br>, change for <p>
+-  When time is selected, then start sprint upon pressing Enter key
+-  Low priority: Put in cold mode
+-  Low priority: Put in night mode
+
+
 ### Randoms
 [CONVERT HTML TO PDF](https://doc.courtbouillon.org/weasyprint/stable/)
 
 [CONVERT HTML TO PDF - PYTHON](https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#python-library) => note que y a un argument pour gérer les pages !!
 
 [pdf WITH A PAGE-AT RULE](https://developer.mozilla.org/en-US/docs/Web/CSS/@page)
+
+[BIBLIOTHÈQUE POUR RACCOURCIS](https://www.npmjs.com/package/hotkeys-js)
+
+[PLAY A SOUND WHEN KEY IS PRESSED](https://stackoverflow.com/questions/12578379/play-a-sound-when-a-key-is-pressed)
+
+[INSTANCE OF RICH TEXT EDITOR](https://codingtorque.com/rich-text-editor-using-javascript/)
+
+## Credit
+[Rich text editor](https://codepen.io/BibekOli/pen/abRgbVW)

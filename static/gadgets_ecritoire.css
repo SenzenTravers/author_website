@@ -1,0 +1,15 @@
+.rich-text-editor-block {
+    .timer-block {
+        display: flex;
+        gap: 11px;
+    }
+
+    input[type="number"] {
+        width: 5ch;
+    }
+}
+
+.rich-text-editor-block #text-input {
+    border: solid black 1px;
+    color: black;
+}
