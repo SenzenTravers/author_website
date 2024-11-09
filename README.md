@@ -24,11 +24,7 @@ You're done!
 2. Restart the app
 
 ## TODO
--  Put in productivity check with time
--  Export text for posting: when there's a </br>, change for <p>
 -  When time is selected, then start sprint upon pressing Enter key
--  Low priority: Put in cold mode
--  Low priority: Put in night mode
 
 
 ### Randoms

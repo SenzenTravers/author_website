@@ -20,49 +20,49 @@
     <section class="editor-header">
       <section class="command-btns-wrapper">
         <!-- Text Format -->
-        <button id="bold" class="option-button format">
+        <button id="bold" class="option-button format" title="Mettre en gras">
           <i class="fa-solid fa-bold"></i>
         </button>
-        <button id="italic" class="option-button format">
+        <button id="italic" class="option-button format" title="Mettre en italique">
           <i class="fa-solid fa-italic"></i>
         </button>
-        <button id="underline" class="option-button format">
+        <button id="underline" class="option-button format" title="Souligner">
           <i class="fa-solid fa-underline"></i>
         </button>
-        <button id="strikethrough" class="option-button format">
+        <button id="strikethrough" class="option-button format" title="Barrer">
           <i class="fa-solid fa-strikethrough"></i>
         </button>
-        <button id="superscript" class="option-button script">
+        <button id="superscript" class="option-button script" title="Mettre en indice">
           <i class="fa-solid fa-superscript"></i>
         </button>
-        <button id="subscript" class="option-button script">
+        <button id="subscript" class="option-button script" title="Mettre en indice, mais en bas">
           <i class="fa-solid fa-subscript"></i>
         </button>
 
         <!-- Link -->
-        <button id="createLink" class="adv-option-button">
+        <button id="createLink" class="adv-option-button" title="Créer un lien">
           <i class="fa fa-link"></i>
         </button>
-        <button id="unlink" class="option-button">
+        <button id="unlink" class="option-button" title="Ôter un lien">
           <i class="fa fa-unlink"></i>
         </button>
 
         <!-- Alignment -->
-        <button id="justifyLeft" class="option-button align">
+        <button id="justifyLeft" class="option-button align" title="Aligner texte à gauche">
           <i class="fa-solid fa-align-left"></i>
         </button>
-        <button id="justifyCenter" class="option-button align">
+        <button id="justifyCenter" class="option-button align" title="Centrer texte">
           <i class="fa-solid fa-align-center"></i>
         </button>
-        <button id="justifyRight" class="option-button align">
+        <button id="justifyRight" class="option-button align" title="Aligner texte à droite">
           <i class="fa-solid fa-align-right"></i>
         </button>
-        <button id="justifyFull" class="option-button align">
+        <button id="justifyFull" class="option-button align" title="Justifier texte">
           <i class="fa-solid fa-align-justify"></i>
         </button>
 
         <!-- Headings -->
-        <select id="formatBlock" class="adv-option-button">
+        <select id="formatBlock" class="adv-option-button" title="Mettre le texte sélectionné en titre 1, 2, 3...">
           <option value="H1">H1</option>
           <option value="H2">H2</option>
           <option value="H3">H3</option>
@@ -72,25 +72,26 @@
         </select>
 
         <!-- Font -->
-        <select id="fontName" class="adv-option-button"></select>
-        <select id="fontSize" class="adv-option-button"></select>
+        <select id="fontName" class="adv-option-button" title="Police d'écriture"></select>
+        <select id="fontSize" class="adv-option-button" title="Taille du texte"></select>
 
         <!-- Color -->
         <div class="input-wrapper">
           <label for="foreColor">Texte</label>
-          <input type="color" id="foreColor" class="adv-option-button" />
+          <input type="color" id="foreColor" class="adv-option-button" title="Couleur du texte"/>
         </div>
         <div class="input-wrapper">
           <label for="backColor">Fond</label>
-          <input type="color" id="backColor" class="adv-option-button" />
+          <input type="color" id="backColor" class="adv-option-button" title="Fond du texte"/>
         </div>
       </section>
 
       <div class="timer-block">
         <div class="btn-mode-wrapper">
-          <button type="button" id="heavenModeBtn" onclick="changeMode('mode-heaven')"><i class="fa-solid fa-cloud"></i></button>
-          <button type="button" id="warmModeBtn" onclick="changeMode('mode-warm')"><i class="fa-solid fa-sun"></i></button>
-          <button type="button" id="nightModeBtn" onclick="changeMode('mode-night')"><i class="fa-solid fa-moon"></i></button>
+          <button type="button" id="exportBtn" title="Exporter au format HTML" onclick="exportInputText()"><i class="fa-solid fa-file-export"></i></button>
+          <button type="button" id="heavenModeBtn" onclick="changeMode('mode-heaven')" title="Thème bleu pâle"><i class="fa-solid fa-cloud"></i></button>
+          <button type="button" id="warmModeBtn" onclick="changeMode('mode-warm')" title="Thème orangé"><i class="fa-solid fa-sun"></i></button>
+          <button type="button" id="nightModeBtn" onclick="changeMode('mode-night')" title="Thème nuit"><i class="fa-solid fa-moon"></i></button>
         </div>
         <div class="timer-input">
           <label for="timer-length">Session (en min.)</label>
@@ -104,9 +105,9 @@
         </div>
     
         <div class="timer-btns">
-          <button type="button" id="startCdBtn" onclick="handleCountDown()" disabled><i class="fa-solid fa-play"></i></button>
+          <button type="button" id="startCdBtn" onclick="handleCountDown()" title="Lancer sprint" disabled><i class="fa-solid fa-play"></i></button>
           <!-- <button><i class="fa-solid fa-pause"></i></button> -->
-          <button type="button" id="stopCdBtn" onclick="stopCountdown()" disabled><i class="fa-solid fa-stop"></i></button>
+          <button type="button" id="stopCdBtn" onclick="stopCountdown()" title="Arrêter sprint" disabled><i class="fa-solid fa-stop"></i></button>
         </div>    
       </div>
     </section>
@@ -120,6 +121,16 @@
 
     </section>
 
+    <!-- VARIOUS -->
+    <dialog>
+      <p id="timer-dialog-content">En attente...</p>
+    </dialog>
+    
+    <audio id="victoryAudio">
+      <!-- <source src="horse.ogg" type="audio/ogg"> -->
+      <source src="../../static/sounds/success-chosen.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>    
 </section>
 
 <script>
@@ -129,8 +140,9 @@
     let lastEditDate = ""
     let lastKnownValue = ""
     let timeSpentWriting = 0
+    const modalDialog = document.querySelector("dialog");
 
-        ///////////////// MAIN COUNTDOWN HANDLING FUNCTION
+    ///////////////// MAIN COUNTDOWN HANDLING FUNCTION
     function handleCountDown() {
       let minutes = returnDelayValue()
       document.getElementById("startCdBtn").disabled = true      
@@ -164,6 +176,7 @@
         document.getElementById("visible-timer").innerHTML = visibleTimerContent
 
         if (distance < 0) {
+          playAudio("victoryAudio")
           handleCdEnding(timerInterval)
         }
       }, 1000);
@@ -185,11 +198,16 @@
       document.getElementById("startCdBtn").disabled = false
       document.getElementById("stopCdBtn").disabled = true
 
-      const minutes = Math.floor((timeSpentWriting/60))
-      const seconds = Math.floor((timeSpentWriting % 60));
-      const visibleMinutes = minutes? minutes + "mn et ": ""
-      const visibleSeconds = seconds + "s"
-      console.log("Vous avez écrit " + visibleMinutes + visibleSeconds + ".")
+      if (timeSpentWriting > 0) {
+        const minutes = Math.floor((timeSpentWriting/60))
+        const seconds = Math.floor((timeSpentWriting % 60));
+        const visibleMinutes = minutes? minutes + "mn et ": ""
+        const visibleSeconds = seconds + "s"
+        const msg = "Félicitations ! Vous avez écrit " + visibleMinutes + visibleSeconds + " au total."
+
+        document.getElementById("timer-dialog-content").textContent = msg
+        modalDialog.showModal();
+      }
 
       lastEditDate = ""
       lastKnownValue = ""
@@ -244,6 +262,15 @@
       ongoingSprint = 0
     }
 
+    function exportInputText() {
+      let textToExport = document.getElementById('text-input').innerHTML
+      textToExport = textToExport.replaceAll("<div>", "<p>")
+      textToExport = textToExport.replaceAll("</div>", "</p>")
+      textToExport = textToExport.replaceAll("<br>", "")
+      navigator.clipboard.writeText(textToExport)
+      document.getElementById("timer-dialog-content").textContent = "Votre texte a bien été copié."
+      modalDialog.showModal()
+    }
     //////////////// UTILS DOM-RELATED FUNCTIONS
     function returnDelayValue() {
       let valueInput = document.getElementById("timer-length").value
@@ -266,13 +293,26 @@
         }
     });
 
+    window.onclick = function(event) {
+        if (
+            modalDialog.contains(event.target) &&
+            modalDialog.open == true &&
+            !document.getElementById("timer-dialog-content").contains(event.target)
+          ) {
+          modalDialog.close()
+          document.getElementById("timer-dialog-content").textContent = ""
+        }
+    }
+
     function changeMode(modeName) {
-      console.log("aaa")
       let layout = document.getElementById("rich-text-editor-block")
       layout.classList.remove(layout.classList[0])
-
-      console.log(layout.classList)
       layout.classList.add(modeName)
+    }
+
+    function playAudio(audioId) {
+      let audioFile = document.getElementById(audioId); 
+      audioFile.play()
     }
 </script>
 

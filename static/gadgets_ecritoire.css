@@ -104,6 +104,10 @@
             font-weight: bolder;
         }
     }
+
+    dialog {
+        border-radius: 5px;
+    }
 }
 
 body:has(#rich-text-editor-block):has(.mode-heaven) {
@@ -128,8 +132,12 @@ body:has(#rich-text-editor-block):has(.mode-heaven) {
         color: var(--gadget-blue);
     }
 
-    #text-input-wrapper {
+    #text-input-wrapper, dialog {
         background-color: var(--gadget-whitish);
+    }
+
+    dialog {
+        border: solid var(--gadget-turquoise) 2px;
     }
 
     footer {
@@ -190,8 +198,12 @@ body:has(#rich-text-editor-block):has(.mode-warm) {
         background-color: var(--gadget-champagne);
     }
 
-    #text-input-wrapper {
+    #text-input-wrapper, dialog {
         background-color: var(--gadget-champagne);
+    }
+
+    dialog {
+        border: solid var(--gadget-blackish) 2px;
     }
 
     footer {
@@ -250,9 +262,13 @@ body:has(#rich-text-editor-block):has(.mode-night) {
         color: var(--gadget-blackish);
     }
 
-    #text-input-wrapper {
+    #text-input-wrapper, dialog {
         background-color: var(--gadget-dark-blue);
         color: #fabf44;
+    }
+
+    dialog {
+        border: solid var(--gadget-green-blue) 2px;
     }
 
     footer {
