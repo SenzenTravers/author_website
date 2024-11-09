@@ -90,9 +90,9 @@
             } 
         }
 
-        .visible-timer {
+        #visible-timer {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             left: 15px;
             margin: 0;
             padding: 0;
@@ -100,7 +100,7 @@
 
         .word-counter {
             position: absolute;
-            bottom: 15px;
+            bottom: 10px;
             right: 15px;
             margin: 0;
             padding: 0;
@@ -121,6 +121,11 @@
         ul li {
             font-weight: bolder;
         }
+    }
+
+    #visible-timer, .word-counter {
+        font-size: small;
+        font-style: italic;
     }
 
     dialog {
