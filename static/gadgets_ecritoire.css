@@ -77,7 +77,7 @@
     #text-input-wrapper {
         position: relative;
         height: 60vh;
-        padding: 25px 7px 25px 25px;
+        padding: 25px 25px 25px 25px;
 
         #text-input {
             overflow: scroll;
