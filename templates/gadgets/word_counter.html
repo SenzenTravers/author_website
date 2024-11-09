@@ -18,72 +18,76 @@
 
 <section id="rich-text-editor-block" class="mode-warm">  
     <section class="editor-header">
-      <section class="command-btns-wrapper">
-        <!-- Text Format -->
-        <button id="bold" class="option-button format" title="Mettre en gras">
-          <i class="fa-solid fa-bold"></i>
-        </button>
-        <button id="italic" class="option-button format" title="Mettre en italique">
-          <i class="fa-solid fa-italic"></i>
-        </button>
-        <button id="underline" class="option-button format" title="Souligner">
-          <i class="fa-solid fa-underline"></i>
-        </button>
-        <button id="strikethrough" class="option-button format" title="Barrer">
-          <i class="fa-solid fa-strikethrough"></i>
-        </button>
-        <button id="superscript" class="option-button script" title="Mettre en indice">
-          <i class="fa-solid fa-superscript"></i>
-        </button>
-        <button id="subscript" class="option-button script" title="Mettre en indice, mais en bas">
-          <i class="fa-solid fa-subscript"></i>
-        </button>
+      <section class="all-command-btns-wrapper">
+        <section class="command-btns-wrapper">
+          <!-- Text Format -->
+          <button id="bold" class="option-button format" title="Mettre en gras">
+            <i class="fa-solid fa-bold"></i>
+          </button>
+          <button id="italic" class="option-button format" title="Mettre en italique">
+            <i class="fa-solid fa-italic"></i>
+          </button>
+          <button id="underline" class="option-button format" title="Souligner">
+            <i class="fa-solid fa-underline"></i>
+          </button>
+          <button id="strikethrough" class="option-button format" title="Barrer">
+            <i class="fa-solid fa-strikethrough"></i>
+          </button>
+          <button id="superscript" class="option-button script" title="Mettre en indice">
+            <i class="fa-solid fa-superscript"></i>
+          </button>
+          <button id="subscript" class="option-button script" title="Mettre en indice, mais en bas">
+            <i class="fa-solid fa-subscript"></i>
+          </button>
 
-        <!-- Link -->
-        <button id="createLink" class="adv-option-button" title="Créer un lien">
-          <i class="fa fa-link"></i>
-        </button>
-        <button id="unlink" class="option-button" title="Ôter un lien">
-          <i class="fa fa-unlink"></i>
-        </button>
+          <!-- Link -->
+          <button id="createLink" class="adv-option-button" title="Créer un lien">
+            <i class="fa fa-link"></i>
+          </button>
+          <button id="unlink" class="option-button" title="Ôter un lien">
+            <i class="fa fa-unlink"></i>
+          </button>
 
-        <!-- Alignment -->
-        <button id="justifyLeft" class="option-button align" title="Aligner texte à gauche">
-          <i class="fa-solid fa-align-left"></i>
-        </button>
-        <button id="justifyCenter" class="option-button align" title="Centrer texte">
-          <i class="fa-solid fa-align-center"></i>
-        </button>
-        <button id="justifyRight" class="option-button align" title="Aligner texte à droite">
-          <i class="fa-solid fa-align-right"></i>
-        </button>
-        <button id="justifyFull" class="option-button align" title="Justifier texte">
-          <i class="fa-solid fa-align-justify"></i>
-        </button>
+          <!-- Alignment -->
+          <button id="justifyLeft" class="option-button align" title="Aligner texte à gauche">
+            <i class="fa-solid fa-align-left"></i>
+          </button>
+          <button id="justifyCenter" class="option-button align" title="Centrer texte">
+            <i class="fa-solid fa-align-center"></i>
+          </button>
+          <button id="justifyRight" class="option-button align" title="Aligner texte à droite">
+            <i class="fa-solid fa-align-right"></i>
+          </button>
+          <button id="justifyFull" class="option-button align" title="Justifier texte">
+            <i class="fa-solid fa-align-justify"></i>
+          </button>
 
-        <!-- Headings -->
-        <select id="formatBlock" class="adv-option-button" title="Mettre le texte sélectionné en titre 1, 2, 3...">
-          <option value="H1">H1</option>
-          <option value="H2">H2</option>
-          <option value="H3">H3</option>
-          <option value="H4">H4</option>
-          <option value="H5">H5</option>
-          <option value="H6">H6</option>
-        </select>
+          <!-- Headings -->
+          <select id="formatBlock" class="adv-option-button" title="Mettre le texte sélectionné en titre 1, 2, 3...">
+            <option value="H1">H1</option>
+            <option value="H2">H2</option>
+            <option value="H3">H3</option>
+            <option value="H4">H4</option>
+            <option value="H5">H5</option>
+            <option value="H6">H6</option>
+          </select>
+        </section>
 
-        <!-- Font -->
-        <select id="fontName" class="adv-option-button" title="Police d'écriture"></select>
-        <select id="fontSize" class="adv-option-button" title="Taille du texte"></select>
+        <section class="command-btns-wrapper">
+          <!-- Font -->
+          <select id="fontName" class="adv-option-button" title="Police d'écriture"></select>
+          <select id="fontSize" class="adv-option-button" title="Taille du texte"></select>
 
-        <!-- Color -->
-        <div class="input-wrapper">
-          <label for="foreColor">Texte</label>
-          <input type="color" id="foreColor" class="adv-option-button" title="Couleur du texte"/>
-        </div>
-        <div class="input-wrapper">
-          <label for="backColor">Fond</label>
-          <input type="color" id="backColor" class="adv-option-button" title="Fond du texte"/>
-        </div>
+          <!-- Color -->
+          <div class="input-wrapper">
+            <label for="foreColor">Texte</label>
+            <input type="color" id="foreColor" class="adv-option-button" title="Couleur du texte"/>
+          </div>
+          <div class="input-wrapper">
+            <label for="backColor">Fond</label>
+            <input type="color" id="backColor" class="adv-option-button" title="Fond du texte"/>
+          </div>
+        </section>
       </section>
 
       <div class="timer-block">
@@ -94,20 +98,21 @@
           <button type="button" id="nightModeBtn" onclick="changeMode('mode-night')" title="Thème nuit"><i class="fa-solid fa-moon"></i></button>
         </div>
         <div class="timer-input">
-          <label for="timer-length">Session (en min.)</label>
           <input
             name="timer-length"
+            title="Durée d'une session (en minutes)"
             id="timer-length"
             type="number"
             min="0"
             onchange="handleTimerLengthChange()"
           />  
+          <label for="timer-length">Durée session (min.)</label>
         </div>
     
         <div class="timer-btns">
-          <button type="button" id="startCdBtn" onclick="handleCountDown()" title="Lancer sprint" disabled><i class="fa-solid fa-play"></i></button>
+          <button type="button" id="startCdBtn" onclick="handleCountDown()" title="Lancer session" disabled><i class="fa-solid fa-play"></i></button>
           <!-- <button><i class="fa-solid fa-pause"></i></button> -->
-          <button type="button" id="stopCdBtn" onclick="stopCountdown()" title="Arrêter sprint" disabled><i class="fa-solid fa-stop"></i></button>
+          <button type="button" id="stopCdBtn" onclick="stopCountdown()" title="Arrêter session" disabled><i class="fa-solid fa-stop"></i></button>
         </div>    
       </div>
     </section>

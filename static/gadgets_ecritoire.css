@@ -1,9 +1,18 @@
 #rich-text-editor-block {
+    label {
+        font-size: small;
+        line-height: normal;
+    }
+
     .editor-header {
         display: flex;
         justify-content: space-between;
         gap: 11px;
-        margin: 0px 10px 40px 10px;
+        margin: 0px 10px 30px 10px;
+
+        #fontName {
+            width: 8ch;
+        }
     }
 
     .timer-block {
@@ -12,7 +21,7 @@
         gap: 5px;
 
         .timer-btns {
-            align-content: end;
+            align-content: start;
         }
 
         input {
@@ -24,9 +33,13 @@
     .timer-input {
         display: flex;
         flex-flow: column;
-        justify-content: center;
+        justify-content: start;
         align-items: center;
+        text-align: center;
 
+        label[for="timer-length"] {
+            max-width: 5ch;
+        }
         input[type="number"] {
             width: 5ch;
         }
@@ -35,9 +48,14 @@
     .btn-mode-wrapper {
         display: flex;
         flex-flow: row;
-        align-items: end;
+        align-items: start;
+        gap: 2px;
     }
 
+    .all-command-btns-wrapper {
+        display: flex;
+        flex-flow: column;
+    }
     .command-btns-wrapper {
         display: flex;
         flex-flow: row;
