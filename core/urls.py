@@ -28,6 +28,7 @@ urlpatterns = [
     path('archives/', include('archives.urls', namespace='archives')),
     path('gadgets/', include('gadgets.urls', namespace='gadgets')),
     path("favicon.ico", views.favicon),
+    path("pinytree", views.pine_portfolio)
 ]
 
 handler404 = "core.views.error_404"

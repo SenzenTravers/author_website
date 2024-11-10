@@ -52,28 +52,33 @@
     {% endif %}
 
     <section id="after-reading-actions">
-    {% if messages %}
-    <script>
-    function Scrolldown() {
-        window.scrollTo(0, document.body.scrollHeight); 
-    }
-    
-    window.onload = Scrolldown;</script>
-    {% for message in messages %}
-    <p class="thanks">Merci pour votre soutien ! ♥ </p>
-    {% endfor %}
-    {% endif %}
-    <form action="{% url 'archives:clap' current_chapter.id %}" method="POST"
-    class="story-buttons">
-        {% csrf_token %}
-        <button
-            class="story-button"
-            type="submit"
-            id="clap"
-            alt="Applaudir"
-            title="Applaudir">♥</button>
-      </form>
+        <p class="thanks" hidden>Merci pour votre soutien ! ♥ </p>
+        <section class="story-buttons">
+            <button
+                class="story-button"
+                type="submit"
+                id="clap"
+                alt="Applaudir"
+                title="Applaudir"
+                onclick="onClap()"
+            >♥</button>
+        </section>
     </section>
+
+    <div id="own-url" hidden>
+        {% url "archives:clap" fic.id %}
+    </div>
+    <script>
+         async function onClap() {
+            const url = document.getElementById('own-url').textContent
+
+            const response = await fetch(url, {
+                method: "GET",
+            });
+
+            let thanksP = document.getElementsByClassName("thanks")[0].hidden = false
+        }
+    </script>
 </section>
 
 {% endblock %}

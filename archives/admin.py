@@ -11,7 +11,7 @@ class ChapterAdmin(admin.ModelAdmin):
 class FicAdmin(admin.ModelAdmin):
     fields = ['author', 'title', 'date', 'summary',
         'author_note', 'pairing_type', 'rating',
-        'text_length', 'complete', 'visible'
+        'text_length', 'complete', 'visible',
         'clap']
     list_display = ('title', 'author', 'date', 'complete', 'visible', 'clap')
     list_filter = ('title', 'author', 'complete', 'visible')

@@ -4,20 +4,18 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <meta name="author" content="Sen" />
+        <meta name="author" content="Sen Senestre" />
         <meta
             name="keywords"
-            content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
-            Aquilegia, autrice, LGBTQ, Sen, Senzen, Senzen_Travers, romans"
+            content="danmei, F/F, WLW, M/M, art, artist"
         />
         <meta
             name="description"
-            content="{% block page_desc %}Découvrez les romans et les nouvelles de Sen. Au menu : du M/M, de la fantasy et de l'action !{% endblock %}"
+            content="Portfolio de Pinytree, artiste (peinture)"
         />
 
         <title>
-            {% block title %} Sen Senestre, Autrice M/M | Romans BL et fantasy
-            {% endblock %}
+            Pinytree
         </title>
         {% block stylesheet %}
         <link rel="stylesheet" href="/static/base.css" />
@@ -39,8 +37,8 @@
     </head>
 
     <body>
-        {% include "bannerBase.html" %}
-
+        <!-- {% include "bannerBase.html" %}
+ -->
         <main>{% block content %} {% endblock %}</main>
 
         <footer>Copyright 2024 by une femme fabuleuse.</footer>
@@ -54,11 +52,7 @@
                 let header = document.getElementsByClassName("main-site-header")[0]
                 header.id = "gadgets-header"
             }
-            
-            try {
-                indicateSelectedPage(title)
-            } catch (e) {
-            }
+            indicateSelectedPage(title)
         })
 
         function indicateSelectedPage(title) {

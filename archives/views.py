@@ -2,10 +2,13 @@ import os
 import tempfile
 
 from django.contrib import messages
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
+
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
+
+
 from xhtml2pdf import pisa
 
 from .models import Fic, Chapter
@@ -88,13 +91,14 @@ def download_epub(request, fic_id):
 
     return response
 
-def clap(request, chapter_id):
-    chapter = Chapter.objects.get(id=chapter_id)
-    fic = chapter.fic
-    fic.clap=fic.clap+1
-    fic.save()
-    messages.success(request, "Merci pour votre support !")
-
-    return redirect(
-        "archives:first_chapter", fic_id=fic.id
-        )
+def clap(request, fic_id):    
+    try:
+        fic = Fic.objects.get(id=fic_id)
+        fic.clap=fic.clap+1
+        fic.save()
+        return JsonResponse({"code": 200})
+    except:
+        return JsonResponse({"code": 500})
+    # return redirect(
+    #     "archives:first_chapter", fic_id=fic.id
+    #     )

@@ -15,3 +15,9 @@ def error_500(request):
 def favicon(request: HttpRequest) -> HttpResponse:
     file = (settings.BASE_DIR / "static" / "images/bimbimka_feather-ai2.svg").open("rb")
     return FileResponse(file)
+
+def pine_portfolio(request):
+    return render(
+        request,
+        'pine_portfolio.html'
+    )
