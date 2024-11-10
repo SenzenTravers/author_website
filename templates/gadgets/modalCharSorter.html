@@ -157,7 +157,7 @@
         closeBtn.type = "button"
         closeBtn.classList.add = "char-sorter-submit-button"
         closeBtn.innerText = "Fermer"
-        closeBtn.onclick = () => {charSorterModal.style.display = "none";}
+        closeBtn.onclick = () => {charSorterModal.style.display = "none"; window.location.reload();}
         modalFooter.appendChild(closeBtn)
 
         header.appendChild(title)
