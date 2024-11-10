@@ -48,6 +48,7 @@ class Fic(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
+    visible = models.BooleanField(default=True)
     clap = models.IntegerField(default=0)
     date = models.DateField(null=True)
     title = models.CharField(max_length=150)

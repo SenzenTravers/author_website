@@ -22,43 +22,45 @@ Sen Senestre | Romans, nouvelles et créations diverses
     </div>
 
     {% for fic in fics %}
-        <div class="fic-card">
-            <section class="fic-card_header">
-                <h2 class="fic-card-title"><a href="{% url 'archives:show_chapter' fic.id 1 %}">{{ fic.title }}, par {{ fic.author }}</a></h2>
-                <p class="fic-date">{{ fic.date }}</p>
-            </section>
+        {% if fic.visible %}
+            <div class="fic-card">
+                <section class="fic-card_header">
+                    <h2 class="fic-card-title"><a href="{% url 'archives:show_chapter' fic.id 1 %}">{{ fic.title }}, par {{ fic.author }}</a></h2>
+                    <p class="fic-date">{{ fic.date }}</p>
+                </section>
 
-            <p class="detail_line"> 
-            {% if fic.pairing_type == "autre" %}
-                Autre
+                <p class="detail_line"> 
+                {% if fic.pairing_type == "autre" %}
+                    Autre
 
-            {% else %}
-            {{ fic.pairing_type }}
-            {% endif %}
+                {% else %}
+                {{ fic.pairing_type }}
+                {% endif %}
 
-            {% if fic.rating == "g" %}
-            • Tout public
+                {% if fic.rating == "g" %}
+                • Tout public
 
-            {% elif fic.rating == "t" %}
-            • Public averti
+                {% elif fic.rating == "t" %}
+                • Public averti
 
-            {% elif fic.rating == "e" %}
-            • Explicite
-            {% endif %}
+                {% elif fic.rating == "e" %}
+                • Explicite
+                {% endif %}
 
-            • {{ fic.text_length.capitalize }}
+                • {{ fic.text_length.capitalize }}
 
-            {% if fic.complete == True %}
-            • Complète
-            {% endif %}
-            </p>
-            <P>
-                {% autoescape off %}
-                {{ fic.summary }}
-                {% endautoescape %}
-            </P>
+                {% if fic.complete == True %}
+                • Complète
+                {% endif %}
+                </p>
+                <P>
+                    {% autoescape off %}
+                    {{ fic.summary }}
+                    {% endautoescape %}
+                </P>
 
-        </div>
+            </div>
+        {% endif %}
     {% endfor %}
 
 </section>
