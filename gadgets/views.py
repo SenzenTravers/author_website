@@ -12,7 +12,7 @@ def index(request):
         'gadgets/grenier.html'
         )
 
-def word_counter(request):
+def ecritoire(request):
     return render(
         request,
         'gadgets/word_counter.html'
