@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta name="author" content="Sen Senestre" />
+        <meta
+            name="keywords"
+            content="danmei, F/F, WLW, M/M, art, artist"
+        />
+        <meta
+            name="description"
+            content="Portfolio de Pinytree, artiste"
+        />
+
+        <title>
+            Pinytree
+        </title>
+        {% block stylesheet %}
+        <link rel="stylesheet" href="/static/base.css" />
+        <link rel="stylesheet" href="/static/pine_base.css" />
+        {% endblock %} <link rel=icon href=favicon.ico type=image/ico>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    </head>
+
+    <body>
+        <header class="pinytree-header">
+            <div class="pinytree-header-wrapper">
+                <div class="title-div">
+                    <h1 id="piny-portfolio-title">Pinytree</h1>
+
+                    <div id="soc-med-wrapper">
+                        <a target="_blank" href="https://www.tumblr.com/pinytree">
+                            <img src="/static/images/pinytree/tumblr.svg">
+                        </a>
+                        <a target="_blank" href="https://bsky.app/profile/pinytree.bsky.social">
+                            <img src="/static/images/pinytree/bluesky.svg">
+                        </a>
+                        <a target="_blank" href="https://twitter.com/pinytree">
+                            <img src="/static/images/pinytree/twitter.svg">
+                        </a>
+                    </div>
+                </div>
+
+                <nav id="piny-portfolio-nav">
+                    <ul>
+                        <li><button type=button>Portfolio</button></li>
+                        <li><button type=button>Commissions</button></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <main>{% block content %} {% endblock %}</main>
+
+        <footer>Tous les visuels présentés appartiennent à Pinytree. La reproduction ou l'entraînements d'IA sont interdits.</footer>
+    </body>
+</html>

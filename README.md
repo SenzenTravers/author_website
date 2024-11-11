@@ -26,7 +26,6 @@ You're done!
 ## TODO
 -  When time is selected, then start sprint upon pressing Enter key
 
-
 ### Randoms
 [CONVERT HTML TO PDF](https://doc.courtbouillon.org/weasyprint/stable/)
 
@@ -42,3 +41,4 @@ You're done!
 
 ## Credit
 [Rich text editor](https://codepen.io/BibekOli/pen/abRgbVW)
+

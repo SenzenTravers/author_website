@@ -19,5 +19,5 @@ def favicon(request: HttpRequest) -> HttpResponse:
 def pine_portfolio(request):
     return render(
         request,
-        'pine_portfolio.html'
+        'pinytree/pine_portfolio.html'
     )

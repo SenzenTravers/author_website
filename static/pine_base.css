@@ -1,0 +1,191 @@
+body:has(#piny-portfolio-title) {
+    --pine-whitish: #EDEEF1;
+    --pine-dark-blue: #3C4C70;
+    --pine-rose: #DCA1B0;
+    --pine-mauve: #9168A0;
+
+    background-color: var(--pine-whitish);
+    color: var(--pine-dark-blue);
+
+    #piny-portfolio-title {
+        background: rgb(189,102,200);
+        background: radial-gradient(circle, rgba(189,102,200,1) 5%, rgba(167,102,200,1) 45%, rgba(178,47,185,1) 100%);
+        font-family: "Fleur De Leah", cursive;
+        font-size: 5em;
+        text-transform: none;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: 500ms linear;
+        margin-bottom: 1em;
+        line-height: normal;
+        margin: 0 0 0 30px;
+        padding-right: 30px;
+        text-align: left;
+    
+    }
+
+    main {
+        margin-top: 0;
+    }
+
+    .gallery-wrapper {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+
+        img {
+            cursor:pointer;
+            opacity: 1;
+            /* display: block;
+            width: 100%; */
+            transition: .5s ease;
+            backface-visibility: hidden;
+
+            &:hover {
+                opacity: 0.3;
+            }
+        }
+    }
+
+    /******************** HEADER STUFF */
+    .pinytree-header-wrapper {
+        padding: 1.7em 1.7em 2em 2em;
+
+        li {
+            list-style: none;
+            margin: 0;
+        }
+
+        button {
+            font-family: "Montserrat", sans-serif;
+            font-optical-sizing: auto;
+            font-size: large;
+            background-color: transparent;
+            border: none;
+        }
+
+        #soc-med-wrapper img {
+            height: max(1em, 27px);
+            width: max(1em, 27px);
+        }
+    }
+
+    /***************** FOOTER STUFF */
+    .img-previews-wrapper {
+        button {
+            background-color: transparent;
+            border: none;    
+        }
+    }
+
+    /******************** MODAL STUFF */
+    #dialogImg {
+        background-color: transparent;
+        padding: 0;
+        border: none;
+        overflow: visible;
+
+        &:focus-visible {outline: none;}
+
+        &::backdrop {
+            background-color: black;
+            opacity: 0.9;
+        }
+    }
+    
+}
+
+/********************* DISPOSITION */
+/******** PHONES */
+@media screen and (max-width: 750px) {
+    .pinytree-header {
+        max-height: 30vh;
+    }
+    .pinytree-header-wrapper {
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr 1fr; 
+        gap: 0px 0px; 
+        grid-template-areas: 
+          "piny-portfolio-title soc-med-wrapper"
+          "piny-portfolio-nav ."; 
+
+
+        #piny-portfolio-title { grid-area: piny-portfolio-title; }
+        #soc-med-wrapper { grid-area: soc-med-wrapper; }
+        #piny-portfolio-nav { grid-area: piny-portfolio-nav; }
+      
+        #piny-portfolio-nav ul {
+            display: flex;
+            flex-flow: column;
+            margin: 10px 0;
+            padding: 0;
+        }
+
+        #soc-med-wrapper {
+            display: flex;
+            flex-flow: column;
+            align-items: end;
+            justify-content: start;
+        }
+    }
+}
+
+/* EVERYTHING BUT PHONES */
+@media screen and (min-width: 751px) {
+    .pinytree-header-wrapper {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-between;
+
+        .title-div {
+            display: flex;
+            flex-flow: column;
+        }
+
+        #piny-portfolio-nav {
+            display: flex;
+            flex-flow: column;
+            min-width: 50vw;
+
+            ul {
+                width: 100%;
+                padding: 2em 0;
+                justify-content: start;
+                column-gap: 70px;
+            }
+        }
+
+        #soc-med-wrapper {
+            display: flex;
+            flex-flow: row;
+            padding-left: 50px;
+            margin-top: 0.5em;
+            gap: 21px;
+
+            img {
+                height: 2em;
+                width: 2em;
+            }
+        }
+
+        nav ul {
+            display: flex;
+            flex-flow: row;
+        }
+    }
+
+    .img-previews-wrapper {
+        display: flex;
+        flex-flow: row;
+        margin-top: 30px;
+        max-width: 100%;
+    }
+
+    #img-carrousel {
+        display: flex;
+        flex-flow: row-reverse;
+        overflow: hidden;
+        gap: 10px;
+    }
+}

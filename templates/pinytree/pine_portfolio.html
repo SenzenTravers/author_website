@@ -1,0 +1,156 @@
+{% extends './pinytree_base.html' %}
+
+{% block content %}
+<section class="gallery-wrapper">   
+    <img
+        id="displayed"
+        src=""
+        onclick="showBigger()"
+    >
+
+    <!-- If mobile: a variant will be the main -->
+    <nav class="img-previews-wrapper">
+        <button id="arrow-left" title="Images précédentes"><img src="/static/images/pinytree/left-arrow-angle-svgrepo-com.svg"></button>
+        <div id="img-carrousel"></div>
+        <button id="arrow-right" title="Images précédentes"><img src="/static/images/pinytree/right-arrow-svgrepo-com.svg"></button>
+    </nav>
+</section>
+
+<dialog id="dialogImg" onclick="close()">
+    <img
+        id="full-display-img"
+        src=""
+    >
+</dialog>
+
+<script>
+    const dialogImg = document.getElementById("dialogImg");
+    const googleIdsList = [
+        "1LWEiuf5S-yxEQ27yyY73gLwfCrZFPl1v",
+        "1tbsHpUyLPIvTtDhZbhAFP1TYxtRLYEPW",
+        "1EiD-9axqBdAVJE-hkNZpaMTinhhQjWA1",
+        "1lqZy8l3w76WHYuzL5G2qYxEgLTpsN47K",
+        "1VVqrQBKtDtlFNWFJ9Ivw7pDvEYE3LLCJ",
+        "1RB1gx_I1AMzlfAM7qj3qaDRWCGIzT_r9",
+        "1CcqhdigTOxLMH7d2W9aHNCWog6GEWKqE",
+        "1esRixCOs7uH-HaF4mBs7yoWSbJkW2luT",
+        "1IjABb8E79bUqMGELGxvDjOfRMIYLaEpq",
+        "10eh-tZoxHI7h_GNdyf3JBEyGTpG6RdtX",
+        "189P9i2TTX1yU9fjlq2NEuITKxKFQudaD",
+        "1H_55T4WDWehmUFmETvcLbqkD3BWmcM-G",
+        "1dD3SLbCeDYsXWDyYSMV6xDbrOPVAuC_I",
+        "1mzsDQ4BlKsJhoTP7IhFGmB7G7hlj0Q4x",
+        "15bJOkbHxr7hkIpNiM3xb64h5JZE09m2s",
+        "1OXne8Ctix3ZpZH_yNXM5ogY3p0EFOoP9",
+        "1ptXGecALxhFhuc0mkQ6nxX34bazkI884",
+        "1jScukuZqV26Nlyqbch794QayN7uaieRf",
+        "1yQTTsGURS67JQnoyVGgOuuLhW1FUIJVw",
+        "1Gz9YBDjnqG4z1RCW2qGaWtaQGe-j82qw",
+        "1r1vhgKGwIxWcitIPUsRF-Ar6ufoZokzC",
+        "1WlT0RFQhrccHIldbm0BrT8F_S570YGmP",
+        "1E2KiLqFjVF_Ed-ZTSLabn-fizQ-KF7U6",
+        "1cKu2OCuRugGPqh4eVGna_skWuLFJdUa-",
+        "1dm8n78WIu6vHIrehOZQZvGGTplHK1pE1",
+        "1UVTHt8v1-jBcBbaE0f6QT73tAYFqiGd2",
+        "1a189JQfhbvq9Wdq26WrfLNA2oqHTT0Fg",
+        "1Ku9uc00b3uWTVIDZm8tTG3gBPTXpyrfQ",
+        "1gb_2tngj_qy39VWtnEwhczjkr1XCE3Js",
+        "1ix2mfECYPsrbUP7E9jgM-XyG1Pdzvt6M",
+        "1Kpb1I1Lrg4RVoV5IhQDdropIdqmmuRir",
+        "1FsylEmjw1sqZNUG2PNQoxTfAuorjlitE",
+        "1-fU4180dQ7KHgUl7WP_O2giHHmR9t2C-",
+        "15HgAdEPDS-ACFN9DxCPHQMxT59g3Ba0W",
+        "1vpF1X4uQCZW5qwFzFT3lSkkY6ij8nLKN",
+        "1IHTFTmWCnjnLf1Vx87M3pA9n5wrd2x_C",
+        "1IKeCBHb-PbvE_Nr_hmrZ30UwimyoBBg8",
+    ]
+
+    ///////////// Functions
+    function createCarrImg(height, id) {
+        let imgNode = document.createElement("img");
+        imgNode.setAttribute("onclick",`displayImage('${id}', 'displayed')`);
+        imgNode.setAttribute("loading", "lazy")
+        imgNode.src = formatForDisplay(180, id)
+
+        return imgNode
+
+    }
+    function formatForDisplay(height, id) {
+        return `https://drive.google.com/thumbnail?id=${id}&sz=h${height}`
+    }
+
+    function displayImage(imgId, elementId) {
+        let height = window.innerHeight;
+
+        if (elementId == "displayed") {
+            height = height - 300
+        } else {
+            height = height - 100
+        }
+        let imgSrc = formatForDisplay(height, imgId)
+        let imgElement = document.getElementById(elementId)
+        imgElement.src = imgSrc
+    }
+
+    function showBigger() {
+        const imgElement = document.getElementById("displayed")
+        // const myRegex = /(?<=\/d\/).*?(?==h)/
+        const myRegex = /(?<=\?id=).*?(?=&sz=)/
+        const imgId = myRegex.exec(imgElement.src);
+        dialogImg.showModal();
+        displayImage(imgId, "full-display-img")
+
+    }
+
+    function handleCarrousel(imgIndex) {
+        let carrousel = document.getElementById("img-carrousel")
+        carrousel.innerHTML = ''
+        let toDisplay = ""
+
+        if (imgIndex > -6) {
+            toDisplay = googleIdsList.slice(imgIndex)
+            console.log(toDisplay.length)
+        } else {
+            toDisplay = googleIdsList.slice(imgIndex-5, imgIndex)
+            console.log(toDisplay.length)
+        }
+
+        toDisplay.forEach(
+            function( imgId) {
+                let imgEl = createCarrImg(300, imgId)
+                carrousel.appendChild(imgEl)
+            }
+                
+        );
+        handleCarrouselBtns(imgIndex)
+    }
+
+    function handleCarrouselBtns(imgIndex) {
+        let btnLeft = document.getElementById("arrow-left")
+        let btnRight = document.getElementById("arrow-right")
+
+        if (imgIndex < -5) {
+            btnLeft.setAttribute("onclick",`handleCarrousel(${imgIndex+5})`);
+            btnLeft.disabled = false
+        } else {
+            btnLeft.disabled = true
+        }
+
+        if (imgIndex < googleIdsList.length-5) {
+            btnRight.setAttribute("onclick",`handleCarrousel(${imgIndex-5})`);
+            btnRight.disabled = false
+        } else {
+            btnRight.disabled = true
+        }
+
+        console.log(btnRight)
+    }
+
+    //////////// DOM-specific event ; listeners
+    window.onload = (event) => {
+        let imgId = googleIdsList.findLast((element) => element)
+        displayImage(imgId, "displayed")
+        handleCarrousel(-5)
+    };
+</script>
+{% endblock %}
