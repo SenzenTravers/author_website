@@ -6,6 +6,10 @@
     let timeSpentWriting = 0
     const modalDialog = document.querySelector("dialog");
 
+    if (sessionStorage.getItem("textAutosave")) {
+      document.getElementById("text-input").innerHTML = sessionStorage.getItem("textAutosave");
+    }
+      
     ///////////////// MAIN COUNTDOWN HANDLING FUNCTION
     function handleCountDown() {
       let minutes = returnDelayValue()
@@ -119,6 +123,7 @@
       if (newText != lastKnownValue) {
         lastKnownValue = newText
         lastEditDate = new Date().getTime();
+        sessionStorage.setItem("textAutosave", newText)
       }
     }
 
