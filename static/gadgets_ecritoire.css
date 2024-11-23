@@ -83,6 +83,7 @@
             overflow: scroll;
             height: 55vh;
             width: 100%;
+            line-height: inherit;
 
             &:focus {
                 border: none;

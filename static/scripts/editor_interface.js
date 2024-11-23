@@ -158,6 +158,14 @@
     }
 
     /////////////////////// LISTENERS/DOM-RELATED FUNCTIONS
+    window.addEventListener("beforeunload", function (e) {
+      var confirmationMessage = "\\o/";
+    
+      (e || window.event).returnValue = confirmationMessage; // Gecko + IE
+      return confirmationMessage; /* Safari, Chrome, and other
+       * WebKit-derived browsers */
+    });
+
     document.getElementById('text-input').addEventListener('input', function () {
         const newLength = returnNumberOfWords(this)
 
@@ -188,3 +196,4 @@
       let audioFile = document.getElementById(audioId); 
       audioFile.play()
     }
+
