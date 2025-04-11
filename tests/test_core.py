@@ -1,45 +1,66 @@
-import pytest
-
 from django.urls import reverse
-
-@pytest.mark.django_db(True)
-def test_homepage(client):
-    url = reverse('homepage')
-    response = client.get(url)
-    assert response.status_code == 200
-    assert b"Autrice M/M & fantasy" in response.content
-    assert b"Aux nouvelles" in response.content
-
-def test_about(client):
-    url = reverse('about')
-    response = client.get(url)
-    assert response.status_code == 200
-    assert b"propos" in response.content
-    assert b"Bibliographie" in response.content
-
-@pytest.mark.django_db(True)
-def test_archives_index(client):
-    url = reverse('archives:index')
-    response = client.get(url)
-    assert response.status_code == 200
-    assert b"Fics M/M et F/F" in response.content
-
-def test_404(client):
-    url = '/wrong_url'
-    response = client.get(url)
-    assert b"cette page n'existe pas" in response.content
-    assert response.status_code == 200
-
-# @pytest.fixture
-# def function_fixture():
-#    print('Fixture for each test')
-#    return 1
+from django.test import TestCase
+#from myapp.models import Animal
 
 
-# from django.contrib.auth.models import User
+class CoreTestCase(TestCase):
+    # Views
+    def test_call_view_fail_blank(self):
+        #self.client.login(username='user', password='test')
+        #response = self.client.post('/url/to/view', {}) # blank data dictionary
+        response = self.client.get('/url/to/view') # blank data dictionary
+        self.assertContains(response, 'Malheureusement, cette page n\'existe pas !')
+        self.assertEqual(response.status_code, 200)
 
+    def test_homepage_view(self):
+        response = self.client.get(reverse("homepage"))
+        self.assertContains(response, 'Autrice M/M | Romans BL et fantasy')
+        self.assertContains(response, 'Aux nouvelles')
+        self.assertEqual(response.status_code, 200)
 
-# @pytest.mark.django_db
-# def test_user_create():
-#   User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-#   assert User.objects.count() == 1
+    def test_about(self):
+        response = self.client.get(reverse("about"))
+        self.assertContains(response, 'Bibliographie')
+        self.assertEqual(response.status_code, 200)
+
+    def test_archives_view(self):
+        response = self.client.get(reverse("archives:index"))
+        self.assertContains(response, 'Fics M/M et F/F')
+        self.assertEqual(response.status_code, 200)
+
+    def test_gadget_view(self):
+        response = self.client.get(reverse("gadgets:index"))
+        self.assertContains(response, 'Coquecigrues : trucs, gadgets et machins')
+        self.assertEqual(response.status_code, 200)
+        
+    # def setUp(self):
+    #     Animal.objects.create(name="lion", sound="roar")
+    #     Animal.objects.create(name="cat", sound="meow")
+
+    # def test_animals_can_speak(self):
+    #     """Animals that can speak are correctly identified"""
+    #     lion = Animal.objects.get(name="lion")
+    #     cat = Animal.objects.get(name="cat")
+    #     self.assertEqual(lion.speak(), 'The lion says "roar"')
+    #     self.assertEqual(cat.speak(), 'The cat says "meow"')
+    #     url = reverse('homepage')
+
+    # def test_call_view_deny_anonymous(self):
+    #     response = self.client.get('/url/to/view', follow=True)
+    #     self.assertRedirects(response, '/login/')
+    #     response = self.client.post('/url/to/view', follow=True)
+    #     self.assertRedirects(response, '/login/')
+
+    # def test_call_view_load(self):
+    #     self.client.login(username='user', password='test')  # defined in fixture or with factory in setUp()
+    #     response = self.client.get('/url/to/view')
+    #     self.assertEqual(response.status_code, 200)
+    #     self.assertTemplateUsed(response, 'conversation.html')
+
+    # def test_call_view_fail_invalid(self):
+    #     # as above, but with invalid rather than blank data in dictionary
+
+    # def test_call_view_success_invalid(self):
+    #     # same again, but with valid data, then
+    #     self.assertRedirects(response, '/contact/1/calls/')
+

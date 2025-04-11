@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'archives.apps.ArchivesConfig',
     'gadgets.apps.GadgetsConfig',
+    'voiture_noire.apps.VoitureNoireConfig',
     'writer.apps.WriterConfig',
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',

@@ -2,6 +2,10 @@ from accounts.models import Member
 from django.db import models
 
 
+class ChapterManager(models.Manager):
+    def return_next_number(fic):
+        return Chapter.objects.filter(fic=fic).count() + 1
+
 class Author(models.Model):
     member = models.ForeignKey(Member,
         on_delete=models.CASCADE,
@@ -48,6 +52,8 @@ class Fic(models.Model):
         on_delete=models.SET_NULL,
         null=True
     )
+    
+    visibleByAdmin = models.BooleanField(default=True)
     visible = models.BooleanField(default=True)
     clap = models.IntegerField(default=0)
     date = models.DateField(null=True)
@@ -84,21 +90,19 @@ class Fic(models.Model):
 
 
 class Chapter(models.Model):
-    def return_next_number(self, fic):
-        return Chapter.objects.filter(fic=fic).count() + 1
-
     fic = models.ForeignKey(Fic, on_delete=models.CASCADE)
     title = models.CharField(max_length=150, null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
     author_note = models.TextField(max_length=2000, null=True, blank=True)
     content = models.TextField(max_length=1000000)
 
+    objects = ChapterManager()
     def __str__(self):
         return f"{self.fic}, chapter {self.number}"
     
     def save(self, *args, **kwargs):
         if self.number == None:
-            self.number = self.return_next_number(self.fic)
+            self.number = self.objects.return_next_number(self.fic)
             super(Chapter, self).save(*args, **kwargs)
         else:
             super(Chapter, self).save(*args, **kwargs)
