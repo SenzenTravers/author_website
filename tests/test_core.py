@@ -1,12 +1,14 @@
 from django.urls import reverse
-from django.test import TestCase
-#from myapp.models import Animal
+from django.test import Client, TestCase
+from voiture_noire.models import DiscordMember
 
 
 class CoreTestCase(TestCase):
     # Views
+    def setUp(self):
+        DiscordMember.objects.create_user("Jean-Bob", email="jeanbobdupont@mail.fr", password="motdepasse")
+
     def test_call_view_fail_blank(self):
-        #self.client.login(username='user', password='test')
         #response = self.client.post('/url/to/view', {}) # blank data dictionary
         response = self.client.get('/url/to/view') # blank data dictionary
         self.assertContains(response, 'Malheureusement, cette page n\'existe pas !')
@@ -32,7 +34,10 @@ class CoreTestCase(TestCase):
         response = self.client.get(reverse("gadgets:index"))
         self.assertContains(response, 'Coquecigrues : trucs, gadgets et machins')
         self.assertEqual(response.status_code, 200)
-        
+
+
+
+
     # def setUp(self):
     #     Animal.objects.create(name="lion", sound="roar")
     #     Animal.objects.create(name="cat", sound="meow")

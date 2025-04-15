@@ -24,12 +24,21 @@ You're done!
 2. Restart the app
 
 ## TODO
+### PROMPTS
+[X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
+[X] Système de connexion/déconnexion
+-  PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
+-  PROMPTS(Voiture Noire): introduire tri sur les prompts
+-  PROMPTS(Voiture Noire): page profil fonctionnelle
+-  PROMPTS(Voiture Noire): page prompts fonctionnelle
+-  PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
+-  PROMPTS(Voiture Noire): ajouts de prompts
+
 -  When time is selected, then start sprint upon pressing Enter key
 -  PINE(Mobile) : réarranger la bannière
 -  PINE(Mobile) Mobile : 50 % de la page est une mosaïque
 -  PINE(Ordinateur) Commissions : page complète
 -  PINE(Mobile) Commissions : page complète
-
 
 ### Randoms
 [CONVERT HTML TO PDF](https://doc.courtbouillon.org/weasyprint/stable/)

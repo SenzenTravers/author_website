@@ -21,14 +21,6 @@ class Index(generic.ListView):
 
     def get_queryset(self):
         return Fic.objects.order_by('-date')
-
-
-class PetiteVoiture(generic.ListView):
-    template_name = 'archives/index.html'
-    context_object_name = 'fics'
-
-    def get_queryset(self):
-        return Fic.objects.order_by('-date')
     
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)

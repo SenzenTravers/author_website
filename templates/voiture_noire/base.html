@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <meta name="author" content="Sen" />
+        <meta
+            name="keywords"
+            content="BL, FL, yuri, yaoi, queer fantasy"
+        />
+        <meta
+            name="description"
+            content="{% block page_desc %}Vous trouverez ici les textes des autrices et auteurs de la Petite Voiture Noire, serveur LGBT+.{% endblock %}"
+        />
+
+        <title>
+            {% block title %} La Petite Voiture Noire | Archives de textes queer
+            {% endblock %}
+        </title>
+        {% block stylesheet %}
+        <link rel="stylesheet" href="/static/base.css" />
+        {% endblock %}
+        <link rel=icon href=favicon.ico type=image/ico>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap"
+            rel="stylesheet"
+        />
+    </head>
+
+    <body>
+        <nav class="voiture-noire-banner">
+            <ul>
+                <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li>
+                <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
+                <!-- <li><a href="">Mes écrits</a></li> -->
+                <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Se déconnecter</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Se connecter</a></li>
+                {% endif %}
+            </ul>
+
+            {% if user.is_authenticated %}
+                Bienvenue, {{ user.username }}
+            {% endif %}
+        </nav>
+        
+        <main>{% block content %} {% endblock %}</main>
+
+        <footer>Copyright 2025 by une femme fabuleuse.</footer>
+    </body>
+</html>

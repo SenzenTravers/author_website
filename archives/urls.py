@@ -6,7 +6,6 @@ app_name = 'archives'
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
-    path('petitevoiture', views.PetiteVoiture.as_view(), name='petite_voiture'),
     path("stories/<int:fic_id>/<int:number>", views.show_chapter, name='show_chapter'),
     path("stories/chapter/<int:pk>", views.ChapterView.as_view(), name='chapter'),
     path("<int:fic_id>/html", views.download_html, name="download_html"),

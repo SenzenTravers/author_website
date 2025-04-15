@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/voiture_noire.css">
+{% endblock %}
+
+{% block title %}
+    Les thèmes de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+<h1>Nos thèmes</h1>
+
+<section class="prompt-handler">
+    <p>Ici, vous pouvez faire consulter, suggérer ou approuver un thème.</p>
+    <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p>
+
+    {% for prompt in prompts %}
+        {{prompt }}
+    {% endfor %}
+</section>
+{% endblock %}
