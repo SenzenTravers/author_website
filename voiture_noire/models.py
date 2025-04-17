@@ -2,9 +2,15 @@ from django.db import models
 from accounts.models import Member
 
 
-class DiscordMember(Member):
+class DiscordProfile(models.Model):
     likes = models.TextField(max_length=1500, blank=True, null=True)
     dislikes = models.TextField(max_length=1500, blank=True, null=True)
+    member = models.OneToOneField(
+        Member, 
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+    )
 
 class Prompt(models.Model):
     PAIRING_TYPE = [
@@ -19,5 +25,4 @@ class Prompt(models.Model):
     supporters = models.ManyToManyField(
         Member, 
         blank=True,
-        null=True,
     )

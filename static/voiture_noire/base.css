@@ -1,0 +1,66 @@
+@import "../normalize.css";
+
+body {
+    --main-bg-colour-clear:  #fef6e6;
+    --ivory:  #e4e4cd;
+    --beige: #D1BFA6;
+    --cool-gray: #939081;
+    --jet-black: #040000;
+    --midnight-blue: #4C6585;
+    --misty-blue: #B0BFC2;
+    --nude: #CCB4A9;
+    --puce: #725446;
+
+    background-color: var(--main-bg-colour-clear);
+    color: var(--midnight-blue);
+    margin: 0 5vw 0 5vw;
+    line-height: 1em;
+    
+    h1 {
+        color: var(--midnight-blue);
+        text-align: right;
+        margin-bottom: 2em;
+        filter: drop-shadow(1px 1px 2px var(--nude));
+    }
+
+    input, textarea {
+        border: 1px solid var(--puce);
+        border-radius: 2px;
+        height: fit-content;
+    }
+
+    button {
+        margin: 2em;
+        padding: 10px;
+        align-self: center;
+        background-color: var(--midnight-blue);
+        color: var(--nude);
+        border: 3px double var(--misty-blue);
+        width: fit-content;
+        border-radius: 15px;
+
+    }
+
+    a {
+        color: var(--puce);
+    }
+}
+
+form {
+    label {
+        margin-top: 1.5em;
+        margin-bottom: 0.5em;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        margin: 0 5vw 0 5vw;
+    }
+}
+
+@media screen and (min-width: 1001px){
+    body {
+        margin: 0 5vw 0 5vw;
+    }
+}

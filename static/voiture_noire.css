@@ -1,6 +1,0 @@
-@import "./normalize.css";
-
-body {
-    --main-bg-colour-clear:  #fef6e6;
-    background-color: var(--main-bg-colour-clear);
-}

@@ -27,10 +27,10 @@ You're done!
 ### PROMPTS
 [X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
 [X] Système de connexion/déconnexion
+-  PROFIL(Voiture Noire): page profil fonctionnelle
+-  PROMPTS(Voiture Noire): page prompts fonctionnelle
 -  PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
 -  PROMPTS(Voiture Noire): introduire tri sur les prompts
--  PROMPTS(Voiture Noire): page profil fonctionnelle
--  PROMPTS(Voiture Noire): page prompts fonctionnelle
 -  PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
 -  PROMPTS(Voiture Noire): ajouts de prompts
 

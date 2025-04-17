@@ -1,11 +1,11 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic, View
 
 from archives_api.models import APIFic
 
-from .models import DiscordMember
-from .forms import DiscordMemberForm, PromptForm
+from .models import DiscordProfile
+from .forms import DiscordProfileForm, PromptForm
 
 # Create your views here.
 class Index(generic.ListView):
@@ -16,12 +16,27 @@ class Index(generic.ListView):
         return APIFic.objects.order_by('-date')
 
 class Profile(generic.View):
-    form_class = DiscordMemberForm
+    form_class = DiscordProfileForm
     template_name = 'voiture_noire/profile.html'
+    initial = {}
 
     def get(self, request, *args, **kwargs):
+        try:
+            discord_member = DiscordProfile.objects.get(
+                username=request.user.username
+            )
+            self.initial = discord_member
+        except:
+            self.initial = {"likes": "", "dislikes": ""}
+
         form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {"form": form})
+    
+    def post(self, request, *args, **kwargs):
+        page_form = request.POST
+        new_form = DiscordProfile(request.POST)
+        print(request.POST)
+        return redirect('voiture_noire:profile')
 
 class Prompt(View):
     form_class = PromptForm

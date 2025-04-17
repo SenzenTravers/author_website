@@ -1,0 +1,6 @@
+@import "./base.css";
+
+.discord-member-profile {
+    display: flex;
+    flex-flow: column;
+}

@@ -1,11 +1,11 @@
 from django import forms
 
-from .models import DiscordMember, Prompt
+from .models import DiscordProfile, Prompt
 
 
-class DiscordMemberForm(forms.ModelForm):
+class DiscordProfileForm(forms.ModelForm):
     class Meta:
-        model = DiscordMember
+        model = DiscordProfile
         fields = ["likes", "dislikes"]
 
 class PromptForm(forms.ModelForm):

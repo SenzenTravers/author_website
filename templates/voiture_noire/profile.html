@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/voiture_noire.css">
+<link rel="stylesheet" href="/static/voiture_noire/profile.css">
 {% endblock %}
 
 {% block title %}
@@ -15,9 +15,27 @@
     </div>
 </noscript>
 
-<h1>MEMBERNAME | Votre profil</h1>
+<h1>{{ user.username.capitalize }} | Votre profil</h1>
 
 <section>
-    <p>Vous trouverez ici les œuvres de nos auteurs et autrices classées par...</p>
+    <p>Ici, vous pouvez configurer vos goûts afin :</p>
+    <p>
+        1. de vous faciliter la vie durant les échanges en
+         les gardant de côté ;
+    </p>
+    <p>
+         2. de permettre à autrui
+        de vous offrir, potentiellement, des dessins ou des fics. 
+    </p>
 </section>
+
+<form method="post" class="discord-member-profile">
+    {% csrf_token %}
+    <label for="id_likes">Ce que vous aimez</label>
+    {{ form.likes }}
+    <label for="id_dislikes">Ce que vous détestez</label>
+    {{ form.dislikes }}
+    <button type="submit">Valider</button>
+</form>
+
 {% endblock %}
