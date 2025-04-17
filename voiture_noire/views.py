@@ -4,6 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.views import generic, View
 
 from archives_api.models import APIFic
+from .models import DiscordProfile
 
 from .models import DiscordProfile
 from .forms import DiscordProfileForm, PromptForm
@@ -15,6 +16,16 @@ class Index(generic.ListView):
 
     def get_queryset(self):
         return APIFic.objects.order_by('-date')
+
+
+class MemberList(generic.ListView):
+    template_name = 'voiture_noire/memberList.html'
+    context_object_name = 'DiscordProfiles'
+
+    def get_queryset(self):
+        return DiscordProfile.objects.order_by('-member')    
+
+
 
 class Profile(generic.View):
     form_class = DiscordProfileForm

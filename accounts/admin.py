@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
     AdminPasswordChangeForm
 )
 from .models import Member
-from .forms import MemberCreationForm
+from .forms import MemberCreationForm, MemberOtherCreationForm
 
 
 class MemberAdmin(UserAdmin):
@@ -27,27 +27,12 @@ class MemberAdmin(UserAdmin):
         }),
     )
     form = MemberCreationForm
-    add_form = MemberCreationForm
+    add_form = MemberOtherCreationForm
     change_password_form = AdminPasswordChangeForm
     list_display = ('username', 'email', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
     search_fields = ('username', 'email')
     ordering = ('username',)
     filter_horizontal = ('groups', 'user_permissions',)
-
-    def get_fieldsets(self, request, obj=None):
-        if not obj:
-            return self.add_fieldsets
-        return super().get_fieldsets(request, obj)
-
-    def get_form(self, request, obj=None, **kwargs):
-        """
-        Use special form during user creation
-        """
-        defaults = {}
-        if obj is None:
-            defaults['form'] = self.add_form
-        defaults.update(kwargs)
-        return super().get_form(request, obj, **defaults)
 
 admin.site.register(Member, MemberAdmin)

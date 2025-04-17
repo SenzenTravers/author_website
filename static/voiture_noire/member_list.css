@@ -1,0 +1,74 @@
+@import "./base.css";
+
+.member-list {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.card-member-profile {
+    display: flex;
+    flex-flow: column;
+    height: max(250px, 35vh);
+    width: max(250px, 20vw);
+    overflow: hidden;
+    transition: all 300ms ease-in-out;
+
+    padding: 30px;
+    border-radius: 25px;
+    background-color: var(--misty-blue);
+    filter: drop-shadow(1px 1px 2px var(--nude));
+    color: var(--jet-black);
+
+    h2 {
+        color: var(--puce);
+        text-align: end;
+        margin-top: 0.5em;
+        margin-bottom: 2px;
+    }
+
+    h3 {
+        margin: 1em 0 0 0;
+    }
+
+    hr {
+        width: 75%;
+        color: var(--puce);
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
+    p {
+        margin: 0.5em 0 0.5em 0;
+        line-height: 1.2em;
+
+        text-align: justify;
+    }
+
+    h3, p {
+        filter: blur(5px);
+    }
+}
+
+.card-member-profile:hover {
+    flex-grow: 4.3;
+
+    border-radius: 10px;
+    overflow: scroll;
+
+    h3, p {
+        filter: none;
+    }
+}
+
+.card-member-profile:before {
+    &:before {
+        content: attr(data-order);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+    }
+}

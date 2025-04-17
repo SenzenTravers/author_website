@@ -17,6 +17,8 @@
 
 <h1>{{ user.username.capitalize }} | Votre profil</h1>
 
+<hr>
+
 <section>
     <p>Ici, vous pouvez configurer vos goûts afin :</p>
     <p>
@@ -31,9 +33,9 @@
 
 <form method="post" class="discord-member-profile">
     {% csrf_token %}
-    <label for="id_likes">Ce que vous aimez</label>
+    <label for="id_likes">Vous aimez :</label>
     {{ form.likes }}
-    <label for="id_dislikes">Ce que vous détestez</label>
+    <label for="id_dislikes">Vous détestez :</label>
     {{ form.dislikes }}
     <button type="submit">Valider</button>
 </form>

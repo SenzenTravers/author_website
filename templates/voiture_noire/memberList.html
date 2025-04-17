@@ -1,0 +1,48 @@
+{% extends './base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/voiture_noire/member_list.css">
+{% endblock %}
+
+{% block title %}
+    Membres de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+
+<h1>Tout le monde, et le reste</h1>
+
+<hr>
+
+<section class="member-list">
+    {% for profile in DiscordProfiles %}
+    <!-- NOTE : faire une petite carte de membre -->
+     <!-- Option pour copier d'un clic -->
+        <section class="card-member-profile">
+            <h2>{{ profile.member.username }}</h2>
+            <hr>
+            <h3>Aime :</h3>
+                <p>{{ profile.likes }}</p>
+            <h3>N'aime pas :</h3>
+                <p>{{ profile.dislikes }}</p>
+        </section>
+
+    {% endfor %}
+</section>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        console.log('aarjh')
+        let allCards = document.getElementsByClassName("card-member-profile")
+        allCards = Array(allCards)
+        // Alas, copilot
+        allCards.forEach(card => {
+            console.log('))):')
+            title = card.getElementsByTagName('h2')[0]
+            title.scrollIntoView({ behavior: "instant", block: "start" });
+        });
+    });
+
+</script>
+{% endblock %}
+

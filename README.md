@@ -27,7 +27,11 @@ You're done!
 ### PROMPTS
 [X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
 [X] Système de connexion/déconnexion
--  PROFIL(Voiture Noire): page profil fonctionnelle
+[X] PROFIL(Voiture Noire): page profil fonctionnelle
+- PROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
+-  Dans un futur monde idéal : like/dislikes en rich text editor
+-  Page de membres
+-  Une joulie bannière
 -  PROMPTS(Voiture Noire): page prompts fonctionnelle
 -  PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
 -  PROMPTS(Voiture Noire): introduire tri sur les prompts

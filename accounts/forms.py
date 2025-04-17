@@ -8,3 +8,8 @@ class MemberCreationForm(UserCreationForm):
     class Meta:
         model = Member
         fields = ('username', 'email', 'password1', 'password2')
+
+class MemberOtherCreationForm(UserCreationForm):
+    class Meta:
+        model = Member
+        fields = '__all__'

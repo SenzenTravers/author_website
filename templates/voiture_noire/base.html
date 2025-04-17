@@ -46,6 +46,7 @@
                 <!-- <li><a href="">Mes écrits</a></li> -->
                 <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
                 {% if user.is_authenticated %}
+                    <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
                     <li>
                         <form action="{% url 'logout' %}" method="post">
                             {% csrf_token %}
