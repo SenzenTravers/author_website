@@ -1,5 +1,6 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
+from django.views.generic.edit import UpdateView
 from django.views import generic, View
 
 from archives_api.models import APIFic
@@ -23,20 +24,27 @@ class Profile(generic.View):
     def get(self, request, *args, **kwargs):
         try:
             discord_member = DiscordProfile.objects.get(
-                username=request.user.username
+                member=request.user
             )
             self.initial = discord_member
+            form = self.form_class(instance=self.initial)
         except:
             self.initial = {"likes": "", "dislikes": ""}
+            form = self.form_class(initial=self.initial)
 
-        form = self.form_class(initial=self.initial)
         return render(request, self.template_name, {"form": form})
     
     def post(self, request, *args, **kwargs):
-        page_form = request.POST
-        new_form = DiscordProfile(request.POST)
-        print(request.POST)
+        new_profile = DiscordProfileForm(request.POST)
+        if new_profile.is_valid():
+            discord_member = DiscordProfile.objects.get_or_create(member=request.user)[0]
+            instance = new_profile.save(commit=False)
+            discord_member.likes = instance.likes
+            discord_member.dislikes = instance.dislikes
+            discord_member.member = request.user
+            discord_member.save()
         return redirect('voiture_noire:profile')
+
 
 class Prompt(View):
     form_class = PromptForm

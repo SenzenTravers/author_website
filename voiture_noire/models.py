@@ -12,6 +12,7 @@ class DiscordProfile(models.Model):
         on_delete=models.CASCADE,
     )
 
+
 class Prompt(models.Model):
     PAIRING_TYPE = [
     ("MM", "M/M"),
