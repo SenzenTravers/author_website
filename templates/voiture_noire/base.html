@@ -39,32 +39,32 @@
     </head>
 
     <body>
-        <nav class="voiture-noire-banner">
+        <nav class="banner-voiture-noire">
             <ul>
-                <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li>
+                {% if user.is_authenticated %}
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Se déconnecter</button>
+                    </form>
+                </li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Se connecter</a></li>
+            {% endif %}
+                <!-- <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li> -->
                 <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
+            {% endif %}
                 <!-- <li><a href="">Mes écrits</a></li> -->
                 <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
-                    <li>
-                        <form action="{% url 'logout' %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">Se déconnecter</button>
-                        </form>
-                    </li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Se connecter</a></li>
-                {% endif %}
             </ul>
 
             {% if user.is_authenticated %}
-                Bienvenue, {{ user.username }}
+                <p id="welcome-blurb">Bienvenue, <b>{{ user.username }}</b> !</p>
             {% endif %}
         </nav>
         
         <main>{% block content %} {% endblock %}</main>
-
-        <footer>Copyright 2025 by une femme fabuleuse.</footer>
     </body>
 </html>

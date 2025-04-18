@@ -28,6 +28,7 @@ You're done!
 [X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
 [X] Système de connexion/déconnexion
 [X] PROFIL(Voiture Noire): page profil fonctionnelle
+-  Petit script pour welcome-blurb
 - PROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
 -  Dans un futur monde idéal : like/dislikes en rich text editor
 -  Page de membres
