@@ -48,6 +48,10 @@
 </form>
 
 <script>
+    let likesValue = `{{ form.likes.value | safe }}`  
+    let dislikesValue = `{{ form.dislikes.value | safe }}`  
+
+
     let quillLikes = new Quill('#editor-container-likes', {
         modules: {
             toolbar: [
@@ -68,6 +72,8 @@
     }
 
     function getQuillHtml() { return quillLikes.root.innerHTML; }
+
+    quillLikes.clipboard.dangerouslyPasteHTML(likesValue);
 
     /////// SECOND QUILL EDITOR
     let quillDislikes = new Quill('#editor-container-dislikes', {
@@ -90,5 +96,7 @@
     }
 
     function getQuillHtmlDislikes() { return quillDislikes.root.innerHTML; }
+
+    quillDislikes.clipboard.dangerouslyPasteHTML(dislikesValue);
 </script>
 {% endblock %}
