@@ -60,6 +60,7 @@ body {
         border: 3px double var(--misty-blue);
         width: fit-content;
         border-radius: 15px;
+        font-weight: bold;
     }
 
     a {
@@ -68,6 +69,8 @@ body {
 }
 
 .form-main {
+    display: flex;
+    flex-flow: column;
     label {
         margin-top: 1.5em;
         margin-bottom: 0.5em;
@@ -105,6 +108,16 @@ body {
         color: var(--nude);
         border: 3px double var(--misty-blue);
         border-radius: 15px;
+        text-decoration: none;
+    }
+
+    a, button {
+        font-weight: bold;
+        color: var(--ivory);
+
+        &:hover {
+            filter: brightness(115%);
+        }
     }
 
     #welcome-blurb {

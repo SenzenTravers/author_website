@@ -18,6 +18,7 @@ class Prompt(models.Model):
     ("MM", "M/M"),
     ("FF", "F/F"),
     ("F/M", "Hétéro"),
+    ("ANY", "N'importe"),
     ("ETC", "Autre"),
     ("GEN", "Général"),
     ]

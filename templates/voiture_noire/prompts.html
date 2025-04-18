@@ -14,11 +14,95 @@
 <hr>
 
 <section class="prompt-handler">
-    <p>Ici, vous pouvez faire consulter, suggérer ou approuver un thème.</p>
-    <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p>
+    <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
 
-    {% for prompt in prompts %}
-        {{prompt }}
-    {% endfor %}
+    <details class="detail-prompt-post">
+        <summary>
+          Proposer un thème
+        </summary>
+
+        <form method="post" class="form-prompt-post form-main">
+            {% csrf_token %}
+            <label for="id_likes">Type :</label>
+            {{ form.pairing_type }}
+            <label for="id_dislikes">Thème :</label>
+            {{ form.body }}
+            <button type="submit">Envoyer</button>
+        </form>    
+    </details>
+
+        <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
+    <section>
+        <h2>Les thèmes</h2>
+        <table class="table-prompt-list">
+            <tr>
+                <th class="prompt-type">Type</th>
+                <th class="prompt-body">Thème</th>
+                <th class="prompt-supporters">Intéressés</th>
+                <th class="prompt-button"></th>
+            </tr>
+            {% for prompt in prompt_list %}
+            <tr>
+                <td class="prompt-type">
+                    {% if prompt.pairing_type == 'FF' %}
+                        F/F
+                    {% elif prompt.pairing_type == 'MM' %}
+                        M/M
+                    {% elif prompt.pairing_type == 'FM' %}
+                        F/M
+                    {% elif prompt.pairing_type == 'ANY' %}
+                        N'importe
+                    {% elif prompt.pairing_type == 'ETC' %}
+                        Autre
+                    {% elif prompt.pairing_type == 'GEN' %}
+                        Général
+                    {% endif %}
+                </td>
+                
+                <td class="prompt-body">
+                    {{ prompt.body }}
+                </td>
+
+                <td class="prompt-supporters">
+                    <!-- NOTE : Gérer les virgules -->
+                    {% for person in prompt.supporters.all %}
+                        {% if forloop.last %}
+                            {{ person.username.capitalize }}
+                        {% else %}
+                            {{ person.username.capitalize }},
+                        {% endif %}
+
+                    {% endfor %}
+                </td>
+
+                <td class="prompt-button">
+                    {% if user in prompt.supporters.all %}
+                        <form action="{% url 'voiture_noire:unfavourite' prompt.id %} " method="post">
+                            {% csrf_token %}
+                            <button type="submit" titre="Retirer des favoris">💔</button>
+                        </form>
+                    {% else %}
+                        <form action="{% url 'voiture_noire:favourite' prompt.id %} " method="post">
+                            {% csrf_token %}
+                            <button type="submit" title="Ajouter aux favoris">💛</button>
+                        </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </section>
 </section>
+
+<!-- <script>
+    window.onload = (event) => {
+        allSupporterCells = document.getElementsByClassName("prompt-supporters")
+        allSupporterCells = Array.from(allSupporterCells)
+        allSupporterCells.forEach(function (cell) {
+            if (cell.innerText.slice(-1) == ",") {
+                cell.innerText = cell.innerText.slice(0, -1)
+            }
+        });
+    }
+</script> -->
 {% endblock %}

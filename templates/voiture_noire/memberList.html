@@ -25,12 +25,34 @@
                 <p>{{ profile.likes }}</p>
             <h3>N'aime pas :</h3>
                 <p>{{ profile.dislikes }}</p>
+            <h3>Intéressé.e par :</h3>
+                <ul>
+                    {% for prompt in profile.member.prompt_set.all|dictsort:"pairing_type" %} 
+                        <li>
+                            <b>{% if prompt.pairing_type == 'FF' %}
+                                F/F
+                            {% elif prompt.pairing_type == 'MM' %}
+                                M/M
+                            {% elif prompt.pairing_type == 'FM' %}
+                                F/M
+                            {% elif prompt.pairing_type == 'ANY' %}
+                                N'importe
+                            {% elif prompt.pairing_type == 'ETC' %}
+                                Autre
+                            {% elif prompt.pairing_type == 'GEN' %}
+                                Général
+                            {% endif %}
+                            </b>
+                            : {{prompt.body}}
+                        </li>
+                    {% endfor %}
+                </ul>
         </section>
 
     {% endfor %}
 </section>
 
-<script>
+<!-- <script>
     // À supprimer si flemme
     document.addEventListener("DOMContentLoaded", function() {
         console.log('aarjh')
@@ -44,6 +66,6 @@
         });
     });
 
-</script>
+</script> -->
 {% endblock %}
 

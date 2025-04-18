@@ -1,10 +1,9 @@
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
-from django.views.generic.edit import UpdateView
 from django.views import generic, View
 
 from archives_api.models import APIFic
-from .models import DiscordProfile
+from .models import DiscordProfile, Prompt
 
 from .models import DiscordProfile
 from .forms import DiscordProfileForm, PromptForm
@@ -23,7 +22,7 @@ class MemberList(generic.ListView):
     context_object_name = 'DiscordProfiles'
 
     def get_queryset(self):
-        return DiscordProfile.objects.order_by('-member')    
+        return DiscordProfile.objects.order_by('member__username')    
 
 
 
@@ -57,7 +56,7 @@ class Profile(generic.View):
         return redirect('voiture_noire:profile')
 
 
-class Prompt(View):
+class PromptView(View):
     form_class = PromptForm
     initial = {"key": "value"}
     template_name = "voiture_noire/prompts.html"
@@ -65,12 +64,35 @@ class Prompt(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        return render(request, self.template_name, {"form": form})
+        prompt_list = Prompt.objects.order_by('body')
+
+        return render(request, self.template_name, {
+            "form": form,
+            "prompt_list": prompt_list
+            }
+        )
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            # <process form cleaned data>
-            return HttpResponseRedirect("/")
+        new_prompt = PromptForm(request.POST)
+        if new_prompt.is_valid():
+            saved_prompt = new_prompt.save()
+            saved_prompt.supporters.add(request.user)
+        return redirect('voiture_noire:prompts')
 
-        return render(request, self.template_name, {"form": form})
+def favourite(request, prompt_id):
+    try:
+        prompt = Prompt.objects.get(id=prompt_id)
+        prompt.supporters.add(request.user)
+    except:
+        return redirect('500')
+
+    return redirect('voiture_noire:prompts')
+
+def unfavourite(request, prompt_id):
+    try:
+        prompt = Prompt.objects.get(id=prompt_id)
+        prompt.supporters.remove(request.user)
+    except:
+        return redirect('500')
+
+    return redirect('voiture_noire:prompts')

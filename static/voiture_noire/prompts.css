@@ -1,3 +1,73 @@
 @import "./base.css";
 
 /* filter: drop-shadow(1px 1px 2px var(--nude)); */
+.detail-prompt-post {
+    margin-top: 6em;
+
+    summary {
+        margin-top: 0.5em;
+        margin-bottom: 2px;
+        color: var(--puce);
+        text-align: start;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1.3em;
+        cursor: pointer;
+    }
+
+    .form-prompt-post {
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+    textarea {
+        height: 100px;
+    }
+}
+
+h2 {
+    margin-top: 2em;
+    color: var(--puce);
+    text-align: start;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.6em;
+}
+
+.table-prompt-list {
+    width: 85%;
+    text-align: left;
+    color: var(--jet-black);
+
+    tr:nth-child(even) {
+        background-color: var(--nude);
+    }
+
+    tr:nth-child(odd) {
+        background-color: var(--misty-blue);
+    }
+
+    tr {
+        display: grid;
+        grid-template-columns: 0.5fr 3fr 1fr 0.2fr;
+        border: thin solid var(--jet-black);
+    }
+
+    th, td {
+        line-height: 1.2em;
+        padding: 1em;
+    }
+
+    tr > th {
+        background-color: var(--midnight-blue);
+        color: var(--ivory);
+    }
+
+    .prompt-body {
+        text-align: justify;
+    }
+
+    button {
+        margin: 0;
+    }
+}

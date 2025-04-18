@@ -92,7 +92,7 @@ def download_epub(request, fic_id):
 
     return response
 
-def clap(request, fic_id):    
+def clap(request, fic_id):
     try:
         fic = Fic.objects.get(id=fic_id)
         fic.clap=fic.clap+1

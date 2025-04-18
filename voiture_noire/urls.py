@@ -9,5 +9,8 @@ urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('profile', login_required(views.Profile.as_view()), name='profile'),
     path('everyone', login_required(views.MemberList.as_view()), name='everyone'),
-    path('prompts', login_required(views.Prompt.as_view()), name='prompts'),
+    path('prompts', login_required(views.PromptView.as_view()), name='prompts'),
+    path('unfavourite/<int:prompt_id>', views.unfavourite, name='unfavourite'),
+    path('favourite/<int:prompt_id>', views.favourite, name='favourite'),
+
 ]

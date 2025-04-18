@@ -28,16 +28,18 @@ You're done!
 [X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
 [X] Système de connexion/déconnexion
 [X] PROFIL(Voiture Noire): page profil fonctionnelle
--  Petit script pour welcome-blurb
+[X] PROFILS(Voiture Noire): page des membres
+[X] BANNIÈRE(Voiture Noire): CSS
+[X] PROMPTS(Voiture Noire): page prompts fonctionnelle
+[X] PROMPTS(Voiture Noire): ajouts de prompts
+
+  Petit script pour welcome-blurb
 - PROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
--  Dans un futur monde idéal : like/dislikes en rich text editor
--  Page de membres
+-  Dans un futur monde idéal : like/dislikes en rich text editor 
 -  Une joulie bannière
--  PROMPTS(Voiture Noire): page prompts fonctionnelle
 -  PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
 -  PROMPTS(Voiture Noire): introduire tri sur les prompts
 -  PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
--  PROMPTS(Voiture Noire): ajouts de prompts
 
 -  When time is selected, then start sprint upon pressing Enter key
 -  PINE(Mobile) : réarranger la bannière
