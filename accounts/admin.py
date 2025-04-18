@@ -10,7 +10,7 @@ from .forms import MemberCreationForm, MemberOtherCreationForm
 
 
 class MemberAdmin(UserAdmin):
-    add_form_template = MemberCreationForm
+    add_form = MemberCreationForm
     change_user_password_template = None
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
