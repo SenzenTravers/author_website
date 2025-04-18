@@ -2,19 +2,19 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
-from archives_api.models import APIFic
+# from archives_api.models import APIFic
 from .models import DiscordProfile, Prompt
 
 from .models import DiscordProfile
 from .forms import DiscordProfileForm, PromptForm
 
 # Create your views here.
-class Index(generic.ListView):
-    template_name = 'voiture_noire/index.html'
-    context_object_name = 'APIfics'
+# class Index(generic.ListView):
+#     template_name = 'voiture_noire/index.html'
+#     context_object_name = 'APIfics'
 
-    def get_queryset(self):
-        return APIFic.objects.order_by('-date')
+#     def get_queryset(self):
+#         return APIFic.objects.order_by('-date')
 
 
 class MemberList(generic.ListView):
