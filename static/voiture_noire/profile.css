@@ -3,4 +3,37 @@
 .discord-member-profile {
     display: flex;
     flex-flow: column;
+
+    label {
+        margin-top: 2em;
+        margin-bottom: 1em;
+    }
+    
+}
+
+.quill-input {
+    .ql-editor {
+        border: 1px solid var(--puce);
+        filter: drop-shadow(1px 1px 2px var(--nude));
+        border-radius: 2px;
+        min-height: 200px;
+        background-color: white;
+        font-size: medium;
+    }
+}
+
+.ql-toolbar {
+    background-color: var(--nude);
+    border: 1px solid var(--puce);
+    filter: drop-shadow(1px 1px 2px var(--jet-black));
+
+    .ql-formats {
+        height: 1.5em;
+        padding: 0 15px 0 15px !important;
+
+        button {
+            padding: 8px;
+            margin: 0;
+        }    
+    }
 }

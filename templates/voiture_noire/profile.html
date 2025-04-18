@@ -2,6 +2,8 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/voiture_noire/profile.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 {% endblock %}
 
 {% block title %}
@@ -34,10 +36,59 @@
 <form method="post" class="discord-member-profile form-main">
     {% csrf_token %}
     <label for="id_likes">Vous aimez :</label>
-    {{ form.likes }}
+    <div id="editor-container-likes" class="quill-input">
+    </div>
+    <div hidden>{{ form.likes }}</div>
+
     <label for="id_dislikes">Vous détestez :</label>
-    {{ form.dislikes }}
+    <div id="editor-container-dislikes" class="quill-input">
+    </div>
+    <div hidden>{{ form.dislikes }}</div>
     <button type="submit">Valider</button>
 </form>
 
+<script>
+    let quillLikes = new Quill('#editor-container-likes', {
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
+            ]
+        },
+        placeholder: '',
+        theme: 'snow'
+    });
+
+    quillLikes.on('text-change', function(delta, source) {
+	    updateHtmlOutput()
+    })
+
+    function updateHtmlOutput() {
+        let html = getQuillHtml();
+        document.getElementById('id_likes').innerText = html;
+    }
+
+    function getQuillHtml() { return quillLikes.root.innerHTML; }
+
+    /////// SECOND QUILL EDITOR
+    let quillDislikes = new Quill('#editor-container-dislikes', {
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
+            ]
+        },
+        placeholder: '',
+        theme: 'snow'
+    });
+
+    quillDislikes.on('text-change', function(delta, source) {
+	    updateHtmlOutputDislikes()
+    })
+
+    function updateHtmlOutputDislikes() {
+        let html = getQuillHtmlDislikes();
+        document.getElementById('id_dislikes').innerText = html;
+    }
+
+    function getQuillHtmlDislikes() { return quillDislikes.root.innerHTML; }
+</script>
 {% endblock %}

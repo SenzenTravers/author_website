@@ -21,11 +21,11 @@
         <section class="card-member-profile">
             <h2>{{ profile.member.username }}</h2>
             <hr>
-            <h3>Aime :</h3>
-                <p>{{ profile.likes }}</p>
-            <h3>N'aime pas :</h3>
-                <p>{{ profile.dislikes }}</p>
-            <h3>Intéressé.e par :</h3>
+            <h3>AIME :</h3>
+                {{ profile.likes | safe }}
+            <h3>N'AIME PAS :</h3>
+                {{ profile.dislikes | safe}}
+            <h3>INTÉRESSÉ.E PAR :</h3>
                 <ul>
                     {% for prompt in profile.member.prompt_set.all|dictsort:"pairing_type" %} 
                         <li>
