@@ -178,4 +178,4 @@ REST_FRAMEWORK = {
 
 # AUTH
 LOGIN_REDIRECT_URL = "/voiture_noire"  # new
-LOGOUT_REDIRECT_URL = "/voiture_noire"  # new
+LOGOUT_REDIRECT_URL = "/voiture_noire/"  # new
