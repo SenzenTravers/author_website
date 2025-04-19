@@ -48,3 +48,15 @@
         font-style: italic;
     }
 }
+
+.p-character-counter {
+    margin-top: 0.2em;
+    margin-right: 10px;
+    text-align: right;
+    font-size: small;
+}
+
+.limit-reached {
+    color: darkred;
+    font-weight: bold;
+}

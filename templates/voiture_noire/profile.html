@@ -2,6 +2,7 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/voiture_noire/profile.css">
+<!-- Lucile : un jour, tu ôteras ceci. Bravement. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 {% endblock %}
@@ -48,18 +49,58 @@
 <form method="post" class="discord-member-profile form-main">
     {% csrf_token %}
     <label for="id_likes">Vous aimez :</label>
-    <div id="editor-container-likes" class="quill-input">
-    </div>
+    <div id="editor-container-likes" class="quill-input"></div>
     <div hidden>{{ form.likes }}</div>
+    <p id="char-counter-likes" class="p-character-counter"></p>
 
     <label for="id_dislikes">Vous détestez :</label>
     <div id="editor-container-dislikes" class="quill-input">
     </div>
     <div hidden>{{ form.dislikes }}</div>
+    <p id="char-counter-dislikes" class="p-character-counter"></p>
     <button type="submit">Valider</button>
 </form>
 
 <script>
+    /////////// INITIALIZE CUSTOM MODULES
+    class Counter {
+        constructor(quill, options) {
+            this.quill = quill;
+            this.options = options;
+            this.container = document.querySelector(options.container);
+            quill.on(Quill.events.TEXT_CHANGE, this.update.bind(this));
+        }
+
+        calculate() {
+            const text = this.quill.getText();
+
+            if (this.options.unit === 'word') {
+            const trimmed = text.trim();
+            // Splitting empty text returns a non-empty array
+            return trimmed.length > 0 ? trimmed.split(/\s+/).length : 0;
+            } else {
+            return text.length;
+            }
+        }
+
+        update() {
+            const length = this.calculate();
+            let label = this.options.unit;
+            if (length !== 1) {
+            label += 's';
+            }
+            this.container.innerText = `${length} ${label}`;
+            if (length >= 300) {
+                this.container.classList.add("limit-reached")
+                this.container.innerText += " : attention ! La limite acceptée est de 3 000 caractères."
+            } else {
+                this.container.classList.remove("limit-reached")
+            }
+        }
+        }
+
+        Quill.register('modules/counter', Counter);
+
     let likesValue = `{{ form.likes.value | safe }}`  
     let dislikesValue = `{{ form.dislikes.value | safe }}`  
 
@@ -68,7 +109,16 @@
         modules: {
             toolbar: [
                 ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
-            ]
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-likes',
+                unit: 'caractère'
+            }
         },
         placeholder: '',
         theme: 'snow'
@@ -79,7 +129,16 @@
         modules: {
             toolbar: [
                 ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
-            ]
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-dislikes',
+                unit: 'caractère'
+            }
         },
         placeholder: '',
         theme: 'snow'
@@ -121,8 +180,10 @@
         const quill = editorName == "likes"? quillLikes: quillDislikes
 
         if (quill.getLength() > limit) {
-            quill.deleteText(limit, quill.getLength());
+            quill.history.undo();
         }
     }
+
+    ////////// COUNTER MODULE
 </script>
 {% endblock %}
