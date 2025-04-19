@@ -3,8 +3,8 @@ from accounts.models import Member
 
 
 class DiscordProfile(models.Model):
-    likes = models.TextField(max_length=1500, blank=True, null=True)
-    dislikes = models.TextField(max_length=1500, blank=True, null=True)
+    likes = models.TextField(max_length=3000, blank=True, null=True)
+    dislikes = models.TextField(max_length=3000, blank=True, null=True)
     member = models.OneToOneField(
         Member, 
         blank=True,

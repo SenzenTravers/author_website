@@ -22,6 +22,13 @@
     color: var(--jet-black);
 
     h2 {
+        position: sticky;
+        top: 0.5em;
+        font-size: 1.8em;
+        text-shadow: 0 0px 5px var(--main-bg-colour-clear),
+        0 0 5px var(--main-bg-colour-clear),
+        0 0 5px var(--main-bg-colour-clear),
+        0 0 5px var(--main-bg-colour-clear);
         color: var(--puce);
         text-align: end;
         margin-top: 0.5em;
@@ -68,6 +75,12 @@
     border-radius: 10px;
     overflow: scroll;
 
+    h2 {
+        position:inherit;
+        text-shadow: none;
+        font-size: 1.5em;
+    }
+    
     h3, p, ul {
         filter: none;
     }
