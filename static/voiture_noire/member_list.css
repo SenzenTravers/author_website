@@ -82,7 +82,7 @@
     }
     
     h3, p, ul {
-        filter: none !important;
+        filter: blur(0px);
     }
 }
 
