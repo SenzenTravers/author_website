@@ -25,6 +25,11 @@
     }
 }
 
+.section-prompt-list {
+    display: flex;
+    flex-flow: column;
+}
+
 h2 {
     margin-top: 2em;
     color: var(--puce);
@@ -34,7 +39,16 @@ h2 {
     font-size: 1.6em;
 }
 
+.h2-prompt-table {
+    margin-bottom: 1em;
+}
+
+.p-prompt-table-explanation {
+    font-style: italic;
+}
+
 .table-prompt-list {
+    align-self: center;
     width: 85%;
     text-align: left;
     color: var(--jet-black);
