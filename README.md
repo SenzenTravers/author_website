@@ -26,28 +26,21 @@ You're done!
 ## TODO
 ### PROMPTS
 - TODO: le POST sur la page de prompt ne poste plus un prompt (l'adresse du postage de prompt sera changée). Elle prend en compte un (1) paramètre qui servira à trier les prompts.
-- TODO : la lecture annotée ? À la lecture, on peut ajouter des commentaires à chaque paragraphe (ou lettre ?). Le résultat est enregitré pour envoi à l'autrice ? 
-[X]  PROMPTS(Voiture Noire): un test fonctionnel pour charger chaque page
-[X] Système de connexion/déconnexion
-[X] PROFIL(Voiture Noire): page profil fonctionnelle
-[X] PROFILS(Voiture Noire): page des membres
-[X] BANNIÈRE(Voiture Noire): CSS
-[X] PROMPTS(Voiture Noire): page prompts fonctionnelle
-[X] PROMPTS(Voiture Noire): ajouts de prompts
-
+- Properly implement error messages https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
   Petit script pour welcome-blurb
-- PROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
--  Dans un futur monde idéal : like/dislikes en rich text editor 
--  Une joulie bannière
--  PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
--  PROMPTS(Voiture Noire): introduire tri sur les prompts
--  PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
+- ROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
+- Dans un futur monde idéal : like/dislikes en rich text editor 
+- Une joulie bannière
+- PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
+- PROMPTS(Voiture Noire): introduire tri sur les prompts
+- PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
+- la lecture annotée ? À la lecture, on peut ajouter des commentaires à chaque paragraphe (ou lettre ?). Le résultat est enregitré pour envoi à l'autrice ? 
 
--  When time is selected, then start sprint upon pressing Enter key
--  PINE(Mobile) : réarranger la bannière
--  PINE(Mobile) Mobile : 50 % de la page est une mosaïque
--  PINE(Ordinateur) Commissions : page complète
--  PINE(Mobile) Commissions : page complète
+- When time is selected, then start sprint upon pressing Enter key
+- PINE(Mobile) : réarranger la bannière
+- PINE(Mobile) Mobile : 50 % de la page est une mosaïque
+- PINE(Ordinateur) Commissions : page complète
+- PINE(Mobile) Commissions : page complète
 
 ### Randoms
 [CONVERT HTML TO PDF](https://doc.courtbouillon.org/weasyprint/stable/)

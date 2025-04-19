@@ -37,3 +37,14 @@
         }    
     }
 }
+
+.error-messages {
+    color: darkred;
+    text-align: justify;
+    margin: none;
+
+    li {
+        list-style: none;
+        font-style: italic;
+    }
+}

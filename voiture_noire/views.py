@@ -1,4 +1,4 @@
-from django.http import HttpResponse, JsonResponse
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
@@ -53,7 +53,14 @@ class Profile(generic.View):
             discord_member.dislikes = instance.dislikes
             discord_member.member = request.user
             discord_member.save()
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre profil. Veuillez garder chaque champ en-dessous de 3000 caractères."
+            )
         return redirect('voiture_noire:profile')
+        
 
 
 class PromptView(View):

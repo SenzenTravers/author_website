@@ -21,6 +21,14 @@
 
 <hr>
 
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 <section>
     <p>Ici, vous pouvez configurer vos goûts afin :</p>
     <p>
@@ -30,6 +38,10 @@
     <p>
          2. de permettre à autrui
         de vous offrir, potentiellement, des dessins ou des fics. 
+    </p>
+    <p>
+        <b>Attention</b> : si vous êtes du genre bavard, sauvegardez bien votre texte avant de le poster,
+        au cas où le grand internet mondial le mange au moment de sauvegarder.
     </p>
 </section>
 
@@ -62,19 +74,6 @@
         theme: 'snow'
     });
 
-    quillLikes.on('text-change', function(delta, source) {
-	    updateHtmlOutput()
-    })
-
-    function updateHtmlOutput() {
-        let html = getQuillHtml();
-        document.getElementById('id_likes').innerText = html;
-    }
-
-    function getQuillHtml() { return quillLikes.root.innerHTML; }
-
-    quillLikes.clipboard.dangerouslyPasteHTML(likesValue);
-
     /////// SECOND QUILL EDITOR
     let quillDislikes = new Quill('#editor-container-dislikes', {
         modules: {
@@ -86,17 +85,44 @@
         theme: 'snow'
     });
 
+    ///// UTILS
+    quillLikes.on('text-change', function(delta, source) {
+        handleCharacterLimit("likes")
+	    updateHtmlOutput("likes")
+    })
     quillDislikes.on('text-change', function(delta, source) {
-	    updateHtmlOutputDislikes()
+        handleCharacterLimit("dislikes")
+        updateHtmlOutput("dislikes")
     })
 
-    function updateHtmlOutputDislikes() {
-        let html = getQuillHtmlDislikes();
-        document.getElementById('id_dislikes').innerText = html;
+    function updateHtmlOutput(editorName) {
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+        let html = getQuillHtml(editorName);
+        document.getElementById('id_'+editorName).innerText = html;
     }
 
-    function getQuillHtmlDislikes() { return quillDislikes.root.innerHTML; }
+    function getQuillHtml(editorName) {
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+        if (editorName == "likes") {
+            return quillLikes.root.innerHTML;
+        } else {
+            return quillDislikes.root.innerHTML;
+        }
 
+    }
+
+    quillLikes.clipboard.dangerouslyPasteHTML(likesValue);
     quillDislikes.clipboard.dangerouslyPasteHTML(dislikesValue);
+
+
+    ////// GENERAL EDITOR FUNCTIONS
+    function handleCharacterLimit(editorName) {
+        const limit = 3000
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+
+        if (quill.getLength() > limit) {
+            quill.deleteText(limit, quill.getLength());
+        }
+    }
 </script>
 {% endblock %}
