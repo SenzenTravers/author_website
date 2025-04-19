@@ -54,7 +54,7 @@
     }
 
     h3, p, ul {
-        filter: blur(5px);
+        filter: blur(10px);
     }
 
     li {
