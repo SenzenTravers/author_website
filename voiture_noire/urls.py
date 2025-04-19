@@ -11,6 +11,7 @@ urlpatterns = [
     path('profile', login_required(views.Profile.as_view()), name='profile'),
     path('everyone', login_required(views.MemberList.as_view()), name='everyone'),
     path('prompts', login_required(views.PromptView.as_view()), name='prompts'),
+    path('post_prompt', login_required(views.post_prompt), name='post_prompt'),
     path('unfavourite/<int:prompt_id>', views.unfavourite, name='unfavourite'),
     path('favourite/<int:prompt_id>', views.favourite, name='favourite'),
 

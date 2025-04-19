@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
@@ -62,7 +63,6 @@ class Profile(generic.View):
         return redirect('voiture_noire:profile')
         
 
-
 class PromptView(View):
     form_class = PromptForm
     initial = {"key": "value"}
@@ -71,7 +71,7 @@ class PromptView(View):
 
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
-        prompt_list = Prompt.objects.order_by('body')
+        prompt_list = Prompt.objects.order_by('-id')
 
         return render(request, self.template_name, {
             "form": form,
@@ -80,11 +80,33 @@ class PromptView(View):
         )
 
     def post(self, request, *args, **kwargs):
-        new_prompt = PromptForm(request.POST)
-        if new_prompt.is_valid():
-            saved_prompt = new_prompt.save()
-            saved_prompt.supporters.add(request.user)
+        form = self.form_class(initial=self.initial)
+        criteria = request.POST['sort_value']
+
+        if criteria == "supporters":
+            prompt_list = Prompt.objects.annotate(number_of_supporters=Count('supporters')).order_by("number_of_supporters")
+        elif criteria == "pairing_type":
+            prompt_list = Prompt.objects.order_by(criteria, "body")
+        elif criteria == "user_likes":
+            prompt_list = Prompt.objects.annotate(
+                has_supporter=Count(
+                    'supporters', filter=Q(supporters__id=request.user.id)
+                )).order_by('-has_supporter', 'body')
+            print(prompt_list)
+        else:
+            prompt_list = Prompt.objects.order_by(criteria)
+        return render(request, self.template_name, {
+            "form": form,
+            "prompt_list": prompt_list
+            })
+
+def post_prompt(request):
+    new_prompt = PromptForm(request.POST)
+    if new_prompt.is_valid():
+        saved_prompt = new_prompt.save()
+        saved_prompt.supporters.add(request.user)
         return redirect('voiture_noire:prompts')
+    # Todo: return message for ano
 
 def favourite(request, prompt_id):
     try:

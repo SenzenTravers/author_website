@@ -15,13 +15,12 @@
 
 <section class="prompt-handler">
     <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
-
     <details class="detail-prompt-post">
         <summary>
           Proposer un thème
         </summary>
 
-        <form method="post" class="form-prompt-post form-main">
+        <form method="post" action="{% url 'voiture_noire:post_prompt' %} "class="form-prompt-post form-main">
             {% csrf_token %}
             <label for="id_likes">Type :</label>
             {{ form.pairing_type }}
@@ -34,12 +33,42 @@
         <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
     <section>
         <h2>Les thèmes</h2>
+
+        <p>
+            Les thèmes peuvent être triés par type de couple, par demandeur, par ordre alphabétique
+            (chacun ses fantasmes) et, enfin, par s'ils sont ou non dans vos requêtes.
+        </p>
+
         <table class="table-prompt-list">
             <tr>
-                <th class="prompt-type">Type</th>
-                <th class="prompt-body">Thème</th>
-                <th class="prompt-supporters">Intéressés</th>
-                <th class="prompt-button"></th>
+                <th class="prompt-type">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="pairing_type">
+                        <button type="submit">Type</button>
+                    </form>
+                </th>
+                <th class="prompt-body">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="body">
+                        <button type="submit">Thème</button>
+                    </form>
+                </th>
+                <th class="prompt-supporters">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="supporters">
+                        <button type="submit">Intéressés</button>
+                    </form>
+                </th>
+                <th class="prompt-button">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="user_likes">
+                        <button type="submit">⇓⇓⇓</button>
+                    </form>
+                </th>
             </tr>
             {% for prompt in prompt_list %}
             <tr>

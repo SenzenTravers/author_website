@@ -53,14 +53,29 @@ h2 {
         border: thin solid var(--jet-black);
     }
 
-    th, td {
+    td {
         line-height: 1.2em;
         padding: 1em;
+        text-align: center;
     }
 
     tr > th {
+        line-height: 1,2em;
         background-color: var(--midnight-blue);
-        color: var(--ivory);
+
+        .form-prompt-table-sorter button {
+            padding: 1em;
+            width: 100%;
+            height: 100%;
+            background-color: var(--midnight-blue);
+            color: var(--ivory);
+            border: none;
+            border-radius: 0%;
+        }
+
+        &:hover {
+            filter: brightness(150%);
+        }
     }
 
     .prompt-body {
