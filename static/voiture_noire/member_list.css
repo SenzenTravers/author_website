@@ -82,7 +82,7 @@
     }
     
     h3, p, ul {
-        filter: none;
+        filter: none !important;
     }
 }
 
