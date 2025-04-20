@@ -1,0 +1,43 @@
+{% extends '../voiture_noire/base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/voiture_noire/base.css">
+{% endblock %}
+
+{% block title %}
+    La bibliothèque de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+<noscript>
+    <div class="javascript-warning">
+        Ce site requiert javascript pour fonctionner correctement. Désolée !
+    </div>
+</noscript>
+
+<h1>Publier une histoire</h1>
+
+<hr>
+
+<section>
+    <form method="post" class="discord-member-profile form-main">
+        {% csrf_token %}
+        {{ chapter_form }}
+
+        {{ fic_form }}
+
+        <!-- Gnnn
+        <label for="id_likes">Vous aimez :</label>
+        <div id="editor-container-likes" class="quill-input"></div>
+        <div hidden>{{ form.likes }}</div>
+        <p id="char-counter-likes" class="p-character-counter"></p>
+    
+        <label for="id_dislikes">Vous détestez :</label>
+        <div id="editor-container-dislikes" class="quill-input">
+        </div>
+        <div hidden>{{ form.dislikes }}</div>
+        <p id="char-counter-dislikes" class="p-character-counter"></p> -->
+        <button type="submit">Valider</button>
+    </form>
+</section>
+{% endblock %}

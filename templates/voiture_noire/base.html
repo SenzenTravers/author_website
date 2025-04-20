@@ -51,7 +51,7 @@
             {% else %}
                 <li><a href="{% url 'login' %}">Se connecter</a></li>
             {% endif %}
-                <!-- <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li> -->
+                <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li>
                 <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
             {% if user.is_authenticated %}
                 <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>

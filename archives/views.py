@@ -11,7 +11,8 @@ from django.views import generic
 
 from xhtml2pdf import pisa
 
-from .models import Fic, Chapter
+from .forms import ChapterForm, FicForm
+from .models import Chapter, Fic
 from .utils import FicDigester
 
 
@@ -21,7 +22,27 @@ class Index(generic.ListView):
 
     def get_queryset(self):
         return Fic.objects.order_by('-date')
-    
+
+class PublishView(generic.View):
+    template_name = 'archives/voiture_noire_publish.html'
+    chapter_form = ChapterForm
+    fic_form = FicForm
+
+    initial = {"key": "value"}
+
+
+    def get(self, request, *args, **kwargs):
+        fic_form = self.fic_form(initial=self.initial)
+        chapter_form = self.chapter_form(initial=self.initial)
+        return render(
+            request,
+            self.template_name,
+            {
+                "chapter_form": chapter_form,
+                "fic_form": fic_form,
+            }
+        )
+
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)
     chapters = Chapter.objects.filter(fic=fic_id).order_by('number')
@@ -100,6 +121,3 @@ def clap(request, fic_id):
         return JsonResponse({"code": 200})
     except:
         return JsonResponse({"code": 500})
-    # return redirect(
-    #     "archives:first_chapter", fic_id=fic.id
-    #     )
