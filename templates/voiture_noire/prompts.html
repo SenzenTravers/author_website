@@ -135,11 +135,8 @@
     const userName = "{{ request.user.username }}"
 
     document.addEventListener("submit", function (e) {
-        // e.preventDefault(); 
         const submittedForm = e.target
         const btn = e.submitter;
-        console.log(e)
-        console.log(e.submitter)
 
         if (submittedForm.classList.contains("form-favourite-logic")) {
             e.preventDefault();
@@ -175,8 +172,11 @@
         let supportersList = supporterCell.innerText
 
         if (supportersList.includes(userName)) {
-            const withComma = userName + ", "
-            supportersList = supportersList.replace(withComma, "")
+            const commaAfter = userName + ", "
+            const commaBefore = ", " + userName
+
+            supportersList = supportersList.replace(commaAfter, "")
+            supportersList = supportersList.replace(commaBefore, "")
             supportersList = supportersList.replace(userName, "")
         } else {
             const withComma = ", " + userName
