@@ -44,7 +44,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'senestre-coquecigrues.fr']
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'archives.apps.ArchivesConfig',
-    'archives_api.apps.ArchivesApiConfig',
     'gadgets.apps.GadgetsConfig',
     'voiture_noire.apps.VoitureNoireConfig',
     'writer.apps.WriterConfig',

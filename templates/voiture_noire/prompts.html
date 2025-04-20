@@ -106,12 +106,20 @@
 
                 <td class="prompt-button">
                     {% if user in prompt.supporters.all %}
-                        <form action="{% url 'voiture_noire:unfavourite' prompt.id %} " method="post">
+                        <form
+                            class="form-favourite-logic"
+                            action="{% url 'voiture_noire:unfavourite' prompt.id %} "
+                            method="post"
+                        >
                             {% csrf_token %}
                             <button type="submit" titre="Retirer des favoris">💔</button>
                         </form>
                     {% else %}
-                        <form action="{% url 'voiture_noire:favourite' prompt.id %} " method="post">
+                        <form 
+                            class="form-favourite-logic"
+                            action="{% url 'voiture_noire:favourite' prompt.id %} "
+                            method="post"
+                        >
                             {% csrf_token %}
                             <button type="submit" title="Ajouter aux favoris">💛</button>
                         </form>
@@ -123,15 +131,64 @@
     </section>
 </section>
 
-<!-- <script>
-    window.onload = (event) => {
-        allSupporterCells = document.getElementsByClassName("prompt-supporters")
-        allSupporterCells = Array.from(allSupporterCells)
-        allSupporterCells.forEach(function (cell) {
-            if (cell.innerText.slice(-1) == ",") {
-                cell.innerText = cell.innerText.slice(0, -1)
+<script>
+    const userName = "{{ request.user.username }}"
+
+    document.addEventListener("submit", function (e) {
+        // e.preventDefault(); 
+        const submittedForm = e.target
+        const btn = e.submitter;
+        console.log(e)
+        console.log(e.submitter)
+
+        if (submittedForm.classList.contains("form-favourite-logic")) {
+            e.preventDefault();
+            switchFavBtns(btn)
+            handleFormLogic(submittedForm)
+            handleSupporterNames(e.target)
+        }
+    });
+    
+    async function handleFormLogic(form) {
+        const formData = new FormData(form);
+        const response = await fetch(
+            form.action, {
+                method: form.method,
+                body: formData,
             }
-        });
+        )
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
     }
-</script> -->
+
+    function switchFavBtns(btn) {
+        colour = btn.innerText
+        const heart = colour === "💛"? "💔": "💛"
+        btn.innerText = heart
+    }
+
+    function handleSupporterNames(form) {
+        const parentCell = form.parentElement;
+        const supporterCell = parentCell.previousSibling.previousSibling
+        let supportersList = supporterCell.innerText
+
+        if (supportersList.includes(userName)) {
+            const withComma = userName + ", "
+            supportersList = supportersList.replace(withComma, "")
+            supportersList = supportersList.replace(userName, "")
+        } else {
+            const withComma = ", " + userName
+
+            if (supportersList.length === 0) {
+                supportersList = userName    
+            } else {
+                supportersList = supportersList + withComma
+            }
+        }
+        
+        supporterCell.innerText = supportersList
+    }
+</script>
 {% endblock %}

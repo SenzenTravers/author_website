@@ -3,19 +3,19 @@ from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
-# from archives_api.models import APIFic
+from archives.models import Fic
 from .models import DiscordProfile, Prompt
 
 from .models import DiscordProfile
 from .forms import DiscordProfileForm, PromptForm
 
 # Create your views here.
-# class Index(generic.ListView):
-#     template_name = 'voiture_noire/index.html'
-#     context_object_name = 'APIfics'
+class Index(generic.ListView):
+    template_name = 'voiture_noire/index.html'
+    context_object_name = 'fics'
 
-#     def get_queryset(self):
-#         return APIFic.objects.order_by('-date')
+    def get_queryset(self):
+        return Fic.objects.order_by('-date')
 
 
 class MemberList(generic.ListView):
@@ -114,7 +114,6 @@ def favourite(request, prompt_id):
         prompt.supporters.add(request.user)
     except:
         return redirect('500')
-
     return redirect('voiture_noire:prompts')
 
 def unfavourite(request, prompt_id):
@@ -123,5 +122,4 @@ def unfavourite(request, prompt_id):
         prompt.supporters.remove(request.user)
     except:
         return redirect('500')
-
     return redirect('voiture_noire:prompts')

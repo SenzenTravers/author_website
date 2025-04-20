@@ -25,15 +25,13 @@ You're done!
 
 ## TODO
 ### PROMPTS
-- TODO: le POST sur la page de prompt ne poste plus un prompt (l'adresse du postage de prompt sera changée). Elle prend en compte un (1) paramètre qui servira à trier les prompts.
 - Properly implement error messages https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
   Petit script pour welcome-blurb
-- ROFIL(Voiture Noire): messages d'erreur si ça foire/blocage avec nombre maximum de charactères
-- Dans un futur monde idéal : like/dislikes en rich text editor 
 - Une joulie bannière
 - PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
 - PROMPTS(Voiture Noire): introduire tri sur les prompts
-- PROMPTS(Voiture Noire): page éditer mes histoires fonctionnelle
+- ARCHIVES(Voiture Noire): page éditer mes histoires fonctionnelle
+- ARCHIVES(Voiture Noire): handle last_updated field
 - la lecture annotée ? À la lecture, on peut ajouter des commentaires à chaque paragraphe (ou lettre ?). Le résultat est enregitré pour envoi à l'autrice ? 
 
 - When time is selected, then start sprint upon pressing Enter key

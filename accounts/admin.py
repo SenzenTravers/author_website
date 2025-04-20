@@ -11,7 +11,7 @@ from .forms import MemberCreationForm, MemberOtherCreationForm
 
 class MemberAdmin(UserAdmin):
     add_form = MemberCreationForm
-    change_user_password_template = None
+    # change_user_password_template = Non
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
         (_('Personal info'), {'fields': ('email',)}),
