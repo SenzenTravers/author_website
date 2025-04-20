@@ -25,12 +25,17 @@ You're done!
 
 ## TODO
 ### PROMPTS
+- ARCHIVES(Voiture Noire): GÉRER LES ERREURS SUR SUMMARY ET COMPAGNIE (remonter sur l'élément)
+- ARCHIVES(Voiture Noire): implanter les chapitres multiples
+- ARCHIVES(Voiture Noire): supprimer une fic
+- ARCHIVES(Voiture Noire): lister les fic
+- ARCHIVES(Voiture Noire): page éditer mes histoires fonctionnelle
+
 - Properly implement error messages https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
   Petit script pour welcome-blurb
 - Une joulie bannière
 - PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
 - PROMPTS(Voiture Noire): introduire tri sur les prompts
-- ARCHIVES(Voiture Noire): page éditer mes histoires fonctionnelle
 - ARCHIVES(Voiture Noire): handle last_updated field
 - la lecture annotée ? À la lecture, on peut ajouter des commentaires à chaque paragraphe (ou lettre ?). Le résultat est enregitré pour envoi à l'autrice ? 
 

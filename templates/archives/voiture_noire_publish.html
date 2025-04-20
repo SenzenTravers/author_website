@@ -1,7 +1,10 @@
 {% extends '../voiture_noire/base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/voiture_noire/base.css">
+<link rel="stylesheet" href="/static/archives/voiture_noire_post.css">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+
 {% endblock %}
 
 {% block title %}
@@ -16,28 +19,132 @@
 </noscript>
 
 <h1>Publier une histoire</h1>
-
 <hr>
 
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
 <section>
-    <form method="post" class="discord-member-profile form-main">
+    <form method="post" class="vn-fic-publishing form-main">
         {% csrf_token %}
-        {{ chapter_form }}
 
-        {{ fic_form }}
+        <section class="vn-section-fic-publishing section-administration">
+            <h2> ❧ Administration </h2>
+            <hr>
 
-        <!-- Gnnn
-        <label for="id_likes">Vous aimez :</label>
-        <div id="editor-container-likes" class="quill-input"></div>
-        <div hidden>{{ form.likes }}</div>
-        <p id="char-counter-likes" class="p-character-counter"></p>
+            <section>
+                <div>
+                    <label for="id_text_length">Format</label>
+                    {{ fic_form.text_length }}    
+                </div>
+                <div>
+                    <label for="id_pairing_type">Genre</label>
+                    {{ fic_form.pairing_type }}
+                </div>
+                <div>
+                    <label for="id_rating">Public</label>
+                    {{ fic_form.rating }}    
+                </div>
+                <div>
+                    <label for="id_complete">Fini</label>
+                    {{ fic_form.complete }}    
+                </div>
+            </section>
+        </section>
+            
+
+        <section class="vn-section-fic-publishing detail-summaries-etc">
+            <h2> ❧ Titre & résumé & sataneries affiliées</h2>    
+            <hr>
+
+            <label for="id_fic_title">Titre</label>
+            {{ fic_form.fic_title }}
+
+            <label for="id_summary">Résumé</label>
+            <div id="quill-summary" class="quill-input"></div>
+            <div hidden>{{ fic_form.summary }}</div>
+            <p id="char-counter-summary" class="p-character-counter"></p>
+
+            <label for="id_pairing_archetype">Non nécessaire : archétype de couple</label>
+            {{ fic_form.pairing_archetype }}
+
+            <label for="id_one_sentence_summary">Non nécessaire : résumé (sérieux ou non) en une ligne</label>
+            {{ fic_form.one_sentence_summary }}
+
+            <label for="id_fic_author_note">Non nécessaire : note d'auteur/d'autrice</label>
+            <div id="quill-fic-author-note" class="quill-input"></div>
+            <div  hidden>{{ fic_form.fic_author_note }}</div>
+            <p id="char-counter-fic-author-note" class="p-character-counter"></p>
+
+        </section>
+
+        <section class="vn-section-fic-publishing">
+            <h2>❧ Logistique</h2>
+            <hr>
+
+            <label for="id_date">Date de publication</label>
+            <div class="select-date">
+                {{ fic_form.date }}
+            </div>
+            <div class="checkbox-fieldset">
+            <label for="id_visible">Visible par d'autres membres connectés</label>
+                {{ fic_form.visible }}
+            </div>
+            <p class="p-publish-explanation">
+                Note : en tant qu'admin, tout est accessible à Sen, qui pourrait lire si elle le voulait. Elle ne ne 
+                veut pas mais transparence, RGPD, toussa toussa.
+            </p>
+            <div class="checkbox-fieldset">
+                <label for="id_visible_member_only ">Visible par des gueux non connectés</label>
+                {{ fic_form.visible_member_only }}
+            </div>
+            </section>
+
+        <section class="vn-section-fic-publishing detail-chapter-content">
+            <h2>❧ Contenu</h2>
+            <hr>
+
+            <label for="id_chapter_title">(Non nécessaire) Titre du chapitre</label>
+            {{ chapter_form.chapter_title }}
+            <label for="id_author_note">(Non nécessaire) Note d'auteur du chapitre</label>
+            <div id="quill-chapter-author-note" class="quill-input"></div>
+            <p id="char-counter-chapter-author-note" class="p-character-counter"></p>
+            <div hidden>{{ chapter_form.author_note }}</div>
+
+            <label for="id_content">(Fort nécessaire) Texte</label>
+            <div id="quill-content" class="quill-input"></div>
+            <div hidden>{{ chapter_form.content }}</div>
+            <p id="char-counter-content" class="p-character-counter"></p>
+
+            <label for="id_publish_date">Date de publication du chapitre</label>
+            <div class="select-date">
+                {{ chapter_form.publish_date }}
+            </div>
+        </section>
+
+        <p class="p-publish-explanation">
+            <b>Attention</b> : sauvegardez bien votre texte avant de le poster.
+            <b>Cet éditeur ne gardera pas votre texte en mémoire en cas d'accident fâcheux.</b>
+        </p>
     
-        <label for="id_dislikes">Vous détestez :</label>
-        <div id="editor-container-dislikes" class="quill-input">
-        </div>
-        <div hidden>{{ form.dislikes }}</div>
-        <p id="char-counter-dislikes" class="p-character-counter"></p> -->
-        <button type="submit">Valider</button>
+        <button id="fic-submit-btn"  type="submit">Enregistrer</button>
     </form>
 </section>
+
+<script>
+    let ficAuthorNoteValue = `{{ fic_form.fic_author_note.value |safe }}` !== "None" ? `{{ fic_form.fic_author_note.value |safe }}`:''
+    let ficSummaryValue = `{{ fic_form.summary.value |safe }}`!== "None" ?`{{ fic_form.summary.value |safe }}`:''
+    let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
+    let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''
+
+    const ficSubmitBtn = document.getElementById("fic-submit-btn")
+    ficSubmitBtn.disabled = true
+</script>
+<script src="/static/scripts/quill_handling.js"></script>
+<script src="/static/scripts/form_validation_handling.js"></script>
 {% endblock %}

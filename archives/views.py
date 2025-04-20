@@ -11,8 +11,8 @@ from django.views import generic
 
 from xhtml2pdf import pisa
 
-from .forms import ChapterForm, FicForm
-from .models import Chapter, Fic
+from .forms import Author, ChapterForm, FicForm
+from .models import Chapter, Fic, PairingType
 from .utils import FicDigester
 
 
@@ -30,7 +30,6 @@ class PublishView(generic.View):
 
     initial = {"key": "value"}
 
-
     def get(self, request, *args, **kwargs):
         fic_form = self.fic_form(initial=self.initial)
         chapter_form = self.chapter_form(initial=self.initial)
@@ -42,6 +41,39 @@ class PublishView(generic.View):
                 "fic_form": fic_form,
             }
         )
+    
+    def post(self, request, *args, **kwargs):
+        fic_form = FicForm(request.POST)
+        chapter_form = ChapterForm(request.POST)
+
+        print(fic_form.errors)
+        # fic_form.errors
+
+        if fic_form.is_valid() & chapter_form.is_valid():
+            fic_author = Author.objects.get_or_create(
+                member=request.user,
+                defaults={"nickname": request.user.username}
+            )[0]
+            fic_instance = fic_form.save(commit=False)
+            fic_instance.clap = 0
+            fic_instance.author = fic_author
+            fic_instance.save()
+            new_fic = Fic.objects.filter(author=fic_author).latest("id")
+            pairing_types = fic_form.cleaned_data["pairing_type"]
+            pairing_types = PairingType.objects.filter(id__in=pairing_types)
+            new_fic.pairing_type.set(pairing_types)
+            new_fic.save()
+            chapter_form = chapter_form.save(commit=False)
+            chapter_form.fic = new_fic
+            chapter_form.save()
+
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre fic."
+            )
+        return redirect('archives:publish')
 
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)

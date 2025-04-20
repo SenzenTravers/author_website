@@ -6,12 +6,15 @@ from accounts.models import Member
 
 # UTILS CLASSES
 class ChapterManager(models.Manager):
-    def return_next_number(fic):
+    def return_next_number(self, fic):
         return Chapter.objects.filter(fic=fic).count() + 1
 
 
 class PairingType(models.Model):
     pairing_type = models.CharField(max_length=5, unique=True)
+
+    def __str__(self):
+        return self.pairing_type
 
 
 # TRUE CLASSES
@@ -29,20 +32,6 @@ class Fic(models.Model):
     G = 'g'
     T = 't'
     E = 'e'
-
-    GEN = 'gen'
-    FF = 'F/F'
-    MM = 'M/M'
-    HET = 'F/M'
-    OTHER = 'autre'
-
-    # TODO: manytomany relationship    
-    # PAIRING_CHOICES = [
-    #     (GEN, 'Pas de couple'),
-    #     (FF, 'F/F'),
-    #     (MM, 'M/M'),
-    #     (HET, 'Hétéro'),
-    #     (OTHER, 'Autre')
 
     RATING_CHOICES = [
         (G, 'G'),
@@ -64,14 +53,14 @@ class Fic(models.Model):
 
     author = models.ForeignKey(Author,
         on_delete=models.CASCADE,
-        null=True)
+        null=True, blank=True)
     visible_member_only = models.BooleanField(default=False)
     visible = models.BooleanField(default=True)
-    clap = models.IntegerField(default=0)
+    clap = models.IntegerField(default=0, blank=True)
     date = models.DateField(null=True)
-    title = models.CharField(max_length=150)
+    fic_title = models.CharField(max_length=150)
     summary = models.TextField(max_length=600)
-    author_note = models.TextField(max_length=2000, blank=True)
+    fic_author_note = models.TextField(max_length=2000, blank=True)
     pairing_archetype = models.CharField(max_length=200, blank=True)
     one_sentence_summary = models.CharField(max_length=200, blank=True)
     pairing_type = models.ManyToManyField(
@@ -81,8 +70,7 @@ class Fic(models.Model):
     rating = models.CharField(
         max_length=6,
         choices=RATING_CHOICES,
-        default=G
-    )
+        default=G    )
     text_length = models.CharField(
         max_length=20,
         choices=LENGTH_CHOICES,
@@ -97,21 +85,22 @@ class Fic(models.Model):
         return False
     
     def __str__(self):
-        return f"{self.author} : {self.title}"
+        return f"{self.author} : {self.fic_title}"
 
 
 class Chapter(models.Model):
     fic = models.ForeignKey(Fic, on_delete=models.CASCADE, blank=True)
-    title = models.CharField(max_length=150, null=True, blank=True)
+    chapter_title = models.CharField(max_length=150, null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
     author_note = models.TextField(max_length=1500, null=True, blank=True)
     content = models.TextField(max_length=1000000)
+    publish_date = models.DateField(null=True)
 
     objects = ChapterManager()
     
-    def save(self, *args, **kwargs):
-        if self.number == None:
-            self.number = self.objects.return_next_number(self.fic)
+    def save(self, commit=True, *args, **kwargs):
+        if self.number == None and commit == True:
+            self.number = Chapter.objects.return_next_number(self.fic)
             super(Chapter, self).save(*args, **kwargs)
         else:
             super(Chapter, self).save(*args, **kwargs)

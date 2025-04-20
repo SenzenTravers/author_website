@@ -62,6 +62,12 @@ body {
         border-radius: 15px;
         font-weight: bold;
         cursor: pointer;
+
+        &:disabled {
+            background-color: grey;
+            color: darkgrey;
+            cursor: not-allowed;
+        }
     }
 
     a {

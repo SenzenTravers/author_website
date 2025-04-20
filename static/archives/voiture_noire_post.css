@@ -1,0 +1,158 @@
+@import "../voiture_noire/base.css";
+
+.vn-section-fic-publishing {
+    display: flex;
+    flex-flow: column;
+    margin-bottom: 1em;
+
+    h2 {
+        margin-right: 10px;
+        line-height: 1.5em;
+    }
+
+    label {
+        color: var(--midnight-blue);
+        font-style: italic;
+        font-weight: normal;
+        text-transform: none;
+        filter:none
+    }
+
+    hr {
+        color: var(--misty-blue);
+        width: 25%;
+        margin: 0%;
+    }
+
+    select {
+        background-color: var(--ivory);
+        color: var(--puce);
+    }
+
+    input[type="checkbox"] {
+        accent-color: var(--puce);
+    }
+
+}
+
+.section-administration {
+    section {
+        display: flex;
+        flex-flow: row;
+        /* justify-content: center; */
+        gap: 1vw;
+
+    }
+
+    div {
+        display: flex;
+        flex-flow: column;
+    }
+
+    #id_pairing_type {
+        label {
+            margin: 0px;
+            color: var(--puce);
+            font-style: normal;
+            font-weight: normal;
+            font-size: 1em;
+        }
+    }
+}
+
+.detail-summaries-etc, .detail-chapter-content {
+    textarea, #id_pairing_archetype, #id_one_sentence_summary {
+        width: 100%;
+    }
+}
+
+#quill-content {
+    height: max(800px, 50vh)
+}
+
+.select-date {
+    display: flex;
+    flex-flow: row;
+    margin-bottom: 1em;
+}
+
+.p-publish-explanation {
+    margin-top: 0em;
+    font-size: small;
+}
+
+.limit-reached {
+    color: darkred;
+    font-weight: bold;
+}
+
+.error-messages {
+    color: darkred;
+    text-align: justify;
+    margin: none;
+
+    li {
+        list-style: none;
+        font-style: italic;
+    }
+}
+
+/* QUIL EDITOR */
+.quill-input {
+    .ql-editor {
+        border: 1px solid var(--puce);
+        filter: drop-shadow(1px 1px 2px var(--nude));
+        border-radius: 2px;
+        min-height: 200px;
+        background-color: white;
+        font-size: medium;
+    }
+}
+
+.ql-toolbar {
+    background-color: var(--nude);
+    border: 1px solid var(--puce);
+    filter: drop-shadow(1px 1px 2px var(--jet-black));
+
+    .ql-formats {
+        height: 1.5em;
+        padding: 0px !important;
+
+        button {
+            padding: 8px;
+            margin: 0;
+        }    
+    }
+}
+
+.p-character-counter {
+    margin-top: 0.2em;
+    margin-right: 10px;
+    text-align: right;
+    font-size: small;
+}
+
+/* MEDIA QUERIES */
+@media screen and (max-width: 850px) {
+    input[type="text"] {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 851px) {
+    input[type="text"] {
+        width: 60vw;
+    }
+}
+
+body {
+    --main-bg-colour-clear:  #fef6e6;
+    --ivory:  #e4e4cd;
+    --beige: #D1BFA6;
+    --cool-gray: #939081;
+    --jet-black: #040000;
+    --midnight-blue: #4C6585;
+    --misty-blue: #B0BFC2;
+    --nude: #CCB4A9;
+    --puce: #725446;
+}
