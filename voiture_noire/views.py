@@ -16,11 +16,12 @@ class Index(generic.ListView):
 
     def get_queryset(self):
         user = self.request.user
-        story_author = Author.objects.get(member=user)
-        if user.is_authenticated:
-            return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
-        else:
-            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+        return Fic.objects.all()
+        # story_author = Author.objects.get(member=user)
+        # if user.is_authenticated:
+        #     return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
+        # else:
+        #     return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
 
 class MemberList(generic.ListView):
