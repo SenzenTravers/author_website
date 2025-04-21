@@ -40,7 +40,7 @@
             {% endif %}
 
 
-            {% if chapter.author_note != '' or chapter.author_note != '<p><br></p>' %}
+            {% if chapter.author_note != '' or chapter.author_note or chapter.author_note != '<p><br></p>' %}
                 <section class="chapter-author-note">
                     <h3>Notes du chapitre</h3>
                     {% autoescape off %}
