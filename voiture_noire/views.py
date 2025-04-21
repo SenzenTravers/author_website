@@ -22,7 +22,7 @@ class Index(generic.ListView):
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
         if user.is_authenticated:
-            return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
+            return Fic.objects.get(Q(author=story_author) | Q(visible=True)).order_by('-date')
         else:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
             
