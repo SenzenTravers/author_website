@@ -71,6 +71,7 @@ class PublishView(generic.View):
             new_fic.save()
             chapter_form = chapter_form.save(commit=False)
             chapter_form.fic = new_fic
+            chapter_form.number = 1
             chapter_form.save()
 
         else:

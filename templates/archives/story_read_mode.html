@@ -28,9 +28,9 @@
         <!-- <hr> -->
     </header>
 
-    {% if story.fic_author_note != '' or chapter.author_note != ''%}
+    {% if story.fic_author_note != '' or story.fic_author_note != '<p><br></p>' or chapter.author_note != '' or chapter.author_note != '<p><br></p>' %}
         <section class="section-story-notes">
-            {% if story.fic_author_note != '' %}
+            {% if story.fic_author_note != '' and story.fic_author_note != '<p><br></p>' %}
                 <section class="story-author-note">
                     <h3>Commentaires de l'auteur/autrice</h3>
                     {% autoescape off %}
@@ -40,7 +40,7 @@
             {% endif %}
 
 
-            {% if chapter.author_note != '' %}
+            {% if chapter.author_note != '' or chapter.author_note != '<p><br></p>' %}
                 <section class="chapter-author-note">
                     <h3>Notes du chapitre</h3>
                     {% autoescape off %}
