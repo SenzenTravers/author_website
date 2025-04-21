@@ -18,7 +18,7 @@ class Index(generic.ListView):
         user = self.request.user
 
         if user.is_authenticated:
-            if Author.objects.exists(member=user):
+            if Author.objects.filter(member=user).exists():
                 story_author = Author.objects.get(member=user)
                 return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
             else:
