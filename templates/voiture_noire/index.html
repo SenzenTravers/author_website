@@ -40,10 +40,13 @@
     </div>
     {% for fic in fics %}
         <article class="article-story">
-            <!-- TODO: title as link -->
             <p class="article-story-date">{{ fic.date }}</p>
-            <h2 class="article-story-title">{{ fic.fic_title }} <span class="author-name">par {{ fic.author }}</span></h2>
-            <hr class="article-story-title-hr">
+            <h2 class="article-story-title">
+                <a href="{% url 'archives:story_read_mode' fic.id 1 %}">
+                    {{ fic.fic_title }}</a>
+                <span class="author-name">par {{ fic.author }}</span>
+                
+            </h2>
 
             <div class="story-administration">
                 <p class="article-story-admin-details">
@@ -94,7 +97,9 @@
             </div>
             
             <div class="story-summaries">
-                    {{ fic.summary }}
+                    {% autoescape off %}
+                        {{ fic.summary }}
+                    {% endautoescape %}
                 </div>
                 {% if fic.pairing_archetype != '' %}
                     <p>

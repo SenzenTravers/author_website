@@ -42,6 +42,11 @@
     margin-top: 0;
     margin-bottom: 0.2em;
     color: var(--puce);
+    text-decoration: none;
+
+    a {
+        cursor: pointer;
+    }
 
     .author-name {
         font-size: large;
@@ -50,12 +55,6 @@
     }
 }
 
-.article-story-title-hr {
-    margin-bottom: 0.2em;
-    width: 150px;
-    margin-left: 0;
-    color: var(--misty-blue)
-}
 .article-story-date {
     text-align: end;
     margin: 0;
@@ -71,6 +70,10 @@
 .story-summaries {
     text-align: justify;
 
+}
+
+.article-story-categ-name {
+    font-weight: bold;
 }
 
 .hr-separator-story-articles {

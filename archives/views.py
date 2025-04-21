@@ -74,6 +74,22 @@ class PublishView(generic.View):
             )
         return redirect('archives:publish')
 
+class StoryReadMode(generic.View):
+    template_name = 'archives/story_read_mode.html'
+
+    def get(self, request, fic_id, number, *args, **kwargs):
+        fic = get_object_or_404(Fic, pk=fic_id)
+        chapter = Chapter.objects.get(fic=fic, number=number)
+
+        return render(
+            request,
+            self.template_name,
+            {
+                "story": fic,
+                "chapter": chapter
+            }
+        )
+
 class FicEditView(generic.DetailView):
     template_name = 'archives/voiture_noire_fic_edit.html'
     # chapter_form = ChapterForm

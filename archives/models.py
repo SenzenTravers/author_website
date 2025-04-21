@@ -84,6 +84,10 @@ class Fic(models.Model):
             return True
         return False
     
+    @property
+    def first_chapter(self):
+        return Chapter.objects.filter(fic=self, number=1)[0]
+
     def __str__(self):
         return f"{self.author} : {self.fic_title}"
 

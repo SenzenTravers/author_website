@@ -1,0 +1,33 @@
+{% extends '../voiture_noire/base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/voiture_noire/base.css">
+{% endblock %}
+
+{% block title %}
+    La bibliothèque de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+<noscript>
+    <div class="javascript-warning">
+        Ce site requiert javascript pour fonctionner correctement. Désolée !
+    </div>
+</noscript>
+
+<h1>Une Petite Voiture Noire</h1>
+
+<hr>
+
+<section>
+    <header>
+        {{ story.fic_title }}
+    </header>
+    
+    <section>
+        {% autoescape off %}
+            {{ chapter.content }}
+        {% endautoescape %}
+    </section>
+</section>
+{% endblock %}
