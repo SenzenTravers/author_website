@@ -16,7 +16,7 @@ class Index(generic.ListView):
 
     def get_queryset(self):
         try:
-            story_author = DiscordProfile.objects.exists(member=self.request.user)
+            dicordProfile = DiscordProfile.objects.exists(member_username=self.request.user.username)
         except TypeError:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
