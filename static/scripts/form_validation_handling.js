@@ -1,6 +1,6 @@
 document.addEventListener('click', function() {
     checkRequiredFields(
-        ["id_pairing_type", "id_rating", "id_complete", "id_fic_title", "id_summary", "id_content"]
+        ["id_pairing_type", "id_complete", "id_fic_title", "id_summary", "id_content"]
     )
 });
 
@@ -10,7 +10,10 @@ function checkRequiredFields(requiredFields) {
 
     requiredFields.forEach(function (fieldId) {
         let element = document.getElementById(fieldId)
-        allRequired.push(element);
+
+        if (element) {
+            allRequired.push(element);
+        }
       }
     );
     allRequired.forEach(function (element) {
@@ -33,8 +36,11 @@ function handleMultiChoices(mainId, elementLength) {
     let checked = []
     choicesRange.forEach(function (i) {
         let inputItem = document.getElementById(mainId + "_" + i)
-        if (inputItem.checked) {
-            checked.push(inputItem)
+
+        if (!inputItem) {
+            checked.push('Not initialized')
+        } else if (inputItem.checked) {
+                checked.push(inputItem)
         }
     })
 

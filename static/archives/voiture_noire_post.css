@@ -140,6 +140,27 @@
     font-size: small;
 }
 
+
+/* EDIT PAGES */
+.section-chapter-btns {
+    display: flex;
+    flex-flow: row;
+    gap: 5px;
+
+    a {
+        padding: 10px;
+        background-color: var(--misty-blue);
+        color: var(--puce);
+        border: 3px double var(--midnight-blue);
+        width: fit-content;
+        border-radius: 15px;
+        font-weight: bold;
+        cursor: pointer;
+
+        text-decoration: none;
+    }
+}
+
 /* MEDIA QUERIES */
 @media screen and (max-width: 850px) {
     input[type="text"] {

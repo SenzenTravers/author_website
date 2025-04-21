@@ -14,6 +14,8 @@ urlpatterns = [
     path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     path("<int:fic_id>/clap", views.clap, name="clap"),
     path('stories/publish', login_required(views.PublishView.as_view()), name="story_publish"),
-    path('stories/edit/<int:pk>', login_required(views.FicEditView.as_view()), name="edit_fic"),
+    path('stories/edit/<int:fic_id>', login_required(views.FicEditView.as_view()), name="story_edit_mode"),
+    path('stories/post/<int:fic_id>', login_required(views.ChapterPostView.as_view()), name="chapter_post_mode"),
+    path('stories/edit/<int:fic_id>/chapter/<int:number>', login_required(views.ChapterEditView.as_view()), name="chapter_edit_mode"),
     path('library/<int:fic_id>/<int:number>', views.StoryReadMode.as_view(), name="story_read_mode")
 ]

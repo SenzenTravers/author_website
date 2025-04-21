@@ -1,0 +1,77 @@
+{% extends '../voiture_noire/base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/archives/voiture_noire_post.css">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+
+{% endblock %}
+
+{% block title %}
+    La bibliothèque de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+<noscript>
+    <div class="javascript-warning">
+        Ce site requiert javascript pour fonctionner correctement. Désolée !
+    </div>
+</noscript>
+
+<h1>Poster un nouveau chapitre de {{ story.fic_title }}</h1>
+<hr>
+
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<section>
+    <form method="post" class="vn-fic-publishing form-main">
+        {% csrf_token %}
+        <section class="vn-section-fic-publishing detail-chapter-content">
+            <h2>❧ Contenu</h2>
+            <hr>
+
+            <label for="id_chapter_title">(Non nécessaire) Titre du chapitre</label>
+            {{ chapter_form.chapter_title }}
+            <label for="id_author_note">(Non nécessaire) Note d'auteur du chapitre</label>
+            <div id="quill-chapter-author-note" class="quill-input"></div>
+            <p id="char-counter-chapter-author-note" class="p-character-counter"></p>
+            <div hidden>{{ chapter_form.author_note }}</div>
+
+            <label for="id_content">(Fort nécessaire) Texte</label>
+            <div id="quill-content" class="quill-input"></div>
+            <div hidden>{{ chapter_form.content }}</div>
+            <p id="char-counter-content" class="p-character-counter"></p>
+
+            <label for="id_publish_date">Date de publication du chapitre</label>
+            <div class="select-date">
+                {{ chapter_form.publish_date }}
+            </div>
+        </section>
+
+        <p class="p-publish-explanation">
+            <b>Attention</b> : sauvegardez bien votre texte avant de le poster.
+            <b>Cet éditeur ne gardera pas votre texte en mémoire en cas d'accident fâcheux.</b>
+        </p>
+    
+        <button id="fic-submit-btn"  type="submit">Enregistrer</button>
+    </form>
+</section>
+
+<script>
+    let ficAuthorNoteValue = `{{ fic_form.fic_author_note.value |safe }}` !== "None" ? `{{ fic_form.fic_author_note.value |safe }}`:''
+    let ficSummaryValue = `{{ fic_form.summary.value |safe }}`!== "None" ?`{{ fic_form.summary.value |safe }}`:''
+    let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
+    let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''
+
+    const ficSubmitBtn = document.getElementById("fic-submit-btn")
+    ficSubmitBtn.disabled = true
+</script>
+<script src="/static/scripts/quill_handling.js"></script>
+<script src="/static/scripts/form_validation_handling.js"></script>
+{% endblock %}

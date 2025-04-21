@@ -13,7 +13,7 @@ from xhtml2pdf import pisa
 
 from .forms import Author, ChapterForm, FicForm
 from .models import Chapter, Fic, PairingType
-from .utils import check_user_has_right, FicDigester
+from .utils import FicDigester
 
 
 class Index(generic.ListView):
@@ -28,7 +28,6 @@ class Index(generic.ListView):
             return Fic.objects.filter(visible=True).order_by('-date')
         else:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
-
 
 
 class PublishView(generic.View):
@@ -80,7 +79,8 @@ class PublishView(generic.View):
                 messages.ERROR,
                 "Une erreur est survenue durant l'enregistrement de votre fic."
             )
-        return redirect('archives:publish')
+        return redirect('archives:story_publish')
+
 
 class StoryReadMode(generic.View):
     template_name = 'archives/story_read_mode.html'
@@ -105,39 +105,157 @@ class StoryReadMode(generic.View):
         else:
             return redirect('voiture_noire:index')
 
-
-
-class FicEditView(generic.View):
-    template_name = 'archives/voiture_noire_fic_edit.html'
+##### TO EDIT
+class ChapterEditView(generic.View):
+    template_name = 'archives/voiture_noire_chapter_edit.html'
     chapter_form = ChapterForm
-    fic_form = FicForm
 
     def get(self, request, fic_id, number, *args, **kwargs):
         fic = get_object_or_404(Fic, pk=fic_id)
-        chapter = Chapter.objects.get(fic=fic, number=1)
-        fic_form = self.fic_form(initial=self.initial)
-        chapter_form = self.chapter_form(initial=self.initial)
+        chapter = get_object_or_404(Chapter, fic=fic, number=number)
+
+        if request.user != fic.author.member:
+            redirect('voiture_noire:index')
+    
+        chapter_form = self.chapter_form(instance=chapter)
+
+        return render(
+            request,
+            self.template_name,
+            {
+                "chapter_form": chapter_form,
+                "fic": fic
+            }
+        )
+
+    def post(self, request, fic_id, number, *args, **kwargs):
+        root_fic = Fic.objects.get(id=fic_id)
+
+        if request.user != root_fic.author.member:
+            redirect('voiture_noire:index')
+
+        chapter_form = ChapterForm(request.POST)
+
+        # # fic_form.errors
+        if chapter_form.is_valid():
+            chapter_initial_instance = Chapter.objects.get(fic=root_fic, number=number)
+            chapter_form = chapter_form.save(commit=False)
+            chapter_initial_instance.chapter_title = chapter_form.chapter_title
+            chapter_initial_instance.author_note = chapter_form.author_note
+            chapter_initial_instance.content = chapter_form.content
+            chapter_initial_instance.publish_date = chapter_form.publish_date
+            chapter_initial_instance.save()
+
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre fic."
+            )
+        return redirect('voiture_noire:index')
+    
+
+class ChapterPostView(generic.View):
+    template_name = 'archives/voiture_noire_chapter_post.html'
+    chapter_form = ChapterForm
+
+    def get(self, request, fic_id, *args, **kwargs):
+        fic = get_object_or_404(Fic, pk=fic_id)
+
+        if request.user != fic.author.member:
+            redirect('voiture_noire:index')
+    
+        return render(
+            request,
+            self.template_name,
+            {
+                "chapter_form": self.chapter_form,
+                "story": fic
+            }
+        )
+
+    def post(self, request, fic_id, *args, **kwargs):
+        root_fic = Fic.objects.get(id=fic_id)
+        chapter_nb = root_fic.number_of_chapter + 1
+
+        if request.user != root_fic.author.member:
+            redirect('voiture_noire:index')
+
+        chapter_form = ChapterForm(request.POST)
+
+        # # fic_form.errors
+
+        if chapter_form.is_valid():
+            chapter_form = chapter_form.save(commit=False)
+            chapter_form.fic = root_fic
+            chapter_form.number = chapter_nb
+            chapter_form.save()
+
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre fic."
+            )
+        return redirect('voiture_noire:index')
+    
+
+class FicEditView(generic.View):
+    template_name = 'archives/voiture_noire_story_edit.html'
+    fic_form = FicForm
+
+    def get(self, request, fic_id, *args, **kwargs):
+        fic = get_object_or_404(Fic, pk=fic_id)
+        chapters = Chapter.objects.filter(fic=fic)
+
+        if request.user != fic.author.member:
+            redirect('voiture_noire:index')
+    
+        fic_form = self.fic_form(instance=fic)
 
         return render(
             request,
             self.template_name,
             {
                 "fic_form": fic_form,
-                "chapter_form": chapter_form
+                "chapters": chapters,
+                "fic_id": fic.id
             }
         )
-    # def get(self, request, *args, **kwargs):
-    #     fic_form = self.fic_form(initial=self.initial)
-    #     chapter_form = self.chapter_form(initial=self.initial)
-    #     return render(
-    #         request,
-    #         self.template_name,
-    #         {
-    #             "chapter_form": chapter_form,
-    #             "fic_form": fic_form,
-    #         }
-    #     )
 
+    def post(self, request, fic_id, *args, **kwargs):
+        fic_initial_instance = Fic.objects.get(id=fic_id)
+        # NOTE : passer aussi les chapitres existants en arg
+        if request.user != fic_initial_instance.author.member:
+            redirect('voiture_noire:index')
+
+        fic_form = FicForm(request.POST)
+
+        if fic_form.is_valid():
+            fic_instance = fic_form.save(commit=False)
+            fic_initial_instance.fic_title = fic_instance.fic_title
+            fic_initial_instance.visible_not_member_only = fic_instance.visible_not_member_only
+            fic_initial_instance.visible = fic_instance.visible
+            fic_initial_instance.date = fic_instance.date
+            fic_initial_instance.summary = fic_instance.summary
+            fic_initial_instance.fic_author_note = fic_instance.fic_author_note
+            fic_initial_instance.pairing_archetype = fic_instance.pairing_archetype
+            fic_initial_instance.one_sentence_summary = fic_instance.one_sentence_summary
+            fic_initial_instance.rating = fic_instance.rating
+            fic_initial_instance.text_length = fic_instance.text_length
+            fic_initial_instance.complete = fic_instance.complete
+
+            pairing_types = fic_form.cleaned_data["pairing_type"]
+            pairing_types = PairingType.objects.filter(id__in=pairing_types)
+            fic_initial_instance.pairing_type.set(pairing_types)
+            fic_initial_instance.save()
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'édition de votre récit. Désolée !"
+            )
+        return redirect('voiture_noire:index')
 
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)

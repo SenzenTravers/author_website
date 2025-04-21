@@ -105,13 +105,6 @@ class Chapter(models.Model):
     publish_date = models.DateField(null=True)
 
     objects = ChapterManager()
-    
-    def save(self, commit=True, *args, **kwargs):
-        if self.number == None and commit == True:
-            self.number = Chapter.objects.return_next_number(self.fic)
-            super(Chapter, self).save(*args, **kwargs)
-        else:
-            super(Chapter, self).save(*args, **kwargs)
 
     @property
     def previous_chapter_index(self):

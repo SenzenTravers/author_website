@@ -107,7 +107,7 @@
             </div>
             </section>
 
-        <section class="vn-section-fic-publishing detail-chapter-content">
+        <!-- <section class="vn-section-fic-publishing detail-chapter-content">
             <h2>❧ Contenu</h2>
             <hr>
 
@@ -126,6 +126,17 @@
             <label for="id_publish_date">Date de publication du chapitre</label>
             <div class="select-date">
                 {{ chapter_form.publish_date }}
+            </div>
+        </section> -->
+
+        <section class="vn-section-fic-publishing">
+            <label>Gérer les chapitres</label>
+
+            <div class="section-chapter-btns">
+                {% for chapter in chapters %}
+                    <a href="{% url 'archives:chapter_edit_mode' fic_id chapter.number %}">{{ chapter.number }}</a>
+                {% endfor %}
+                <a href="{% url 'archives:chapter_post_mode' fic_id %}">Ajouter un chapitre</a>
             </div>
         </section>
 

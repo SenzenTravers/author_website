@@ -52,6 +52,15 @@
     {% endif %}
 
     <section class="story-body">
+        {% if story.has_multiple_chapters and chapter.chapter_title == '' or story.has_multiple_chapters and chapter.chapter_title == None %}
+            <h3 class="story-chapter-title">Chapitre {{ chapter.number }}</h3>
+        {% elif story.has_multiple_chapters and chapter.chapter_title != '' and chapter.chapter_title != None %}
+            <h3 class="story-chapter-title">Chapitre {{ chapter.number }} : {{chapter.chapter_title}}</h3>
+        {% elif chapter.chapter_title != '' and chapter.chapter_title != None %}
+            <h3 class="story-chapter-title">{{chapter.chapter_title}}</h3>
+        {% endif %}
+                
+
         {% autoescape off %}
             {{ chapter.content }}
         {% endautoescape %}

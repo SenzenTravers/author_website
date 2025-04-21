@@ -38,76 +38,94 @@ class Counter {
 Quill.register('modules/counter', Counter);
 
 //////////////////////// EDITORS
-let quillSummary = new Quill('#quill-summary', {
-    modules: {
-        toolbar: [
-            [
+let quillSummary;
+let quillFicAuthorNote;
+let quillChapterAuthorNote;
+let quillContent;
+
+try {
+    quillSummary = new Quill('#quill-summary', {
+        modules: {
+            toolbar: [
+                [
+                    'bold', 'italic', 'underline','strike',
+                    { 'align': [] },
+                    { 'list': 'ordered'}, { 'list': 'bullet' },
+                    'link'
+                ],
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-summary',
+                unit: 'caractère',
+                charLimit: 600,
+            }
+        },
+        placeholder: '',
+        theme: 'snow'
+    });    
+} catch {
+    console.log("Summary quill not initialized.")
+}
+
+try {
+    quillFicAuthorNote = new Quill('#quill-fic-author-note', {
+        modules: {
+            toolbar: [
                 'bold', 'italic', 'underline','strike',
                 { 'align': [] },
                 { 'list': 'ordered'}, { 'list': 'bullet' },
                 'link'
             ],
-        ],
-        history: {
-            delay: 1000,
-            maxStack: 200,
-            userOnly: false
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-fic-author-note',
+                unit: 'caractère',
+                charLimit: 2000
+            }
         },
-        counter: {
-            container: '#char-counter-summary',
-            unit: 'caractère',
-            charLimit: 600,
-        }
-    },
-    placeholder: '',
-    theme: 'snow'
-});
+        placeholder: '',
+        theme: 'snow'
+    });
+} catch {
+    console.log("Author quill not initialized.")
+}
 
-let quillFicAuthorNote = new Quill('#quill-fic-author-note', {
-    modules: {
-        toolbar: [
-            'bold', 'italic', 'underline','strike',
-            { 'align': [] },
-            { 'list': 'ordered'}, { 'list': 'bullet' },
-            'link'
-        ],
-        history: {
-            delay: 1000,
-            maxStack: 200,
-            userOnly: false
+try {
+    quillChapterAuthorNote = new Quill('#quill-chapter-author-note', {
+        modules: {
+            toolbar: [
+                'bold', 'italic', 'underline','strike',
+                { 'align': [] },
+                { 'list': 'ordered'}, { 'list': 'bullet' },
+                'link'
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-chapter-author-note',
+                unit: 'caractère',
+                charLimit: 1500
+            }
         },
-        counter: {
-            container: '#char-counter-fic-author-note',
-            unit: 'caractère',
-            charLimit: 2000
-        }
-    },
-    placeholder: '',
-    theme: 'snow'
-});
-let quillChapterAuthorNote = new Quill('#quill-chapter-author-note', {
-    modules: {
-        toolbar: [
-            'bold', 'italic', 'underline','strike',
-            { 'align': [] },
-            { 'list': 'ordered'}, { 'list': 'bullet' },
-            'link'
-        ],
-        history: {
-            delay: 1000,
-            maxStack: 200,
-            userOnly: false
-        },
-        counter: {
-            container: '#char-counter-chapter-author-note',
-            unit: 'caractère',
-            charLimit: 1500
-        }
-    },
-    placeholder: '',
-    theme: 'snow'
-});
-let quillContent = new Quill('#quill-content', {
+        placeholder: '',
+        theme: 'snow'
+    });
+} catch {
+    console.log("Chapter note quill not initialized.")
+}
+try {quillContent = new Quill('#quill-content', {
     modules: {
         toolbar: [
             'bold', 'italic', 'underline','strike',
@@ -129,19 +147,38 @@ let quillContent = new Quill('#quill-content', {
     placeholder: '',
     theme: 'snow'
 });
+} catch {
+    console.log("Content quill not initialized.")
+}
+
 /////////// FUELLING THE QUILL DATA TO THE FORM
-quillSummary.on('text-change', function(delta, source) {
-    onQuillEditorChange("summary", 600)
-})
-quillFicAuthorNote.on('text-change', function(delta, source) {
-    onQuillEditorChange("fic-author-note", 2000)
-})
-quillChapterAuthorNote.on('text-change', function(delta, source) {
-    onQuillEditorChange("author-note", 1500)
-})
-quillContent.on('text-change', function(delta, source) {
-    onQuillEditorChange("content", 1000000)
-})
+if (quillSummary) {
+    quillSummary.on('text-change', function(delta, source) {
+        onQuillEditorChange("summary", 600)
+    })
+    quillSummary.clipboard.dangerouslyPasteHTML(ficAuthorNoteValue);
+}
+
+if (quillFicAuthorNote) {
+    quillFicAuthorNote.on('text-change', function(delta, source) {
+        onQuillEditorChange("fic-author-note", 2000)
+    })
+    quillFicAuthorNote.clipboard.dangerouslyPasteHTML(ficSummaryValue);
+}
+
+if (quillChapterAuthorNote) {
+    quillChapterAuthorNote.on('text-change', function(delta, source) {
+        onQuillEditorChange("author-note", 1500)
+    })
+    quillChapterAuthorNote.clipboard.dangerouslyPasteHTML(chapterAuthorNoteValue);
+}
+
+if (quillContent) {
+    quillContent.on('text-change', function(delta, source) {
+        onQuillEditorChange("content", 1000000)
+    })
+    quillContent.clipboard.dangerouslyPasteHTML(chapterContentValue);
+}
 
 
 function onQuillEditorChange(editorName) {
@@ -171,12 +208,6 @@ function getQuillHtml(editorName) {
     }
     return editor.root.innerHTML;
 }
-
-quillSummary.clipboard.dangerouslyPasteHTML(ficAuthorNoteValue);
-quillFicAuthorNote.clipboard.dangerouslyPasteHTML(ficSummaryValue);
-quillChapterAuthorNote.clipboard.dangerouslyPasteHTML(chapterAuthorNoteValue);
-quillContent.clipboard.dangerouslyPasteHTML(chapterContentValue);
-
 
 ////// GENERAL EDITOR FUNCTIONS
 function handleCharacterLimit(editorName, limit) {
