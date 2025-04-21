@@ -49,7 +49,7 @@ try {
             toolbar: [
                 [
                     'bold', 'italic', 'underline','strike',
-                    { 'align': [] },
+                    { align: 'center' }, { align: 'right' }, { align: 'justify' },
                     { 'list': 'ordered'}, { 'list': 'bullet' },
                     'link'
                 ],
@@ -77,7 +77,7 @@ try {
         modules: {
             toolbar: [
                 'bold', 'italic', 'underline','strike',
-                { 'align': [] },
+                { align: 'center' }, { align: 'right' }, { align: 'justify' },
                 { 'list': 'ordered'}, { 'list': 'bullet' },
                 'link'
             ],
@@ -104,7 +104,7 @@ try {
         modules: {
             toolbar: [
                 'bold', 'italic', 'underline','strike',
-                { 'align': [] },
+                { align: 'center' }, { align: 'right' }, { align: 'justify' },
                 { 'list': 'ordered'}, { 'list': 'bullet' },
                 'link'
             ],
@@ -129,7 +129,7 @@ try {quillContent = new Quill('#quill-content', {
     modules: {
         toolbar: [
             'bold', 'italic', 'underline','strike',
-            { 'align': [] },
+            { align: 'center' }, { align: 'right' }, { align: 'justify' },
             { 'list': 'ordered'}, { 'list': 'bullet' },
             'link'
         ],
