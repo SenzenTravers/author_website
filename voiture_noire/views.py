@@ -18,7 +18,8 @@ class Index(generic.ListView):
         try:
             dicordProfile = DiscordProfile.objects.exists(member_username=self.request.user.username)
         except TypeError:
-            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+            # return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+            return Fic.objects.filter(visible=True).order_by('-date')
 
         if user.is_authenticated:
             user = self.request.user
