@@ -15,14 +15,14 @@ class Index(generic.ListView):
     context_object_name = 'fics'
 
     def get_queryset(self):
-        if user.is_authenticated:
-            user = self.request.user
+        user = self.request.user
 
+        if user.is_authenticated:
             if Author.objects.exists(member=user):
                 story_author = Author.objects.get(member=user)
                 return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
             else:
-                return Fic.objects.filter(visible_not_member_only=True)
+                return Fic.objects.filter(visible=True)
         else:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
             
