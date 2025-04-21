@@ -15,7 +15,9 @@
         font-style: italic;
         font-weight: normal;
         text-transform: none;
-        filter:none
+        filter:none;
+        margin-top: 0.5em;
+        margin-bottom: 0.2em;
     }
 
     hr {
@@ -31,6 +33,10 @@
 
     input[type="checkbox"] {
         accent-color: var(--puce);
+    }
+
+    .checkbox-fieldset {
+        margin-top: 0.5em;
     }
 
 }
@@ -58,6 +64,13 @@
             font-size: 1em;
         }
     }
+
+    .select-date {
+        display: flex;
+        flex-flow: row;
+        margin-bottom: 1em;
+    }
+    
 }
 
 .detail-summaries-etc, .detail-chapter-content {
@@ -68,12 +81,6 @@
 
 #quill-content {
     height: max(800px, 50vh)
-}
-
-.select-date {
-    display: flex;
-    flex-flow: row;
-    margin-bottom: 1em;
 }
 
 .p-publish-explanation {

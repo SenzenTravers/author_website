@@ -46,7 +46,6 @@ class PublishView(generic.View):
         fic_form = FicForm(request.POST)
         chapter_form = ChapterForm(request.POST)
 
-        print(fic_form.errors)
         # fic_form.errors
 
         if fic_form.is_valid() & chapter_form.is_valid():
@@ -74,6 +73,12 @@ class PublishView(generic.View):
                 "Une erreur est survenue durant l'enregistrement de votre fic."
             )
         return redirect('archives:publish')
+
+class EditView(generic.View):
+    template_name = 'archives/voiture_noire_edit.html'
+    chapter_form = ChapterForm
+    fic_form = FicForm
+
 
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)

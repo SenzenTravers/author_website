@@ -25,11 +25,12 @@ You're done!
 
 ## TODO
 ### PROMPTS
-- ARCHIVES(Voiture Noire): GÉRER LES ERREURS SUR SUMMARY ET COMPAGNIE (remonter sur l'élément)
-- ARCHIVES(Voiture Noire): implanter les chapitres multiples
-- ARCHIVES(Voiture Noire): supprimer une fic
 - ARCHIVES(Voiture Noire): lister les fic
 - ARCHIVES(Voiture Noire): page éditer mes histoires fonctionnelle
+- ARCHIVES(Voiture Noire): implanter les chapitres multiples
+- ARCHIVES(Voiture Noire): supprimer une fic
+- ARCHIVES(Voiture Noire): page auteur
+- ARCHIVES(Voiture Noire): GÉRER LES ERREURS SUR SUMMARY ET COMPAGNIE (remonter sur l'élément)
 
 - Properly implement error messages https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
   Petit script pour welcome-blurb

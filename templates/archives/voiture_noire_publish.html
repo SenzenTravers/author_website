@@ -51,9 +51,16 @@
                     {{ fic_form.rating }}    
                 </div>
                 <div>
+                    <label for="id_date">Date de publication</label>
+                    <div class="select-date">
+                        {{ fic_form.date }}
+                    </div>    
+                </div>
+                <div>
                     <label for="id_complete">Fini</label>
                     {{ fic_form.complete }}    
                 </div>
+
             </section>
         </section>
             
@@ -84,13 +91,8 @@
         </section>
 
         <section class="vn-section-fic-publishing">
-            <h2>❧ Logistique</h2>
+            <h2>❧ Visibilité</h2>
             <hr>
-
-            <label for="id_date">Date de publication</label>
-            <div class="select-date">
-                {{ fic_form.date }}
-            </div>
             <div class="checkbox-fieldset">
             <label for="id_visible">Visible par d'autres membres connectés</label>
                 {{ fic_form.visible }}
