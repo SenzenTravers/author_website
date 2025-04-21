@@ -17,12 +17,18 @@ class Index(generic.ListView):
     def get_queryset(self):
         try:
             user = self.request.user
-            story_author = Author.objects.get(member=user)
+            story_author = Author.objects.exists(member=user)
         except TypeError:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
         if user.is_authenticated:
-            return Fic.objects.get(Q(author=story_author) | Q(visible=True)).order_by('-date')
+            user = self.request.user
+
+            if Author.objects.exists(member=user):
+                story_author = Author.objects.get(member=user)
+                return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
+            else:
+                return Fic.objects.filter(visible=True)
         else:
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
             
