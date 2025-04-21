@@ -18,10 +18,15 @@ class Index(generic.ListView):
         user = self.request.user
         story_author = Author.objects.get(member=user)
 
-        # if user.is_authenticated:
-        #     return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
-        # else:
-        return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+        try:
+            if user.is_authenticated:
+                return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
+            else:
+                return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+        except Exception as e:
+            quer = Fic.objects.all()
+            quer[0].title = e
+            
 
 
 class MemberList(generic.ListView):
