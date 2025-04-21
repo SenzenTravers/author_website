@@ -13,15 +13,23 @@ from xhtml2pdf import pisa
 
 from .forms import Author, ChapterForm, FicForm
 from .models import Chapter, Fic, PairingType
-from .utils import FicDigester
+from .utils import check_user_has_right, FicDigester
 
 
 class Index(generic.ListView):
     template_name = 'archives/index.html'
     context_object_name = 'fics'
 
+
     def get_queryset(self):
-        return Fic.objects.order_by('-date')
+        user = self.request.user
+
+        if user.is_authenticated:
+            return Fic.objects.filter(visible=True).order_by('-date')
+        else:
+            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+
+
 
 class PublishView(generic.View):
     template_name = 'archives/voiture_noire_publish.html'
@@ -78,24 +86,46 @@ class StoryReadMode(generic.View):
     template_name = 'archives/story_read_mode.html'
 
     def get(self, request, fic_id, number, *args, **kwargs):
+        request_user = self.request.user
+        story_author = Author.objects.get(member=request_user)
         fic = get_object_or_404(Fic, pk=fic_id)
-        chapter = Chapter.objects.get(fic=fic, number=number)
+
+        if (fic.visible == False and fic.author == story_author) or \
+            (fic.visible == True and fic.visible_not_member_only == False and request_user.is_authenticated) or \
+            (fic.visible == True and fic.visible_not_member_only == True):
+            chapter = Chapter.objects.get(fic=fic, number=number)
+            return render(
+                request,
+                self.template_name,
+                {
+                    "story": fic,
+                    "chapter": chapter
+                }
+            )
+        else:
+            return redirect('voiture_noire:index')
+
+
+
+class FicEditView(generic.View):
+    template_name = 'archives/voiture_noire_fic_edit.html'
+    chapter_form = ChapterForm
+    fic_form = FicForm
+
+    def get(self, request, fic_id, number, *args, **kwargs):
+        fic = get_object_or_404(Fic, pk=fic_id)
+        chapter = Chapter.objects.get(fic=fic, number=1)
+        fic_form = self.fic_form(initial=self.initial)
+        chapter_form = self.chapter_form(initial=self.initial)
 
         return render(
             request,
             self.template_name,
             {
-                "story": fic,
-                "chapter": chapter
+                "fic_form": fic_form,
+                "chapter_form": chapter_form
             }
         )
-
-class FicEditView(generic.DetailView):
-    template_name = 'archives/voiture_noire_fic_edit.html'
-    # chapter_form = ChapterForm
-    # fic_form = FicForm
-    model = Fic
-
     # def get(self, request, *args, **kwargs):
     #     fic_form = self.fic_form(initial=self.initial)
     #     chapter_form = self.chapter_form(initial=self.initial)

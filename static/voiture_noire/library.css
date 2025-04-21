@@ -5,6 +5,11 @@
     display: flex;
     flex-flow: column;
 
+    p {
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+    }
+
 }
 
 .library-page-blurb {
@@ -61,6 +66,10 @@
     font-size: 0.9em;
     font-style: italic;
 }
+
+.story-administration {
+    margin-bottom: 0.8em;
+}
 .article-story-admin-details {
     margin-top: 0;
     margin-bottom: 0.2;
@@ -90,7 +99,7 @@
 
 @media screen and (min-width: 751px) {
     .hr-separator-story-articles {
-        margin-top: 3em;
+        margin-top: 2.5em;
         margin-bottom: 3em;
     }
 }

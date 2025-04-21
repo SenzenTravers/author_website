@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.urls import path
 
 from . import views
@@ -12,7 +13,7 @@ urlpatterns = [
     path("<int:fic_id>/pdf", views.download_pdf, name="download_pdf"),
     path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     path("<int:fic_id>/clap", views.clap, name="clap"),
-    path('stories/publish', views.PublishView.as_view(), name="story_publish"),
-    path('story/edit/<int:pk>', views.FicEditView.as_view(), name="edit_fic"),
+    path('stories/publish', login_required(views.PublishView.as_view()), name="story_publish"),
+    path('stories/edit/<int:pk>', login_required(views.FicEditView.as_view()), name="edit_fic"),
     path('library/<int:fic_id>/<int:number>', views.StoryReadMode.as_view(), name="story_read_mode")
 ]

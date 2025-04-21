@@ -1,7 +1,7 @@
 {% extends '../voiture_noire/base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/voiture_noire/base.css">
+<link rel="stylesheet" href="/static/voiture_noire/story_read.css">
 {% endblock %}
 
 {% block title %}
@@ -19,15 +19,65 @@
 
 <hr>
 
-<section>
-    <header>
-        {{ story.fic_title }}
+<section class="section-story">
+    <header class="header-story">
+        <h2 class="header-story-title">
+                {{ story.fic_title }}
+        </h2>
+        <p class="header-author-name">par {{ story.author }}</p>
+        <!-- <hr> -->
     </header>
-    
-    <section>
+
+    {% if story.fic_author_note != '' or chapter.author_note != ''%}
+        <section class="section-story-notes">
+            {% if story.fic_author_note != '' %}
+                <section class="story-author-note">
+                    <h3>Commentaires de l'auteur/autrice</h3>
+                    {% autoescape off %}
+                    {{ story.fic_author_note }}
+                    {% endautoescape %}
+                </section>
+            {% endif %}
+
+
+            {% if chapter.author_note != '' %}
+                <section class="chapter-author-note">
+                    <h3>Notes du chapitre</h3>
+                    {% autoescape off %}
+                    {{ chapter.author_note }}
+                    {% endautoescape %}
+                </section>
+            {% endif %}
+        </section>
+    {% endif %}
+
+    <section class="story-body">
         {% autoescape off %}
             {{ chapter.content }}
         {% endautoescape %}
     </section>
+
+    {% if story.has_multiple_chapters %}
+        <section class="story-footer">
+            {% if chapter.number > 1 %}
+            <a
+                class="chapter-nav-link" 
+                href="{% url 'archives:story_read_mode' story.id chapter.previous_chapter_index %}"
+            >
+                Précédent
+            </a>
+            {% endif %}
+
+            {% if chapter.number != story.number_of_chapter %}
+            <a
+                class="chapter-nav-link" 
+                href="{% url 'archives:story_read_mode' story.id chapter.next_chapter_index %}"
+            >
+                Suivant
+            </a>
+            {% endif %}
+        </section>
+    {% endif %}
+
 </section>
 {% endblock %}

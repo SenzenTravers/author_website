@@ -3,7 +3,7 @@ from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
-from archives.models import Fic
+from archives.models import Author, Fic
 from .models import DiscordProfile, Prompt
 
 from .models import DiscordProfile
@@ -15,7 +15,12 @@ class Index(generic.ListView):
     context_object_name = 'fics'
 
     def get_queryset(self):
-        return Fic.objects.order_by('-date')
+        user = self.request.user
+        story_author = Author.objects.get(member=user)
+        if user.is_authenticated:
+            return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
+        else:
+            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
 
 class MemberList(generic.ListView):

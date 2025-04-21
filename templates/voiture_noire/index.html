@@ -45,7 +45,10 @@
                 <a href="{% url 'archives:story_read_mode' fic.id 1 %}">
                     {{ fic.fic_title }}</a>
                 <span class="author-name">par {{ fic.author }}</span>
-                
+                <!-- {% if fic.author.member == user %}
+                    <a href="{% url 'archives:story_read_mode' fic.id 1 %}">Éditer</a>
+                    <a href="{% url 'archives:story_read_mode' fic.id 1 %}">Ajouter un chapitre</a>
+                {% endif %} -->
             </h2>
 
             <div class="story-administration">

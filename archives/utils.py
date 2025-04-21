@@ -92,8 +92,9 @@ class FicDigester:
 
         return book
 
-        
 
+def check_user_has_right():
+    pass
 
     # def epub_chapters(self):
     #     chapters = Chapter.objects.filter(

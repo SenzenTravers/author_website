@@ -54,7 +54,7 @@ class Fic(models.Model):
     author = models.ForeignKey(Author,
         on_delete=models.CASCADE,
         null=True, blank=True)
-    visible_member_only = models.BooleanField(default=False)
+    visible_not_member_only = models.BooleanField(default=False)
     visible = models.BooleanField(default=True)
     clap = models.IntegerField(default=0, blank=True)
     date = models.DateField(null=True)
@@ -88,6 +88,10 @@ class Fic(models.Model):
     def first_chapter(self):
         return Chapter.objects.filter(fic=self, number=1)[0]
 
+    @property
+    def number_of_chapter(self):
+        return Chapter.objects.filter(fic=self).count()
+
     def __str__(self):
         return f"{self.author} : {self.fic_title}"
 
@@ -108,6 +112,14 @@ class Chapter(models.Model):
             super(Chapter, self).save(*args, **kwargs)
         else:
             super(Chapter, self).save(*args, **kwargs)
+
+    @property
+    def previous_chapter_index(self):
+        return self.number - 1
+
+    @property
+    def next_chapter_index(self):
+        return self.number + 1
 
     def __str__(self):
         return f"{self.fic}, chapter {self.number}"
