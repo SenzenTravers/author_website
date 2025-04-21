@@ -20,12 +20,13 @@ class Index(generic.ListView):
 
         try:
             if user.is_authenticated:
-                return Fic.objects.filter(Q(author=story_author) | Q(visible=True))
+                return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
             else:
                 return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
         except Exception as e:
             quer = Fic.objects.all()
-            quer[0].title = e
+            quer[0].title = e.msg
+            return quer
             
 
 
