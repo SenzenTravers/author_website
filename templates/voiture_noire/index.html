@@ -1,7 +1,7 @@
 {% extends './base.html' %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/voiture_noire/base.css">
+<link rel="stylesheet" href="/static/voiture_noire/library.css">
 {% endblock %}
 
 {% block title %}
@@ -19,10 +19,97 @@
 
 <hr>
 
-<section>
-    <p>WIP <3</p>
+<section class="library-page">
+    {% if user.is_authenticated %}
+        <a
+            class="library-page-link" 
+            href="{% url 'archives:story_publish' %}"
+        >Publier</a>
+    {% endif %}
+
+    <div class="library-page-blurb">
+        <p>
+            Pour lire les récits des membres du serveur ! Veuillez noter que tout ceci est en
+            <b>bêta</b> donc n'allez pas poster vos fics sans les sauvegarder, de grâce.
+        </p>
+        <p>
+            Vous avez lu une histoire et l'avez aimée ? Dites-le ! Je préfère ne pas mettre
+            de fonction Commenter, mais n'hésitez pas à poster dans #lectures ou à aller 
+            complimenter directement l'autrice/l'auteur.
+        </p>
+    </div>
     {% for fic in fics %}
-        {{ fic }}
+        <article class="article-story">
+            <!-- TODO: title as link -->
+            <p class="article-story-date">{{ fic.date }}</p>
+            <h2 class="article-story-title">{{ fic.fic_title }} <span class="author-name">par {{ fic.author }}</span></h2>
+            <hr class="article-story-title-hr">
+
+            <div class="story-administration">
+                <p class="article-story-admin-details">
+                    {% if fic.pairing_type.all.length == 0 %}
+                        Général
+                    {% else %}
+                        {% for pair in fic.pairing_type.all %}
+                            {% if pair.pairing_type == "gen" %}
+                                Pas de couple
+                            {% elif pair.pairing_type == "ff" %}
+                                F/F
+                            {% elif pair.pairing_type == "mm" %}
+                                M/M
+                            {% elif pair.pairing_type == "het" %}
+                                Hétéro
+                            {% elif pair.pairing_type == "oth" %}
+                                Autre
+                            {% else %}
+                                Sen, à l'aide
+                            {{ pair.pairing_type }}
+                            {% endif %}
+
+                            {% if not forloop.last %}
+                            &
+                            {% endif %}
+                            <!-- TODO : HANDLE LAST, SAME AS SUPPORTER -->
+                        {% endfor %}
+                    {% endif %} ❖
+                    {{ fic.text_length.capitalize }} ❖
+
+                    {% if fic.rating == "g" %}
+                        Tout public
+                    {% elif fic.rating == "t" %}
+                        Public averti
+                    {% elif fic.rating == "e" %}
+                        Public averti
+                    {% else %}
+                        Au secours, Sen
+                    {% endif %}
+                    ❖
+
+                    {% if fic.complete %}
+                        <span class="span-story-finished">ACHEVÉ</span>
+                    {% else %}
+                    <span class="span-story-ongoing">En cours</span>
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="story-summaries">
+                    {{ fic.summary }}
+                </div>
+                {% if fic.pairing_archetype != '' %}
+                    <p>
+                        <span class="article-story-categ-name">Le(s) couple(s) :</span>{{ fic.pairing_archetype }}
+                    </p>
+                {% endif %}
+                {% if fic.one_sentence_summary != '' %}
+                <p>
+                    <span class="article-story-categ-name">En quelques mots :</span>{{ fic.one_sentence_summary }}
+                </p>
+            {% endif %}
+            </div>
+        </article>
+
+        <hr class="hr-separator-story-articles">
         <!-- SEN : si auteur de la fic, bouton éditer -->
     {% endfor %}
 </section>

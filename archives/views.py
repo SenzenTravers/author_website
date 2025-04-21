@@ -74,10 +74,23 @@ class PublishView(generic.View):
             )
         return redirect('archives:publish')
 
-class EditView(generic.View):
-    template_name = 'archives/voiture_noire_edit.html'
-    chapter_form = ChapterForm
-    fic_form = FicForm
+class FicEditView(generic.DetailView):
+    template_name = 'archives/voiture_noire_fic_edit.html'
+    # chapter_form = ChapterForm
+    # fic_form = FicForm
+    model = Fic
+
+    # def get(self, request, *args, **kwargs):
+    #     fic_form = self.fic_form(initial=self.initial)
+    #     chapter_form = self.chapter_form(initial=self.initial)
+    #     return render(
+    #         request,
+    #         self.template_name,
+    #         {
+    #             "chapter_form": chapter_form,
+    #             "fic_form": fic_form,
+    #         }
+    #     )
 
 
 def show_chapter(request, fic_id, number):

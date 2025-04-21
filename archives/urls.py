@@ -12,5 +12,6 @@ urlpatterns = [
     path("<int:fic_id>/pdf", views.download_pdf, name="download_pdf"),
     path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     path("<int:fic_id>/clap", views.clap, name="clap"),
-    path('publish', views.PublishView.as_view(), name="publish")
+    path('stories/publish', views.PublishView.as_view(), name="story_publish"),
+    path('story/edit/<int:pk>"', views.FicEditView.as_view(), name="edit_fic")
 ]
