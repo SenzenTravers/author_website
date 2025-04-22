@@ -50,13 +50,15 @@
                         class="article-story-title-btn"
                         href="{% url 'archives:story_edit_mode' fic.id %}"
                         aria-label="Éditer l'histoire"
+                        title="Éditer l'histoire"
                     >
                         <img src="/static/images/pen-line-svgrepo-com.svg">
                     </a>
                     <a
                         class="article-story-title-btn"
                         href="{% url 'archives:chapter_post_mode' fic.id %}"
-                        aria-label="Éditer l'histoire"
+                        aria-label="Ajouter un chapitre"
+                        title="Ajouter un chapitre"
                     >+</a>
                 {% endif %}
             </h2>
