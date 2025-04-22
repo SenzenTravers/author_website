@@ -169,14 +169,14 @@ if (quillSummary) {
     quillSummary.on('text-change', function(delta, source) {
         onQuillEditorChange("summary", 600)
     })
-    quillSummary.clipboard.dangerouslyPasteHTML(ficAuthorNoteValue);
+    quillSummary.clipboard.dangerouslyPasteHTML(ficSummaryValue);
 }
 
 if (quillFicAuthorNote) {
     quillFicAuthorNote.on('text-change', function(delta, source) {
         onQuillEditorChange("fic-author-note", 2000)
     })
-    quillFicAuthorNote.clipboard.dangerouslyPasteHTML(ficSummaryValue);
+    quillFicAuthorNote.clipboard.dangerouslyPasteHTML(ficAuthorNoteValue);
 }
 
 if (quillChapterAuthorNote) {

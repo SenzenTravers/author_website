@@ -1,4 +1,4 @@
-import os
+import datetime
 import tempfile
 
 from django.contrib import messages
@@ -35,11 +35,11 @@ class PublishView(generic.View):
     chapter_form = ChapterForm
     fic_form = FicForm
 
-    initial = {"key": "value"}
-
     def get(self, request, *args, **kwargs):
-        fic_form = self.fic_form(initial=self.initial)
-        chapter_form = self.chapter_form(initial=self.initial)
+        fic_form = self.fic_form(
+            initial={"date": datetime.date.today()}
+        )
+        chapter_form = self.chapter_form()
         return render(
             request,
             self.template_name,
@@ -68,6 +68,8 @@ class PublishView(generic.View):
             pairing_types = fic_form.cleaned_data["pairing_type"]
             pairing_types = PairingType.objects.filter(id__in=pairing_types)
             new_fic.pairing_type.set(pairing_types)
+            # SEN :
+            print(new_fic.pairing_type)
             new_fic.save()
             chapter_form = chapter_form.save(commit=False)
             chapter_form.fic = new_fic
@@ -80,7 +82,7 @@ class PublishView(generic.View):
                 messages.ERROR,
                 "Une erreur est survenue durant l'enregistrement de votre fic."
             )
-        return redirect('archives:story_publish')
+        return redirect('voiture_noire:index')
 
 
 class StoryReadMode(generic.View):
