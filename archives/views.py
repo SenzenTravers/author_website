@@ -90,10 +90,10 @@ class StoryReadMode(generic.View):
 
     def get(self, request, fic_id, number, *args, **kwargs):
         request_user = self.request.user
-        story_author = Author.objects.get(member=request_user)
+
         fic = get_object_or_404(Fic, pk=fic_id)
 
-        if (fic.visible == False and fic.author == story_author) or \
+        if (fic.visible == False and fic.author.member == request.user) or \
             (fic.visible == True and fic.visible_not_member_only == False and request_user.is_authenticated) or \
             (fic.visible == True and fic.visible_not_member_only == True):
             chapter = Chapter.objects.get(fic=fic, number=number)
