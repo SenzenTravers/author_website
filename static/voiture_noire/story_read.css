@@ -40,6 +40,11 @@
     }
 }
 
+.chapter-nav-link {
+    text-decoration: none;
+    color: var(--ivory) !important;
+}
+
 .section-story-notes {
     margin-left: 2em;
     margin-right: 2em;
