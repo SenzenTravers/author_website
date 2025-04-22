@@ -133,6 +133,23 @@ body {
     
 }
 
+/* QUILL HTML SILLINESS */
+.ql-align-justify {
+    text-align: justify;
+}
+
+.ql-align-center {
+    text-align: center;
+}
+
+.ql-align-left {
+    text-align: left;
+}
+
+.ql-align-right {
+    text-align: right;
+}
+
 /* RESPONSIVE */
 @media screen and (max-width: 1000px){
     main {
