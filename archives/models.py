@@ -97,7 +97,7 @@ class Fic(models.Model):
 
 
 class Chapter(models.Model):
-    fic = models.ForeignKey(Fic, on_delete=models.CASCADE, blank=True)
+    fic = models.ForeignKey(Fic, on_delete=models.CASCADE, blank=True, related_name="chapters")
     chapter_title = models.CharField(max_length=150, null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
     author_note = models.TextField(max_length=1500, null=True, blank=True)

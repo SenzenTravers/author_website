@@ -69,12 +69,18 @@
     {% if story.has_multiple_chapters %}
         <section class="story-footer">
             {% if chapter.number > 1 %}
-            <a
-                class="chapter-nav-link" 
-                href="{% url 'archives:story_read_mode' story.id chapter.previous_chapter_index %}"
-            >
-                Précédent
-            </a>
+                <a
+                    class="chapter-nav-link" 
+                    href="{% url 'archives:story_read_mode' story.id 1 %}"
+                >
+                    Premier chapitre
+                </a>
+                <a
+                    class="chapter-nav-link" 
+                    href="{% url 'archives:story_read_mode' story.id chapter.previous_chapter_index %}"
+                >
+                    Précédent
+                </a>
             {% endif %}
 
             {% if chapter.number != story.number_of_chapter %}
@@ -84,6 +90,13 @@
             >
                 Suivant
             </a>
+            <a
+                class="chapter-nav-link" 
+                href="{% url 'archives:story_read_mode' story.id story.number_of_chapter %}"
+            >
+                Dernier chapitre
+            </a>
+
             {% endif %}
         </section>
     {% endif %}

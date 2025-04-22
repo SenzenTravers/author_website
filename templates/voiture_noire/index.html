@@ -41,13 +41,17 @@
     {% for fic in fics %}
         <article class="article-story">
             <p class="article-story-date">{{ fic.date }}</p>
-            <h2 class="article-story-title">
-                <a href="{% url 'archives:story_read_mode' fic.id 1 %}">
-                    {{ fic.fic_title }}</a>
-                <span class="author-name">par {{ fic.author }}</span>
+            <div class="div-story-header-block">
+                <h2 class="article-story-title">
+                    <a href="{% url 'archives:story_read_mode' fic.id 1 %}">
+                        {{ fic.fic_title }}</a>
+                    <span class="author-name">par {{ fic.author }}</span>
+                </h2>
+    
                 {% if fic.author.member == user %}
+                <div class="div-story-title-buttons">
                     <a
-                        class="article-story-title-btn"
+                        class="article-story-btn"
                         href="{% url 'archives:story_edit_mode' fic.id %}"
                         aria-label="Éditer l'histoire"
                         title="Éditer l'histoire"
@@ -55,13 +59,15 @@
                         <img src="/static/images/pen-line-svgrepo-com.svg">
                     </a>
                     <a
-                        class="article-story-title-btn"
+                        class="article-story-btn"
                         href="{% url 'archives:chapter_post_mode' fic.id %}"
                         aria-label="Ajouter un chapitre"
                         title="Ajouter un chapitre"
                     >+</a>
-                {% endif %}
-            </h2>
+                </div>
+            {% endif %}
+
+            </div>
 
             <div class="story-administration">
                 <p class="article-story-admin-details">
@@ -127,10 +133,21 @@
                 </p>
             {% endif %}
             </div>
+            {% if fic.chapters.all.count > 1 %}
+            <div class="story-chapters">
+                {% for chapter in fic.chapters.all %}
+                    <a
+                        class="article-story-btn"
+                        href="{% url 'archives:story_read_mode' fic.id chapter.number %}"
+                    >
+                    {{ chapter.number }}
+                    </a>
+                {% endfor %}
+            </div>
+            {% endif %}
         </article>
 
         <hr class="hr-separator-story-articles">
-        <!-- SEN : si auteur de la fic, bouton éditer -->
     {% endfor %}
 </section>
 {% endblock %}

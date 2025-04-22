@@ -57,24 +57,6 @@
         font-style: italic;
         color: var(--midnight-blue);
     }
-
-    .article-story-title-btn {
-        margin: 0;
-        padding: 6px;
-        background-color: var(--midnight-blue);
-        color: var(--nude);
-        border: 1px solid var(--misty-blue);
-        border-radius: 15px;
-        font-weight: bold;
-        text-decoration: none;
-        cursor: pointer;
-        font-size: small;
-
-        img {
-            height: 15px;
-            color: var(--nude);
-        }
-    }
 }
 
 .article-story-date {
@@ -100,6 +82,39 @@
 
 .article-story-categ-name {
     font-weight: bold;
+}
+
+.div-story-header-block {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 7px;
+}
+.story-chapters, .div-story-title-buttons {
+    display: flex;
+    flex-flow: row;
+    gap: 3px;
+}
+.article-story-btn {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+
+    margin: 0;
+    padding: 6px;
+    background-color: var(--midnight-blue);
+    color: var(--nude);
+    border: 1px solid var(--misty-blue);
+    border-radius: 15px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: small;
+
+    img {
+        height: 15px;
+        color: var(--nude);
+    }
 }
 
 .hr-separator-story-articles {
