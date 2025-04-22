@@ -12,9 +12,10 @@ class ChapterManager(models.Manager):
 
 class PairingType(models.Model):
     pairing_type = models.CharField(max_length=5, unique=True)
+    label = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.pairing_type
+        return self.label
 
 
 # TRUE CLASSES

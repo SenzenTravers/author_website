@@ -17,7 +17,7 @@ class FicAdmin(admin.ModelAdmin):
     list_filter = ('fic_title', 'author', 'complete')
 
 class PairingTypeAdmin(admin.ModelAdmin):
-    fields = ['pairing_type']
+    fields = ['pairing_type', 'label']
 
 admin.site.register(Author)
 admin.site.register(Chapter, ChapterAdmin)

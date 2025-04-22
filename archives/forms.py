@@ -21,23 +21,9 @@ class ChapterForm(forms.ModelForm):
 
 
 class FicForm(forms.ModelForm):
-    GEN = 1
-    FF = 2
-    MM = 3
-    HET = 4
-    OTH = 5
-
     G = "g"
     T = "t"
     E = "e"
-
-    PAIRING_TYPE_CHOICES = {
-        GEN: "Général",
-        FF: "F/F",
-        MM: "M/M",
-        HET: "F/M",
-        OTH: "Autre"
-    }
 
     RATING_TYPE_CHOICES = {
         G: "Tout public",
@@ -48,9 +34,9 @@ class FicForm(forms.ModelForm):
     date = forms.DateField(
         widget = forms.SelectDateWidget(years=range(2005, 2026))
     )
-    pairing_type = forms.MultipleChoiceField(
+    pairing_type = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,
-        choices=PAIRING_TYPE_CHOICES,
+        queryset=PairingType.objects.all()
     )
     rating = forms.ChoiceField(
         widget=forms.Select,
