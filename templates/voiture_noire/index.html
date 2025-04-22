@@ -46,8 +46,18 @@
                     {{ fic.fic_title }}</a>
                 <span class="author-name">par {{ fic.author }}</span>
                 {% if fic.author.member == user %}
-                    <a class="article-story-title-btn" href="{% url 'archives:story_edit_mode' fic.id %}">Éditer</a>
-                    <a class="article-story-title-btn" href="{% url 'archives:chapter_post_mode' fic.id %}">Ajouter chapitre</a>
+                    <a
+                        class="article-story-title-btn"
+                        href="{% url 'archives:story_edit_mode' fic.id %}"
+                        aria-label="Éditer l'histoire"
+                    >
+                        <img src="/static/images/pen-line-svgrepo-com.svg">
+                    </a>
+                    <a
+                        class="article-story-title-btn"
+                        href="{% url 'archives:chapter_post_mode' fic.id %}"
+                        aria-label="Éditer l'histoire"
+                    >+</a>
                 {% endif %}
             </h2>
 

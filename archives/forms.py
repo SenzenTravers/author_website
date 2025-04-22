@@ -12,9 +12,8 @@ class AuthorForm(forms.ModelForm):
 
 class ChapterForm(forms.ModelForm):
     publish_date = forms.DateField(
-        widget = forms.SelectDateWidget,
-        initial = datetime.date.today
-    ) 
+        widget = forms.SelectDateWidget(years=range(2005, 2026)),
+    )
 
     class Meta:
         model = Chapter
@@ -47,8 +46,7 @@ class FicForm(forms.ModelForm):
     }
 
     date = forms.DateField(
-        widget = forms.SelectDateWidget,
-        initial = datetime.date.today
+        widget = forms.SelectDateWidget(years=range(2005, 2026))
     )
     pairing_type = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,

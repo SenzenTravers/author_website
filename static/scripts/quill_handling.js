@@ -25,7 +25,8 @@ class Counter {
         if (length !== 1) {
         label += 's';
         }
-        this.container.innerText = `${length} ${label}`;
+        // SEN : tu as aussi changé ceci. Teste et implante si ça fonctionne bien
+        this.container.innerText = `${length} ${label}/${this.options.charLimit}`;
         if (length >= this.options.charLimit) {
             this.container.classList.add("limit-reached")
             this.container.innerText += ` : attention ! La limite acceptée est de ${this.options.charLimit} caractères.`
@@ -65,7 +66,10 @@ try {
                 charLimit: 600,
             }
         },
-        placeholder: '',
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
         theme: 'snow'
     });    
 } catch {
@@ -92,7 +96,10 @@ try {
                 charLimit: 2000
             }
         },
-        placeholder: '',
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
         theme: 'snow'
     });
 } catch {
@@ -119,7 +126,10 @@ try {
                 charLimit: 1500
             }
         },
-        placeholder: '',
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
         theme: 'snow'
     });
 } catch {
@@ -143,9 +153,12 @@ try {quillContent = new Quill('#quill-content', {
             unit: 'caractère',
             charLimit: 1000000
         }
-    },
-    placeholder: '',
-    theme: 'snow'
+        },
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
+        theme: 'snow'
 });
 } catch {
     console.log("Content quill not initialized.")
