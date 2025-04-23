@@ -1,14 +1,31 @@
 # Site d'autrice
 
 ## TO-DO
--  Add PDF support for multiple chapters
--  Add HTML support for multiple chapters
--  Add buttons to filter rants
+### Must-have
+- [ALL] Better test coverage to ensure safe user experience
+- [STORIES] Change Profile into Author page
+- [STORIES] Delete story
+- [STORIES] Add PDF
+- [STORIES] Add HTML
+- [STORIES] Add PDF support for multiple chapters
+- [STORIES] Add HTML support for multiple chapters
 
-## Install it in o2switch
+### Nice to have
+- [WRITER] Add buttons to filter rants
+- [PROMPTS] Search prompts through text
+- [STORIES] Handle last_updated field
+- [BLACK CAR] Small, funny script to handle welcome-blurb
+
+### Last priority
+- [PINE] (Mobile) : Rearrange banner
+- [PINE] (Mobile) Mobile : 50 % of page as a mosaic
+- [PINE] (Computer) Commissions : final page
+- [PINE] (Mobile) Commissions : final page
+
+## Setting the app in o2switch
 ### Package
 
-Pick Python 11.x.
+Pick Python 3.11.x.
 
 > pip install -r requirements.txt
 > pip install mysqlclient.
@@ -17,34 +34,17 @@ Indicate core/wsgi.py as the entrance point of your app.
 
 Check that all migrations are applied.
 
-You're done!
-
-## Change staticfiles (images, CSS, etc)
+### Change staticfiles (images, CSS, etc)
 1. Run `python manage.py collectstatic`
 2. Restart the app
 
-## TODO
+### When making changes
+1. If on the front end: run `python manage.py collectstatic`, then restart
+2. If involving models: run migrations
+
 ### PROMPTS
-- ARCHIVES(Voiture Noire): lister les fic
-- ARCHIVES(Voiture Noire): page éditer mes histoires fonctionnelle
-- ARCHIVES(Voiture Noire): implanter les chapitres multiples
-- ARCHIVES(Voiture Noire): supprimer une fic
-- ARCHIVES(Voiture Noire): page auteur
-- ARCHIVES(Voiture Noire): GÉRER LES ERREURS SUR SUMMARY ET COMPAGNIE (remonter sur l'élément)
-
 - Properly implement error messages https://docs.djangoproject.com/en/5.1/ref/contrib/messages/
-  Petit script pour welcome-blurb
-- Une joulie bannière
-- PROMPTS(Voiture Noire): introduire option de recherche sur le texte des prompts
-- PROMPTS(Voiture Noire): introduire tri sur les prompts
-- ARCHIVES(Voiture Noire): handle last_updated field
-- la lecture annotée ? À la lecture, on peut ajouter des commentaires à chaque paragraphe (ou lettre ?). Le résultat est enregitré pour envoi à l'autrice ? 
 
-- When time is selected, then start sprint upon pressing Enter key
-- PINE(Mobile) : réarranger la bannière
-- PINE(Mobile) Mobile : 50 % de la page est une mosaïque
-- PINE(Ordinateur) Commissions : page complète
-- PINE(Mobile) Commissions : page complète
 
 ### Randoms
 [CONVERT HTML TO PDF](https://doc.courtbouillon.org/weasyprint/stable/)
@@ -62,3 +62,14 @@ You're done!
 ## Credit
 [Rich text editor](https://codepen.io/BibekOli/pen/abRgbVW)
 
+
+## Useful commands
+To export the db, app by app, into a json format suitable for fixture:
+`python manage.py dumpdata voiture_noire --settings=core.settings > voiture_noire/fixtures/voiture_noire.json`
+
+To run the tests specific to one particular TestCase:
+`python manage.py test tests.test_voiture_noire.VoitureNoireTestCase`
+`python manage.py test tests.test_library.LibraryTestCase`
+
+(In prod) To run statics and clear them, in case the files got corrupted (don't forget to restart afterwards!):
+`python manage.py collectstatic --clear`

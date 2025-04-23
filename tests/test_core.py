@@ -1,12 +1,14 @@
 from django.urls import reverse
 from django.test import Client, TestCase
+
+from accounts.models import Member
 from voiture_noire.models import DiscordProfile
 
 
 class CoreTestCase(TestCase):
     # Views
     def setUp(self):
-        DiscordProfile.objects.create_user("Jean-Bob", email="jeanbobdupont@mail.fr", password="motdepasse")
+        Member.objects.create_user("Jean-Bob", email="jeanbobdupont@mail.fr", password="motdepasse")
 
     def test_call_view_fail_blank(self):
         #response = self.client.post('/url/to/view', {}) # blank data dictionary
