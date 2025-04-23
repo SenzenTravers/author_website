@@ -2,6 +2,7 @@
 
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/voiture_noire/profile.css">
+<link rel="stylesheet" href="/static/voiture_noire/story-cards.css" />
 <!-- Moi-même : un jour, tu ôteras ceci. Bravement. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
@@ -30,38 +31,117 @@
     </ul>
 {% endif %}
 
-<section>
-    <p>Ici, vous pouvez configurer vos goûts afin :</p>
-    <p>
-        1. de vous faciliter la vie durant les échanges en
-         les gardant de côté ;
-    </p>
-    <p>
-         2. de permettre à autrui
-        de vous offrir, potentiellement, des dessins ou des fics. 
-    </p>
-    <p>
-        <b>Attention</b> : si vous êtes du genre bavard, sauvegardez bien votre texte avant de le poster,
-        au cas où le grand internet mondial le mange au moment fatidique.
-    </p>
-</section>
+<details class="section-profile">
+    <summary>
+        <h2 class="h2-blue-title">❧ Profil d'auteur/d'autrice</h2>
+    </summary>
 
-<form method="post" class="discord-member-profile form-main">
-    {% csrf_token %}
-    <label for="id_likes">Vous aimez :</label>
-    <div id="editor-container-likes" class="quill-input"></div>
-    <div hidden>{{ form.likes }}</div>
-    <p id="char-counter-likes" class="p-character-counter"></p>
+    <hr class="hr-blue-h2-title hr-section-profile">
 
-    <label for="id_dislikes">Vous détestez :</label>
-    <div id="editor-container-dislikes" class="quill-input">
+    <p class="p-library-page-link">
+        <a
+            class="library-page-link" 
+            href="{% url 'archives:story_publish' %}"
+            >
+            Publier
+        </a>
+    </p>
+
+    <h3 id="your-crimes" class="subtitle-section-profile">
+        {% if author_profile.criminal %}
+            Vos crimes
+        {% else %}
+            Vos œuvres
+        {% endif %}
+    </h3>
+
+    <div class="div-profile-criminal">
+        <input
+            type="checkbox"
+            id="criminal-switch"
+            onclick="handleCriminality()"
+            {% if author_profile.criminal %}
+            value="on"
+            checked
+            {% endif %}
+        >
+        <p>Comment ça, « mes œuvres »</p>
     </div>
-    <div hidden>{{ form.dislikes }}</div>
-    <p id="char-counter-dislikes" class="p-character-counter"></p>
-    <button type="submit">Valider</button>
-</form>
+    {% if stories|length == 0 %}
+        <p>Rien pour le moment. Rien pour le moment ? RIEN POUR LE MOMENT ? ÉCRIVEZ TOUT DE SUITE.</p>
+    {% endif %}
+
+    {% for story in stories %}
+        {% include './story_card.html' %} 
+    {% endfor %}
+</details>
+
+<details class="section-profile">
+    <summary>
+        <h2 class="h2-blue-title">❧ Profil d'échange</h2>
+    </summary>
+
+    <hr class="hr-blue-h2-title hr-section-profile">
+
+    <section>
+        <p>Ici, vous pouvez configurer vos goûts afin :</p>
+        <p>
+            1. de vous faciliter la vie durant les échanges en
+            les gardant de côté ;
+        </p>
+        <p>
+            2. de permettre à autrui
+            de vous offrir, potentiellement, des dessins ou des fics. 
+        </p>
+        <p>
+            <b>Attention</b> : si vous êtes du genre bavard, sauvegardez bien votre texte avant de le poster,
+            au cas où le grand internet mondial le mange au moment fatidique.
+        </p>
+    </section>
+
+    <form method="post" class="discord-member-profile form-main">
+        {% csrf_token %}
+        <label for="id_likes">Vous aimez :</label>
+        <div id="editor-container-likes" class="quill-input"></div>
+        <div hidden>{{ form.likes }}</div>
+        <p id="char-counter-likes" class="p-character-counter"></p>
+
+        <label for="id_dislikes">Vous détestez :</label>
+        <div id="editor-container-dislikes" class="quill-input">
+        </div>
+        <div hidden>{{ form.dislikes }}</div>
+        <p id="char-counter-dislikes" class="p-character-counter"></p>
+        <button type="submit">Valider</button>
+    </form>
+</details>
 
 <script>
+    const criminalUrl = "{% url 'voiture_noire:brand_as_criminal' author_profile.id %}"
+    
+    async function handleCriminality() {
+        const response = await fetch(
+            criminalUrl, {
+                method: "GET",
+            }
+        )
+
+        if (response.ok) {
+            const checkbox = document.getElementById("criminal-switch")
+            const authorH2 = document.getElementsByClassName("h2-blue-title")[0] 
+            const subtitle = document.getElementById("your-crimes")
+
+            if (checkbox.checked) {
+                subtitle.innerHTML = "Vos crimes"
+                authorH2.innerHTML = "Profil de criminel/criminelle"
+            } else {
+                subtitle.innerHTML = "Vos œuvres"
+                authorH2.innerHTML = "Profil d'autrice/d'auteur"
+            }
+
+        } else {
+            throw new Error(`Response status: ${response.status}`);            
+        }
+    }
     /////////// INITIALIZE CUSTOM MODULES
     class Counter {
         constructor(quill, options) {

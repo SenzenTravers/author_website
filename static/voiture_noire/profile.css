@@ -11,6 +11,85 @@
     
 }
 
+
+/***************** AUTHOR-SPECIFIC SESSION */
+.subtitle-section-profile {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: larger;
+    text-decoration: underline;
+}
+
+.div-profile-criminal {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    gap: 10px;
+    line-height: 1.15em;
+    color: var(--cool-gray);
+}
+
+.p-library-page-link {
+    text-align: right;
+}
+
+.library-page-link {
+    align-self: end;
+
+    margin-right: 1em;
+    margin-bottom: 2em;
+    padding: 10px;
+    background-color: var(--misty-blue);
+    color: var(--puce);
+    border: 3px double var(--midnight-blue);
+    width: fit-content;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+
+    font-size: large;
+    text-decoration: none;
+    text-transform: uppercase;
+
+    &:hover {
+        filter: brightness(110%)
+    }
+}
+/************** GENERAL SECTION BLOCK (author and discord */
+.section-profile {
+    display: flex;
+    flex-flow: column;
+
+    .hr-section-profile {
+        margin-bottom: 3.5em;        
+    }
+
+    .article-story {
+        margin-left: 3vw;
+        margin-right: 3vw;    
+    }
+
+    summary {
+        list-style: none;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    summary::-webkit-details-marker {
+    display: none
+    }
+    
+    summary::after {
+    content: ' ►';
+    }
+
+    &[open] summary:after {
+        content: " ▼";
+    }
+}
+
 .quill-input {
     .ql-editor {
         border: 1px solid var(--puce);

@@ -75,6 +75,17 @@ body {
     }
 }
 
+.h2-blue-title {
+    margin-right: 10px;
+    line-height: 1.5em;
+}
+
+.hr-blue-h2-title {
+    color: var(--misty-blue);
+    width: 25%;
+    margin: 0%;
+}
+
 .form-main {
     display: flex;
     flex-flow: column;

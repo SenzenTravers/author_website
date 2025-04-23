@@ -24,6 +24,7 @@ class Author(models.Model):
         on_delete=models.CASCADE,
         null=True)
     nickname = models.CharField(max_length=100, unique=True)
+    criminal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nickname
@@ -106,14 +107,6 @@ class Chapter(models.Model):
     publish_date = models.DateField(null=True)
 
     objects = ChapterManager()
-
-    @property
-    def previous_chapter_index(self):
-        return self.number - 1
-
-    @property
-    def next_chapter_index(self):
-        return self.number + 1
 
     def __str__(self):
         return f"{self.fic}, chapter {self.number}"

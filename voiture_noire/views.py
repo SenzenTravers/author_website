@@ -35,24 +35,30 @@ class MemberList(generic.ListView):
         return DiscordProfile.objects.order_by('member__username')    
 
 
-
 class Profile(generic.View):
     form_class = DiscordProfileForm
     template_name = 'voiture_noire/profile.html'
     initial = {}
 
     def get(self, request, *args, **kwargs):
-        try:
-            discord_member = DiscordProfile.objects.get(
-                member=request.user
-            )
-            self.initial = discord_member
-            form = self.form_class(instance=self.initial)
-        except:
-            self.initial = {"likes": "", "dislikes": ""}
-            form = self.form_class(initial=self.initial)
+        user_stories = []
+        author_profile = None
+        discord_member = DiscordProfile.objects.filter(member=request.user).first()
 
-        return render(request, self.template_name, {"form": form})
+        if discord_member:
+            self.initial = discord_member
+            discord_form = self.form_class(instance=self.initial)
+            author_profile = Author.objects.filter(member=request.user).first() 
+            if author_profile:
+                user_stories = Fic.objects.filter(author=author_profile)
+        else:
+            self.initial = {"likes": "", "dislikes": ""}
+            discord_form = self.form_class(initial=self.initial)
+
+        return render(
+            request,
+            self.template_name,
+            {"author_profile": author_profile, "form": discord_form, "stories": user_stories})
     
     def post(self, request, *args, **kwargs):
         new_profile = DiscordProfileForm(request.POST)
@@ -132,3 +138,18 @@ def unfavourite(request, prompt_id):
     except:
         return redirect('500')
     return redirect('voiture_noire:prompts')
+
+def brand_as_criminal(request, author_id):
+    author = Author.objects.filter(member=request.user).first()
+
+    if author and request.user == author.member :
+        if author.criminal:
+            author.criminal = False
+        else:
+            author.criminal = True
+        author.save()
+
+        print('meh')
+
+    return redirect('voiture_noire:profile')
+

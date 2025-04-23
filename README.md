@@ -2,7 +2,6 @@
 
 ## TO-DO
 ### Must-have
-- [ALL] Better test coverage to ensure safe user experience
 - [STORIES] Change Profile into Author page
 - [STORIES] Delete story
 - [STORIES] Add PDF

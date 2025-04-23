@@ -13,5 +13,6 @@ urlpatterns = [
     path('post_prompt', login_required(views.post_prompt), name='post_prompt'),
     path('unfavourite/<int:prompt_id>', views.unfavourite, name='unfavourite'),
     path('favourite/<int:prompt_id>', views.favourite, name='favourite'),
+    path('accuse/<int:author_id>', login_required(views.brand_as_criminal), name='brand_as_criminal')
 
 ]

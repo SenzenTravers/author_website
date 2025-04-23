@@ -1,0 +1,121 @@
+<article class="article-story">
+    <p class="article-story-date">{{ story.date }}</p>
+    <div class="div-story-header-block">
+        <h2 class="article-story-title">
+            <a href="{% url 'archives:story_read_mode' story.id 1 %}">
+                {{ story.fic_title }}</a>
+            <span class="author-name">par {{ story.author }}</span>
+        </h2>
+
+        {% if story.author.member == user %}
+        <div class="div-story-title-buttons">
+            <a
+                class="article-story-btn"
+                href="{% url 'archives:story_edit_mode' story.id %}"
+                aria-label="Éditer l'histoire"
+                title="Éditer l'histoire"
+            >
+                <img src="/static/images/pen-line-svgrepo-com.svg">
+            </a>
+            <a
+                class="article-story-btn"
+                href="{% url 'archives:chapter_post_mode' story.id %}"
+                aria-label="Ajouter un chapitre"
+                title="Ajouter un chapitre"
+            >+</a>
+        </div>
+    {% endif %}
+
+    </div>
+
+    <div class="story-administration">
+        <p class="article-story-admin-details">
+            {% if user == story.author.member %}
+                {% if story.visible_not_member_only %}
+                    Visible de tous
+                {% elif story.visible %}
+                    Visible des autres membres
+                {% else %}
+                    Invisible
+                {% endif %}
+                ❖
+            {% endif %}
+
+            {% if story.pairing_type.all.length == 0 %}
+                Général
+            {% else %}
+                {% for pair in story.pairing_type.all %}
+                    {% if pair.pairing_type == "gen" %}
+                        Pas de couple
+                    {% elif pair.pairing_type == "ff" %}
+                        F/F
+                    {% elif pair.pairing_type == "mm" %}
+                        M/M
+                    {% elif pair.pairing_type == "het" %}
+                        Hétéro
+                    {% elif pair.pairing_type == "oth" %}
+                        Autre
+                    {% else %}
+                        Sen, à l'aide
+                    {{ pair.pairing_type }}
+                    {% endif %}
+
+                    {% if not forloop.last %}
+                    &
+                    {% endif %}
+                    <!-- TODO : HANDLE LAST, SAME AS SUPPORTER -->
+                {% endfor %}
+            {% endif %} ❖
+            
+            {{ story.text_length.capitalize }} ❖
+
+            {% if story.rating == "g" %}
+                Tout public
+            {% elif story.rating == "t" %}
+                Public averti
+            {% elif story.rating == "e" %}
+                Public averti
+            {% else %}
+                Au secours, Sen
+            {% endif %}
+            ❖
+
+            {% if story.complete %}
+                <span class="span-story-finished">ACHEVÉ</span>
+            {% else %}
+            <span class="span-story-ongoing">En cours</span>
+            {% endif %}
+        </p>
+    </div>
+    
+    <div class="story-summaries">
+            {% autoescape off %}
+                {{ story.summary }}
+            {% endautoescape %}
+        </div>
+        {% if story.pairing_archetype != '' %}
+            <p>
+                <span class="article-story-categ-name">Le(s) couple(s) :</span>{{ story.pairing_archetype }}
+            </p>
+        {% endif %}
+        {% if story.one_sentence_summary != '' %}
+        <p>
+            <span class="article-story-categ-name">En quelques mots :</span>{{ story.one_sentence_summary }}
+        </p>
+    {% endif %}
+    </div>
+    {% if story.chapters.all.count > 1 %}
+    <div class="story-chapters">
+        {% for chapter in story.chapters.all %}
+            <a
+                class="article-story-btn"
+                href="{% url 'archives:story_read_mode' story.id chapter.number %}"
+            >
+            {{ chapter.number }}
+            </a>
+        {% endfor %}
+    </div>
+    {% endif %}
+</article>
+
+<hr class="hr-separator-story-articles">

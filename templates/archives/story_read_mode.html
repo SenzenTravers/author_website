@@ -77,7 +77,7 @@
                 </a>
                 <a
                     class="chapter-nav-link" 
-                    href="{% url 'archives:story_read_mode' story.id chapter.previous_chapter_index %}"
+                    href="{% url 'archives:story_read_mode' story.id chapter.number|add:-1 %}"
                 >
                     Précédent
                 </a>
@@ -86,7 +86,7 @@
             {% if chapter.number != story.number_of_chapter %}
             <a
                 class="chapter-nav-link" 
-                href="{% url 'archives:story_read_mode' story.id chapter.next_chapter_index %}"
+                href="{% url 'archives:story_read_mode' story.id chapter.number|add:1 %}"
             >
                 Suivant
             </a>
