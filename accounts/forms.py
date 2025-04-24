@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
 from .models import Member
 
@@ -7,7 +7,7 @@ class MemberCreationForm(UserCreationForm):
         model = Member
         fields = ('username', 'email', 'password1', 'password2')
 
-class MemberOtherCreationForm(UserCreationForm):
+class MemberChangeForm(UserChangeForm):
     class Meta:
         model = Member
-        fields = '__all__'
+        fields = ('username', 'email')

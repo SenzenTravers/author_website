@@ -6,7 +6,7 @@ from django.contrib.auth.forms import (
     AdminPasswordChangeForm
 )
 from .models import Member
-from .forms import MemberCreationForm, MemberOtherCreationForm
+from .forms import MemberCreationForm, MemberChangeForm
 
 
 class MemberAdmin(UserAdmin):
@@ -26,8 +26,7 @@ class MemberAdmin(UserAdmin):
             'fields': ('username', 'password1', 'password2'),
         }),
     )
-    form = MemberCreationForm
-    add_form = MemberOtherCreationForm
+    form = MemberChangeForm
     change_password_form = AdminPasswordChangeForm
     list_display = ('username', 'email', 'is_staff')
     list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
