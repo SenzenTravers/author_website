@@ -62,7 +62,10 @@ class PublishView(generic.View):
         fic_form = self.fic_form(
             initial={"date": datetime.date.today()}
         )
-        chapter_form = self.chapter_form()
+        chapter_form = self.chapter_form(
+            initial={"publish_date": datetime.date.today()}
+
+        )
         return render(
             request,
             self.template_name,
@@ -88,6 +91,9 @@ class PublishView(generic.View):
             fic_instance.author = fic_author
             fic_instance.save()
             new_fic = Fic.objects.filter(author=fic_author).latest("id")
+            pairing_types = fic_form.cleaned_data["pairing_type"]
+            pairing_types = PairingType.objects.filter(id__in=pairing_types)
+            new_fic.pairing_type.set(pairing_types)
             new_fic.save()
             chapter_form = chapter_form.save(commit=False)
             chapter_form.fic = new_fic

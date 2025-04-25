@@ -2,7 +2,7 @@
 
 ## TO-DO
 ### Must-have
-- [STORIES] Delete story
+- [STORIES] Delete chapter
 - [STORIES] Add PDF
 - [STORIES] Add HTML
 - [STORIES] Add PDF support for multiple chapters
