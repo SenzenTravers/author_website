@@ -2,8 +2,7 @@ import datetime
 import tempfile
 
 from django.contrib import messages
-from django.http import HttpResponse, JsonResponse
-
+from django.http import HttpResponseNotAllowed, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
@@ -30,6 +29,30 @@ class Index(generic.ListView):
             return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
 
+class StoryReadMode(generic.View):
+    template_name = 'archives/story_read_mode.html'
+
+    def get(self, request, fic_id, number, *args, **kwargs):
+        request_user = self.request.user
+
+        fic = get_object_or_404(Fic, pk=fic_id)
+
+        if (fic.visible == False and fic.author.member == request.user) or \
+            (fic.visible == True and fic.visible_not_member_only == False and request_user.is_authenticated) or \
+            (fic.visible == True and fic.visible_not_member_only == True):
+            chapter = Chapter.objects.get(fic=fic, number=number)
+            return render(
+                request,
+                self.template_name,
+                {
+                    "story": fic,
+                    "chapter": chapter
+                }
+            )
+        else:
+            return redirect('voiture_noire:index')
+
+############## POSTING
 class PublishView(generic.View):
     template_name = 'archives/voiture_noire_publish.html'
     chapter_form = ChapterForm
@@ -80,30 +103,52 @@ class PublishView(generic.View):
         return redirect('voiture_noire:index')
 
 
-class StoryReadMode(generic.View):
-    template_name = 'archives/story_read_mode.html'
+class ChapterPostView(generic.View):
+    template_name = 'archives/voiture_noire_chapter_post.html'
+    chapter_form = ChapterForm
 
-    def get(self, request, fic_id, number, *args, **kwargs):
-        request_user = self.request.user
-
+    def get(self, request, fic_id, *args, **kwargs):
         fic = get_object_or_404(Fic, pk=fic_id)
 
-        if (fic.visible == False and fic.author.member == request.user) or \
-            (fic.visible == True and fic.visible_not_member_only == False and request_user.is_authenticated) or \
-            (fic.visible == True and fic.visible_not_member_only == True):
-            chapter = Chapter.objects.get(fic=fic, number=number)
-            return render(
-                request,
-                self.template_name,
-                {
-                    "story": fic,
-                    "chapter": chapter
-                }
-            )
-        else:
-            return redirect('voiture_noire:index')
+        if request.user != fic.author.member:
+            redirect('voiture_noire:index')
+    
+        return render(
+            request,
+            self.template_name,
+            {
+                "chapter_form": self.chapter_form,
+                "story": fic
+            }
+        )
 
-##### TO EDIT
+    def post(self, request, fic_id, *args, **kwargs):
+        root_fic = Fic.objects.get(id=fic_id)
+        chapter_nb = root_fic.number_of_chapter + 1
+
+        if request.user != root_fic.author.member:
+            redirect('voiture_noire:index')
+
+        chapter_form = ChapterForm(request.POST)
+
+        # # fic_form.errors
+
+        if chapter_form.is_valid():
+            chapter_form = chapter_form.save(commit=False)
+            chapter_form.fic = root_fic
+            chapter_form.number = chapter_nb
+            chapter_form.save()
+
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre fic."
+            )
+        return redirect('voiture_noire:index')
+
+
+##### EDITING
 class ChapterEditView(generic.View):
     template_name = 'archives/voiture_noire_chapter_edit.html'
     chapter_form = ChapterForm
@@ -151,52 +196,7 @@ class ChapterEditView(generic.View):
                 "Une erreur est survenue durant l'enregistrement de votre fic."
             )
         return redirect('voiture_noire:index')
-    
-
-class ChapterPostView(generic.View):
-    template_name = 'archives/voiture_noire_chapter_post.html'
-    chapter_form = ChapterForm
-
-    def get(self, request, fic_id, *args, **kwargs):
-        fic = get_object_or_404(Fic, pk=fic_id)
-
-        if request.user != fic.author.member:
-            redirect('voiture_noire:index')
-    
-        return render(
-            request,
-            self.template_name,
-            {
-                "chapter_form": self.chapter_form,
-                "story": fic
-            }
-        )
-
-    def post(self, request, fic_id, *args, **kwargs):
-        root_fic = Fic.objects.get(id=fic_id)
-        chapter_nb = root_fic.number_of_chapter + 1
-
-        if request.user != root_fic.author.member:
-            redirect('voiture_noire:index')
-
-        chapter_form = ChapterForm(request.POST)
-
-        # # fic_form.errors
-
-        if chapter_form.is_valid():
-            chapter_form = chapter_form.save(commit=False)
-            chapter_form.fic = root_fic
-            chapter_form.number = chapter_nb
-            chapter_form.save()
-
-        else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                "Une erreur est survenue durant l'enregistrement de votre fic."
-            )
-        return redirect('voiture_noire:index')
-    
+        
 
 class FicEditView(generic.View):
     template_name = 'archives/voiture_noire_story_edit.html'
@@ -258,6 +258,27 @@ class FicEditView(generic.View):
             )
         return redirect('voiture_noire:index')
 
+
+##### DELETING
+def delete_story(request, story_id):
+    story = get_object_or_404(Fic, pk=story_id)
+
+    if request.user == story.author.member:
+        story.delete()
+        return redirect('voiture_noire:profile')
+    else:
+        raise HttpResponseNotAllowed("Vous n'êtes pas l'auteur de cette histoire !")
+    
+def delete_chapter(request, chapter_id):
+    chapter = get_object_or_404(Chapter, pk=chapter_id)
+
+    if request.user == chapter.fic.author.member:
+        chapter.delete()
+        return redirect('voiture_noire:profile')
+    else:
+        raise HttpResponseNotAllowed("Vous n'êtes pas l'auteur de cette histoire !")
+
+########## OLD
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)
     chapters = Chapter.objects.filter(fic=fic_id).order_by('number')
@@ -273,19 +294,7 @@ def show_chapter(request, fic_id, number):
         'number': number
         })
 
-# TODO: REMOVE THESE TWO THINGS
-def next_chapter(request, chapter_id):
-    chapter = get_object_or_404(Chapter, pk=chapter_id)
-    return Chapter.filter(fic=chapter.fic).filter(number=chapter.number + 1)
-
-def previous_chapter(request, chapter_id):
-    chapter = get_object_or_404(Chapter, pk=chapter_id)
-    return Chapter.filter(fic=chapter.fic).filter(number=chapter.number - 1)
-
-class ChapterView(generic.DetailView):
-    model = Chapter
-    template_name = 'archives/story.html'
-
+################ UTILS
 def download_html(request, fic_id):
     digester = FicDigester(fic_id)
     title = digester.return_title()

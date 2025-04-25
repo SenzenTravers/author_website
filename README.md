@@ -2,7 +2,6 @@
 
 ## TO-DO
 ### Must-have
-- [STORIES] Change Profile into Author page
 - [STORIES] Delete story
 - [STORIES] Add PDF
 - [STORIES] Add HTML

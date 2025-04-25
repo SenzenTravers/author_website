@@ -21,8 +21,7 @@
 <hr>
 
 <section class="library-page">
-    {% if user.is_authenticated %}
-        <a
+    {% if user.is_authenticated %}        <a
             class="library-page-link" 
             href="{% url 'archives:story_publish' %}"
         >Publier</a>
@@ -42,5 +41,59 @@
     {% for story in fics %}
         {% include './story_card.html' %} 
     {% endfor %}
+
+    <dialog id="story-delete-modal">
+        <h3 id="story-delete-title">This modal dialog has a groovy backdrop!</h3>
+        <div class="story-delete-btn-div">
+            <a class="story-delete-yes"
+                href="deleteItem({{ story.id }})">Oui.</a>
+            <button 
+                class="story-delete-no"
+                type="button"
+                onclick="closeStoryDeleteModal()"
+            >Noooon !! ):</button>
+        </div>
+    </dialog>
 </section>
+
+<script>
+    const deleteStoryUrl = "{% url 'archives:delete_story' 0 %}"
+    // LUCILE : puis additionner à story_id 
+    let deleteDialog = document.getElementById("story-delete-modal");
+    
+    function showDeleteModal(btn, elementName) {
+        const elementId = btn.dataset.elementId;
+        const storyTitle = btn.dataset.storyTitle;
+        const deleteDialog = document.getElementById(`${elementName}-delete-modal`);
+        const deleteDialogTitle = document.getElementById(`${elementName}-delete-title`)
+        const deleteLink = deleteDialog.getElementsByClassName("story-delete-yes")[0]
+
+        deleteDialogTitle.innerHTML = `Êtes-vous certain.e de vouloir supprimer ${storyTitle} ?`
+        deleteLink.href = prepareUrlDeleteItem(elementName, elementId)
+        deleteDialog.showModal()
+    }
+
+    function closeStoryDeleteModal() {
+        const deleteDialog = document.getElementById("story-delete-modal");
+        deleteDialog.close()
+    }
+
+    function prepareUrlDeleteItem(elementName, item_id) {
+        let url;
+
+        if (elementName == "story") {
+            url = deleteStoryUrl.slice(0, -1)
+            url += item_id
+        } else {
+            url = deleteChapterUrl.slice(0, -1)
+            url += item_id
+        }
+        
+        return url;
+        // const response = await fetch(url, {
+        //         method: "GET",
+        // });
+
+    }
+</script>
 {% endblock %}

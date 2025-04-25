@@ -10,6 +10,8 @@ body {
     --misty-blue: #B0BFC2;
     --nude: #CCB4A9;
     --puce: #725446;
+    --very-rouge: #cc0000;
+    --paler-red: #ff5050;
 
     background-color: var(--main-bg-colour-clear);
     color: var(--midnight-blue);
@@ -161,6 +163,44 @@ body {
     text-align: right;
 }
 
+/* STORIES DELETE MODAL */
+#story-delete-modal {
+    background-color: var(--nude);
+    color: var(--puce);
+    display: flex;
+    flex-flow: column;
+
+    &:not([open]) {
+        display: none;
+    }
+}
+.story-delete-btn-div {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    gap: 10px;
+    a, button {
+        margin: 0;
+        padding: 10px;
+        background-color: var(--misty-blue);
+        color: var(--puce);
+        border: 3px double var(--midnight-blue);
+        width: fit-content;
+        border-radius: 15px;
+        font-weight: bold;
+        cursor: pointer;
+    
+        font-size: large;
+        text-decoration: none;
+        text-transform: uppercase;
+
+        &.story-delete-yes {
+            background-color: var(--very-rouge);
+            border-color: var(--paler-red);
+            color: white;
+        }
+    }
+}
 /* RESPONSIVE */
 @media screen and (max-width: 1000px){
     main {

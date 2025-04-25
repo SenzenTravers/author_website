@@ -12,8 +12,8 @@
             <a
                 class="article-story-btn"
                 href="{% url 'archives:story_edit_mode' story.id %}"
-                aria-label="Éditer l'histoire"
-                title="Éditer l'histoire"
+                aria-label="Éditer"
+                title="Éditer"
             >
                 <img src="/static/images/pen-line-svgrepo-com.svg">
             </a>
@@ -23,6 +23,18 @@
                 aria-label="Ajouter un chapitre"
                 title="Ajouter un chapitre"
             >+</a>
+
+            <button
+                class="article-story-btn delete-btn"
+                type="button"
+                data-element-id="{{ story.id }}"
+                data-story-title="{{ story.fic_title |escapejs}}"
+                aria-label="Supprimer"
+                title="Supprimer"
+                onclick="showDeleteModal(this, 'story')"
+            >
+                <img src="/static/images/bin-svgrepo-com.svg">
+            </button>
         </div>
     {% endif %}
 
@@ -63,7 +75,6 @@
                     {% if not forloop.last %}
                     &
                     {% endif %}
-                    <!-- TODO : HANDLE LAST, SAME AS SUPPORTER -->
                 {% endfor %}
             {% endif %} ❖
             
@@ -92,15 +103,14 @@
             {% autoescape off %}
                 {{ story.summary }}
             {% endautoescape %}
-        </div>
         {% if story.pairing_archetype != '' %}
             <p>
-                <span class="article-story-categ-name">Le(s) couple(s) :</span>{{ story.pairing_archetype }}
+                <span class="article-story-categ-name">Le(s) couple(s) : </span>{{ story.pairing_archetype }}
             </p>
         {% endif %}
         {% if story.one_sentence_summary != '' %}
         <p>
-            <span class="article-story-categ-name">En quelques mots :</span>{{ story.one_sentence_summary }}
+            <span class="article-story-categ-name">En quelques mots : </span>{{ story.one_sentence_summary }}
         </p>
     {% endif %}
     </div>

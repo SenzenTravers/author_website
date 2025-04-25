@@ -149,7 +149,5 @@ def brand_as_criminal(request, author_id):
             author.criminal = True
         author.save()
 
-        print('meh')
-
     return redirect('voiture_noire:profile')
 

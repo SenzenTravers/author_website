@@ -53,6 +53,7 @@
     display: flex;
     flex-flow: row;
     gap: 3px;
+    height: 29px;
 }
 .article-story-btn {
     display: flex;
@@ -73,6 +74,11 @@
     img {
         height: 15px;
         color: var(--nude);
+    }
+
+    &.delete-btn {
+        background-color: var(--very-rouge);
+        border: 1px solid var(--paler-red);
     }
 }
 
