@@ -3,7 +3,9 @@
 ## TO-DO
 ### Must-have
 - [STORIES] Delete chapter
-- [STORIES] Add PDF
+- [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
+available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). Instruction book can be found
+[here](https://github.com/jorisschellekens/borb-examples/tree/master/chapter_001).
 - [STORIES] Add HTML
 - [STORIES] Add PDF support for multiple chapters
 - [STORIES] Add HTML support for multiple chapters

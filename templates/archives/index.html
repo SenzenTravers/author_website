@@ -22,7 +22,7 @@ Sen Senestre | Romans, nouvelles et créations diverses
     </div>
 
     {% for fic in fics %}
-        {% if fic.visible %}
+        {% if fic.visible and fic.visible_not_member_only %}
             <div class="fic-card">
                 <section class="fic-card_header">
                     <h2 class="fic-card-title"><a href="{% url 'archives:show_chapter' fic.id 1 %}">{{ fic.title }}, par {{ fic.author }}</a></h2>
