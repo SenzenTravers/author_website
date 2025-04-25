@@ -20,6 +20,16 @@
 <hr>
 
 <section class="section-story">
+    {% if user == story.author.member %}
+        <div class="story-header-btns">
+            <a
+            class="vn-archives-btn-or-a chapter-nav-link"
+            href="{% url 'archives:story_edit_mode' story.id %}"
+            >
+                Éditer
+            </a>
+        </div>
+    {% endif %}
     <header class="header-story">
         <h2 class="header-story-title">
                 {{ story.fic_title }}
@@ -70,13 +80,13 @@
         <section class="story-footer">
             {% if chapter.number > 1 %}
                 <a
-                    class="chapter-nav-link" 
+                    class="vn-archives-btn-or-a chapter-nav-link" 
                     href="{% url 'archives:story_read_mode' story.id 1 %}"
                 >
                     Premier chapitre
                 </a>
                 <a
-                    class="chapter-nav-link" 
+                    class="vn-archives-btn-or-a chapter-nav-link" 
                     href="{% url 'archives:story_read_mode' story.id chapter.number|add:-1 %}"
                 >
                     Précédent
@@ -85,13 +95,13 @@
 
             {% if chapter.number != story.number_of_chapter %}
             <a
-                class="chapter-nav-link" 
+                class="vn-archives-btn-or-a chapter-nav-link" 
                 href="{% url 'archives:story_read_mode' story.id chapter.number|add:1 %}"
             >
                 Suivant
             </a>
             <a
-                class="chapter-nav-link" 
+                class="vn-archives-btn-or-a chapter-nav-link" 
                 href="{% url 'archives:story_read_mode' story.id story.number_of_chapter %}"
             >
                 Dernier chapitre

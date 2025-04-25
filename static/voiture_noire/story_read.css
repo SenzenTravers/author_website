@@ -4,6 +4,17 @@
     color: var(--jet-black);
 }
 
+.story-header-btns {
+   width: 100%;
+   display: flex;
+   flex-flow: row; 
+   justify-content: end;
+
+   a, button {
+    margin: 0;
+   }
+}
+
 .header-story {
     text-align: center;
     margin-top: 6em;
@@ -25,19 +36,19 @@
     display: flex;
     justify-content: center;
     margin-top: 3em;
+}
 
-    a {
-        margin: 2em 0.2em 2em 0.2em;
-        padding: 10px;
-        align-self: center;
-        background-color: var(--midnight-blue);
-        color: var(--nude);
-        border: 3px double var(--misty-blue);
-        width: fit-content;
-        border-radius: 15px;
-        font-weight: bold;
-        cursor: pointer;
-    }
+.vn-archives-btn-or-a {
+    margin: 2em 0.2em 2em 0.2em;
+    padding: 10px;
+    align-self: center;
+    background-color: var(--midnight-blue);
+    color: var(--nude);
+    border: 3px double var(--misty-blue);
+    width: fit-content;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .chapter-nav-link {
