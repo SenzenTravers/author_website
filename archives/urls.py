@@ -10,7 +10,7 @@ urlpatterns = [
     path(
         "",
         RedirectView.as_view(url="https://senestre-coquecigrues.fr/voiture_noire/"),
-        name="redirect-vn",
+        name="index",
     ),
     # LUCILE : à ranger plus tard
     # path('', views.Index.as_view(), name='index'),
