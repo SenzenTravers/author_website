@@ -25,17 +25,35 @@ Sen Senestre | Romans, nouvelles et créations diverses
         {% if fic.visible and fic.visible_not_member_only %}
             <div class="fic-card">
                 <section class="fic-card_header">
-                    <h2 class="fic-card-title"><a href="{% url 'archives:show_chapter' fic.id 1 %}">{{ fic.title }}, par {{ fic.author }}</a></h2>
+                    <h2 class="fic-card-title"><a href="{% url 'archives:show_chapter' fic.id 1 %}">{{ fic.fic_title }}, par {{ fic.author }}</a></h2>
                     <p class="fic-date">{{ fic.date }}</p>
                 </section>
 
                 <p class="detail_line"> 
-                {% if fic.pairing_type == "autre" %}
-                    Autre
-
-                {% else %}
-                {{ fic.pairing_type }}
-                {% endif %}
+                    {% if fic.pairing_type.all.length == 0 %}
+                    Général
+                    {% else %}
+                        {% for pair in fic.pairing_type.all %}
+                            {% if pair.pairing_type == "gen" %}
+                                Pas de couple
+                            {% elif pair.pairing_type == "ff" %}
+                                F/F
+                            {% elif pair.pairing_type == "mm" %}
+                                M/M
+                            {% elif pair.pairing_type == "het" %}
+                                Hétéro
+                            {% elif pair.pairing_type == "oth" %}
+                                Autre
+                            {% else %}
+                                Sen, à l'aide
+                            {{ pair.pairing_type }}
+                            {% endif %}
+        
+                            {% if not forloop.last %}
+                            &
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
 
                 {% if fic.rating == "g" %}
                 • Tout public

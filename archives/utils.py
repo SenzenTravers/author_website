@@ -9,12 +9,12 @@ class FicDigester:
         self.fic = Fic.objects.get(id=fic_id)
 
     def return_title(self):
-        return f"{self.fic.title}_par_{self.fic.author}"
+        return f"{self.fic.fic_title}_par_{self.fic.author}"
 
     def html_fic(self):
         fic = self.fic
         results = html_fic_base.format(
-            title=fic.title,
+            title=fic.fic_title,
             author=fic.author,
             summary=fic.summary,
             chapters=self.html_chapter()
@@ -61,7 +61,7 @@ class FicDigester:
         results = pdf_fic_base.format(
             pdf_page_title_style=pdf_page_title_style,
             pdf_normal_page_style=pdf_normal_page_style,
-            title=fic.title,
+            title=fic.fic_title,
             author=fic.author,
             summary=fic.summary,
             chapters=self.pdf_chapter()
@@ -72,7 +72,7 @@ class FicDigester:
     def epub_fic(self):
         fic = self.fic
         book = epub.EpubBook()
-        book.set_title(fic.title)
+        book.set_title(fic.fic_title)
         book.set_language("fr")
         book.add_author(fic.author)
         chapters = self.epub_chapters()
@@ -84,7 +84,7 @@ class FicDigester:
             for chapter in enumerate(chapters, start=1):
                 book.toc = (
                     epub.Link("chap_{number}.xhtml", "{number}.", "intro"),
-                    (epub.Section(fic.title), chapters),
+                    (epub.Section(fic.fic_title), chapters),
                 )
 
         book.add_item(epub.EpubNcx())

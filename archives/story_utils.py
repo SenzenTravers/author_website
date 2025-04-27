@@ -7,7 +7,7 @@ class FicDigester:
         self.fic = Fic.objects.get(id=fic_id)
 
     def return_title(self):
-        return f"{self.fic.title}_par_{self.fic.author}"
+        return f"{self.fic.fic_title}_par_{self.fic.author}"
 
     def html_fic(self):
         fic = self.fic
