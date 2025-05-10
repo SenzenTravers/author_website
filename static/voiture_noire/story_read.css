@@ -22,7 +22,8 @@
 
     .header-story-title {
         font-size: 3em;
-        margin-bottom: 0.2em;
+        margin-bottom: 0;
+        line-height: 1em;
     }
 }
 
