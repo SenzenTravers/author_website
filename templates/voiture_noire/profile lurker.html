@@ -1,0 +1,249 @@
+{% extends './base.html' %}
+{% extends './base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/voiture_noire/profile.css">
+<link rel="stylesheet" href="/static/voiture_noire/story-cards.css" />
+<!-- Moi-même : un jour, tu ôteras ceci. Bravement. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+{% endblock %}
+
+{% block title %}
+    Votre profil
+{% endblock %}
+
+{% block content %}
+<noscript>
+    <div class="javascript-warning">
+        Ce site requiert javascript pour fonctionner correctement. Désolée !
+    </div>
+</noscript>
+
+<h1>{{ user.username.capitalize }} | Votre profil</h1>
+
+<hr>
+
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<details class="section-profile">
+    <summary>
+        <h2 class="h2-blue-title">❧ Profil d'auteur/d'autrice</h2>
+    </summary>
+
+    <hr class="hr-blue-h2-title hr-section-profile">
+
+    <p class="p-library-page-link">
+        <a
+            class="library-page-link" 
+            href="{% url 'archives:story_publish' %}"
+            >
+            Publier
+        </a>
+    </p>
+
+    <h3 id="your-crimes" class="subtitle-section-profile">
+        {% if author_profile.criminal %}
+            Vos crimes
+        {% else %}
+            Vos œuvres
+        {% endif %}
+    </h3>
+
+    <div class="div-profile-criminal">
+        <input
+            type="checkbox"
+            id="criminal-switch"
+            onclick="handleCriminality()"
+            {% if author_profile.criminal %}
+            value="on"
+            checked
+            {% endif %}
+        >
+        <p>Comment ça, « mes œuvres »</p>
+    </div>
+    {% if stories|length == 0 %}
+        <p>Rien pour le moment. Rien pour le moment ? RIEN POUR LE MOMENT ? ÉCRIVEZ TOUT DE SUITE.</p>
+    {% endif %}
+
+    {% for story in stories %}
+        {% include './story_card.html' %} 
+    {% endfor %}
+</details>
+
+<details class="section-profile">
+    <summary>
+        <h2 class="h2-blue-title">❧ Profil d'échange</h2>
+    </summary>
+
+    <hr class="hr-blue-h2-title hr-section-profile">
+
+    <section>
+        <p>Ici, vous pouvez configurer vos goûts afin :</p>
+        <p>
+            1. de vous faciliter la vie durant les échanges en
+            les gardant de côté ;
+        </p>
+        <p>
+            2. de permettre à autrui
+            de vous offrir, potentiellement, des dessins ou des fics. 
+        </p>
+        <p>
+            <b>Attention</b> : si vous êtes du genre bavard, sauvegardez bien votre texte avant de le poster,
+            au cas où le grand internet mondial le mange au moment fatidique.
+        </p>
+    </section>
+
+    <form method="post" class="discord-member-profile form-main">
+        {% csrf_token %}
+        <label for="id_likes">Vous aimez :</label>
+        <div id="editor-container-likes" class="quill-input"></div>
+        <div hidden>{{ form.likes }}</div>
+        <p id="char-counter-likes" class="p-character-counter"></p>
+
+        <label for="id_dislikes">Vous détestez :</label>
+        <div id="editor-container-dislikes" class="quill-input">
+        </div>
+        <div hidden>{{ form.dislikes }}</div>
+        <p id="char-counter-dislikes" class="p-character-counter"></p>
+        <button type="submit">Valider</button>
+    </form>
+</details>
+
+<script>
+    /////////// INITIALIZE CUSTOM MODULES
+    class Counter {
+        constructor(quill, options) {
+            this.quill = quill;
+            this.options = options;
+            this.container = document.querySelector(options.container);
+            quill.on(Quill.events.TEXT_CHANGE, this.update.bind(this));
+        }
+
+        calculate() {
+            const text = this.quill.getText();
+
+            if (this.options.unit === 'word') {
+            const trimmed = text.trim();
+            // Splitting empty text returns a non-empty array
+            return trimmed.length > 0 ? trimmed.split(/\s+/).length : 0;
+            } else {
+            return text.length;
+            }
+        }
+
+        update() {
+            const length = this.calculate();
+            let label = this.options.unit;
+            if (length !== 1) {
+            label += 's';
+            }
+            this.container.innerText = `${length} ${label}`;
+            if (length >= 3000) {
+                this.container.classList.add("limit-reached")
+                this.container.innerText += " : attention ! La limite acceptée est de 3 000 caractères."
+            } else {
+                this.container.classList.remove("limit-reached")
+            }
+        }
+        }
+
+        Quill.register('modules/counter', Counter);
+
+    let likesValue = `{{ form.likes.value | safe }}`  
+    let dislikesValue = `{{ form.dislikes.value | safe }}`  
+
+
+    let quillLikes = new Quill('#editor-container-likes', {
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-likes',
+                unit: 'caractère'
+            }
+        },
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
+        placeholder: '',
+        theme: 'snow'
+    });
+
+    /////// SECOND QUILL EDITOR
+    let quillDislikes = new Quill('#editor-container-dislikes', {
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline','strike', 'link', { 'list': 'ordered'}, { 'list': 'bullet' }],
+            ],
+            history: {
+                delay: 1000,
+                maxStack: 200,
+                userOnly: false
+            },
+            counter: {
+                container: '#char-counter-dislikes',
+                unit: 'caractère'
+            }
+        },
+        formats: [
+            'bold', 'italic', 'underline','strike', 'link',
+            'list', 'align'
+        ],
+        theme: 'snow'
+    });
+
+    ///// UTILS
+    quillLikes.on('text-change', function(delta, source) {
+        handleCharacterLimit("likes")
+	    updateHtmlOutput("likes")
+    })
+    quillDislikes.on('text-change', function(delta, source) {
+        handleCharacterLimit("dislikes")
+        updateHtmlOutput("dislikes")
+    })
+
+    function updateHtmlOutput(editorName) {
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+        let html = getQuillHtml(editorName);
+        document.getElementById('id_'+editorName).innerText = html;
+    }
+
+    function getQuillHtml(editorName) {
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+        if (editorName == "likes") {
+            return quillLikes.root.innerHTML;
+        } else {
+            return quillDislikes.root.innerHTML;
+        }
+
+    }
+
+    quillLikes.clipboard.dangerouslyPasteHTML(likesValue);
+    quillDislikes.clipboard.dangerouslyPasteHTML(dislikesValue);
+
+
+    ////// GENERAL EDITOR FUNCTIONS
+    function handleCharacterLimit(editorName) {
+        const limit = 3000
+        const quill = editorName == "likes"? quillLikes: quillDislikes
+
+        if (quill.getLength() > limit) {
+            quill.history.undo();
+        }
+    }
+</script>
+{% endblock %}

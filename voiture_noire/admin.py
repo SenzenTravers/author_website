@@ -10,9 +10,9 @@ class PromptAdmin(admin.ModelAdmin):
 
 
 class DiscordProfileAdmin(admin.ModelAdmin):
-    fields = ['member', 'likes', 'dislikes']
-    list_display = ('member', 'likes', 'dislikes')
-    list_filter = ('member', 'likes', 'dislikes')
+    fields = ['member', 'likes', 'dislikes', 'is_creator']
+    list_display = ('member', 'likes', 'dislikes', 'is_creator')
+    list_filter = ('member', 'likes', 'dislikes', 'is_creator')
 
 # admin.site.register(Author)
 # admin.site.register(Chapter, ChapterAdmin)

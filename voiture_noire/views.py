@@ -1,4 +1,7 @@
+from random import randint
+
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.views import generic, View
@@ -32,7 +35,7 @@ class MemberList(generic.ListView):
     context_object_name = 'DiscordProfiles'
 
     def get_queryset(self):
-        return DiscordProfile.objects.order_by('member__username')    
+        return DiscordProfile.objects.filter(is_creator=True).order_by('member__username')    
 
 
 class Profile(generic.View):
@@ -49,16 +52,34 @@ class Profile(generic.View):
             self.initial = discord_member
             discord_form = self.form_class(instance=self.initial)
             author_profile = Author.objects.filter(member=request.user).first() 
+            count = Fic.objects.count()
+            random_rec = None
+            potential_recs = Fic.objects.filter(
+                ~Q(author=author_profile) & (
+                    (Q(visible=True)| Q(visible_not_member_only=True))
+                )
+            )
+            
+            if len(potential_recs) > 1:
+                random_rec = potential_recs[randint(0, count-1)]
+            else:
+                random_rec = potential_recs[0]
+
             if author_profile:
                 user_stories = Fic.objects.filter(author=author_profile)
         else:
-            self.initial = {"likes": "", "dislikes": ""}
-            discord_form = self.form_class(initial=self.initial)
+            raise PermissionDenied()
 
         return render(
             request,
             self.template_name,
-            {"author_profile": author_profile, "form": discord_form, "stories": user_stories})
+            {
+                "author_profile": author_profile,
+                "form": discord_form,
+                "stories": user_stories,
+                "random_rec": random_rec
+            }
+        )
     
     def post(self, request, *args, **kwargs):
         new_profile = DiscordProfileForm(request.POST)
