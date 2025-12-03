@@ -13,6 +13,7 @@ class DiscordProfile(models.Model):
         on_delete=models.CASCADE,
         related_name="discord_profile"
     )
+    birthday = models.DateField(null=True)
 
 
 class Prompt(models.Model):
@@ -28,5 +29,17 @@ class Prompt(models.Model):
     pairing_type = models.CharField(max_length=3, choices=PAIRING_TYPE)
     supporters = models.ManyToManyField(
         Member, 
-        blank=True,
+        blank=True
     )
+
+
+class ServerEvent(models.Model):
+    event_start = models.DateField()
+    event_end = models.DateField()
+    EVENT_TYPE = [
+        ("conv", "Salon"),
+        ("travel", "Voyage")
+    ]
+    event_type = models.CharField(max_length=10, choices=EVENT_TYPE)
+    title = models.CharField(max_length=50)
+    actor = models.ForeignKey(DiscordProfile, on_delete=models.CASCADE, related_name="events")

@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 
-from .models import Author, Chapter, Fic, PairingType
+from .models import Author, Chapter, Comment, Fic, PairingType
 
 class AuthorForm(forms.ModelForm):
     class Meta:
@@ -18,6 +18,12 @@ class ChapterForm(forms.ModelForm):
     class Meta:
         model = Chapter
         fields = '__all__'
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
 
 
 class FicForm(forms.ModelForm):

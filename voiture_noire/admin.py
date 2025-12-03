@@ -1,7 +1,7 @@
 from django.utils.translation import gettext, gettext_lazy as _
 
 from django.contrib import admin
-from .models import DiscordProfile, Prompt
+from .models import DiscordProfile, Prompt, ServerEvent
 
 class PromptAdmin(admin.ModelAdmin):
     fields = ['body', 'pairing_type', 'supporters']
@@ -10,11 +10,16 @@ class PromptAdmin(admin.ModelAdmin):
 
 
 class DiscordProfileAdmin(admin.ModelAdmin):
-    fields = ['member', 'likes', 'dislikes', 'is_creator']
-    list_display = ('member', 'likes', 'dislikes', 'is_creator')
-    list_filter = ('member', 'likes', 'dislikes', 'is_creator')
+    fields = ['member', 'likes', 'dislikes', 'is_creator', 'birthday']
+    list_display = ('member', 'likes', 'dislikes', 'is_creator', 'birthday')
+    list_filter = ('member', 'likes', 'dislikes', 'is_creator', 'birthday')
 
-# admin.site.register(Author)
-# admin.site.register(Chapter, ChapterAdmin)
+
+class ServerEventAdmin(admin.ModelAdmin):
+    fields = ['actor', 'event_type', 'title', 'event_start', 'event_end']
+    list_display = ('actor', 'event_type', 'title', 'event_start', 'event_end')
+    list_filter = ('actor', 'event_type', 'title', 'event_start', 'event_end')
+
 admin.site.register(Prompt, PromptAdmin)
 admin.site.register(DiscordProfile, DiscordProfileAdmin)
+admin.site.register(ServerEvent, ServerEventAdmin)

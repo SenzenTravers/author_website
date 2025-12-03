@@ -2,6 +2,10 @@
 
 ## TO-DO
 ### Must-have
+- [VOITURE_NOIRE] A Json view that Eriza would be able to ping
+- [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)
+- [SERVER] Add a birthday (ongoing: lacking form implementation)
+- [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
 available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). Instruction book can be found
@@ -14,7 +18,6 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field
-- [BLACK CAR] Small, funny script to handle welcome-blurb
 
 ### Last priority
 - [PINE] (Mobile) : Rearrange banner

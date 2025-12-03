@@ -116,4 +116,9 @@ class Chapter(models.Model):
             models.UniqueConstraint(fields=['fic', 'number'], name="unique_chapter_number_for_fic")
         ]
 
+
+class Comment(models.Model):
+    chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, blank=True, related_name="comments")
+    author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, related_name="comments")
+    content = models.TextField(max_length=3000)
 # TO ADD: concept de série
