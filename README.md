@@ -39,12 +39,14 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [PINE] (Computer) Commissions : final page
 - [PINE] (Mobile) Commissions : final page
 - [PROMPTS] Properly implement [error messages](https://docs.djangoproject.com/en/5.1/ref/contrib/messages/)
+- [ENV] upgrading python  >= 3.13 needs to upgrade cffi to >= 1.17.1 also
+
 ## LOCAL USE
 
 ### Installing
 This app was tested with Python 3.11 and Python 3.12.3. Other versions were not tested.
 
-FOR LINUX : navigate to the project's root folder from your command line
+FOR UNIX : navigate to the project's root folder from your command line
  interface, then:
 
 ``` bash
@@ -64,6 +66,10 @@ version of requirements.txt, then try again. Mssql is only used in production.
 Then, run:
 ``` bash
 # Create migrations, i.e. ORM-generated files.
+# pay attention that the folder migrations should exists 
+# its currenting ignore by git (see .gitignore file)
+# can cause issue like: 
+# 'CommandError: Unable to serialize database: no such table: voiture_noire_discordprofile'
 python manage.py makemigrations
 python manage.py migrate
 
