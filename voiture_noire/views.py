@@ -118,19 +118,18 @@ class PromptView(View):
     def post(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
         criteria = request.POST['sort_value']
-
-        if criteria == "supporters":
-            prompt_list = Prompt.objects.annotate(number_of_supporters=Count('supporters')).order_by("number_of_supporters")
-        elif criteria == "pairing_type":
-            prompt_list = Prompt.objects.order_by(criteria, "body")
-        elif criteria == "user_likes":
-            prompt_list = Prompt.objects.annotate(
-                has_supporter=Count(
-                    'supporters', filter=Q(supporters__id=request.user.id)
-                )).order_by('-has_supporter', 'body')
-            print(prompt_list)
-        else:
-            prompt_list = Prompt.objects.order_by(criteria)
+        match criteria:
+            case "supporters":
+                prompt_list = Prompt.objects.annotate(number_of_supporters=Count('supporters')).order_by("number_of_supporters")
+            case "pairing_type":
+                prompt_list = Prompt.objects.order_by(criteria, "body")
+            case "user_likes":
+                prompt_list = Prompt.objects.annotate(
+                    has_supporter=Count(
+                        'supporters', filter=Q(supporters__id=request.user.id)
+                    )).order_by('-has_supporter', 'body')
+            case _:
+                prompt_list = Prompt.objects.order_by(criteria)
         return render(request, self.template_name, {
             "form": form,
             "prompt_list": prompt_list
@@ -164,10 +163,7 @@ def brand_as_criminal(request, author_id):
     author = Author.objects.filter(member=request.user).first()
 
     if author and request.user == author.member :
-        if author.criminal:
-            author.criminal = False
-        else:
-            author.criminal = True
+        author.criminal = not author.criminal # toggle the value ON/OFF
         author.save()
 
     return redirect('voiture_noire:profile')
