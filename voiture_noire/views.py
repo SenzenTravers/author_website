@@ -1,8 +1,10 @@
 from random import randint
+from datetime import date, datetime
 
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
@@ -167,4 +169,27 @@ def brand_as_criminal(request, author_id):
         author.save()
 
     return redirect('voiture_noire:profile')
+
+def discord_profiles_birthdates(request):
+    # Get date from request, default to today if not provided
+    date_param = request.GET.get('date') or request.POST.get('date')
+    
+    if date_param:
+        try:
+            query_date = datetime.strptime(date_param, '%Y-%m-%d').date()
+        except ValueError:
+            query_date = date.today()
+    else:
+        query_date = date.today()
+    
+    profiles = DiscordProfile.objects.filter(birthday__isnull=False).select_related('member')
+    data = [
+        {
+            'member_id': profile.member.id if profile.member else None,
+            'member_username': profile.member.username if profile.member else None,
+            'birthday': profile.birthday.isoformat() if profile.birthday else None
+        }
+        for profile in profiles if profile.birthday and profile.birthday == query_date
+    ]
+    return JsonResponse({'members_birthdays': data, 'query_date': query_date.isoformat()})
 
