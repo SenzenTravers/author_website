@@ -76,6 +76,22 @@
         {% endautoescape %}
     </section>
 
+    <section class="story-actions-footer">
+        <a
+            class="vn-archives-btn-or-a"
+            href="{% url 'archives:download_html' story.id %}"
+        >
+            EPUB
+        </a>
+
+        <a
+            class="vn-archives-btn-or-a"
+            href="{% url 'archives:download_html' story.id %}"
+        >
+            HTML
+        </a>
+    </section>
+
     {% if story.has_multiple_chapters %}
         <section class="story-footer">
             {% if chapter.number > 1 %}

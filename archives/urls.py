@@ -14,7 +14,7 @@ urlpatterns = [
     ),
     # LUCILE : à ranger plus tard
     # path('', views.Index.as_view(), name='index'),
-    # path("<int:fic_id>/html", views.download_html, name="download_html"),
+    path("<int:story_id>/download_html", views.download_html, name="download_html"),
     # path("<int:fic_id>/pdf", views.download_pdf, name="download_pdf"),
     # path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     # path("<int:fic_id>/clap", views.clap, name="clap"),

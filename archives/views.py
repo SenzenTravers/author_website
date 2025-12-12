@@ -12,6 +12,7 @@ from xhtml2pdf import pisa
 
 from .forms import Author, ChapterForm, FicForm
 from .models import Chapter, Fic, PairingType
+from .story_downloader import EpubMaker, HtmlMaker
 from .utils import FicDigester
 
 
@@ -284,6 +285,22 @@ def delete_chapter(request, chapter_id):
     else:
         raise HttpResponseNotAllowed("Vous n'êtes pas l'auteur de cette histoire !")
 
+
+######################## NEW DOWNLOAD FUNCTION
+def download_html(request, story_id):
+    story = get_object_or_404(Fic, pk=story_id)
+    document_maker = HtmlMaker(story)
+
+    response = HttpResponse(
+        document_maker.return_story(),
+        content_type='text/html',
+        headers={
+            'Content-Disposition': f'attachment; filename="{story.fic_title}, by {story.author}.html"'
+        },
+    )
+
+    return response
+
 ########## OLD
 def show_chapter(request, fic_id, number):
     fic = get_object_or_404(Fic, pk=fic_id)
@@ -301,16 +318,16 @@ def show_chapter(request, fic_id, number):
         })
 
 ################ UTILS
-def download_html(request, fic_id):
-    digester = FicDigester(fic_id)
-    title = digester.return_title()
-    response = HttpResponse(
-        digester.html_fic(),
-        content_type='text/html',
-        headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
-    )
+# def download_html(request, fic_id):
+#     digester = FicDigester(fic_id)
+#     title = digester.return_title()
+#     response = HttpResponse(
+#         digester.html_fic(),
+#         content_type='text/html',
+#         headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
+#     )
 
-    return response
+#     return response
 
 def download_pdf(request, fic_id):
     digester = FicDigester(fic_id)
