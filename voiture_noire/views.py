@@ -170,7 +170,7 @@ def brand_as_criminal(request, author_id):
 
     return redirect('voiture_noire:profile')
 
-def discord_profiles_birthdates(request):
+def discord_profiles_birthdays(request):
     # Get date from request, default to today if not provided
     date_param = request.GET.get('date') or request.POST.get('date')
     
