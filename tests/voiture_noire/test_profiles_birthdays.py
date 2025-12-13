@@ -2,7 +2,7 @@ from datetime import date
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import Member
-from .models import DiscordProfile
+from voiture_noire.models import DiscordProfile
 
 
 class DiscordProfilesbirthdaysTestCase(TestCase):
@@ -21,6 +21,8 @@ class DiscordProfilesbirthdaysTestCase(TestCase):
         DiscordProfile.objects.create(member=self.member3, birthday=date(2024, 6, 15))
 
     def test_discord_profiles_birthdays_with_a_requesting_date(self):
+        # Login as one of the members
+        self.client.login(username="user1", password="pass")
         # Request with a specific date
         response = self.client.get(reverse('voiture_noire:birthdays'), {'date': '2024-12-25'})
         
@@ -34,6 +36,8 @@ class DiscordProfilesbirthdaysTestCase(TestCase):
         self.assertEqual(data['query_date'], '2024-12-25')
 
     def test_discord_profiles_birthdays_without_a_requesting_date(self):
+        # Login as one of the members
+        self.client.login(username="user1", password="pass")
         # Request without a specific date
         response = self.client.get(reverse('voiture_noire:birthdays'), { })
         
