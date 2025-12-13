@@ -1,12 +1,8 @@
-from io import BytesIO
-import zipfile
-
-import pypub
-
 from archives.models import Chapter
 
 from .common_utils import return_chapter_title, return_html_chapter_title
 from .epub_bases import html_chapter
+
 
 class EpubMaker:
     def __init__(
@@ -20,7 +16,6 @@ class EpubMaker:
         self.add_chapters()
 
         return self.write_epub_to_memory(self.epub_file)
-        # return write_epub_to_memory(epub)
         # self.epub_file.create(f"{self.story.fic_title}.epub")
 
     def return_story(self):        
