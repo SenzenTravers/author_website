@@ -5,7 +5,7 @@ from accounts.models import Member
 from .models import DiscordProfile
 
 
-class DiscordProfilesBirthdatesTestCase(TestCase):
+class DiscordProfilesbirthdaysTestCase(TestCase):
     def setUp(self):
         # Create 3 members
         self.member1 = Member.objects.create_user("user1", email="user1@test.com", password="pass")
@@ -20,9 +20,9 @@ class DiscordProfilesBirthdatesTestCase(TestCase):
         # - One with a different birthdate
         DiscordProfile.objects.create(member=self.member3, birthday=date(2024, 6, 15))
 
-    def test_discord_profiles_birthdates_with_a_requesting_date(self):
+    def test_discord_profiles_birthdays_with_a_requesting_date(self):
         # Request with a specific date
-        response = self.client.get(reverse('voiture_noire:birthdates'), {'date': '2024-12-25'})
+        response = self.client.get(reverse('voiture_noire:birthdays'), {'date': '2024-12-25'})
         
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -33,9 +33,9 @@ class DiscordProfilesBirthdatesTestCase(TestCase):
         self.assertEqual(data['members_birthdays'][0]['birthday'], '2024-12-25')
         self.assertEqual(data['query_date'], '2024-12-25')
 
-    def test_discord_profiles_birthdates_without_a_requesting_date(self):
+    def test_discord_profiles_birthdays_without_a_requesting_date(self):
         # Request without a specific date
-        response = self.client.get(reverse('voiture_noire:birthdates'), { })
+        response = self.client.get(reverse('voiture_noire:birthdays'), { })
         
         self.assertEqual(response.status_code, 200)
         data = response.json()
