@@ -16,20 +16,6 @@ from .story_downloader import EpubMaker, HtmlMaker
 from .utils import FicDigester
 
 
-class Index(generic.ListView):
-    template_name = 'archives/index.html'
-    context_object_name = 'fics'
-
-
-    def get_queryset(self):
-        user = self.request.user
-
-        if user.is_authenticated:
-            return Fic.objects.filter(visible=True).order_by('-date')
-        else:
-            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
-
-
 class StoryReadMode(generic.View):
     template_name = 'archives/story_read_mode.html'
 
@@ -295,8 +281,24 @@ def download_html(request, story_id):
         document_maker.return_story(),
         content_type='text/html',
         headers={
-            'Content-Disposition': f'attachment; filename="{story.fic_title}, by {story.author}.html"'
+            'Content-Disposition': f'attachment; filename="{story.fic_title}, par {story.author}.html"'
         },
+    )
+
+    return response
+
+def download_epub(request, story_id):
+    story = get_object_or_404(Fic, pk=story_id)
+    document_maker = EpubMaker(story)
+
+    epub_bytes = document_maker.generate_ebook()
+
+    response = HttpResponse(
+        epub_bytes,
+        content_type="application/epub+zip",
+        headers={
+            'Content-Disposition': f'attachment; filename="{story.fic_title}, par {story.author}.epub"'
+        }
     )
 
     return response
@@ -318,17 +320,6 @@ def show_chapter(request, fic_id, number):
         })
 
 ################ UTILS
-# def download_html(request, fic_id):
-#     digester = FicDigester(fic_id)
-#     title = digester.return_title()
-#     response = HttpResponse(
-#         digester.html_fic(),
-#         content_type='text/html',
-#         headers={'Content-Disposition': f'attachment; filename="{title}.html"'},
-#     )
-
-#     return response
-
 def download_pdf(request, fic_id):
     digester = FicDigester(fic_id)
     title = digester.return_title()
@@ -345,18 +336,6 @@ def download_pdf(request, fic_id):
         request,
         'error_500.html'
         )
-
-    return response
-
-def download_epub(request, fic_id):
-    digester = FicDigester(fic_id)
-    title = digester.return_title()
-
-    response = HttpResponse(
-        digester.epub_fic(),
-        content_type='application/epub',
-        headers={'Content-Disposition': f'attachment; filename="{title}.epub"'},
-    )
 
     return response
 

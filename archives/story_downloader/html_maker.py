@@ -1,5 +1,6 @@
 from archives.models import Chapter
 
+from .common_utils import return_html_chapter_title
 from .html_bases import *
 
 class HtmlMaker:
@@ -26,9 +27,10 @@ class HtmlMaker:
             return chapters[0].content
         else:
             for chapter in chapters:
+                chapter_title_html = return_html_chapter_title(chapter, i)
                 formatted_chapters.append(
-                    numbered_chapter_title.format(chapter_number=i) + chapter.content
-                    )
+                    chapter_title_html + chapter.content
+                )
                 i += 1
 
             return "".join(formatted_chapters)

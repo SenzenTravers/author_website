@@ -13,11 +13,10 @@ urlpatterns = [
         name="index",
     ),
     # LUCILE : à ranger plus tard
-    # path('', views.Index.as_view(), name='index'),
-    path("<int:story_id>/download_html", views.download_html, name="download_html"),
     # path("<int:fic_id>/pdf", views.download_pdf, name="download_pdf"),
-    # path("<int:fic_id>/epub", views.download_epub, name="download_epub"),
     # path("<int:fic_id>/clap", views.clap, name="clap"),
+    path("download_epub/<int:story_id>", views.download_epub, name="download_epub"),
+    path("download_html/<int:story_id>", views.download_html, name="download_html"),
     path('stories/publish', login_required(views.PublishView.as_view()), name="story_publish"),
     path('stories/delete/<int:story_id>', login_required(views.delete_story), name="delete_story"),
     path('stories/delete/<int:chapter_id>', login_required(views.delete_chapter), name="delete_chapter"),

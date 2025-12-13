@@ -3,7 +3,7 @@ html_fic_base = """<!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Senestre-Coquecigrues">
+        <meta name="author" content="{author}">
         <title>{title}, par {author}</title>
 
     </head>
@@ -22,5 +22,3 @@ html_fic_base = """<!DOCTYPE html>
     {chapters}
     </body>
 </html>"""
-
-numbered_chapter_title = """<h2 style="margin-top: 4em;margin-bottom:2em;text-align: center; text-transform: uppercase">Chapitre {chapter_number}</h2>"""
