@@ -13,7 +13,7 @@ class DiscordProfile(models.Model):
         on_delete=models.CASCADE,
         related_name="discord_profile"
     )
-    birthday = models.DateField(null=True)
+    birthday = models.DateField(null=True, blank=True)
 
 
 class Prompt(models.Model):
