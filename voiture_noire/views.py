@@ -137,6 +137,34 @@ class PromptView(View):
             "prompt_list": prompt_list
             })
 
+
+class DiscordProfilesBirthdaysUpdateView(generic.edit.UpdateView):
+    form_class = DiscordProfileForm
+    template_name = 'voiture_noire/profile.html'
+    initial = {}
+ 
+    def update(self, request, *args, **kwargs):
+        profile = DiscordProfileForm(request.POST)
+        if profile.is_valid():
+            discord_member = DiscordProfile.objects.get(member=request.user)
+            #to do what if object does not exists ?
+            instance = profile.save(commit=False)
+            # discord_member.likes = instance.likes
+            # discord_member.dislikes = instance.dislikes
+            # discord_member.member = request.user
+            discord_member.birthday = instance.birthday
+            discord_member.save()
+        else:
+            messages.add_message(
+                request,
+                messages.ERROR,
+                "Une erreur est survenue durant l'enregistrement de votre profil. Veuillez garder chaque champ en-dessous de 3000 caractères."
+            )
+        return redirect('voiture_noire:profile')
+       
+
+
+## View functions
 def post_prompt(request):
     new_prompt = PromptForm(request.POST)
     if new_prompt.is_valid():
