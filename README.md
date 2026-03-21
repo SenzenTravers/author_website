@@ -3,6 +3,7 @@
 ## TO-DO
 ### Must-have
 - [STORIES] Delete chapter
+- [STORIES] User Comment
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
 available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). Instruction book can be found
 [here](https://github.com/jorisschellekens/borb-examples/tree/master/chapter_001).
@@ -11,6 +12,7 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [STORIES] Add HTML support for multiple chapters
 
 ### Nice to have
+- [STORIES] User Reaction?
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field

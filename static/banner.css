@@ -1,9 +1,14 @@
+@font-face {
+  font-family: "IM Fell";
+  src: url(fonts/IMFellEnglishSC-Regular.woff2);
+}
+
 /* GENERAL HEADER QUALITIES */
 .main-site-header {
     --banner-height: 250px;
     --logo-height: calc(var(--banner-height) - 1vh);
 
-    font-family: "IM Fell DW Pica", "Libre Baskerville", serif;
+    font-family: "IM Fell", "Libre Baskerville", serif;
     height: var(--banner-height);
     line-height: 2em;
 
@@ -60,7 +65,7 @@
         margin: 0;
         padding-top: 8px;
         text-align: center;
-        font-family: 'IM Fell English SC', 'IM Fell DW Pica', serif;
+        font-family: "IM Fell", serif;
         font-size: 50px;
         color: #f5deb3;
         background: #e6be8a;
@@ -78,7 +83,8 @@
     .logo-subtitle {
         position: absolute;
         top: 111px;
-        left: 42px;
+        left: 50px;
+        font-family: "Libre Baskerville", serif;
         font-size: 19px;
         font-style: italic;
         text-align: center;
