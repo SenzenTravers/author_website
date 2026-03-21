@@ -1,5 +1,17 @@
 @import "./normalize.css";
-@import "./banner.css"; /* Using a string */
+@import "./banner.css";
+
+@font-face {
+  font-family: "IM Fell";
+  src: url(fonts/IMFellEnglishSC-Regular.woff2);
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Libre Baskerville"; /* set name */
+  src: url(fonts/LibreBaskerville-VariableFont_wght.woff2);
+  font-display: swap;
+}
 
 body {
     --very-dark-purple: #35182b;
@@ -30,7 +42,7 @@ footer {
 }
 
 h1 {
-    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
+    font-family: "IM Fell", "Libre Baskerville", serif;
     text-align: center;
     font-size: 3em;
     text-transform: uppercase;
@@ -44,7 +56,7 @@ h1 {
 }
 
 .h2-writer {
-    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
+    font-family: "IM Fell", "Libre Baskerville", serif;
     text-align: center;
     background: radial-gradient(circle, #f5deb3 0%, #e6be8a 50%, #e6be8a 100%);
     -webkit-background-clip: text;
@@ -54,7 +66,7 @@ h1 {
 }
 
 h3 {
-    font-family: "IM Fell Double Pica", "Libre Baskerville", serif;
+    font-family: "IM Fell", "Libre Baskerville", serif;
     font-size: 1.3em;
     text-transform: uppercase;
     color: #e6be8a;
