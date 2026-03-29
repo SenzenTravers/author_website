@@ -10,12 +10,6 @@ def error_404(request, exception):
 def error_500(request):
     return render(request, 'error_500.html')
 
-@require_GET
-@cache_control(max_age=60 * 60 * 24, immutable=True, public=True)  # one day
-def favicon(request: HttpRequest) -> HttpResponse:
-    file = (settings.BASE_DIR / "static" / "images/bimbimka_feather-ai2.svg").open("rb")
-    return FileResponse(file)
-
 def pine_portfolio(request):
     return render(
         request,

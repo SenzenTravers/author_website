@@ -12,7 +12,7 @@ class AuthorForm(forms.ModelForm):
 
 class ChapterForm(forms.ModelForm):
     publish_date = forms.DateField(
-        widget = forms.SelectDateWidget(years=range(2005, 2026)),
+        widget = forms.SelectDateWidget(years=range(2005, 2027)),
     )
 
     class Meta:
@@ -32,7 +32,7 @@ class FicForm(forms.ModelForm):
     }
 
     date = forms.DateField(
-        widget = forms.SelectDateWidget(years=range(2005, 2026))
+        widget = forms.SelectDateWidget(years=range(2005, 2027))
     )
     pairing_type = forms.ModelMultipleChoiceField(
         widget=forms.CheckboxSelectMultiple,

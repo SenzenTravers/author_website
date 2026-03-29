@@ -29,7 +29,6 @@ urlpatterns = [
     path('archives/', include('archives.urls', namespace='archives')),
     path('gadgets/', include('gadgets.urls', namespace='gadgets:index')),
     path('voiture_noire/', include('voiture_noire.urls', namespace='voiture_noire:index')),
-    path("favicon.ico", views.favicon),
     path("pinytree", views.pine_portfolio)
 ]
 
