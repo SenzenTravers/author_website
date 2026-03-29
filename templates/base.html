@@ -1,6 +1,9 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
+        <link rel ="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -16,26 +19,11 @@
         />
 
         <title>
-            {% block title %} Sen Senestre, Autrice M/M | Romans BL et fantasy
-            {% endblock %}
+            {% block title %} Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}
         </title>
         {% block stylesheet %}
         <link rel="stylesheet" href="/static/base.css" />
-        {% endblock %} <link rel=icon href=favicon.ico type=image/ico>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=IM+Fell+DW+Pica:ital@0;1&family=IM+Fell+Double+Pica:ital@0;1&display=swap"
-            rel="stylesheet"
-        />
-        <link
-            href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap"
-            rel="stylesheet"
-        />
+        {% endblock %}
     </head>
 
     <body>
