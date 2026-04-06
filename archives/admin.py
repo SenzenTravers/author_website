@@ -5,7 +5,9 @@ from .models import Author, Chapter, Story, PairingType
 
 
 class ChapterAdmin(admin.ModelAdmin):
-    fields = ['story', 'chapter_title', 'number', 'content', 'author_note']
+    fields = [
+        'story', 'chapter_title', 'number', 'content', 'chapter_author_note'
+    ]
 
 
 class StoryAdmin(admin.ModelAdmin):

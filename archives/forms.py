@@ -11,7 +11,12 @@ class AuthorForm(forms.ModelForm):
 
 
 class ChapterForm(forms.ModelForm):
-    publish_date = forms.DateField(
+    # LUCILE : import datetime
+    # date = datetime.date.today()
+    # year = date.strftime("%Y")
+    # print(f"Current Year -> {year}")
+
+    publishing_date = forms.DateField(
         widget = forms.SelectDateWidget(years=range(2005, 2027)),
     )
 

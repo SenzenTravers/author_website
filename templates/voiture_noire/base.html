@@ -15,8 +15,7 @@
         />
 
         <title>
-            {% block title %} La Petite Voiture Noire | Archives de textes queer
-            {% endblock %}
+            {% block title %} La Petite Voiture Noire | Archives de textes queer {% endblock %}
         </title>
         {% block stylesheet %}
         <link rel="stylesheet" href="/static/base.css" />
@@ -47,16 +46,17 @@
                         <button type="submit">Se déconnecter</button>
                     </form>
                 </li>
-            {% else %}
+                {% else %}
                 <li><a href="{% url 'login' %}">Se connecter</a></li>
-            {% endif %}
-                <li><a href="{% url 'voiture_noire:index' %}">La bibliothèque</a></li>
-            {% if user.is_authenticated %}
+                {% endif %}
+
+                <li><a href="{% url 'voiture_noire:index' %}">Bibliothèque</a></li>
+                
+                {% if user.discord_profile.id %}
                 <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
                 <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
                 <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
-            {% endif %}
-                <!-- <li><a href="">Mes écrits</a></li> -->
+                {% endif %}
             </ul>
 
             {% if user.is_authenticated %}

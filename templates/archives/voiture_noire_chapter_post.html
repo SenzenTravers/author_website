@@ -18,7 +18,7 @@
     </div>
 </noscript>
 
-<h1>Poster un nouveau chapitre de {{ story.fic_title }}</h1>
+<h1>Poster un nouveau chapitre de {{ story.story_title }}</h1>
 <hr>
 
 {% if messages %}
@@ -48,9 +48,9 @@
             <div hidden>{{ chapter_form.content }}</div>
             <p id="char-counter-content" class="p-character-counter"></p>
 
-            <label for="id_publish_date">Date de publication du chapitre</label>
+            <label for="id_publishing_date">Date de publication du chapitre</label>
             <div class="select-date">
-                {{ chapter_form.publish_date }}
+                {{ chapter_form.publishing_date }}
             </div>
         </section>
 
@@ -64,7 +64,7 @@
 </section>
 
 <script>
-    let ficAuthorNoteValue = `{{ fic_form.fic_author_note.value |safe }}` !== "None" ? `{{ fic_form.fic_author_note.value |safe }}`:''
+    let ficAuthorNoteValue = `{{ fic_form.story_author_note.value |safe }}` !== "None" ? `{{ fic_form.story_author_note.value |safe }}`:''
     let ficSummaryValue = `{{ fic_form.summary.value |safe }}`!== "None" ?`{{ fic_form.summary.value |safe }}`:''
     let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
     let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''

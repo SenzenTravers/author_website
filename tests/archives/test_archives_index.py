@@ -21,7 +21,6 @@ class ArchivesIndexTestCase(TestCase):
             rating="g", visibility="Everyone"
         )
 
-    ############### INDEX
     def test_voiture_noire_index_unlogged(self):
         # Unlogged users only see stories available to everyone.
         # Future stories are not displayed.
@@ -80,42 +79,3 @@ class ArchivesIndexTestCase(TestCase):
         self.assertIn("Private", visibility_status) 
         self.assertEqual(response.status_code, 200)
         self.assertIn(future_story, fetched_stories)
-
-    # ############### ACCESS SPECIFIC FIC
-    # def test_voiture_noire_unlogged_user_can_only_see_fic_visible_for_everyone(self):
-    #     # Non-visible, non-visible by outsider story
-    #     response = self.client.get(reverse("archives:story_read_mode", kwargs={'fic_id':31, 'number': 1}))
-    #     self.assertEqual(response.status_code, 302)
-    #     # Visible, non-visible by outsider story
-    #     response = self.client.get(reverse("archives:story_read_mode", kwargs={'fic_id':30, 'number': 1}))
-    #     self.assertEqual(response.status_code, 302)
-    #     # Visible by everyone story
-    #     response = self.client.get(reverse("archives:story_read_mode", kwargs={'fic_id':2, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-
-    # def test_voiture_noire_logged_user_behaviour(self):
-    #     test_client = Client()
-    #     test_client.login(username="Mr NoAccounts", password="motdepasse")
-    #     # Non-visible, non-visible by outsider story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':31, 'number': 1}))
-    #     self.assertEqual(response.status_code, 302)
-    #     # Visible, non-visible by outsider story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':30, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-    #     # Visible by everyone story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':2, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-
-    # def test_voiture_noire_author_can_see_non_visible_fic(self):
-    #     test_client = Client()
-    #     test_client.login(username="MrsDiscordMemberAndAuthor", password="hypatia")
-    #     # Non-visible, non-visible by outsider story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':31, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-    #     # Visible, non-visible by outsider story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':30, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-    #     # Visible by everyone story
-    #     response = test_client.get(reverse("archives:story_read_mode", kwargs={'fic_id':2, 'number': 1}))
-    #     self.assertEqual(response.status_code, 200)
-

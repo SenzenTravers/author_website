@@ -32,7 +32,7 @@ class VoitureNoireTestCase(TestCase):
         self.assertRedirects(response, "/accounts/login/?next=/voiture_noire/profile")
 
     def test_voiture_noire_publish_get_unlogged(self):
-        response = self.client.get(reverse("archives:story_publish"))
+        response = self.client.get(reverse("archives:publish_story"))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, "/accounts/login/?next=/archives/stories/publish")
 

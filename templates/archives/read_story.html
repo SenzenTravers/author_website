@@ -1,11 +1,13 @@
 {% extends '../voiture_noire/base.html' %}
 
+{% block page_desc %}{{ story.summary }}{% endblock %}
+
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/voiture_noire/story_read.css">
 {% endblock %}
 
 {% block title %}
-    La bibliothèque de la Petite Voiture Noire
+    {{ story.story_title }}, par {{ story.author.nickname }}
 {% endblock %}
 
 {% block content %}
@@ -24,7 +26,7 @@
         <div class="story-header-btns">
             <a
             class="vn-archives-btn-or-a chapter-nav-link"
-            href="{% url 'archives:story_edit_mode' story.id %}"
+            href="{% url 'archives:edit_story' story.id %}"
             >
                 Éditer
             </a>
@@ -32,25 +34,25 @@
     {% endif %}
     <header class="header-story">
         <h2 class="header-story-title">
-                {{ story.fic_title }}
+                {{ story.story_title }}
         </h2>
         <p class="header-author-name">par {{ story.author }}</p>
         <!-- <hr> -->
     </header>
 
-    {% if story.fic_author_note != '' or story.fic_author_note != '<p><br></p>' or chapter.author_note != '' or chapter.author_note != '<p><br></p>' %}
+    {% if story.story_author_note != '' or story.story_author_note != '<p><br></p>' or chapter.chapter_author_note != '' or chapter.chapter_author_note != '<p><br></p>' %}
         <section class="section-story-notes">
-            {% if story.fic_author_note != '' and story.fic_author_note != '<p><br></p>' %}
+            {% if story.story_author_note != '' and story.story_author_note != '<p><br></p>' %}
                 <section class="story-author-note">
                     <h3>Commentaires de l'auteur/autrice</h3>
                     {% autoescape off %}
-                    {{ story.fic_author_note }}
+                    {{ story.story_author_note }}
                     {% endautoescape %}
                 </section>
             {% endif %}
 
 
-            {% if chapter.author_note != '' and chapter.author_note != '<p><br></p>' %}
+            {% if chapter.chapter_author_note != '' and chapter.chapter_author_note != '<p><br></p>' %}
                 <section class="chapter-author-note">
                     <h3>Notes du chapitre</h3>
                     {% autoescape off %}
@@ -81,13 +83,13 @@
             {% if chapter.number > 1 %}
                 <a
                     class="vn-archives-btn-or-a chapter-nav-link" 
-                    href="{% url 'archives:story_read_mode' story.id 1 %}"
+                    href="{% url 'archives:read_story' story.id 1 %}"
                 >
                     Premier chapitre
                 </a>
                 <a
                     class="vn-archives-btn-or-a chapter-nav-link" 
-                    href="{% url 'archives:story_read_mode' story.id chapter.number|add:-1 %}"
+                    href="{% url 'archives:read_story' story.id chapter.number|add:-1 %}"
                 >
                     Précédent
                 </a>
@@ -96,13 +98,13 @@
             {% if chapter.number != story.number_of_chapter %}
             <a
                 class="vn-archives-btn-or-a chapter-nav-link" 
-                href="{% url 'archives:story_read_mode' story.id chapter.number|add:1 %}"
+                href="{% url 'archives:read_story' story.id chapter.number|add:1 %}"
             >
                 Suivant
             </a>
             <a
                 class="vn-archives-btn-or-a chapter-nav-link" 
-                href="{% url 'archives:story_read_mode' story.id story.number_of_chapter %}"
+                href="{% url 'archives:read_story' story.id story.number_of_chapter %}"
             >
                 Dernier chapitre
             </a>

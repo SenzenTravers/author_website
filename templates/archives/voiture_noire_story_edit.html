@@ -69,8 +69,8 @@
             <h2> ❧ Titre & résumé & sataneries affiliées</h2>    
             <hr>
 
-            <label for="id_fic_title">Titre</label>
-            {{ fic_form.fic_title }}
+            <label for="id_story_title">Titre</label>
+            {{ fic_form.story_title }}
 
             <label for="id_summary">Résumé</label>
             <div id="quill-summary" class="quill-input"></div>
@@ -83,9 +83,9 @@
             <label for="id_one_sentence_summary">Non nécessaire : résumé (sérieux ou non) en une ligne</label>
             {{ fic_form.one_sentence_summary }}
 
-            <label for="id_fic_author_note">Non nécessaire : note d'auteur/d'autrice</label>
+            <label for="id_story_author_note">Non nécessaire : note d'auteur/d'autrice</label>
             <div id="quill-fic-author-note" class="quill-input"></div>
-            <div  hidden>{{ fic_form.fic_author_note }}</div>
+            <div  hidden>{{ fic_form.story_author_note }}</div>
             <p id="char-counter-fic-author-note" class="p-character-counter"></p>
 
         </section>
@@ -123,9 +123,9 @@
             <div hidden>{{ chapter_form.content }}</div>
             <p id="char-counter-content" class="p-character-counter"></p>
 
-            <label for="id_publish_date">Date de publication du chapitre</label>
+            <label for="id_publishing_date">Date de publication du chapitre</label>
             <div class="select-date">
-                {{ chapter_form.publish_date }}
+                {{ chapter_form.publishing_date }}
             </div>
         </section> -->
 
@@ -134,9 +134,9 @@
 
             <div class="section-chapter-btns">
                 {% for chapter in chapters %}
-                    <a href="{% url 'archives:chapter_edit_mode' fic_id chapter.number %}">{{ chapter.number }}</a>
+                    <a href="{% url 'archives:edit_chapter' story_id chapter.number %}">{{ chapter.number }}</a>
                 {% endfor %}
-                <a href="{% url 'archives:chapter_post_mode' fic_id %}">Ajouter un chapitre</a>
+                <a href="{% url 'archives:publish_chapter' story_id %}">Ajouter un chapitre</a>
             </div>
         </section>
 
@@ -150,7 +150,7 @@
 </section>
 
 <script>
-    let ficAuthorNoteValue = `{{ fic_form.fic_author_note.value |safe }}` !== "None" ? `{{ fic_form.fic_author_note.value |safe }}`:''
+    let ficAuthorNoteValue = `{{ fic_form.story_author_note.value |safe }}` !== "None" ? `{{ fic_form.story_author_note.value |safe }}`:''
     let ficSummaryValue = `{{ fic_form.summary.value |safe }}`!== "None" ?`{{ fic_form.summary.value |safe }}`:''
     let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
     let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''

@@ -1,6 +1,6 @@
 document.addEventListener('click', function() {
     checkRequiredFields(
-        ["id_pairing_type", "id_complete", "id_fic_title", "id_summary", "id_content"]
+        ["id_pairing_type", "id_complete", "id_story_title", "id_summary", "id_content"]
     )
 });
 

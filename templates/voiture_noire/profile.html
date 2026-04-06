@@ -39,7 +39,7 @@
 
     <p>✧ Et si vous avez envie de lire, pourquoi ne pas tenter la recommandation du Saint Algorithme : 
         <strong>
-            ˚₊‧✩‧₊˚ <a href="{% url 'archives:story_read_mode' random_rec.id 1 %}">{{random_rec.fic_title }}</a> ˚₊‧✩‧₊˚ ,
+            ˚₊‧✩‧₊˚ <a href="{% url 'archives:read_story' random_rec.id 1 %}">{{random_rec.story_title }}</a> ˚₊‧✩‧₊˚ ,
             de {{ random_rec.author }} !
         </strong>
     </p>
