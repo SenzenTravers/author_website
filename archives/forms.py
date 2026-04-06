@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 
-from .models import Author, Chapter, Comment, Fic, PairingType
+from .models import Author, Chapter, Comment, Story, PairingType
 
 class AuthorForm(forms.ModelForm):
     class Meta:
@@ -26,7 +26,7 @@ class CommentForm(forms.ModelForm):
         fields = ['content']
 
 
-class FicForm(forms.ModelForm):
+class StoryForm(forms.ModelForm):
     G = "g"
     T = "t"
     E = "e"
@@ -37,7 +37,7 @@ class FicForm(forms.ModelForm):
         E: "Adulte",
     }
 
-    date = forms.DateField(
+    story_date = forms.DateField(
         widget = forms.SelectDateWidget(years=range(2005, 2027))
     )
     pairing_type = forms.ModelMultipleChoiceField(
@@ -50,11 +50,11 @@ class FicForm(forms.ModelForm):
     )
 
     class Meta:
-        model = Fic
+        model = Story
         fields = '__all__'
 
     def __init__(self, *arg, **kwargs):
-        super(FicForm, self).__init__(*arg, **kwargs)
+        super(StoryForm, self).__init__(*arg, **kwargs)
         self.fields["text_length"].initial = "SHORT"
         self.fields["rating"].initial = "t"
 

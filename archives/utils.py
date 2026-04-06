@@ -1,12 +1,12 @@
 # from ebooklib import epub
 
-from .models import Fic, Chapter
+from .models import Story, Chapter
 from .utils_constants import *
 
 
 class FicDigester:
     def __init__(self, fic_id):
-        self.fic = Fic.objects.get(id=fic_id)
+        self.fic = Story.objects.get(id=fic_id)
 
     def return_title(self):
         return f"{self.fic.fic_title}_par_{self.fic.author}"

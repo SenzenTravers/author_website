@@ -3,13 +3,6 @@ from django.db import models
 from accounts.models import Member
 
 
-
-# UTILS CLASSES
-class ChapterManager(models.Manager):
-    def return_next_number(self, fic):
-        return Chapter.objects.filter(fic=fic).count() + 1
-
-
 class PairingType(models.Model):
     pairing_type = models.CharField(max_length=5, unique=True)
     label = models.CharField(max_length=10)
@@ -30,39 +23,34 @@ class Author(models.Model):
         return self.nickname
 
 
-class Fic(models.Model):
-    G = 'g'
-    T = 't'
-    E = 'e'
-
+class Story(models.Model):
     RATING_CHOICES = [
-        (G, 'G'),
-        (T, 'T'),
-        (E, 'E')
+        ('g', 'G'),
+        ('t', 'T'),
+        ('e', 'E')
     ]
 
-    SHORT = 'nouvelle'
-    NOVELLA = "novella"
-    NOVEL = 'roman'
-    SERIES = 'series'
+    VISIBILITY_CHOICES = [
+        ("Private", "Privée"),
+        ("Members only", "Membres seules"),
+        ("Everyone", "Visibles par tous")
+    ]
     
     LENGTH_CHOICES = [
-        (SHORT, 'Nouvelle'),
-        (NOVELLA, 'Novella'),
-        (NOVEL, 'Roman'),
-        (SERIES, 'Série')
+        ('nouvelle', 'Nouvelle'),
+        ('novella', 'Novella'),
+        ('roman', 'Roman'),
+        ('series', 'Série')
     ]
 
     author = models.ForeignKey(Author,
         on_delete=models.CASCADE,
         null=True, blank=True)
-    visible_not_member_only = models.BooleanField(default=False)
-    visible = models.BooleanField(default=True)
     clap = models.IntegerField(default=0, blank=True)
-    date = models.DateField(null=True)
-    fic_title = models.CharField(max_length=150)
+    story_date = models.DateField(null=True)
+    story_title = models.CharField(max_length=150)
     summary = models.TextField(max_length=600)
-    fic_author_note = models.TextField(max_length=2000, blank=True)
+    story_author_note = models.TextField(max_length=2000, blank=True)
     pairing_archetype = models.CharField(max_length=200, blank=True)
     one_sentence_summary = models.CharField(max_length=200, blank=True)
     pairing_type = models.ManyToManyField(
@@ -72,48 +60,52 @@ class Fic(models.Model):
     rating = models.CharField(
         max_length=6,
         choices=RATING_CHOICES,
-        default=G    )
+        default='g'
+    )
+    visibility = models.CharField(
+        max_length=20,
+        choices=VISIBILITY_CHOICES,
+        default="Members only"
+    )
     text_length = models.CharField(
         max_length=20,
         choices=LENGTH_CHOICES,
-        default=SHORT
+        default='nouvelle'
     )
     complete = models.BooleanField(default=True)
 
     @property
     def has_multiple_chapters(self):
-        if Chapter.objects.filter(fic=self).count() > 1:
+        if Chapter.objects.filter(story=self).count() > 1:
             return True
         return False
     
     @property
     def first_chapter(self):
-        return Chapter.objects.filter(fic=self, number=1)[0]
+        return Chapter.objects.filter(story=self, number=1)[0]
 
     @property
     def number_of_chapter(self):
-        return Chapter.objects.filter(fic=self).count()
+        return Chapter.objects.filter(story=self).count()
 
     def __str__(self):
-        return f"{self.author} : {self.fic_title}"
+        return f"{self.author} : {self.story_title}"
 
 
 class Chapter(models.Model):
-    fic = models.ForeignKey(Fic, on_delete=models.CASCADE, blank=True, related_name="chapters")
+    story = models.ForeignKey(Story, on_delete=models.CASCADE, blank=True, related_name="chapters")
     chapter_title = models.CharField(max_length=150, null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
     author_note = models.TextField(max_length=1500, null=True, blank=True)
     content = models.TextField(max_length=1000000)
     publish_date = models.DateField(null=True)
 
-    objects = ChapterManager()
-
     def __str__(self):
-        return f"{self.fic}, chapter {self.number}"
+        return f"{self.story}, chapter {self.number}"
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=['fic', 'number'], name="unique_chapter_number_for_fic")
+            models.UniqueConstraint(fields=['story', 'number'], name="unique_chapter_number_for_story")
         ]
 
 
@@ -121,4 +113,3 @@ class Comment(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, blank=True, related_name="comments")
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, related_name="comments")
     content = models.TextField(max_length=3000)
-# TO ADD: concept de série

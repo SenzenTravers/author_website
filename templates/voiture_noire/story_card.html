@@ -43,14 +43,7 @@
     <div class="story-administration">
         <p class="article-story-admin-details">
             {% if user == story.author.member %}
-                {% if story.visible_not_member_only %}
-                    Visible de tous
-                {% elif story.visible %}
-                    Visible des autres membres
-                {% else %}
-                    Invisible
-                {% endif %}
-                ❖
+                {story.visibility} ❖
             {% endif %}
 
             {% if story.pairing_type.all.length == 0 %}

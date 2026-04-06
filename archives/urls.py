@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.views.generic.base import RedirectView
-from django.urls import path
+from django.urls import path, reverse_lazy
 
 from . import views
 
@@ -9,7 +9,7 @@ app_name = 'archives'
 urlpatterns = [
     path(
         "",
-        RedirectView.as_view(url="https://senestre-coquecigrues.fr/voiture_noire/"),
+        RedirectView.as_view(url=reverse_lazy("voiture_noire:index")),
         name="index",
     ),
     # LUCILE : à ranger plus tard
