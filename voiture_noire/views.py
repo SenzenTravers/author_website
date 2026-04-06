@@ -8,7 +8,7 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
-from archives.models import Author, Fic
+from archives.models import Author, Story
 from .models import DiscordProfile, Prompt
 
 from .models import DiscordProfile
@@ -17,19 +17,19 @@ from .forms import DiscordProfileForm, PromptForm
 # Create your views here.
 class Index(generic.ListView):
     template_name = 'voiture_noire/index.html'
-    context_object_name = 'fics'
+    context_object_name = 'stories'
 
     def get_queryset(self):
         user = self.request.user
 
         if user.is_authenticated:
-            if Author.objects.filter(member=user).exists():
-                story_author = Author.objects.get(member=user)
-                return Fic.objects.filter(Q(author=story_author) | Q(visible=True)).order_by('-date')
-            else:
-                return Fic.objects.filter(visible=True)
+            return Story.objects.filter(
+                Q(author__member_id=user.id) | (~Q(visibility='Private') & Q(story_date__lte=date.today()))
+            ).order_by('-story_date')
         else:
-            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
+            return Story.objects.filter(
+                Q(visibility='Everyone') & (Q(story_date__lte=date.today()))
+            ).order_by('-story_date')
             
 
 class MemberList(generic.ListView):
@@ -58,7 +58,7 @@ class Profile(generic.View):
             random_rec = None
             potential_recs = Fic.objects.filter(
                 ~Q(author=author_profile) & (
-                    (Q(visible=True)| Q(visible_not_member_only=True))
+                    (Q(visible=True)| Q(visible_everyone=True))
                 )
             )
             

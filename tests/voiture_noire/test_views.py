@@ -4,7 +4,7 @@ from accounts.models import Member
 
 
 class VoitureNoireTestCase(TestCase):
-    # Views
+    # TODO: check visible banner
     def setUp(self):
         Member.objects.create_user("Jean-Bob", email="jeanbobdupont@mail.fr", password="motdepasse")
 

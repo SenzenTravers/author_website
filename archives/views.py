@@ -2,31 +2,15 @@ import datetime
 import tempfile
 
 from django.contrib import messages
+from django.db.models import Q
 from django.http import HttpResponseNotAllowed, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-
-from xhtml2pdf import pisa
-
-from .forms import Author, ChapterForm, FicForm
-from .models import Chapter, Fic, PairingType
+from .forms import Author, ChapterForm, StoryForm
+from .models import Chapter, Story, PairingType
 from .utils import FicDigester
-
-
-class Index(generic.ListView):
-    template_name = 'archives/index.html'
-    context_object_name = 'fics'
-
-
-    def get_queryset(self):
-        user = self.request.user
-
-        if user.is_authenticated:
-            return Fic.objects.filter(visible=True).order_by('-date')
-        else:
-            return Fic.objects.filter(visible=True, visible_not_member_only=True).order_by('-date')
 
 
 class StoryReadMode(generic.View):
@@ -35,12 +19,13 @@ class StoryReadMode(generic.View):
     def get(self, request, fic_id, number, *args, **kwargs):
         request_user = self.request.user
 
-        fic = get_object_or_404(Fic, pk=fic_id)
+        fic = get_object_or_404(Story, pk=fic_id)
 
-        if (fic.visible == False and fic.author.member == request.user) or \
-            (fic.visible == True and fic.visible_not_member_only == False and request_user.is_authenticated) or \
-            (fic.visible == True and fic.visible_not_member_only == True):
-            chapter = Chapter.objects.get(fic=fic, number=number)
+        if request.user.is_authenticated is False and fic.visibility != 'Everyone':
+            return redirect('voiture_noire:index')
+        elif request_user.id != fic.author.member.id and fic.visibility != 'Private':
+            return redirect('voiture_noire:index')
+        else:
             return render(
                 request,
                 self.template_name,
@@ -49,18 +34,16 @@ class StoryReadMode(generic.View):
                     "chapter": chapter
                 }
             )
-        else:
-            return redirect('voiture_noire:index')
 
 ############## POSTING
 class PublishView(generic.View):
     template_name = 'archives/voiture_noire_publish.html'
     chapter_form = ChapterForm
-    fic_form = FicForm
+    fic_form = StoryForm
 
     def get(self, request, *args, **kwargs):
         fic_form = self.fic_form(
-            initial={"date": datetime.date.today()}
+            initial={"story_date": datetime.date.today()}
         )
         chapter_form = self.chapter_form(
             initial={"publish_date": datetime.date.today()}
@@ -76,7 +59,7 @@ class PublishView(generic.View):
         )
     
     def post(self, request, *args, **kwargs):
-        fic_form = FicForm(request.POST)
+        fic_form = StoryForm(request.POST)
         chapter_form = ChapterForm(request.POST)
 
         # fic_form.errors
@@ -206,10 +189,10 @@ class ChapterEditView(generic.View):
 
 class FicEditView(generic.View):
     template_name = 'archives/voiture_noire_story_edit.html'
-    fic_form = FicForm
+    fic_form = StoryForm
 
     def get(self, request, fic_id, *args, **kwargs):
-        fic = get_object_or_404(Fic, pk=fic_id)
+        fic = get_object_or_404(Story, pk=fic_id)
         chapters = Chapter.objects.filter(fic=fic)
 
         if request.user != fic.author.member:
@@ -236,14 +219,13 @@ class FicEditView(generic.View):
         if request.user != fic_initial_instance.author.member:
             redirect('voiture_noire:index')
 
-        fic_form = FicForm(request.POST)
+        fic_form = StoryForm(request.POST)
 
         if fic_form.is_valid():
             fic_instance = fic_form.save(commit=False)
             fic_initial_instance.fic_title = fic_instance.fic_title
-            fic_initial_instance.visible_not_member_only = fic_instance.visible_not_member_only
-            fic_initial_instance.visible = fic_instance.visible
-            fic_initial_instance.date = fic_instance.date
+            fic_initial_instance.visibility = fic_instance.visibility
+            fic_initial_instance.story_date = fic_instance.story_date
             fic_initial_instance.summary = fic_instance.summary
             fic_initial_instance.fic_author_note = fic_instance.fic_author_note
             fic_initial_instance.pairing_archetype = fic_instance.pairing_archetype
