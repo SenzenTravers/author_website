@@ -18,7 +18,7 @@
     </div>
 </noscript>
 
-<h1>Poster un nouveau chapitre de {{ story.fic_title }}</h1>
+<h1>Poster un nouveau chapitre de {{ story.story_title }}</h1>
 <hr>
 
 {% if messages %}
@@ -30,9 +30,9 @@
 {% endif %}
 
 <section>
-    <form method="post" class="vn-fic-publishing form-main">
+    <form method="post" class="vn-story-publishing form-main">
         {% csrf_token %}
-        <section class="vn-section-fic-publishing detail-chapter-content">
+        <section class="vn-section-story-publishing detail-chapter-content">
             <h2>❧ Contenu</h2>
             <hr>
 
@@ -48,9 +48,9 @@
             <div hidden>{{ chapter_form.content }}</div>
             <p id="char-counter-content" class="p-character-counter"></p>
 
-            <label for="id_publish_date">Date de publication du chapitre</label>
+            <label for="id_publishing_date">Date de publication du chapitre</label>
             <div class="select-date">
-                {{ chapter_form.publish_date }}
+                {{ chapter_form.publishing_date }}
             </div>
         </section>
 
@@ -59,18 +59,18 @@
             <b>Cet éditeur ne gardera pas votre texte en mémoire en cas d'accident fâcheux.</b>
         </p>
     
-        <button id="fic-submit-btn"  type="submit">Enregistrer</button>
+        <button id="story-submit-btn"  type="submit">Enregistrer</button>
     </form>
 </section>
 
 <script>
-    let ficAuthorNoteValue = `{{ fic_form.fic_author_note.value |safe }}` !== "None" ? `{{ fic_form.fic_author_note.value |safe }}`:''
-    let ficSummaryValue = `{{ fic_form.summary.value |safe }}`!== "None" ?`{{ fic_form.summary.value |safe }}`:''
+    let storyAuthorNoteValue = `{{ story_form.story_author_note.value |safe }}` !== "None" ? `{{ story_form.story_author_note.value |safe }}`:''
+    let storySummaryValue = `{{ story_form.summary.value |safe }}`!== "None" ?`{{ story_form.summary.value |safe }}`:''
     let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
     let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''
 
-    const ficSubmitBtn = document.getElementById("fic-submit-btn")
-    ficSubmitBtn.disabled = true
+    const storySubmitBtn = document.getElementById("story-submit-btn")
+    storySubmitBtn.disabled = true
 </script>
 <script src="/static/scripts/quill_handling.js"></script>
 <script src="/static/scripts/form_validation_handling.js"></script>

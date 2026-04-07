@@ -2,8 +2,8 @@
     <p class="article-story-date">{{ story.date }}</p>
     <div class="div-story-header-block">
         <h2 class="article-story-title">
-            <a href="{% url 'archives:story_read_mode' story.id 1 %}">
-                {{ story.fic_title }}</a>
+            <a href="{% url 'archives:read_story' story.id 1 %}">
+                {{ story.story_title }}</a>
             <span class="author-name">par {{ story.author }}</span>
         </h2>
 
@@ -11,7 +11,7 @@
         <div class="div-story-title-buttons">
             <a
                 class="article-story-btn"
-                href="{% url 'archives:story_edit_mode' story.id %}"
+                href="{% url 'archives:edit_story' story.id %}"
                 aria-label="Éditer"
                 title="Éditer"
             >
@@ -19,7 +19,7 @@
             </a>
             <a
                 class="article-story-btn"
-                href="{% url 'archives:chapter_post_mode' story.id %}"
+                href="{% url 'archives:publish_chapter' story.id %}"
                 aria-label="Ajouter un chapitre"
                 title="Ajouter un chapitre"
             >+</a>
@@ -28,7 +28,7 @@
                 class="article-story-btn delete-btn"
                 type="button"
                 data-element-id="{{ story.id }}"
-                data-story-title="{{ story.fic_title |escapejs}}"
+                data-story-title="{{ story.story_title |escapejs}}"
                 aria-label="Supprimer"
                 title="Supprimer"
                 onclick="showDeleteModal(this, 'story')"
@@ -43,46 +43,19 @@
     <div class="story-administration">
         <p class="article-story-admin-details">
             {% if user == story.author.member %}
-                {story.visibility} ❖
+                {{story.get_visibility_display }} ❖
             {% endif %}
 
-            {% if story.pairing_type.all.length == 0 %}
-                Général
-            {% else %}
-                {% for pair in story.pairing_type.all %}
-                    {% if pair.pairing_type == "gen" %}
-                        Pas de couple
-                    {% elif pair.pairing_type == "ff" %}
-                        F/F
-                    {% elif pair.pairing_type == "mm" %}
-                        M/M
-                    {% elif pair.pairing_type == "het" %}
-                        Hétéro
-                    {% elif pair.pairing_type == "oth" %}
-                        Autre
-                    {% else %}
-                        Sen, à l'aide
-                    {{ pair.pairing_type }}
-                    {% endif %}
-
-                    {% if not forloop.last %}
-                    &
-                    {% endif %}
-                {% endfor %}
-            {% endif %} ❖
+            {% for pair in story.pairing_type.all %}
+                {{pair.label }}
+                {% if not forloop.last %}
+                &
+                {% endif %}
+            {% endfor %} ❖
             
             {{ story.text_length.capitalize }} ❖
 
-            {% if story.rating == "g" %}
-                Tout public
-            {% elif story.rating == "t" %}
-                Public averti
-            {% elif story.rating == "e" %}
-                Public averti
-            {% else %}
-                Au secours, Sen
-            {% endif %}
-            ❖
+            {{ story.get_rating_display }} ❖          
 
             {% if story.complete %}
                 <span class="span-story-finished">ACHEVÉ</span>
@@ -112,7 +85,7 @@
         {% for chapter in story.chapters.all %}
             <a
                 class="article-story-btn"
-                href="{% url 'archives:story_read_mode' story.id chapter.number %}"
+                href="{% url 'archives:read_story' story.id chapter.number %}"
             >
             {{ chapter.number }}
             </a>

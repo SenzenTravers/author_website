@@ -1,0 +1,128 @@
+{% extends '../voiture_noire/base.html' %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="/static/archives/voiture_noire_post.css">
+<script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
+
+{% endblock %}
+
+{% block title %}
+    La bibliothèque de la Petite Voiture Noire
+{% endblock %}
+
+{% block content %}
+<noscript>
+    <div class="javascript-warning">
+        Ce site requiert javascript pour fonctionner correctement. Désolée !
+    </div>
+</noscript>
+
+<h1>Éditer votre histoire</h1>
+<hr>
+
+{% if messages %}
+    <ul class="error-messages">
+        {% for message in messages %}
+            <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<section>
+    <form method="post" class="vn-story-publishing form-main">
+        {% csrf_token %}
+
+        <section class="vn-section-story-publishing section-administration">
+            <h2> ❧ Administration </h2>
+            <hr>
+
+            <section>
+                <div>
+                    <label for="id_visibility">Visibilité</label>
+                    {{ story_form.visibility }}
+                </div>
+
+                <div>
+                    <label for="id_text_length">Format</label>
+                    {{ story_form.text_length }}    
+                </div>
+                <div>
+                    <label for="id_pairing_type">Genre</label>
+                    {{ story_form.pairing_type }}
+                </div>
+                <div>
+                    <label for="id_rating">Public</label>
+                    {{ story_form.rating }}    
+                </div>
+                <div>
+                    <label for="id_date">Date de publication</label>
+                    <div class="select-date">
+                        {{ story_form.story_date }}
+                    </div>    
+                </div>
+                <div>
+                    <label for="id_complete">Fini</label>
+                    {{ story_form.complete }}    
+                </div>
+            </section>
+        </section>
+            
+
+        <section class="vn-section-story-publishing detail-summaries-etc">
+            <h2> ❧ Titre & résumé & sataneries affiliées</h2>    
+            <hr>
+
+            <label for="id_story_title">Titre</label>
+            {{ story_form.story_title }}
+
+            <label for="id_summary">Résumé</label>
+            <div id="quill-summary" class="quill-input"></div>
+            <div hidden>{{ story_form.summary }}</div>
+            <p id="char-counter-summary" class="p-character-counter"></p>
+
+            <label for="id_pairing_archetype">Non nécessaire : archétype de couple</label>
+            {{ story_form.pairing_archetype }}
+
+            <label for="id_one_sentence_summary">Non nécessaire : résumé (sérieux ou non) en une ligne</label>
+            {{ story_form.one_sentence_summary }}
+
+            <label for="id_story_author_note">Non nécessaire : note d'auteur/d'autrice</label>
+            <div id="quill-story-author-note" class="quill-input"></div>
+            <div  hidden>{{ story_form.story_author_note }}</div>
+            <p id="char-counter-story-author-note" class="p-character-counter"></p>
+
+        </section>
+
+        <section class="vn-section-story-publishing">
+            <label>Gérer les chapitres</label>
+
+            <div class="section-chapter-btns">
+                {% for chapter in chapters %}
+                    <a href="{% url 'archives:edit_chapter' story_id chapter.number %}">{{ chapter.number }}</a>
+                {% endfor %}
+                <a href="{% url 'archives:publish_chapter' story_id %}">Ajouter un chapitre</a>
+            </div>
+        </section>
+
+        <p class="p-publish-explanation">
+            <b>Attention</b> : sauvegardez bien votre texte avant de le poster.
+            <b>Cet éditeur ne gardera pas votre texte en mémoire en cas d'accident fâcheux.</b>
+        </p>
+    
+        <button id="story-submit-btn"  type="submit">Enregistrer</button>
+    </form>
+</section>
+
+<script>
+    let storyAuthorNoteValue = `{{ story_form.story_author_note.value |safe }}` !== "None" ? `{{ story_form.story_author_note.value |safe }}`:''
+    let storySummaryValue = `{{ story_form.summary.value |safe }}`!== "None" ?`{{ story_form.summary.value |safe }}`:''
+    let chapterAuthorNoteValue = `{{ chapter_form.author_note.value | safe }}` !== "None" ?`{{ chapter_form.author_note.value | safe }}`:''
+    let chapterContentValue = `{{ chapter_form.content.value | safe }}`!== "None" ?`{{ chapter_form.content.value | safe }}`:''
+
+    const storySubmitBtn = document.getElementById("story-submit-btn")
+    storySubmitBtn.disabled = true
+</script>
+<script src="/static/scripts/quill_handling.js"></script>
+<script src="/static/scripts/form_validation_handling.js"></script>
+{% endblock %}

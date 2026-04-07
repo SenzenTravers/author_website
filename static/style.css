@@ -300,7 +300,7 @@ header a {
     line-height: 2.5em;
 }
 
-.fic-card {
+.story-card {
     background-color: #E7E6E1;
     color: #4C223D;
     text-align: justify;
@@ -318,24 +318,24 @@ header a {
     
 }
 
-.fic-card h2 {
+.story-card h2 {
     color: #4C223D;
     margin-top: 1%;
     margin-bottom: 0%;
 }
 
-.fic-card a {
+.story-card a {
     color: #4C223D;
 }
 
-.fic-card .detail_line {
+.story-card .detail_line {
     margin: 0%;
     margin-left: 4%;
     font-style: italic;
     font-size: 0.9em;
 }
 
-.fic-card .date {
+.story-card .date {
     text-align: right;
     font-style: italic;
     margin-top: 0;

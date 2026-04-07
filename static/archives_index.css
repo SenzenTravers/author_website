@@ -28,7 +28,7 @@ body:has(.archives-index) {
     }
 }
 
-.fic-card {
+.story-card {
     background-color: var(--story-card);
     color: var(--very-dark-purple);
     font-family: 'Courier Prime', "Libre Baskerville", serif;
@@ -45,7 +45,7 @@ body:has(.archives-index) {
     height: fit-content;
     block-size: fit-content;
 
-    .fic-card-title {
+    .story-card-title {
         margin-left: 0%;
         font-family: 'Courier Prime', "Libre Baskerville", serif;
         font-size:x-large;
@@ -72,13 +72,13 @@ body:has(.archives-index) {
     }
 }
 
-.fic-card_header {
+.story-card_header {
     display: flex;
     flex-flow: row;
     justify-content: space-between;
 }
 
-.fic-date {
+.story-date {
     color: #8d3f72;
     text-align: right;
     text-indent: 0ch;
@@ -95,15 +95,15 @@ body:has(.archives-index) {
         margin-bottom: 2em;
     }
 
-    .fic-card_header {
+    .story-card_header {
         display: flex;
         flex-flow: column;
     }
 
-    .fic-card_header :nth-child(1) { order: 2; }
-    .fic-card_header :nth-child(2) { order: 1; }
+    .story-card_header :nth-child(1) { order: 2; }
+    .story-card_header :nth-child(2) { order: 1; }
 
-    .fic-date {
+    .story-date {
         text-align: end;
     }
 }
@@ -126,7 +126,7 @@ body:has(.archives-index) {
         margin-bottom: 4em;
     }
 
-    .fic-card {
+    .story-card {
         padding-top: 2em 4.5em 1.5em 4.5em;
     }
 }

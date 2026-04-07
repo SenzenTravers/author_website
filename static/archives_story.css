@@ -19,7 +19,7 @@ body:has(.story) {
 .block-story-title {
     margin: 3em;
 
-    .fic-title {
+    .story-title {
         -webkit-background-clip: text;
         -webkit-text-fill-color: var(--very-dark-purple);
         font-family: 'Courier Prime', "Libre Baskerville", serif;

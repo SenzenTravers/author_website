@@ -1,6 +1,6 @@
 @import "../voiture_noire/base.css";
 
-.vn-section-fic-publishing {
+.vn-section-story-publishing {
     display: flex;
     flex-flow: column;
     margin-bottom: 1em;
@@ -34,11 +34,6 @@
     input[type="checkbox"] {
         accent-color: var(--puce);
     }
-
-    .checkbox-fieldset {
-        margin-top: 0.5em;
-    }
-
 }
 
 .section-administration {

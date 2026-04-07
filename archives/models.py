@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 
 from accounts.models import Member
@@ -11,7 +13,6 @@ class PairingType(models.Model):
         return self.label
 
 
-# TRUE CLASSES
 class Author(models.Model):
     member = models.ForeignKey(Member,
         on_delete=models.CASCADE,
@@ -25,9 +26,9 @@ class Author(models.Model):
 
 class Story(models.Model):
     RATING_CHOICES = [
-        ('g', 'G'),
-        ('t', 'T'),
-        ('e', 'E')
+        ('g', 'Tout public'),
+        ('t', 'Public averti'),
+        ('e', 'Explicite')
     ]
 
     VISIBILITY_CHOICES = [
@@ -47,7 +48,7 @@ class Story(models.Model):
         on_delete=models.CASCADE,
         null=True, blank=True)
     clap = models.IntegerField(default=0, blank=True)
-    story_date = models.DateField(null=True)
+    story_date = models.DateField(null=True, default=datetime.date.today)
     story_title = models.CharField(max_length=150)
     summary = models.TextField(max_length=600)
     story_author_note = models.TextField(max_length=2000, blank=True)
@@ -94,11 +95,11 @@ class Story(models.Model):
 
 class Chapter(models.Model):
     story = models.ForeignKey(Story, on_delete=models.CASCADE, blank=True, related_name="chapters")
-    chapter_title = models.CharField(max_length=150, null=True, blank=True)
     number = models.PositiveSmallIntegerField(null=True, blank=True)
-    author_note = models.TextField(max_length=1500, null=True, blank=True)
+    chapter_title = models.CharField(max_length=150, null=True, blank=True)
+    chapter_author_note = models.TextField(max_length=1500, null=True, blank=True)
     content = models.TextField(max_length=1000000)
-    publish_date = models.DateField(null=True)
+    publishing_date = models.DateField(null=True, default=datetime.date.today)
 
     def __str__(self):
         return f"{self.story}, chapter {self.number}"

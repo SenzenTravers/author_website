@@ -1,6 +1,6 @@
 document.addEventListener('click', function() {
     checkRequiredFields(
-        ["id_pairing_type", "id_complete", "id_fic_title", "id_summary", "id_content"]
+        ["id_pairing_type", "id_complete", "id_story_title", "id_summary", "id_content"]
     )
 });
 
@@ -25,9 +25,9 @@ function checkRequiredFields(requiredFields) {
 
     pairingTypeChecked = handleMultiChoices("id_pairing_type", 5)
     if (missing.length === 0 && pairingTypeChecked) {
-        ficSubmitBtn.disabled = false 
+        storySubmitBtn.disabled = false 
     } else {
-        ficSubmitBtn.disabled = true
+        storySubmitBtn.disabled = true
     }
 }
 

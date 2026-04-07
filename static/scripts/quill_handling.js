@@ -40,7 +40,7 @@ Quill.register('modules/counter', Counter);
 
 //////////////////////// EDITORS
 let quillSummary;
-let quillFicAuthorNote;
+let quillStoryAuthorNote;
 let quillChapterAuthorNote;
 let quillContent;
 
@@ -77,7 +77,7 @@ try {
 }
 
 try {
-    quillFicAuthorNote = new Quill('#quill-fic-author-note', {
+    quillStoryAuthorNote = new Quill('#quill-story-author-note', {
         modules: {
             toolbar: [
                 'bold', 'italic', 'underline','strike',
@@ -91,7 +91,7 @@ try {
                 userOnly: false
             },
             counter: {
-                container: '#char-counter-fic-author-note',
+                container: '#char-counter-story-author-note',
                 unit: 'caractère',
                 charLimit: 2000
             }
@@ -168,14 +168,14 @@ if (quillSummary) {
     quillSummary.on('text-change', function(delta, source) {
         onQuillEditorChange("summary", 600)
     })
-    quillSummary.clipboard.dangerouslyPasteHTML(ficSummaryValue);
+    quillSummary.clipboard.dangerouslyPasteHTML(storySummaryValue);
 }
 
-if (quillFicAuthorNote) {
-    quillFicAuthorNote.on('text-change', function(delta, source) {
-        onQuillEditorChange("fic-author-note", 2000)
+if (quillStoryAuthorNote) {
+    quillStoryAuthorNote.on('text-change', function(delta, source) {
+        onQuillEditorChange("story-author-note", 2000)
     })
-    quillFicAuthorNote.clipboard.dangerouslyPasteHTML(ficAuthorNoteValue);
+    quillStoryAuthorNote.clipboard.dangerouslyPasteHTML(storyAuthorNoteValue);
 }
 
 if (quillChapterAuthorNote) {
@@ -209,8 +209,8 @@ function getQuillHtml(editorName) {
     let editor = ""
     if (editorName == "summary") {
         editor = quillSummary
-    } else if (editorName == "fic-author-note") {
-        editor = quillFicAuthorNote
+    } else if (editorName == "story-author-note") {
+        editor = quillStoryAuthorNote
     } else if (editorName == "author-note") {
         editor = quillChapterAuthorNote
     } else if (editorName == "content") {
@@ -226,8 +226,8 @@ function handleCharacterLimit(editorName, limit) {
     let editor = ""
     if (editorName == "summary") {
         editor = quillSummary
-    } else if (editorName == "fic-author-note") {
-        editor = quillFicAuthorNote
+    } else if (editorName == "story-author-note") {
+        editor = quillStoryAuthorNote
     } else if (editorName == "author-note") {
         editor = quillChapterAuthorNote
     } else if (editorName == "content") {

@@ -54,9 +54,9 @@ class Profile(generic.View):
             self.initial = discord_member
             discord_form = self.form_class(instance=self.initial)
             author_profile = Author.objects.filter(member=request.user).first() 
-            count = Fic.objects.count()
+            count = Story.objects.count()
             random_rec = None
-            potential_recs = Fic.objects.filter(
+            potential_recs = Story.objects.filter(
                 ~Q(author=author_profile) & (
                     (Q(visible=True)| Q(visible_everyone=True))
                 )
@@ -68,7 +68,7 @@ class Profile(generic.View):
                 random_rec = potential_recs[0]
 
             if author_profile:
-                user_stories = Fic.objects.filter(author=author_profile)
+                user_stories = Story.objects.filter(author=author_profile)
         else:
             raise PermissionDenied()
 
