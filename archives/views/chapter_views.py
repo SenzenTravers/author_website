@@ -80,7 +80,7 @@ class ChapterEditView(generic.View):
             }
         )
 
-    def post(self, request, story_id, number, *args, **kwargs):
+    def post(self, request, story_id, chapter_number, *args, **kwargs):
         root_story = Story.objects.get(id=story_id)
 
         if request.user != root_story.author.member:
@@ -90,10 +90,10 @@ class ChapterEditView(generic.View):
 
         # # story_form.errors
         if chapter_form.is_valid():
-            chapter_initial_instance = Chapter.objects.get(story=root_story, number=number)
+            chapter_initial_instance = Chapter.objects.get(story=root_story, number=chapter_number)
             chapter_form = chapter_form.save(commit=False)
             chapter_initial_instance.chapter_title = chapter_form.chapter_title
-            chapter_initial_instance.author_note = chapter_form.author_note
+            chapter_initial_instance.chapter_author_note = chapter_form.chapter_author_note
             chapter_initial_instance.content = chapter_form.content
             chapter_initial_instance.publishing_date = chapter_form.publishing_date
             chapter_initial_instance.save()
