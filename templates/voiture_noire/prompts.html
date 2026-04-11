@@ -73,19 +73,7 @@
             {% for prompt in prompt_list %}
             <tr>
                 <td class="prompt-type">
-                    {% if prompt.pairing_type == 'FF' %}
-                        F/F
-                    {% elif prompt.pairing_type == 'MM' %}
-                        M/M
-                    {% elif prompt.pairing_type == 'FM' %}
-                        F/M
-                    {% elif prompt.pairing_type == 'ANY' %}
-                        N'importe
-                    {% elif prompt.pairing_type == 'ETC' %}
-                        Autre
-                    {% elif prompt.pairing_type == 'GEN' %}
-                        Général
-                    {% endif %}
+                    {{ prompt.get_pairing_type_display }}
                 </td>
                 
                 <td class="prompt-body">

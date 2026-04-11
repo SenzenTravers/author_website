@@ -16,8 +16,6 @@
 
 <section class="member-list">
     {% for profile in DiscordProfiles %}
-    <!-- NOTE : faire une petite carte de membre -->
-     <!-- Option pour copier d'un clic -->
         <section class="card-member-profile">
             <h2>{{ profile.member.username }}</h2>
             <hr>
@@ -29,21 +27,7 @@
                 <ul>
                     {% for prompt in profile.member.prompt_set.all|dictsort:"pairing_type" %} 
                         <li>
-                            <b>{% if prompt.pairing_type == 'FF' %}
-                                F/F
-                            {% elif prompt.pairing_type == 'MM' %}
-                                M/M
-                            {% elif prompt.pairing_type == 'FM' %}
-                                F/M
-                            {% elif prompt.pairing_type == 'ANY' %}
-                                N'importe
-                            {% elif prompt.pairing_type == 'ETC' %}
-                                Autre
-                            {% elif prompt.pairing_type == 'GEN' %}
-                                Général
-                            {% endif %}
-                            </b>
-                            : {{prompt.body}}
+                            <b>{{ prompt.get_pairing_type_display }}</b> : {{prompt.body}}
                         </li>
                     {% endfor %}
                 </ul>
@@ -51,21 +35,5 @@
 
     {% endfor %}
 </section>
-
-<!-- <script>
-    // À supprimer si flemme
-    document.addEventListener("DOMContentLoaded", function() {
-        console.log('aarjh')
-        let allCards = document.getElementsByClassName("card-member-profile")
-        allCards = Array(allCards)
-        // Alas, copilot
-        allCards.forEach(card => {
-            console.log('))):')
-            title = card.getElementsByTagName('h2')[0]
-            title.scrollIntoView({ behavior: "instant", block: "start" });
-        });
-    });
-
-</script> -->
 {% endblock %}
 
