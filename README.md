@@ -16,6 +16,7 @@
 
 ## TO-DO
 ### Must-have
+- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile
 - [VOITURE_NOIRE] A Json view that Eriza would be able to ping
 - [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)
 - [SERVER] Add a birthday (ongoing: lacking form implementation)

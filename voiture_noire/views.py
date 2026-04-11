@@ -57,9 +57,7 @@ class Profile(generic.View):
             count = Story.objects.count()
             random_rec = None
             potential_recs = Story.objects.filter(
-                ~Q(author=author_profile) & (
-                    (Q(visible=True)| Q(visible_everyone=True))
-                )
+                ~Q(author=author_profile) & (~Q(visibility='Private') & Q(story_date__lte=date.today()))
             )
             
             if len(potential_recs) > 1:
