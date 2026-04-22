@@ -20,7 +20,8 @@ env = environ.Env(
     SECRET_KEY=(str, 'blebleble'),
     DB_NAME=(str, 'bleble'),
     DB_USER_NAME=(str, 'bleble'),
-    DB_USER_PASSWORD=(str, 'bleble')
+    DB_USER_PASSWORD=(str, 'bleble'),
+    SITE_URL=(str, 'my_site_url')
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -36,7 +37,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1', 'senestre-coquecigrues.fr']
+ALLOWED_HOSTS = ['127.0.0.1', env('SITE_URL')]
 
 
 # Application definition
@@ -83,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'utils.context_processors.author_settings'
             ],
         },
     },
@@ -155,7 +157,7 @@ LOCALE_PATHS = [BASE_DIR / 'locale',]
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static',]
-
+JSON_DIRS = BASE_DIR / "utils/json"
 if DEBUG == False:
     STATIC_ROOT = BASE_DIR / 'staticfiles'
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

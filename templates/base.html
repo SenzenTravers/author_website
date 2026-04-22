@@ -7,19 +7,18 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <meta name="author" content="Sen" />
+        <meta name="author" content="{{ AUTHOR_NAME }}" />
         <meta
             name="keywords"
-            content="M/M, BL, yaoi, gay fantasy, collectif Aquilegia,
-            Aquilegia, autrice, LGBTQ, Sen, Senzen, Senzen_Travers, romans"
+            content="{{ PAGE_TAGS }}"
         />
         <meta
             name="description"
-            content="{% block page_desc %}Découvrez les romans et les nouvelles de Sen. Au menu : du M/M, de la fantasy et de l'action !{% endblock %}"
+            content="{% block page_desc %}{{ META_DESCRIPTION }}{% endblock %}"
         />
 
         <title>
-            {% block title %} Sen Senestre, Autrice M/M | Romans BL et fantasy{% endblock %}
+            {% block title %} {{ AUTHOR_NAME }} | {{ AUTHOR_BLURB }}{% endblock %}
         </title>
         {% block stylesheet %}
         <link rel="stylesheet" href="/static/base.css" />

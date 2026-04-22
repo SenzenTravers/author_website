@@ -83,12 +83,13 @@
     .logo-subtitle {
         position: absolute;
         top: 111px;
-        left: 50px;
+        left: 20px;
         font-family: "Libre Baskerville", serif;
         font-size: 19px;
         font-style: italic;
         text-align: center;
         color: #f5deb3;
+        margin-right: 12px;
     
     }
 }

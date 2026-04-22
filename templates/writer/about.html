@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block title %}
-Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
+{{ about_author_blurb }}
 {% endblock %}
 
 {% block content %}
@@ -22,52 +22,22 @@ Sen Senestre, Autrice M/M & fantasy, Procrastrinatrice Professionnelle
             >    
         </div>
 
-        <h3>Collectif Aquilegia</h3>
-        <ul class="list-books">
-            <li><em>Les Cendres de l'Hiver</em> (trilogie hybride texte/BD, avec <a href="https://www.instagram.com/eldarianne/">Eldarianne</a>)</li>
-            <li>Collection <em>Nemesis</em> : <em>L'Homme Noyé, Vivarium, Purusha, Vindicte</em>.</li>
-            <li><em>Ceux Qui Servent</em> (recueil de nouvelles/roman, avec <a href="https://www.instagram.com/eldarianne/">Eldarianne</a>).</li>
-            <li><em>Contes du Miroir Brisé</em> (recueil de nouvelles).</li>
-            <li><em>Contes de l'Aube Écarlate</em> (recueil de nouvelles, avec Lev).</li>
-            <li><em>Pépin</em> (roman).</li>
-            <li><em>Princes de Sang</em> (roman).</li>
-        </ul>
-
-        <h3>Lointain passé (Fictionpress)</h3>
-        <ul class="list-books">
-            <li><em>L'Aigle et le Safran</em> (roman)</li>
-            <li><em>Vincent le Vampire</em> (roman).</li>
-            <li>Quelques nouvelles plus ou moins assumables.</li>
-        </ul>
+        {% for category, items in about_author_bibliography.items %}
+            <h3>{{ category }}</h3>
+            {% for item in items %}
+                <li>{{ item|safe }}</li>
+            {% endfor %}
+        {% endfor %}
     </section>
 
     <section class="biography">
-        <h2 class="h2-writer my-name">Sen Senestre</h2>
+        <h2 class="h2-writer my-name">{{ about_author_name}}</h2>
         <img
             class="img-about-sections"
             src="/static/images/macrovector_open_book.svg"
             alt="Illustration figurant un livre ouvert"
         >
-        <p>
-            Jadis connue sous le pseudonyme de Corenn, Sen est une femme douée pour choisir des noms
-            difficiles à googler et à référencer (et elle en est navrée). Elle parle d'elle à la
-            troisième personne pour faire semblant de savoir quoi dire à son propre sujet,
-            mais ce n'est qu'un leurre.
-        </p>
-        <p>
-            En tant qu'autrice, mes genres favoris sont les mille nuances du merveilleux :
-            fantasy (urban fantasy, dark fantasy, high fantasy...), fantastique, 
-            contes détournés ou non... Le tout souvent assorti de M/M, BL, yaoi ou tout 
-            autre terme à la mode pour désigner les histoires d'amour gay. J'adore quand le scénario influe
-            sur la romance et inversement ; j'aime l'action et le suspense, l'humour et l'horreur,
-            les couples conflictuels ou hauts en couleur.
-        </p>
-        <p>
-            J'ai d'abord publié principalement sur Internet (sur feue l'Écurie des Shets — les 
-            anciennes sauront ! — et sur Fictionpress) avant d'avoir la chance de joindre le
-            collectif Aquilegia. Pendant presque neuf ans, j'y ai publié plusieurs romans et nouvelles
-            avant de revenir au format web.
-        </p>
+        {{ about_author_bio |safe }}
     </section>
 
     <section class="credits">

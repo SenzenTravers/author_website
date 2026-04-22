@@ -5,7 +5,6 @@ html_fic_base = """<!DOCTYPE html>
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Senestre-Coquecigrues">
         <title>{title}, par {author}</title>
 
     </head>
@@ -13,7 +12,7 @@ html_fic_base = """<!DOCTYPE html>
     <body style="background-color: #fffffa; padding: 15%; padding-top: 0.5em; line-height: 2em">
     <p style="font-size: 0.9em; text-align: right; margin-bottom: 5em; margin-right: 0.5em">
                 Ce texte peut aussi être lu sur
-                <a href="https://senestre-coquecigrues.fr/">son site d'origine</a>.
+                <a href="SITE_URL/">son site d'origine</a>.
     </p>
 
         <section style="border: black thin solid; padding: 2em; margin: 1em; margin-bottom: 4em;">
@@ -144,7 +143,7 @@ pdf_fic_base = """
     <div id="credit_content">
         <p class="credit_block">
             Ce texte peut aussi être lu sur
-            <a href="https://senestre-coquecigrues.fr/">son site d'origine</a>.
+            <a href="SITE_URL">son site d'origine</a>.
         </p>
     </div>
     
