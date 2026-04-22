@@ -16,6 +16,9 @@
 
 ## TO-DO
 ### Must-have
+- [ARCHIVES] Gérer plusieurs tailles de texte
+- [ARCHIVES] Show author notes
+- [ARCHIVES] Post : preview fic
 - [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile
 - [VOITURE_NOIRE] A Json view that Eriza would be able to ping
 - [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)

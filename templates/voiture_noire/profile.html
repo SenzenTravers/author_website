@@ -3,7 +3,6 @@
 {% block stylesheet %}
 <link rel="stylesheet" href="/static/voiture_noire/profile.css">
 <link rel="stylesheet" href="/static/voiture_noire/story-cards.css" />
-<!-- Moi-même : un jour, tu ôteras ceci. Bravement. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" />
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
 {% endblock %}
@@ -23,10 +22,16 @@
 
     <hr>
 
+    <!-- LUCILE : separate author and discord member -->
     {% if author_profile.member.discord_profile.is_creator %}
         {% include "./profiles/author.html" %}
     {% else %}
-        {% include "./profiles/lurker.html" %}
+
+
+    {% if author_profile.member.discord_profile.is_creator %}
+        {% include "./profiles/author.html" %}
+    {% else %}
+        <p>Vous n'avez hélas pas de profil, car ce serveur pratique une discrimination SCANDALEUSE.</p>
     {% endif %}
 
     {% if messages %}

@@ -14,6 +14,7 @@ class DiscordProfile(models.Model):
         related_name="discord_profile"
     )
     birthday = models.DateField(null=True, blank=True)
+    disabled = models.BooleanField(default=False)
 
 
 class Prompt(models.Model):

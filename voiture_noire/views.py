@@ -14,7 +14,7 @@ from .models import DiscordProfile, Prompt
 from .models import DiscordProfile
 from .forms import DiscordProfileForm, PromptForm
 
-# Create your views here.
+
 class Index(generic.ListView):
     template_name = 'voiture_noire/index.html'
     context_object_name = 'stories'
@@ -47,33 +47,35 @@ class Profile(generic.View):
 
     def get(self, request, *args, **kwargs):
         user_stories = []
-        author_profile = None
+        author_profile = Author.objects.filter(member=request.user).first() 
         discord_member = DiscordProfile.objects.filter(member=request.user).first()
 
-        if discord_member:
-            self.initial = discord_member
-            discord_form = self.form_class(instance=self.initial)
-            author_profile = Author.objects.filter(member=request.user).first() 
-            count = Story.objects.count()
-            random_rec = None
-            potential_recs = Story.objects.filter(
-                ~Q(author=author_profile) & (~Q(visibility='Private') & Q(story_date__lte=date.today()))
-            )
-            
-            if len(potential_recs) > 1:
-                random_rec = potential_recs[randint(0, count-1)]
-            else:
-                random_rec = potential_recs[0]
-
-            if author_profile:
-                user_stories = Story.objects.filter(author=author_profile)
-        else:
+        if discord_member is None and author_profile is None:
             raise PermissionDenied()
+
+        self.initial = discord_member
+        discord_form = self.form_class(instance=self.initial)
+        random_rec = None
+        potential_recs = Story.objects.filter(
+            ~Q(author=author_profile) & (~Q(visibility='Private') & Q(story_date__lte=date.today()))
+        )
+        
+        if len(potential_recs) > 1:
+            random_rec = potential_recs[
+                randint(0, len(potential_recs) -1)
+            ]
+        else:
+            random_rec = potential_recs[0]
+
+        if author_profile:
+            user_stories = Story.objects.filter(author=author_profile)
+
 
         return render(
             request,
             self.template_name,
             {
+                "discord_member": discord_member,
                 "author_profile": author_profile,
                 "form": discord_form,
                 "stories": user_stories,
