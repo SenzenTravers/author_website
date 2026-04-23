@@ -15,12 +15,15 @@ class ArchivesConfig(AppConfig):
 
     def ready(self):
         # Per Django doc, this is OK if the method is idempotent
-        from .models import PairingType
-        pairings = PairingType.objects.all()
+        try:
+            from .models import PairingType
+            pairings = PairingType.objects.all()
 
-        if len(pairings) == 0:
-            PairingType.objects.create(pairing_type="oth", label="Autre")
-            PairingType.objects.create(pairing_type="het", label="Hétéro")
-            PairingType.objects.create(pairing_type="mm", label="M/M")
-            PairingType.objects.create(pairing_type="ff", label="F/F")
-            PairingType.objects.create(pairing_type="gen", label="Aucun")
+            if len(pairings) == 0:
+                PairingType.objects.create(pairing_type="oth", label="Autre")
+                PairingType.objects.create(pairing_type="het", label="Hétéro")
+                PairingType.objects.create(pairing_type="mm", label="M/M")
+                PairingType.objects.create(pairing_type="ff", label="F/F")
+                PairingType.objects.create(pairing_type="gen", label="Aucun")
+        except:
+            pass

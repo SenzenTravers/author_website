@@ -19,6 +19,8 @@ class Author(models.Model):
         null=True)
     nickname = models.CharField(max_length=100, unique=True)
     criminal = models.BooleanField(default=False)
+    trackbear_profile = models.CharField(max_length=100, default='', blank=True)
+    other_profile_url = models.CharField(max_length=100, default='', blank=True)
 
     def __str__(self):
         return self.nickname

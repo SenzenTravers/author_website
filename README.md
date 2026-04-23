@@ -1,12 +1,5 @@
 # Site d'autrice
 
-## What it is
-This site fulfill multiple roles:
-- An author website with a blogging option and an "About" page
-- A page for small gadgets (a writing sprint app, a random sorter)
-- An archives allowing users to post, edit and share their own writing
-- A writing hub allowing users to post prompts and edit their likes and dislikes.
-
 1. [TO-DO](#to-do)
    - [Must-have](#must-have)
    - [Nice to have](#nice-to-have)
@@ -22,26 +15,39 @@ This site fulfill multiple roles:
 
 
 ## TO-DO
+### Current task
+Decouple various types of user profile
+- Rename profiles
+- Birthday tests work (no regression)
+- Create new front page to edit Member
+- Create new front page to edit Author
+- Create new front page to edit ExchangeParticipant
+- Create tests for Author
+- Create tests for Member
+- Create tests for ExchangeParticipant
+
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte
 - [ARCHIVES] Show author notes
 - [ARCHIVES] Post : preview fic
-- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile
+- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (back)
+- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (front)
 - [VOITURE_NOIRE] A Json view that Eriza would be able to ping
 - [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)
 - [SERVER] Add a birthday (ongoing: lacking form implementation)
+- [SERVER] Move birthday view to Accounts (cf test_profiles_birthdays)
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] User Comment
-
-### Nice to have
-- [STORIES] User Reaction?
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
 available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). Instruction book can be found
 [here](https://github.com/jorisschellekens/borb-examples/tree/master/chapter_001).
 - [STORIES] Add HTML
 - [STORIES] Add PDF support for multiple chapters
 - [STORIES] Add HTML support for multiple chapters
+
+### Nice to have
+- [STORIES] User Reaction?
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field
@@ -56,8 +62,7 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 ## LOCAL USE
 
 ### Installing
-This app is currently run and tested with 3.12.3. It isn't compatible with
- lower Python versions.
+This app was tested with Python 3.11, Python 3.12.3 and Python 3.14. Other versions were not tested.
 
 FOR UNIX : navigate to the project's root folder from your command line
  interface, then run:
@@ -76,9 +81,9 @@ pip install -r requirements.txt
 Then, run:
 ``` bash
 # Create migrations, i.e. ORM-generated files.
-# Create a folder migrations per app, with an inner __init__.py.
-# It's currenting ignored by git (see .gitignore file),
-# and its absence will cause issue like: 
+# pay attention that the folder migrations should exists inside each app folder
+# its being ignored by git (see .gitignore file)
+# can cause issue like: 
 # 'CommandError: Unable to serialize database: no such table: voiture_noire_discordprofile'
 python manage.py makemigrations
 python manage.py migrate
@@ -114,7 +119,7 @@ added late and this is done with my spare energy and/or I'm a terrible human bei
 ## Setting the app in o2switch
 ### Package
 
-Pick Python 3.11.x.
+Pick the latest version of Python.
 
 > pip install -r requirements.txt
 > pip install mysqlclient.
@@ -139,7 +144,7 @@ Check that all migrations are applied.
 To export the db, app by app, into a json format suitable for fixture:
 `python manage.py dumpdata voiture_noire --settings=core.settings > voiture_noire/fixtures/voiture_noire.json`
 
-To run the tests specific to one specific TestCase:
+To run the tests specific to one particular TestCase:
 `python manage.py test tests.test_voiture_noire.VoitureNoireTestCase`
 `python manage.py test tests.test_library.LibraryTestCase`
 

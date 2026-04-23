@@ -4,15 +4,14 @@ from datetime import date, datetime
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
-from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
 from archives.models import Author, Story
-from .models import DiscordProfile, Prompt
+from .models import ExchangeParticipant, Prompt
 
-from .models import DiscordProfile
-from .forms import DiscordProfileForm, PromptForm
+from .models import ExchangeParticipant
+from .forms import ExchangeParticipantForm, PromptForm
 
 
 class Index(generic.ListView):
@@ -34,26 +33,27 @@ class Index(generic.ListView):
 
 class MemberList(generic.ListView):
     template_name = 'voiture_noire/memberList.html'
-    context_object_name = 'DiscordProfiles'
+    context_object_name = 'ExchangeParticipants'
 
     def get_queryset(self):
-        return DiscordProfile.objects.filter(is_creator=True).order_by('member__username')    
+        # TODO: later on, filter on member active status
+        return ExchangeParticipant.objects.all().order_by('member__username')
 
 
-class Profile(generic.View):
-    form_class = DiscordProfileForm
+class Profile(View):
+    form_class = ExchangeParticipantForm
     template_name = 'voiture_noire/profile.html'
     initial = {}
 
     def get(self, request, *args, **kwargs):
         user_stories = []
         author_profile = Author.objects.filter(member=request.user).first() 
-        discord_member = DiscordProfile.objects.filter(member=request.user).first()
+        exchange_participant = ExchangeParticipant.objects.filter(member=request.user).first()
 
-        if discord_member is None and author_profile is None:
+        if exchange_participant is None and author_profile is None:
             raise PermissionDenied()
 
-        self.initial = discord_member
+        self.initial = exchange_participant
         discord_form = self.form_class(instance=self.initial)
         random_rec = None
         potential_recs = Story.objects.filter(
@@ -75,7 +75,7 @@ class Profile(generic.View):
             request,
             self.template_name,
             {
-                "discord_member": discord_member,
+                "exchange_participant": exchange_participant,
                 "author_profile": author_profile,
                 "form": discord_form,
                 "stories": user_stories,
@@ -84,14 +84,14 @@ class Profile(generic.View):
         )
     
     def post(self, request, *args, **kwargs):
-        new_profile = DiscordProfileForm(request.POST)
+        new_profile = ExchangeParticipantForm(request.POST)
         if new_profile.is_valid():
-            discord_member = DiscordProfile.objects.get_or_create(member=request.user)[0]
+            exchange_participant = ExchangeParticipant.objects.get_or_create(member=request.user)[0]
             instance = new_profile.save(commit=False)
-            discord_member.likes = instance.likes
-            discord_member.dislikes = instance.dislikes
-            discord_member.member = request.user
-            discord_member.save()
+            exchange_participant.likes = instance.likes
+            exchange_participant.dislikes = instance.dislikes
+            exchange_participant.member = request.user
+            exchange_participant.save()
         else:
             messages.add_message(
                 request,
@@ -169,27 +169,3 @@ def brand_as_criminal(request, author_id):
         author.save()
 
     return redirect('voiture_noire:profile')
-
-def discord_profiles_birthdays(request):
-    # Get date from request, default to today if not provided
-    date_param = request.GET.get('date') or request.POST.get('date')
-    
-    if date_param:
-        try:
-            query_date = datetime.strptime(date_param, '%Y-%m-%d').date()
-        except ValueError:
-            query_date = date.today()
-    else:
-        query_date = date.today()
-    
-    profiles = DiscordProfile.objects.filter(birthday__isnull=False).select_related('member')
-    data = [
-        {
-            'member_id': profile.member.id if profile.member else None,
-            'member_username': profile.member.username if profile.member else None,
-            'birthday': profile.birthday.isoformat() if profile.birthday else None
-        }
-        for profile in profiles if profile.birthday and profile.birthday == query_date
-    ]
-    return JsonResponse({'members_birthdays': data, 'query_date': query_date.isoformat()})
-

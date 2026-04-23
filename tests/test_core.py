@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.test import Client, TestCase
 
 from accounts.models import Member
-from voiture_noire.models import DiscordProfile
+from voiture_noire.models import ExchangeParticipant
 
 
 class CoreTestCase(TestCase):

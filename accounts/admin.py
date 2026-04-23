@@ -14,7 +14,7 @@ class MemberAdmin(UserAdmin):
     # change_user_password_template = Non
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        (_('Personal info'), {'fields': ('email',)}),
+        (_('Personal info'), {'fields': ('email', 'birthday', 'discord_id')}),
         (_('Permissions'), {
             'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
         }),
@@ -28,10 +28,10 @@ class MemberAdmin(UserAdmin):
     )
     form = MemberChangeForm
     change_password_form = AdminPasswordChangeForm
-    list_display = ('username', 'email', 'is_staff')
-    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups')
+    list_display = ('username', 'email', 'is_staff', 'birthday', 'discord_id')
+    list_filter = ('is_staff', 'is_superuser', 'is_active', 'groups', 'birthday', 'discord_id')
     search_fields = ('username', 'email')
-    ordering = ('username',)
+    ordering = ('username', 'birthday')
     filter_horizontal = ('groups', 'user_permissions',)
 
 admin.site.register(Member, MemberAdmin)

@@ -2,14 +2,14 @@ from django.test import Client, TestCase
 from django.urls import reverse
 
 from accounts.models import Member  
-from voiture_noire.models import DiscordProfile
+from voiture_noire.models import ExchangeParticipant
 
 
 class BannerTestCase(TestCase):
     def setUp(self):
         Member.objects.create_user('NoDiscordProfile', email='luciedupont@mail.fr', password='motdepasse')
         user_with_discord = Member.objects.create_user('HasDiscordProfile', email='jeannedurant@mail.fr', password='motdepasse')
-        DiscordProfile.objects.create(member=user_with_discord, is_creator=False)
+        ExchangeParticipant.objects.create(member=user_with_discord, is_creator=False)
 
     def test_banner_not_logged_in(self):
         response = self.client.get(reverse('voiture_noire:index'))

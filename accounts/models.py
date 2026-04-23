@@ -14,6 +14,12 @@ class MemberManager(UserManager):
 
 class Member(AbstractBaseUser, PermissionsMixin):
     objects = MemberManager()
+    COLOUR_SCHEME = [
+        ("light", "jour"),
+        ("dark", "nuit"),
+    ]
+
+    # Administrative logic
     username = models.CharField(
         _("username"),
         max_length=100,
@@ -23,9 +29,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
             "unique": _("A user with that username already exists."),
         },
     )
-    email = models.EmailField(
-        _("email address"),
-    )
+    email = models.EmailField(_("email address"),)
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
@@ -39,6 +43,15 @@ class Member(AbstractBaseUser, PermissionsMixin):
         ),
     )
     date_joined = models.DateTimeField(_("date joined"), default=timezone.now)
+
+    # Site settings
+    colour_scheme = models.CharField(max_length=5, choices=COLOUR_SCHEME, default="light")
+
+    title_blur = models.BooleanField(default=False)
+
+    # Profile logic
+    birthday = models.DateField(null=True, blank=True)
+    discord_id = models.CharField(max_length=150, default="")
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
