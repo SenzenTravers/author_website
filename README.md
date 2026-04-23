@@ -1,5 +1,12 @@
 # Site d'autrice
 
+## What it is
+This site fulfill multiple roles:
+- An author website with a blogging option and an "About" page
+- A page for small gadgets (a writing sprint app, a random sorter)
+- An archives allowing users to post, edit and share their own writing
+- A writing hub allowing users to post prompts and edit their likes and dislikes.
+
 1. [TO-DO](#to-do)
    - [Must-have](#must-have)
    - [Nice to have](#nice-to-have)
@@ -26,15 +33,15 @@
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] User Comment
+
+### Nice to have
+- [STORIES] User Reaction?
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
 available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). Instruction book can be found
 [here](https://github.com/jorisschellekens/borb-examples/tree/master/chapter_001).
 - [STORIES] Add HTML
 - [STORIES] Add PDF support for multiple chapters
 - [STORIES] Add HTML support for multiple chapters
-
-### Nice to have
-- [STORIES] User Reaction?
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field
@@ -45,15 +52,15 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [PINE] (Computer) Commissions : final page
 - [PINE] (Mobile) Commissions : final page
 - [PROMPTS] Properly implement [error messages](https://docs.djangoproject.com/en/5.1/ref/contrib/messages/)
-- [ENV] upgrading python  >= 3.13 needs to upgrade cffi to >= 1.17.1 also
 
 ## LOCAL USE
 
 ### Installing
-This app was tested with Python 3.11 and Python 3.12.3. Other versions were not tested.
+This app is currently run and tested with 3.12.3. It isn't compatible with
+ lower Python versions.
 
 FOR UNIX : navigate to the project's root folder from your command line
- interface, then:
+ interface, then run:
 
 ``` bash
 # Create a virtual environment with the command:
@@ -66,15 +73,12 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-If it complains that you need to install mssql... Remove the line from your
-version of requirements.txt, then try again. Mssql is only used in production.
-
 Then, run:
 ``` bash
 # Create migrations, i.e. ORM-generated files.
-# pay attention that the folder migrations should exists 
-# its currenting ignore by git (see .gitignore file)
-# can cause issue like: 
+# Create a folder migrations per app, with an inner __init__.py.
+# It's currenting ignored by git (see .gitignore file),
+# and its absence will cause issue like: 
 # 'CommandError: Unable to serialize database: no such table: voiture_noire_discordprofile'
 python manage.py makemigrations
 python manage.py migrate
@@ -127,7 +131,7 @@ Check that all migrations are applied.
 1. If on the front end: run `python manage.py collectstatic`, then restart
 2. If involving models: run migrations
 
-## Credits
+## Code credits
 [Rich text editor](https://codepen.io/BibekOli/pen/abRgbVW)
 
 
@@ -135,7 +139,7 @@ Check that all migrations are applied.
 To export the db, app by app, into a json format suitable for fixture:
 `python manage.py dumpdata voiture_noire --settings=core.settings > voiture_noire/fixtures/voiture_noire.json`
 
-To run the tests specific to one particular TestCase:
+To run the tests specific to one specific TestCase:
 `python manage.py test tests.test_voiture_noire.VoitureNoireTestCase`
 `python manage.py test tests.test_library.LibraryTestCase`
 
