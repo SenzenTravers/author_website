@@ -39,26 +39,29 @@
     <body>
         <nav class="banner-voiture-noire">
             <ul>
-                {% if user.is_authenticated %}
-                <li>
-                    <form action="{% url 'logout' %}" method="post">
-                        {% csrf_token %}
-                        <button type="submit">Se déconnecter</button>
-                    </form>
-                </li>
+                {% if not user.is_authenticated %}
+                    <li><a href="{% url 'login' %}">Se connecter</a></li>
                 {% else %}
-                <li><a href="{% url 'login' %}">Se connecter</a></li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Se déconnecter</button>
+                        </form>
+                    </li>
+                    <li><a href="{% url 'voiture_noire:index' %}">Bibliothèque</a></li>
+    
+                    {% if user.exchange_participant %}
+                        <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
+                    {% endif %}
+
+                    {% if user.discord_id != "" %}
+                        <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
+                    {% endif %}
+
+                    <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
                 {% endif %}
 
-                <li><a href="{% url 'voiture_noire:index' %}">Bibliothèque</a></li>
-                
-                {% if user.discord_profile.id %}
-                <li><a href="{% url 'voiture_noire:prompts' %}">Thèmes</a></li>
-                <li><a href="{% url 'voiture_noire:everyone' %}">Membres</a></li>
-                {% endif %}
-
-                <li><a href="{% url 'voiture_noire:profile' %}">Mon profil</a></li>
-            </ul>
+                </ul>
 
             {% if user.is_authenticated %}
                 <p id="welcome-blurb">Bienvenue, <b>{{ user.username }}</b> !</p>

@@ -7,37 +7,64 @@ from voiture_noire.models import ExchangeParticipant
 
 class BannerTestCase(TestCase):
     def setUp(self):
-        Member.objects.create_user('NoDiscordProfile', email='luciedupont@mail.fr', password='motdepasse')
-        user_with_discord = Member.objects.create_user('HasDiscordProfile', email='jeannedurant@mail.fr', password='motdepasse')
-        ExchangeParticipant.objects.create(member=user_with_discord, is_creator=False)
+        Member.objects.create_user('noDiscordnoExchange', email='lucie@mail.fr', password='pass')
+        is_exchange_participant = Member.objects.create_user(
+            'exchangeParticipantNoDiscord', email='faris@mail.fr', password='pass'
+        )
+        Member.objects.create_user(
+            'hasDiscordNoExchange', email='sara@mail.fr', password='pass', discord_id='discord_id'
+        )
+        ExchangeParticipant.objects.create(member=is_exchange_participant)
 
     def test_banner_not_logged_in(self):
         response = self.client.get(reverse('voiture_noire:index'))
 
         self.assertContains(response, 'Se connecter</a></li>')
+        self.assertNotContains(response, 'Bibliothèque</a></li>')
         self.assertNotContains(response, 'Thèmes</a></li>')
         self.assertNotContains(response, 'Membres</a></li>')
         self.assertNotContains(response, 'Mon profil</a></li>')
         self.assertEqual(response.status_code, 200)
 
-    def test_banner_no_discord_profile(self):
+    def test_banner_no_discord_no_exchange(self):
+        # Can't see exchange-specific pages. Accesses Bibliothèque.
         test_client = Client()
-        test_client.login(username='NoDiscordProfile', password='motdepasse')
+        test_client.login(username='noDiscordnoExchange', password='pass')
         response = test_client.get(reverse('voiture_noire:index'))
 
         self.assertContains(response, 'Se déconnecter</button>')
+        self.assertContains(response, 'Bibliothèque</a></li>')
         self.assertNotContains(response, 'Thèmes</a></li>')
         self.assertNotContains(response, 'Membres</a></li>')
-        self.assertNotContains(response, 'Mon profil</a></li>')
-        self.assertEqual(response.status_code, 200)
-
-    def test_banner_with_discord_profile(self):
-        test_client = Client()
-        test_client.login(username='HasDiscordProfile', password='motdepasse')
-        response = test_client.get(reverse('voiture_noire:index'))
-
-        self.assertContains(response, 'Se déconnecter</button>')
-        self.assertContains(response, 'Thèmes</a></li>')
-        self.assertContains(response, 'Membres</a></li>')
         self.assertContains(response, 'Mon profil</a></li>')
+        self.assertEqual(response.status_code, 200)
+
+    def test_banner_has_discord_ids(self):
+        test_client = Client()
+        test_client.login(username='hasDiscordNoExchange', password='pass')
+        response = test_client.get(reverse('voiture_noire:index'))
+
+        self.assertContains(response, 'Se déconnecter</button>')
+        self.assertContains(response, 'Bibliothèque</a></li>')
+        self.assertContains(response, 'Mon profil</a></li>')
+        self.assertContains(response, 'Membres</a></li>')
+
+        self.assertNotContains(response, 'Thèmes</a></li>')
+
+        self.assertEqual(response.status_code, 200)
+
+    def test_banner_is_exchange_participant(self):
+        test_client = Client()
+        test_client.login(
+            username='exchangeParticipantNoDiscord', password='pass'
+        )
+        response = test_client.get(reverse('voiture_noire:index'))
+
+        self.assertContains(response, 'Se déconnecter</button>')
+        self.assertContains(response, 'Bibliothèque</a></li>')
+        self.assertContains(response, 'Thèmes</a></li>')
+        self.assertContains(response, 'Mon profil</a></li>')
+
+        self.assertNotContains(response, 'Membres</a></li>')
+
         self.assertEqual(response.status_code, 200)

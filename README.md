@@ -17,8 +17,8 @@
 ## TO-DO
 ### Current task
 Decouple various types of user profile
-- Rename profiles
-- Birthday tests work (no regression)
+- ~~Rename profiles~~
+~~- Fix banner test~~
 - Create new front page to edit Member
 - Create new front page to edit Author
 - Create new front page to edit ExchangeParticipant
@@ -34,8 +34,6 @@ Decouple various types of user profile
 - [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (front)
 - [VOITURE_NOIRE] A Json view that Eriza would be able to ping
 - [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)
-- [SERVER] Add a birthday (ongoing: lacking form implementation)
-- [SERVER] Move birthday view to Accounts (cf test_profiles_birthdays)
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] User Comment
