@@ -3,10 +3,6 @@ from accounts.models import Member
 
 
 class ExchangeParticipant(models.Model):
-    # TODO: change Meta and related name back to normal
-    class Meta:
-        db_table = "voiture_noire_discordprofile"
-
     likes = models.TextField(max_length=3000, blank=True, null=True)
     dislikes = models.TextField(max_length=3000, blank=True, null=True)
     member = models.OneToOneField(
