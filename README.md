@@ -145,8 +145,8 @@ To export the db, app by app, into a json format suitable for fixture:
 `python manage.py dumpdata voiture_noire --settings=core.settings > voiture_noire/fixtures/voiture_noire.json`
 
 To run the tests specific to one particular TestCase:
-`python manage.py test tests.test_voiture_noire.VoitureNoireTestCase`
-`python manage.py test tests.test_library.LibraryTestCase`
+`python manage.py test tests.accounts.test_birthdays`
+`python manage.py test tests.archives.ArchivesIndexTestCase`
 
 (In prod) To run statics and clear them, in case the files got corrupted (don't forget to restart afterwards!):
 `python manage.py collectstatic --clear`
