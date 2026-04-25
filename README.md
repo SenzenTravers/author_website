@@ -15,8 +15,7 @@
 
 
 ## TO-DO
-### Current task
-Decouple various types of user profile
+### Current task: decouple the various types of user profile
 - ~~Rename profiles~~
 ~~- Fix banner test~~
 - Create new front page to edit Member
@@ -25,6 +24,7 @@ Decouple various types of user profile
 - Create tests for Author
 - Create tests for Member
 - Create tests for ExchangeParticipant
+- Fix: Member page
 
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte

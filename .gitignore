@@ -55,9 +55,3 @@ pytest.ini
 
 # ENV
 .env
-
-# Perplexitude
-*/tmp/*
-aaa.py
-api_eriza/
-for_import.py
