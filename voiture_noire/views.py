@@ -63,7 +63,13 @@ class Profile(View):
             author_form = self.author_form(request.POST)
             if author_form.is_valid():
                 author_form.save()
-
+            else:
+                #TODO: better handle error messages
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Votre pseudonyme doit être unique."
+                )
 
         if request.POST["form_type"] == "exchange":
             exchange_form = self.exchange_form(request.POST)

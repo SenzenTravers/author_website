@@ -5,16 +5,21 @@
 
     <hr class="hr-blue-h2-title hr-section-profile">
 
-    <p class="p-library-page-link">
-        <a
-            class="library-page-link" 
-            href="{% url 'archives:publish_story' %}"
-            >
-            Publier
-        </a>
-    </p>
-    <!-- TODO: fix this mess -->
-    <input type="hidden" name="form_type" value="author">
+    <form>
+        {% csrf_token %}
+        <label for="id_nickname">Votre nom de plume :</label>
+        <div>{{ author_form.nickname }}</div>
+
+        <label for="id_trackbear_profile">Profil trackbear :</label>
+        <div>{{ author_form.trackbear_profile }}</div>
+
+        <label for="id_other_profile_url">Autres profils :</label>
+        <div>{{ author_form.other_profile_url }}</div>
+
+        <input type="hidden" name="form_type" value="author">
+
+        <button type="submit">Enregistrer</button>
+    </form>
 
     <h3 id="your-crimes" class="subtitle-section-profile">
         {% if author_profile.criminal %}
