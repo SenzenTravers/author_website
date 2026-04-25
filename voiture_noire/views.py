@@ -7,10 +7,12 @@ from django.db.models import Count, Q
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
+from accounts.forms import MemberSelfEditForm
+from archives.forms import AuthorForm
 from archives.models import Author, Story
-from .models import ExchangeParticipant, Prompt
+from utils import stories_handler
 
-from .models import ExchangeParticipant
+from .models import ExchangeParticipant, Prompt
 from .forms import ExchangeParticipantForm, PromptForm
 
 
@@ -19,16 +21,9 @@ class Index(generic.ListView):
     context_object_name = 'stories'
 
     def get_queryset(self):
-        user = self.request.user
-
-        if user.is_authenticated:
-            return Story.objects.filter(
-                Q(author__member_id=user.id) | (~Q(visibility='Private') & Q(story_date__lte=date.today()))
-            ).order_by('-story_date')
-        else:
-            return Story.objects.filter(
-                Q(visibility='Everyone') & (Q(story_date__lte=date.today()))
-            ).order_by('-story_date')
+        return stories_handler.get_all_visible_stories(
+            self.request.user
+        )
             
 
 class MemberList(generic.ListView):
@@ -41,63 +36,61 @@ class MemberList(generic.ListView):
 
 
 class Profile(View):
-    form_class = ExchangeParticipantForm
+    account_form = MemberSelfEditForm
+    author_form = AuthorForm
+    exchange_form = ExchangeParticipantForm
     template_name = 'voiture_noire/profile.html'
-    initial = {}
 
     def get(self, request, *args, **kwargs):
         user_stories = []
-        author_profile = Author.objects.filter(member=request.user).first() 
-        exchange_participant = ExchangeParticipant.objects.filter(member=request.user).first()
-
-        if exchange_participant is None and author_profile is None:
-            raise PermissionDenied()
-
-        self.initial = exchange_participant
-        discord_form = self.form_class(instance=self.initial)
-        random_rec = None
-        potential_recs = Story.objects.filter(
-            ~Q(author=author_profile) & (~Q(visibility='Private') & Q(story_date__lte=date.today()))
-        )
-        
-        if len(potential_recs) > 1:
-            random_rec = potential_recs[
-                randint(0, len(potential_recs) -1)
-            ]
-        else:
-            random_rec = potential_recs[0]
+        author_profile = Author.objects.filter(member=request.user).first()
 
         if author_profile:
             user_stories = Story.objects.filter(author=author_profile)
-
 
         return render(
             request,
             self.template_name,
             {
-                "exchange_participant": exchange_participant,
+                "admin_form": self.account_form(instance=request.user),
+                "exchange_form": self.exchange_form(
+                    instance=ExchangeParticipant.objects.filter(
+                        member=request.user
+                    ).first()
+                ),
                 "author_profile": author_profile,
-                "form": discord_form,
                 "stories": user_stories,
-                "random_rec": random_rec
             }
         )
     
     def post(self, request, *args, **kwargs):
-        new_profile = ExchangeParticipantForm(request.POST)
-        if new_profile.is_valid():
-            exchange_participant = ExchangeParticipant.objects.get_or_create(member=request.user)[0]
-            instance = new_profile.save(commit=False)
-            exchange_participant.likes = instance.likes
-            exchange_participant.dislikes = instance.dislikes
-            exchange_participant.member = request.user
-            exchange_participant.save()
-        else:
-            messages.add_message(
-                request,
-                messages.ERROR,
-                "Une erreur est survenue durant l'enregistrement de votre profil. Veuillez garder chaque champ en-dessous de 3000 caractères."
-            )
+        if request.POST["form_type"] == "admin":
+            account_form = self.account_form(request.POST, instance=request.user)
+            if account_form.is_valid():
+                account_form.save()
+
+        if request.POST["form_type"] == "author":
+            author_form = self.author_form(request.POST)
+            #TODO: handle
+
+        if request.POST["form_type"] == "exchange":
+            exchange_form = self.exchange_form(request.POST)
+        
+            if exchange_form.is_valid():
+                exchange_participant = ExchangeParticipant.objects.get_or_create(
+                    member=request.user
+                )[0]
+
+                instance = exchange_form.save(commit=False)
+                exchange_participant.likes = instance.likes
+                exchange_participant.dislikes = instance.dislikes
+                exchange_participant.save()
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Veuillez garder chaque champ en-dessous de 3000 caractères."
+                )
         return redirect('voiture_noire:profile')
         
 

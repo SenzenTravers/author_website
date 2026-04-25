@@ -29,7 +29,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
             "unique": _("A user with that username already exists."),
         },
     )
-    email = models.EmailField(_("email address"),)
+    email = models.EmailField(_("email address"), blank=True, null=True)
     is_staff = models.BooleanField(
         _("staff status"),
         default=False,
@@ -46,7 +46,6 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     # Site settings
     colour_scheme = models.CharField(max_length=5, choices=COLOUR_SCHEME, default="light")
-
     title_blur = models.BooleanField(default=False)
 
     # Profile logic
@@ -55,7 +54,6 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
-    REQUIRED_FIELDS = ["email"]
 
     class Meta:
         verbose_name = _("member")
@@ -63,7 +61,10 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     def clean(self):
         super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email.lower())
+        try:
+            self.email = self.__class__.objects.normalize_email(self.email.lower())
+        except AttributeError:
+            pass
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         """Send an email to this user."""

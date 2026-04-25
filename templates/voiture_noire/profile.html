@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block title %}
-    Votre profil
+    La Petite Voiture Noire | Votre profil
 {% endblock %}
 
 {% block content %}
@@ -22,18 +22,6 @@
 
     <hr>
 
-    <!-- LUCILE : separate author and discord member -->
-    {% if author_profile.member.discord_profile.is_creator %}
-        {% include "./profiles/author.html" %}
-    {% else %}
-
-
-    {% if author_profile.member.discord_profile.is_creator %}
-        {% include "./profiles/author.html" %}
-    {% else %}
-        <p>Vous n'avez hélas pas de profil, car ce serveur pratique une discrimination SCANDALEUSE.</p>
-    {% endif %}
-
     {% if messages %}
         <ul class="error-messages">
             {% for message in messages %}
@@ -42,12 +30,37 @@
         </ul>
     {% endif %}
 
-    <p>✧ Et si vous avez envie de lire, pourquoi ne pas tenter la recommandation du Saint Algorithme : 
-        <strong>
-            ˚₊‧✩‧₊˚ <a href="{% url 'archives:read_story' random_rec.id 1 %}">{{random_rec.story_title }}</a> ˚₊‧✩‧₊˚ ,
-            de {{ random_rec.author }} !
-        </strong>
-    </p>
-    <p><strong>Résumé :</strong></p>
-        {{ random_rec.summary|safe }}
+    <details class="section-profile">
+        <summary>
+            <h2 class="h2-blue-title">❧ Paramètres du site</h2>
+        </summary>
+
+        <form id="admin_form" method="post" class="form-main">
+            {% csrf_token %}
+
+            <label for="id_colour_scheme">Thème couleur</label>
+            <div>{{ admin_form.colour_scheme }}</div>
+
+            <label for="id_title_blur">Effets titres</label>
+            <div>{{ admin_form.title_blur }}</div>
+
+            {% if user.discord_id != "" %}
+                <label for="id_birthday">Votre anniversaire</label>
+                <div>{{ admin_form.birthday }}</div>
+            {% endif %}
+
+            <input type="hidden" name="form_type" value="admin">
+
+            <button type="submit">Enregistrer</button>
+        </form>
+    </details>
+
+    {% if user.author_profile %}
+        {% include "./profiles/author.html" %}
+    {% endif %}
+
+    {% if user.exchange_participant %}
+        {% include "./profiles/exchange_profile.html" %}
+    {% endif %}
+
 {% endblock %}
