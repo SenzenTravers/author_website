@@ -51,7 +51,7 @@ class Member(AbstractBaseUser, PermissionsMixin):
 
     # Profile logic
     birthday = models.DateField(null=True, blank=True)
-    discord_id = models.CharField(max_length=150, default="")
+    discord_id = models.CharField(max_length=150, default="", blank=True)
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
