@@ -80,8 +80,8 @@
 
         Quill.register('modules/counter', Counter);
 
-    let likesValue = `{{ form.likes.value | safe }}`  
-    let dislikesValue = `{{ form.dislikes.value | safe }}`  
+    let likesValue = `{{ exchange_form.likes.value | safe }}`  
+    let dislikesValue = `{{ exchange_form.dislikes.value | safe }}`  
 
 
     let quillLikes = new Quill('#editor-container-likes', {
