@@ -44,7 +44,6 @@ class Profile(View):
     def get(self, request, *args, **kwargs):
         user_stories = []
         author_profile = Author.objects.filter(member=request.user).first()
-
         if author_profile:
             user_stories = Story.objects.filter(author=author_profile)
 
@@ -59,6 +58,9 @@ class Profile(View):
                     ).first()
                 ),
                 "author_profile": author_profile,
+                "author_form": self.author_form(
+                    instance=author_profile
+                ),
                 "stories": user_stories,
             }
         )
@@ -71,7 +73,9 @@ class Profile(View):
 
         if request.POST["form_type"] == "author":
             author_form = self.author_form(request.POST)
-            #TODO: handle
+            if author_form.is_valid():
+                author_form.save()
+
 
         if request.POST["form_type"] == "exchange":
             exchange_form = self.exchange_form(request.POST)

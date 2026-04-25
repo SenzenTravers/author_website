@@ -66,7 +66,7 @@ class ProfileTestCase(TestCase):
         response = test_client.get(reverse('voiture_noire:profile'))
 
         self.assertNotContains(response, "Votre anniversaire")
-        self.assertContains(response, "Profil d'auteur/d'autrice")
-        self.assertContains(response, "Profil d'échange")
+        self.assertNotContains(response, "Profil d'échange")
+        self.assertContains(response, "Profil d'autrice/d'auteur")
         self.assertContains(response, "Paramètres du site")
         self.assertEqual(response.status_code, 200)
