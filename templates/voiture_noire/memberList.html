@@ -15,17 +15,17 @@
 <hr>
 
 <section class="member-list">
-    {% for profile in DiscordProfiles %}
+    {% for participant in ExchangeParticipants %}
         <section class="card-member-profile">
-            <h2>{{ profile.member.username }}</h2>
+            <h2>{{ participant.member.username }}</h2>
             <hr>
             <h3>AIME :</h3>
-                {{ profile.likes | safe }}
+                {{ participant.likes | safe }}
             <h3>N'AIME PAS :</h3>
-                {{ profile.dislikes | safe}}
+                {{ participant.dislikes | safe}}
             <h3>INTÉRESSÉ.E PAR :</h3>
                 <ul>
-                    {% for prompt in profile.member.prompt_set.all|dictsort:"pairing_type" %} 
+                    {% for prompt in participant.member.prompt_set.all|dictsort:"pairing_type" %} 
                         <li>
                             <b>{{ prompt.get_pairing_type_display }}</b> : {{prompt.body}}
                         </li>
