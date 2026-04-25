@@ -1,18 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.views.generic.base import RedirectView
-from django.urls import path, reverse_lazy
+from django.urls import path
 
 from . import views
 
 app_name = 'archives'
 
 urlpatterns = [
-    path(
-        "",
-        RedirectView.as_view(url=reverse_lazy("voiture_noire:index")),
-        name="index",
-    ),
-    # LUCILE : à ranger plus tard
+    path('', views.Index.as_view(), name='index'),
+    # TODO : à ranger plus tard
     # path("<int:story_id>/html", views.download_html, name="download_html"),
     # path("<int:story_id>/pdf", views.download_pdf, name="download_pdf"),
     # path("<int:story_id>/epub", views.download_epub, name="download_epub"),

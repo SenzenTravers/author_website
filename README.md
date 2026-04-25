@@ -18,13 +18,16 @@
 ### Current task: decouple the various types of user profile
 - ~~Rename profiles~~
 ~~- Fix banner test~~
+~~- Fix: Member page~~
+~~- Move library page to Archives~~
+~~- Fix library page~~
 - Create new front page to edit Member
 - Create new front page to edit Author
 - Create new front page to edit ExchangeParticipant
 - Create tests for Author
 - Create tests for Member
 - Create tests for ExchangeParticipant
-- Fix: Member page
+
 
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte

@@ -1,4 +1,3 @@
-from random import randint
 from datetime import date, datetime
 
 from django.contrib import messages
@@ -10,20 +9,9 @@ from django.views import generic, View
 from accounts.forms import MemberSelfEditForm
 from archives.forms import AuthorForm
 from archives.models import Author, Story
-from utils import stories_handler
 
 from .models import ExchangeParticipant, Prompt
 from .forms import ExchangeParticipantForm, PromptForm
-
-
-class Index(generic.ListView):
-    template_name = 'voiture_noire/index.html'
-    context_object_name = 'stories'
-
-    def get_queryset(self):
-        return stories_handler.get_all_visible_stories(
-            self.request.user
-        )
             
 
 class MemberList(generic.ListView):

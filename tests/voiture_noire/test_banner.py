@@ -23,7 +23,7 @@ class BannerTestCase(TestCase):
         self.assertNotContains(response, 'Bibliothèque</a></li>')
         self.assertNotContains(response, 'Thèmes</a></li>')
         self.assertNotContains(response, 'Membres</a></li>')
-        self.assertNotContains(response, 'Mon profil</a></li>')
+        self.assertNotContains(response, 'Paramètres</a></li>')
         self.assertEqual(response.status_code, 200)
 
     def test_banner_no_discord_no_exchange(self):
@@ -36,7 +36,7 @@ class BannerTestCase(TestCase):
         self.assertContains(response, 'Bibliothèque</a></li>')
         self.assertNotContains(response, 'Thèmes</a></li>')
         self.assertNotContains(response, 'Membres</a></li>')
-        self.assertContains(response, 'Mon profil</a></li>')
+        self.assertContains(response, 'Paramètres</a></li>')
         self.assertEqual(response.status_code, 200)
 
     def test_banner_has_discord_ids(self):
@@ -46,7 +46,7 @@ class BannerTestCase(TestCase):
 
         self.assertContains(response, 'Se déconnecter</button>')
         self.assertContains(response, 'Bibliothèque</a></li>')
-        self.assertContains(response, 'Mon profil</a></li>')
+        self.assertContains(response, 'Paramètres</a></li>')
         self.assertContains(response, 'Membres</a></li>')
 
         self.assertNotContains(response, 'Thèmes</a></li>')
@@ -63,7 +63,7 @@ class BannerTestCase(TestCase):
         self.assertContains(response, 'Se déconnecter</button>')
         self.assertContains(response, 'Bibliothèque</a></li>')
         self.assertContains(response, 'Thèmes</a></li>')
-        self.assertContains(response, 'Mon profil</a></li>')
+        self.assertContains(response, 'Paramètres</a></li>')
 
         self.assertNotContains(response, 'Membres</a></li>')
 

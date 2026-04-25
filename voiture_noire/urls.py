@@ -1,12 +1,17 @@
 from django.contrib.auth.decorators import login_required
-from django.urls import path
+from django.urls import path, reverse_lazy
+from django.views.generic.base import RedirectView
 
 from . import views
 
 app_name = 'voiture_noire'
 
 urlpatterns = [
-    path('', views.Index.as_view(), name='index'),
+    path(
+        '',
+        RedirectView.as_view(url=reverse_lazy("archives:index")),
+        name="index",
+    ),
     path('profile', login_required(views.Profile.as_view()), name='profile'),
     path('everyone', login_required(views.MemberList.as_view()), name='everyone'),
     path('prompts', login_required(views.PromptView.as_view()), name='prompts'),

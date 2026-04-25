@@ -12,6 +12,26 @@ from archives.forms import Author, ChapterForm, StoryForm
 from archives.models import Chapter, Story, PairingType
 from archives.utils import StoryDigester
 
+from utils import stories_handler
+
+
+class Index(generic.ListView):
+    template_name = 'archives/index.html'
+    context_object_name = 'stories'
+
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["random_rec"] = stories_handler.return_a_rec(
+            self.request.user
+        )
+        return context
+
+    def get_queryset(self):
+        return stories_handler.get_all_visible_stories(
+            self.request.user
+        )
+
 
 class StoryReadView(generic.View):
     template_name = 'archives/story_read.html'
