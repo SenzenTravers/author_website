@@ -35,8 +35,6 @@
 - [ARCHIVES] Post : preview fic
 - [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (back)
 - [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (front)
-- [VOITURE_NOIRE] A Json view that Eriza would be able to ping
-- [SERVER] Add events (ongoing: lack a get view, post view, edit view, delete view)
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] User Comment

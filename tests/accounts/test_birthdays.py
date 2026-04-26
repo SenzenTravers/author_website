@@ -1,4 +1,6 @@
+import json
 from datetime import date, timedelta
+
 from django.test import TestCase
 from django.urls import reverse
 from accounts.models import Member
@@ -81,7 +83,8 @@ class AccountsBirthdaysTestCase(TestCase):
         self.client.login(username="no_birthday", password="pass")
         response = self.client.post(
             reverse('members:birthdays'),
-            {'discord_id': '17871183718936171','birthday': birthday_iso}
+            json.dumps({'discord_id': '17871183718936171','birthday': birthday_iso}),
+            content_type="application/json"
         )
         members = Member.objects.filter(birthday__isnull=False).filter(discord_id__isnull=False)
         data = [
@@ -97,7 +100,8 @@ class AccountsBirthdaysTestCase(TestCase):
         self.client.login(username="no_birthday", password="pass")
         response = self.client.post(
             reverse('members:birthdays'),
-            {'discord_id': '17871183718936171'}
+            json.dumps({'discord_id': '17871183718936171',}),
+            content_type="application/json"
         )
         data = response.json()
 
@@ -114,7 +118,8 @@ class AccountsBirthdaysTestCase(TestCase):
         self.client.login(username="no_birthday", password="pass")
         response = self.client.post(
             reverse('members:birthdays'),
-            {'discord_id': 'WRONG_DISCORD_ID','birthday': birthday}
+            json.dumps({'discord_id': 'WRONG_DISCORD_ID','birthday': birthday}),
+            content_type="application/json"
         )
         data = response.json()
 
