@@ -1,5 +1,6 @@
 @import "./base.css";
 
+/* TODO: perhaps to delete */
 .discord-member-profile {
     display: flex;
     flex-flow: column;
@@ -7,10 +8,45 @@
     label {
         margin-top: 2em;
         margin-bottom: 1em;
-    }
-    
+    }   
 }
 
+.form-profile {
+    display: flex;
+    flex-flow: column;
+
+    .form-profile-item {
+        display: flex;
+        flex-flow: column;
+        align-items: center;  
+
+        label {
+            margin-bottom: 0.5em;
+            text-align: center;
+        }
+
+        input, select {
+            margin-bottom: 1em;
+            text-transform: capitalize;
+        }
+    }
+}
+
+/***************** UTILS */
+@media screen and (max-width: 550px) {
+    .form-row {
+        display: flex;
+        flex-flow: column;
+    }
+}
+
+@media screen and (min-width: 551px) {
+    .form-row {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+    }
+}
 
 /***************** AUTHOR-SPECIFIC SESSION */
 .subtitle-section-profile {

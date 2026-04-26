@@ -35,21 +35,27 @@
             <h2 class="h2-blue-title">❧ Paramètres du site</h2>
         </summary>
 
-        <form id="admin_form" method="post" class="form-main">
+        <form id="admin_form" method="post" class="form-profile">
             {% csrf_token %}
 
-            <label for="id_colour_scheme">Thème couleur</label>
-            <div>{{ admin_form.colour_scheme }}</div>
+            <div class="form-row">
+                <div class="form-profile-item">
+                    <label for="id_colour_scheme">Thème couleur</label>
+                    <div>{{ admin_form.colour_scheme }}</div>
+                </div>
+                <div class="form-profile-item">
+                    <label for="id_title_blur">Effets titres</label>
+                    <div>{{ admin_form.title_blur }}</div>
+                </div>
+                <div class="form-profile-item">
+                    {% if user.discord_id != "" %}
+                        <label for="id_birthday">Votre anniversaire</label>
+                        <div>{{ admin_form.birthday }}</div>
+                    {% endif %}
+                </div>
 
-            <label for="id_title_blur">Effets titres</label>
-            <div>{{ admin_form.title_blur }}</div>
-
-            {% if user.discord_id != "" %}
-                <label for="id_birthday">Votre anniversaire</label>
-                <div>{{ admin_form.birthday }}</div>
-            {% endif %}
-
-            <input type="hidden" name="form_type" value="admin">
+                <input type="hidden" name="form_type" value="admin">
+            </div>
 
             <button type="submit">Enregistrer</button>
         </form>

@@ -70,4 +70,18 @@
         
         <main>{% block content %} {% endblock %}</main>
     </body>
+
+    <script>
+        {% if user.title_blur == False %}
+            console.log('hohohoho')
+            window.onload = function() {
+            const mayBeBlurred = document.querySelectorAll('h1, h2, label')
+
+            for (let item of mayBeBlurred) {
+                item.classList.add("no-shadow-no-blur")
+            }
+
+        };
+        {% endif %}
+    </script>
 </html>

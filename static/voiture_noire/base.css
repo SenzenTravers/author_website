@@ -97,6 +97,9 @@ body {
     }
 }
 
+.no-shadow-no-blur {
+    filter: none !important;
+}
 
 /* BANNIÈRE */
 .banner-voiture-noire {

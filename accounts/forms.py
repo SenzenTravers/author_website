@@ -16,6 +16,10 @@ class MemberChangeForm(UserChangeForm):
         fields = ('username', 'email', 'birthday')
 
 class MemberSelfEditForm(forms.ModelForm):
+    birthday = forms.DateField(
+        widget=forms.SelectDateWidget(years=range(1800, 1900)) # We despise the youth
+    )
+
     class Meta:
         model = Member
         fields = ('colour_scheme', 'title_blur', 'birthday')

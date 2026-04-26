@@ -97,7 +97,6 @@ class PromptView(View):
     initial = {"key": "value"}
     template_name = "voiture_noire/prompts.html"
 
-
     def get(self, request, *args, **kwargs):
         form = self.form_class(initial=self.initial)
         prompt_list = Prompt.objects.order_by('-id')
