@@ -16,12 +16,8 @@
 
 ## TO-DO
 ### Current task: decouple the various types of user profile
-- ~~Rename profiles~~
-~~- Fix banner test~~
-~~- Fix: Member page~~
-~~- Move library page to Archives~~
-~~- Fix library page~~
-- Create new front page to edit Member
+~~- Fix exchange profile~~
+- Better member list
 - Create new front page to edit Author
 - Create new front page to edit ExchangeParticipant
 - Create tests for Author
@@ -33,7 +29,6 @@
 - [ARCHIVES] Gérer plusieurs tailles de texte
 - [ARCHIVES] Show author notes
 - [ARCHIVES] Post : preview fic
-- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (back)
 - [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (front)
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
