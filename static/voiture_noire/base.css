@@ -99,6 +99,7 @@ body {
 
 .no-shadow-no-blur {
     filter: none !important;
+    text-shadow: none !important;
 }
 
 /* BANNIÈRE */
