@@ -19,6 +19,10 @@
         <section class="card-member-profile">
             <h2>{{ person.username }}</h2>
             <hr>
+            <!-- In case of empty profile -->
+            {% if person.author_set.all.count == 0 and not person.exchange_participant %}
+                <p>Existe, et c'est déjà très bien.</p> 
+            {% endif %}
             <!-- AUTHOR LOGIC -->
             {% for author in person.author_set.all %}
                 <h3>{{ author.nickname }}</h3>
