@@ -31,7 +31,7 @@ def get_all_visible_stories(user):
 def get_all_visible_stories_of_author(user, author_id):
     if user.is_authenticated:
         return Story.objects.filter(
-            Q(author__member_id=author_id) &
+            Q(author_id=author_id) &
             (
                 (~Q(visibility='Private') & Q(story_date__lte=date.today()) | Q(author__member_id=user.id))
             )

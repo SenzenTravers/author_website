@@ -22,9 +22,10 @@ class Index(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["random_rec"] = stories_handler.return_a_rec(
-            self.request.user
-        )
+        if not self.kwargs.get('author_id'):
+            context["random_rec"] = stories_handler.return_a_rec(
+                self.request.user
+            )
         return context
 
     def get_queryset(self):
