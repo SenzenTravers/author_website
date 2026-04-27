@@ -28,7 +28,7 @@ class Index(generic.ListView):
         return context
 
     def get_queryset(self):
-        if self.kwargs['author_id']:
+        if self.kwargs.get('author_id'):
             return stories_handler.get_all_visible_stories_of_author(
                 self.request.user,
                 self.kwargs['author_id']
