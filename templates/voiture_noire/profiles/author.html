@@ -5,18 +5,25 @@
 
     <hr class="hr-blue-h2-title hr-section-profile">
 
-    <form>
+    <form method="post" class="form-profile">
         {% csrf_token %}
-        <label for="id_nickname">Votre nom de plume :</label>
-        <div>{{ author_form.nickname }}</div>
+        <div class="form-profile-item">
+            <label for="id_nickname">Nom de plume</label>
+            {{ author_form.nickname }}
+        </div>
 
-        <label for="id_trackbear_profile">Profil trackbear :</label>
-        <div>{{ author_form.trackbear_profile }}</div>
+        <div class="form-profile-item">
+            <label for="id_trackbear_profile">Profil trackbear</label>
+            {{ author_form.trackbear_profile }}
+        </div>
 
-        <label for="id_other_profile_url">Autres profils :</label>
-        <div>{{ author_form.other_profile_url }}</div>
+        <div class="form-profile-item">
+            <label for="id_other_profile_url">Autres profils</label>
+            {{ author_form.other_profile_url }}
+        </div>
 
         <input type="hidden" name="form_type" value="author">
+        <div hidden>{{ author_form.criminal }}</div>
 
         <button type="submit">Enregistrer</button>
     </form>
@@ -61,6 +68,7 @@
         )
 
         if (response.ok) {
+            const realInput = document.getElementById("id_criminal")
             const checkbox = document.getElementById("criminal-switch")
             const authorH2 = document.getElementsByClassName("h2-blue-title")[0] 
             const subtitle = document.getElementById("your-crimes")
@@ -72,7 +80,7 @@
                 subtitle.innerHTML = "Vos œuvres"
                 authorH2.innerHTML = "Profil d'autrice/d'auteur"
             }
-
+            realInput.checked = !realInput.checked
         } else {
             throw new Error(`Response status: ${response.status}`);            
         }

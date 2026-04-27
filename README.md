@@ -17,13 +17,9 @@
 ## TO-DO
 ### Current task: decouple the various types of user profile
 ~~- Fix exchange profile~~
+~~- Create new front page to edit ExchangeParticipant~~
+~~- Create new front page to edit Author~~
 - Better member list
-- Create new front page to edit Author
-- Create new front page to edit ExchangeParticipant
-- Create tests for Author
-- Create tests for Member
-- Create tests for ExchangeParticipant
-
 
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte

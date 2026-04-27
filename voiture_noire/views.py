@@ -60,15 +60,17 @@ class Profile(View):
                 account_form.save()
 
         if request.POST["form_type"] == "author":
-            author_form = self.author_form(request.POST)
+            author_instance = Author.objects.get_or_create(member=request.user)[0]
+            author_form = self.author_form(request.POST, instance=author_instance)
+
             if author_form.is_valid():
                 author_form.save()
             else:
-                #TODO: better handle error messages
+                #TODO: handle error messages!
                 messages.add_message(
                     request,
                     messages.ERROR,
-                    "Votre pseudonyme doit être unique."
+                    "Votre pseudonyme doit être unique. Si vous n'y avez pas touché, alors mystère."
                 )
 
         if request.POST["form_type"] == "exchange":
@@ -155,7 +157,7 @@ def brand_as_criminal(request, author_id):
     author = Author.objects.filter(member=request.user).first()
 
     if author and request.user == author.member :
-        author.criminal = not author.criminal # toggle the value ON/OFF
+        author.criminal = not author.criminal
         author.save()
 
     return redirect('voiture_noire:profile')

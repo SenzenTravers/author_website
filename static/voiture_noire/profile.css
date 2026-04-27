@@ -18,14 +18,15 @@
     .form-profile-item {
         display: flex;
         flex-flow: column;
-        align-items: center;  
+        align-items: center;
+        margin-bottom: 1em;  
 
         label {
             margin-bottom: 0.5em;
             text-align: center;
         }
 
-        input, select {
+        select {
             margin-bottom: 1em;
             text-transform: capitalize;
         }

@@ -35,17 +35,17 @@
             <h2 class="h2-blue-title">❧ Paramètres du site</h2>
         </summary>
 
-        <form id="admin_form" method="post" class="form-profile">
+        <form method="post" id="admin_form" class="form-profile">
             {% csrf_token %}
 
             <div class="form-row">
                 <div class="form-profile-item">
                     <label for="id_colour_scheme">Thème couleur</label>
-                    <div>{{ admin_form.colour_scheme }}</div>
+                    {{ admin_form.colour_scheme }}
                 </div>
                 <div class="form-profile-item">
                     <label for="id_title_blur">Effets titres</label>
-                    <div>{{ admin_form.title_blur }}</div>
+                    {{ admin_form.title_blur }}
                 </div>
                 <div class="form-profile-item">
                     {% if user.discord_id != "" %}

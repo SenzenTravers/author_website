@@ -7,7 +7,10 @@ from .models import Author, Chapter, Comment, Story, PairingType
 class AuthorForm(forms.ModelForm):
     class Meta:
         model = Author
-        fields = '__all__'
+        fields = [
+            'nickname', 'criminal',
+            'trackbear_profile', 'other_profile_url'
+        ]
 
 
 class ChapterForm(forms.ModelForm):
