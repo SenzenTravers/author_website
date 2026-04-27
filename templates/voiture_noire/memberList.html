@@ -15,24 +15,41 @@
 <hr>
 
 <section class="member-list">
-    {% for participant in ExchangeParticipants %}
+    {% for person in Members %}
         <section class="card-member-profile">
-            <h2>{{ participant.member.username }}</h2>
+            <h2>{{ person.username }}</h2>
             <hr>
-            <h3>AIME :</h3>
-                {{ participant.likes | safe }}
-            <h3>N'AIME PAS :</h3>
-                {{ participant.dislikes | safe}}
-            <h3>INTÉRESSÉ.E PAR :</h3>
+            <!-- AUTHOR LOGIC -->
+            {% for author in person.author_set.all %}
+                <h3>{{ author.nickname }}</h3>
+                <a href="{% url 'archives:author_bibliography' author.id %}">Ses écrits</a>
+
+                {% if author.trackbear_profile != "" %}
+                    <h3>Profil Trackbear</h3>
+                    <p>{{ author.trackbear_profile }}</p>
+                {% endif %}
+                {% if author.other_profile_url != "" %}
+                    <h3>Autres liens</h3>
+                    <p>{{ author.other_profile_url }}</p>
+                {% endif %}
+            {% endfor %}
+
+            {% if request.user.exchange_participant and person.exchange_participant %}
+                <!-- EXCHANGE LOGIC -->
+                <h3>AIME</h3>
+                    {{ person.exchange_participant.likes | safe }}
+                <h3>N'AIME PAS</h3>
+                    {{ person.exchange_participant.dislikes | safe}}
+                <h3>INTÉRESSÉ.E PAR :</h3>
                 <ul>
-                    {% for prompt in participant.member.prompt_set.all|dictsort:"pairing_type" %} 
+                    {% for prompt in person.prompt_set.all|dictsort:"pairing_type" %} 
                         <li>
                             <b>{{ prompt.get_pairing_type_display }}</b> : {{prompt.body}}
                         </li>
                     {% endfor %}
                 </ul>
+            {% endif %}
         </section>
-
     {% endfor %}
 </section>
 {% endblock %}

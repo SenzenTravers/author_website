@@ -27,3 +27,16 @@ def get_all_visible_stories(user):
         return Story.objects.filter(
             Q(visibility='Everyone') & (Q(story_date__lte=date.today()))
         ).order_by('-story_date')
+
+def get_all_visible_stories_of_author(user, author_id):
+    if user.is_authenticated:
+        return Story.objects.filter(
+            Q(author__member_id=user.id) &
+            (
+                (~Q(visibility='Private') & Q(story_date__lte=date.today()) | Q(author__member_id=user.id))
+            )
+        ).order_by('-story_date')
+    else:
+        return Story.objects.filter(
+            Q(visibility='Everyone') & (Q(story_date__lte=date.today()))
+        ).order_by('-story_date')

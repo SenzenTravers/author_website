@@ -19,7 +19,7 @@
 ~~- Fix exchange profile~~
 ~~- Create new front page to edit ExchangeParticipant~~
 ~~- Create new front page to edit Author~~
-- Better member list
+~~- Better member list~~
 
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte

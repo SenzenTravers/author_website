@@ -7,6 +7,7 @@ app_name = 'archives'
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
+    path('<int:author_id>', login_required(views.Index.as_view()), name="author_bibliography"),
     # TODO : à ranger plus tard
     # path("<int:story_id>/html", views.download_html, name="download_html"),
     # path("<int:story_id>/pdf", views.download_pdf, name="download_pdf"),

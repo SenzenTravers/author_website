@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views import generic, View
 
 from accounts.forms import MemberSelfEditForm
+from accounts.models import Member
 from archives.forms import AuthorForm
 from archives.models import Author, Story
 
@@ -16,11 +17,10 @@ from .forms import ExchangeParticipantForm, PromptForm
 
 class MemberList(generic.ListView):
     template_name = 'voiture_noire/memberList.html'
-    context_object_name = 'ExchangeParticipants'
+    context_object_name = 'Members'
 
     def get_queryset(self):
-        # TODO: later on, filter on member active status
-        return ExchangeParticipant.objects.all().order_by('member__username')
+        return Member.objects.exclude(is_active=False).order_by('username')
 
 
 class Profile(View):
