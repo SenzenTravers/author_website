@@ -106,7 +106,7 @@
         filter: drop-shadow(1px 1px 2px var(--nude));
         border-radius: 2px;
         min-height: 200px;
-        background-color: white;
+        background-color: var(--main-bg-colour-clear);
         font-size: medium;
         resize: both;
     }
