@@ -20,12 +20,14 @@
 ~~- Create new front page to edit ExchangeParticipant~~
 ~~- Create new front page to edit Author~~
 ~~- Better member list~~
+~~- [ARCHIVES] Pretty recs~~
+- [ARCHIVES] Fix: show author notes
+- [ARCHIVES] Dark mode (fics only)
+- [STORIES] User Reaction?
 
 ### Must-have
 - [ARCHIVES] Gérer plusieurs tailles de texte
-- [ARCHIVES] Show author notes
 - [ARCHIVES] Post : preview fic
-- [REFACTO] Differentiate more tightly between Author profiles and Discord Member profile (front)
 - [STORIES] Post comment (ongoing: lacking view + checks)
 - [STORIES] Delete chapter
 - [STORIES] User Comment
@@ -37,7 +39,6 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [STORIES] Add HTML support for multiple chapters
 
 ### Nice to have
-- [STORIES] User Reaction?
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field

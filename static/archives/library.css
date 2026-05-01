@@ -40,3 +40,13 @@
         filter: brightness(110%)
     }
 }
+
+#random-rec {
+    background-color: var(--misty-blue);
+    color: var(--jet-black);
+    margin: 0px 2vw 4vh 2vw;
+    padding: 20px 30px 20px 30px;
+    border-radius: 5px;
+    text-wrap: wrap;
+    hyphens: auto;
+}

@@ -41,14 +41,16 @@
     </div>
 
     {% if random_rec %}
-        <p>✧ La recommandation du Saint Algorithme : 
-            <strong>
-                ˚₊‧✩‧₊˚ <a href="{% url 'archives:read_story' random_rec.id 1 %}">{{random_rec.story_title }}</a> ˚₊‧✩‧₊˚ ,
-                de {{ random_rec.author }} !
-            </strong>
-        </p>
-        <p><strong>Résumé :</strong></p>
-            {{ random_rec.summary|safe }}
+        <section id="random-rec">
+            <p>✧ La recommandation du Saint Algorithme : 
+                <strong>
+                    ˚₊‧✩‧₊˚ <a href="{% url 'archives:read_story' random_rec.id 1 %}">{{random_rec.story_title }}</a> ˚₊‧✩‧₊˚ ,
+                    de {{ random_rec.author }} !
+                </strong>
+            </p>
+            <p><strong>Résumé :</strong></p>
+                {{ random_rec.summary|safe }}
+        </section>
     {% endif %}
 
     {% for story in stories %}
