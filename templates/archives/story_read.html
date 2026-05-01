@@ -3,7 +3,7 @@
 {% block page_desc %}{{ story.summary }}{% endblock %}
 
 {% block stylesheet %}
-<link rel="stylesheet" href="/static/voiture_noire/story_read.css">
+<link rel="stylesheet" href="/static/story_read.css">
 {% endblock %}
 
 {% block title %}
@@ -114,4 +114,23 @@
     {% endif %}
 
 </section>
+
+<script>
+    const colourScheme = '{{ user.colour_scheme }}'
+
+    window.onload = (event) => {
+        if (colourScheme === 'dark') {
+            switchToNightMode()
+        }
+    };
+
+    function switchToNightMode() {
+        const body = document.querySelector('body')
+
+        body.style.setProperty('--jet-black', '#D1BFA6');
+        body.style.setProperty('--main-bg-colour-clear', '#252525');
+        body.style.setProperty('--midnight-blue', '#B0BFC2');
+        body.style.setProperty('--ivory', '#4C6585');
+    }
+</script>
 {% endblock %}
