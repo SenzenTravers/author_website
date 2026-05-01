@@ -30,11 +30,11 @@
 
                 {% if author.trackbear_profile != "" %}
                     <h3>Profil Trackbear</h3>
-                    <p>{{ author.trackbear_profile }}</p>
+                    <a href="{{ author.trackbear_profile }}">{{ author.trackbear_profile }}</a>
                 {% endif %}
                 {% if author.other_profile_url != "" %}
                     <h3>Autres liens</h3>
-                    <p>{{ author.other_profile_url }}</p>
+                    <a href="{{ author.trackbear_profile }}">{{ author.other_profile_url }}</a>
                 {% endif %}
             {% endfor %}
 
