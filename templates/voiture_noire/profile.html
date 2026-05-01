@@ -61,6 +61,44 @@
         </form>
     </details>
 
+    <details class="section-profile">
+        <summary>
+            <h2 class="h2-blue-title">❧ Paramètres de lecture</h2>
+        </summary>
+
+        <form method="post" id="reader_form" class="form-profile">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-profile-item">
+                    <label for="id_serif">J'm le Serif</label>
+                    {{ reader_form.serif }}
+                </div>
+
+                <div class="form-profile-item">
+                    <label for="id_font_size">Je suis myope</label>
+                    {{ reader_form.font_size }}
+                </div>
+
+                <input type="hidden" name="form_type" value="reader">
+            </div>
+
+            <div>
+                <p id="example-text-archive">
+                    Cheese on toast airedale the big cheese. Danish 
+                    fontina cheesy grin airedale danish fontina 
+                    taleggio the big cheese macaroni cheese 
+                    port-salut. Edam fromage lancashire feta caerphilly 
+                    everyone loves chalk and cheese brie. Red leicester 
+                    parmesan cheese and biscuits cheesy feet blue castello 
+                    cheesecake fromage frais smelly cheese.
+                </p>
+            </div>
+
+            <button type="submit">Enregistrer</button>
+        </form>
+    </details>
+
     {% if author_profile %}
         {% include "./profiles/author.html" %}
     {% endif %}
@@ -69,4 +107,30 @@
         {% include "./profiles/exchange_profile.html" %}
     {% endif %}
 
+    <script>
+        const exampleText = document.getElementById("example-text-archive")
+        const fontSizeField = document.getElementById("id_font_size")
+        const serifField = document.getElementById("id_serif")
+
+        switchFontSizeField()
+        switchSerifExampleText()
+
+        fontSizeField.onchange = function() {
+            switchFontSizeField()
+        }
+        serifField.onchange = function(e) {
+            switchSerifExampleText()
+        }
+
+        function switchFontSizeField() {
+            exampleText.style.fontSize = fontSizeField.value + "em";
+        }
+        function switchSerifExampleText() {
+            if (serifField.checked) {
+                exampleText.style.fontFamily = 'Libre Baskerville, PT Serif, serif';
+            } else {
+                exampleText.style.fontFamily = 'Gill Sans, sans-serif';
+            }
+        }
+</script>
 {% endblock %}

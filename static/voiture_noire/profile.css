@@ -33,6 +33,11 @@
     }
 }
 
+#example-text-archive {
+    color: var(--jet-black);
+    line-height: normal;
+}
+
 /***************** UTILS */
 @media screen and (max-width: 550px) {
     .form-row {

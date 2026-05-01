@@ -8,8 +8,8 @@ from django.views import generic, View
 
 from accounts.forms import MemberSelfEditForm
 from accounts.models import Member
-from archives.forms import AuthorForm
-from archives.models import Author, Story
+from archives.forms import AuthorForm, ReaderForm
+from archives.models import Author, Reader, Story
 
 from .models import ExchangeParticipant, Prompt
 from .forms import ExchangeParticipantForm, PromptForm
@@ -26,6 +26,7 @@ class MemberList(generic.ListView):
 class Profile(View):
     account_form = MemberSelfEditForm
     author_form = AuthorForm
+    reader_form = ReaderForm
     exchange_form = ExchangeParticipantForm
     template_name = 'voiture_noire/profile.html'
 
@@ -34,6 +35,8 @@ class Profile(View):
         author_profile = Author.objects.filter(member=request.user).first()
         if author_profile:
             user_stories = Story.objects.filter(author=author_profile)
+        if request.user.is_authenticated:
+            reader_profile = Reader.objects.get_or_create(member=request.user)[0]
 
         return render(
             request,
@@ -49,6 +52,9 @@ class Profile(View):
                 "author_form": self.author_form(
                     instance=author_profile
                 ),
+                "reader_form": self.reader_form(
+                    instance=reader_profile
+                ),
                 "stories": user_stories,
             }
         )
@@ -58,6 +64,22 @@ class Profile(View):
             account_form = self.account_form(request.POST, instance=request.user)
             if account_form.is_valid():
                 account_form.save()
+
+        if request.POST["form_type"] == "reader":
+            reader_form = self.reader_form(request.POST)
+        
+            if reader_form.is_valid():
+                reader = Reader.objects.get(member=request.user)
+                instance = reader_form.save(commit=False)
+                reader.serif = instance.serif
+                reader.font_size = instance.font_size
+                reader.save()
+            else:
+                messages.add_message(
+                    request,
+                    messages.ERROR,
+                    "Une erreur est survenue. Veuillez réessayer."
+                )
 
         if request.POST["form_type"] == "author":
             author_instance = Author.objects.get_or_create(member=request.user)[0]

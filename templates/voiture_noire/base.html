@@ -75,7 +75,10 @@
         const isLogged = '{{ user.is_authenticated }}'
         const title_blur = '{{ user.title_blur }}'
         const colourScheme = '{{ user.colour_scheme }}'
-        const serif = '{{ user.serif }}'
+        const serif = '{{ user.reader_profile.serif }}'
+        const fontSize = '{{ user.reader_profile.font_size }}'.replace(",", ".")
+        const storyBody = document.getElementsByClassName("story-body") ? 
+            document.getElementsByClassName("story-body")[0] : false
 
         window.onload = (event) => {
             if (title_blur === 'False' && isLogged === 'True') {
@@ -88,6 +91,16 @@
 
             if (colourScheme === 'dark') {
                 switchToNightMode()
+            }
+
+            if (storyBody) {
+                if (serif === 'False') {
+                    storyBody.style.fontFamily = "Gill Sans, sans-serif"
+                }
+
+                if (!isNaN(fontSize)) {
+                    storyBody.style.fontSize = fontSize + "em"
+                }
             }
 
         };

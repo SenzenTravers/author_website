@@ -17,13 +17,31 @@ class Author(models.Model):
     member = models.ForeignKey(Member,
         on_delete=models.CASCADE,
         null=True)
-    nickname = models.CharField(max_length=100, unique=True)
+    nickname = models.CharField(
+        max_length=100, unique=True
+    )
     criminal = models.BooleanField(default=False)
-    trackbear_profile = models.CharField(max_length=100, default='', blank=True)
-    other_profile_url = models.CharField(max_length=100, default='', blank=True)
+    trackbear_profile = models.CharField(
+        max_length=100, default='', blank=True
+    )
+    other_profile_url = models.CharField(
+        max_length=100, default='', blank=True
+    )
 
     def __str__(self):
         return self.nickname
+
+
+class Reader(models.Model):
+    serif = models.BooleanField(default=True)
+    font_size = models.FloatField(default=1.0)
+    member = models.OneToOneField(
+        Member, 
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="reader_profile"
+    )
 
 
 class Story(models.Model):
@@ -93,6 +111,9 @@ class Story(models.Model):
 
     def __str__(self):
         return f"{self.author} : {self.story_title}"
+
+    class Meta:
+        verbose_name_plural = 'stories'
 
 
 class Chapter(models.Model):

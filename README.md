@@ -22,12 +22,15 @@
 ~~- Better member list~~
 ~~- [ARCHIVES] Pretty recs~~
 ~~- [ARCHIVES] Dark mode (fics only)~~
+~~- [ARCHIVES] Gérer plusieurs tailles de texte~~
+~~- [ARCHIVES] Gérer avec/sans serif~~
+
 - [STORIES] User Reaction?
 
 ### Must-have
-- [ARCHIVES] Gérer plusieurs tailles de texte
 - [ARCHIVES] Post : preview fic
 - [STORIES] Post comment (ongoing: lacking view + checks)
+- [PROFILE] Changing settings activating change in javascript
 - [STORIES] Delete chapter
 - [STORIES] User Comment
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).

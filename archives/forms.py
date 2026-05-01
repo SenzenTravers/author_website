@@ -2,7 +2,7 @@ import datetime
 
 from django import forms
 
-from .models import Author, Chapter, Comment, Story, PairingType
+from .models import Author, Chapter, Comment, Reader, Story, PairingType
 
 class AuthorForm(forms.ModelForm):
     class Meta:
@@ -10,6 +10,15 @@ class AuthorForm(forms.ModelForm):
         fields = [
             'nickname', 'criminal',
             'trackbear_profile', 'other_profile_url'
+        ]
+
+
+class ReaderForm(forms.ModelForm):
+    font_size = forms.FloatField(widget=forms.NumberInput(attrs={"min": "0", "step": ".1"}))
+    class Meta:
+        model = Reader
+        fields = [
+            'member', 'serif', 'font_size'
         ]
 
 

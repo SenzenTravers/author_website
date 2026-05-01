@@ -1,7 +1,7 @@
 from django.utils.translation import gettext, gettext_lazy as _
 
 from django.contrib import admin
-from .models import Author, Chapter, Story, PairingType
+from .models import Author, Chapter, Reader, Story, PairingType
 
 
 class ChapterAdmin(admin.ModelAdmin):
@@ -26,5 +26,6 @@ class PairingTypeAdmin(admin.ModelAdmin):
 
 admin.site.register(Author)
 admin.site.register(Chapter, ChapterAdmin)
+admin.site.register(Reader)
 admin.site.register(Story, StoryAdmin)
 admin.site.register(PairingType, PairingTypeAdmin)
