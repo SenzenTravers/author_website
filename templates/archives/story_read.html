@@ -115,22 +115,4 @@
 
 </section>
 
-<script>
-    const colourScheme = '{{ user.colour_scheme }}'
-
-    window.onload = (event) => {
-        if (colourScheme === 'dark') {
-            switchToNightMode()
-        }
-    };
-
-    function switchToNightMode() {
-        const body = document.querySelector('body')
-
-        body.style.setProperty('--jet-black', '#D1BFA6');
-        body.style.setProperty('--main-bg-colour-clear', '#252525');
-        body.style.setProperty('--midnight-blue', '#B0BFC2');
-        body.style.setProperty('--ivory', '#4C6585');
-    }
-</script>
 {% endblock %}

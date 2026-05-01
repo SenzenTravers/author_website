@@ -21,8 +21,7 @@
 ~~- Create new front page to edit Author~~
 ~~- Better member list~~
 ~~- [ARCHIVES] Pretty recs~~
-- [ARCHIVES] Fix: show author notes
-- [ARCHIVES] Dark mode (fics only)
+~~- [ARCHIVES] Dark mode (fics only)~~
 - [STORIES] User Reaction?
 
 ### Must-have

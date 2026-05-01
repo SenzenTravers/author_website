@@ -72,16 +72,33 @@
     </body>
 
     <script>
-        {% if user.title_blur == False %}
-            console.log('hohohoho')
-            window.onload = function() {
-            const mayBeBlurred = document.querySelectorAll('h1, h2, label')
+        const isLogged = '{{ user.is_authenticated }}'
+        const title_blur = '{{ user.title_blur }}'
+        const colourScheme = '{{ user.colour_scheme }}'
+        const serif = '{{ user.serif }}'
 
-            for (let item of mayBeBlurred) {
-                item.classList.add("no-shadow-no-blur")
+        window.onload = (event) => {
+            if (title_blur === 'False' && isLogged === 'True') {
+                const mayBeBlurred = document.querySelectorAll('h1, h2, label')
+
+                for (let item of mayBeBlurred) {
+                    item.classList.add("no-shadow-no-blur")
+                }
+            }
+
+            if (colourScheme === 'dark') {
+                switchToNightMode()
             }
 
         };
-        {% endif %}
+
+        function switchToNightMode() {
+            const body = document.querySelector('body')
+
+            body.style.setProperty('--jet-black', '#D1BFA6');
+            body.style.setProperty('--main-bg-colour-clear', '#252525');
+            body.style.setProperty('--midnight-blue', '#B0BFC2');
+            body.style.setProperty('--ivory', '#4C6585');
+        }
     </script>
 </html>
