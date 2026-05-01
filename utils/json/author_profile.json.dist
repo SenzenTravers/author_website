@@ -1,0 +1,15 @@
+{
+    "author_name": "Author Name",
+    "author_blurb": "Author blurb",
+    "author_bio": "Author bio",
+    "bibliography": {
+        "Category 1": [
+            "Titles and details",
+            "Titles and details 2"
+        ],
+        "Category 2": [
+            "Titles and details",
+            "Titles and details 2"
+        ]
+    }
+}

@@ -53,7 +53,8 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 ## LOCAL USE
 
 ### Installing
-This app was tested with Python 3.11, Python 3.12.3 and Python 3.14. Other versions were not tested.
+This app was tested with Python 3.11, Python 3.12.3 and Python 3.14. 
+Other versions were not tested.
 
 FOR UNIX : navigate to the project's root folder from your command line
  interface, then run:
@@ -74,7 +75,7 @@ Then, run:
 # Create migrations, i.e. ORM-generated files.
 # pay attention that the folder migrations should exists inside each app folder
 # its being ignored by git (see .gitignore file)
-# can cause issue like: 
+# can cause issues like: 
 # 'CommandError: Unable to serialize database: no such table: voiture_noire_discordprofile'
 python manage.py makemigrations
 python manage.py migrate
@@ -83,6 +84,11 @@ python manage.py migrate
 # Do not put in a real mail address.
 python manage.py createsuperuser --username=jean --email=jean@example.com
 ```
+
+Using the model shown in .env.dist, create your .env file.
+
+Using the model shown in utils/json/author_profile.json.dist, create 
+your author_profile.json file.
 
 You can now launch the app!
 

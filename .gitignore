@@ -55,3 +55,4 @@ pytest.ini
 
 # ENV
 .env
+/utils/json/author_profile.json
