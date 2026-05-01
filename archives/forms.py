@@ -71,6 +71,30 @@ class StoryForm(forms.ModelForm):
         self.fields["rating"].initial = "t"
 
 
+class StoryFilterForm(forms.Form):
+    G = "g"
+    T = "t"
+    E = "e"
+
+    RATING_TYPE_CHOICES = {
+        G: "Tout public",
+        T: "Public averti",
+        E: "Adulte",
+    }
+
+    filter_pairing_types = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        queryset=PairingType.objects.all()
+    )
+    filter_authors = forms.ModelMultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        queryset=Author.objects.all()
+    )
+    filter_ratings = forms.MultipleChoiceField(
+        widget=forms.CheckboxSelectMultiple,
+        choices=RATING_TYPE_CHOICES
+    )
+
 class PairingTypeForm(forms.ModelForm):
     class Meta:
         model = PairingType

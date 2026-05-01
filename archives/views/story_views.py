@@ -8,7 +8,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from archives.forms import Author, ChapterForm, StoryForm
+from archives.forms import Author, ChapterForm, StoryForm, StoryFilterForm
 from archives.models import Chapter, Story, PairingType
 from archives.utils import StoryDigester
 
@@ -22,10 +22,13 @@ class Index(generic.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+
         if not self.kwargs.get('author_id'):
             context["random_rec"] = stories_handler.return_a_rec(
                 self.request.user
             )
+            context["filter_form"] = StoryFilterForm
+
         return context
 
     def get_queryset(self):
@@ -35,8 +38,17 @@ class Index(generic.ListView):
                 self.kwargs['author_id']
             )
 
+        pairing_types = self.request.GET.getlist('filter_pairing_types')
+        ratings = self.request.GET.getlist('filter_ratings')
+        authors = self.request.GET.getlist('filter_authors')
+        request_filters = {
+            "pairing_types": pairing_types,
+            "ratings": ratings,
+            "authors": authors
+        }
         return stories_handler.get_all_visible_stories(
-            self.request.user
+            self.request.user,
+            request_filters
         )
 
 

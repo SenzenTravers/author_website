@@ -53,6 +53,34 @@
         </section>
     {% endif %}
 
+    {% if filter_form %}
+        <form id="story-filter-form" method="get">
+            {% csrf_token %}
+
+            <div id="story-filter-form-body">
+                <div>
+                    <label class="keep-capslocked" for="id_filter_pairing_types">
+                        Type
+                    </label>
+                    {{ filter_form.filter_pairing_types }}
+                </div>
+                <div>
+                    <label class="keep-capslocked" for="id_filter_ratings">
+                        Public
+                    </label>
+                    {{ filter_form.filter_ratings }}
+                </div>
+                <div class="multiple-choices-with-overflow">
+                    <label class="keep-capslocked" for="id_filter_authors">
+                        Autrices
+                    </label>
+                    {{ filter_form.filter_authors }}
+                </div>
+            </div>
+            <button type="submit">Filtrer</button>
+        </form>
+    {% endif %}
+
     {% for story in stories %}
         {% include './story_card.html' %} 
     {% endfor %}

@@ -41,6 +41,38 @@
     }
 }
 
+#story-filter-form {
+    display: flex;
+    flex-flow: column;
+}
+
+#story-filter-form-body {
+    line-height: normal;
+    .keep-capslocked {
+        display: block;
+        text-align: center;
+    }
+
+    label:not(.keep-capslocked) {
+        text-transform: capitalize;
+        font-weight: 100;
+    }
+
+    input {
+        margin-right: 5px;
+    }
+    
+    .multiple-choices-with-overflow div {
+        max-height: 6em;
+        overflow: scroll;
+        padding-right: 10px;
+
+        div {
+            padding-left: 5px;
+            border-bottom: 1px var(--ivory) dotted;
+        }
+    }
+}
 #random-rec {
     background-color: var(--misty-blue);
     color: var(--jet-black);
@@ -49,4 +81,29 @@
     border-radius: 5px;
     text-wrap: wrap;
     hyphens: auto;
+}
+
+
+/* RESPONSIVE */
+@media screen and (max-width: 500px){
+    #story-filter-form-body {
+        margin-left: 5vw;
+        display: flex;
+        flex-flow: column;
+    }
+}
+
+@media screen and (min-width: 501px){
+    #story-filter-form-body {
+        display: flex;
+        flex-flow: row;
+        justify-content: space-around;
+    }
+}
+
+@media screen and (min-width: 1600px){
+    #story-filter-form-body {
+        margin-left: 20vw;
+        margin-right: 20vw;
+    }
 }

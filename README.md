@@ -15,7 +15,7 @@
 
 
 ## TO-DO
-### Current task: decouple the various types of user profile
+### Current task: improve archives
 ~~- Fix exchange profile~~
 ~~- Create new front page to edit ExchangeParticipant~~
 ~~- Create new front page to edit Author~~
@@ -24,13 +24,14 @@
 ~~- [ARCHIVES] Dark mode (fics only)~~
 ~~- [ARCHIVES] Gérer plusieurs tailles de texte~~
 ~~- [ARCHIVES] Gérer avec/sans serif~~
+~~- [PROFILE] Changing settings activating change in javascript~~
+~~- [ARCHIVES] Sorting with authors and pairing types~~
 
 - [STORIES] User Reaction?
 
 ### Must-have
 - [ARCHIVES] Post : preview fic
 - [STORIES] Post comment (ongoing: lacking view + checks)
-- [PROFILE] Changing settings activating change in javascript
 - [STORIES] Delete chapter
 - [STORIES] User Comment
 - [STORIES] Add PDF thanks to [this library](https://www.geeksforgeeks.org/creating-ebooks-with-borb-in-python/).
@@ -44,6 +45,7 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field
+- [STORIES] Replace ratings as instances by rating as choices? 
 
 ### Last priority
 - [PINE] (Mobile) : Rearrange banner
