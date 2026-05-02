@@ -25,7 +25,13 @@ class Prompt(models.Model):
     ]
     body = models.TextField(max_length=300)
     pairing_type = models.CharField(max_length=3, choices=PAIRING_TYPE)
-    will_want = models.ManyToManyField(
+    would_create = models.ManyToManyField(
         Member, 
-        blank=True
+        blank=True,
+        # related_name="would_create"
     )
+    # would_receive = models.ManyToManyField(
+    #     Member, 
+    #     blank=True,
+    #     related_name="would_receive"
+    # )

@@ -4,9 +4,9 @@ from django.contrib import admin
 from .models import ExchangeParticipant, Prompt
 
 class PromptAdmin(admin.ModelAdmin):
-    fields = ['body', 'pairing_type', 'will_want']
+    fields = ['body', 'pairing_type', 'would_create']
     list_display = ('body', 'pairing_type')
-    list_filter = ('body', 'pairing_type', 'will_want')
+    list_filter = ('body', 'pairing_type', 'would_create')
 
 
 class ExchangeParticipantAdmin(admin.ModelAdmin):

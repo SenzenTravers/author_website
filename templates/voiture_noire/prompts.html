@@ -55,11 +55,11 @@
                         <button type="submit">⇓ Thème</button>
                     </form>
                 </th>
-                <th class="prompt-will_want">
+                <th class="prompt-would_create">
                     <form method="post" class="form-prompt-table-sorter">
                         {% csrf_token %}
-                        <input type="text" hidden name="sort_value" value="will_want">
-                        <button type="submit">⇓ Intéressés</button>
+                        <input type="text" hidden name="sort_value" value="would_create">
+                        <button type="submit">⇓ Veulent créer</button>
                     </form>
                 </th>
                 <th class="prompt-button">
@@ -80,8 +80,8 @@
                     {{ prompt.body }}
                 </td>
 
-                <td class="prompt-will_want">
-                    {% for person in prompt.will_want.all %}
+                <td class="prompt-would_create">
+                    {% for person in prompt.would_create.all %}
                         {% if forloop.last %}
                             {{ person.username.capitalize }}
                         {% else %}
@@ -92,7 +92,7 @@
                 </td>
 
                 <td class="prompt-button">
-                    {% if user in prompt.will_want.all %}
+                    {% if user in prompt.would_create.all %}
                         <form
                             class="form-favourite-logic"
                             action="{% url 'voiture_noire:unfavourite' prompt.id %} "
@@ -156,26 +156,26 @@
     function handleSupporterNames(form) {
         const parentCell = form.parentElement;
         const supporterCell = parentCell.previousSibling.previousSibling
-        let will_wantList = supporterCell.innerText
+        let would_createList = supporterCell.innerText
 
-        if (will_wantList.includes(userName)) {
+        if (would_createList.includes(userName)) {
             const commaAfter = userName + ", "
             const commaBefore = ", " + userName
 
-            will_wantList = will_wantList.replace(commaAfter, "")
-            will_wantList = will_wantList.replace(commaBefore, "")
-            will_wantList = will_wantList.replace(userName, "")
+            would_createList = would_createList.replace(commaAfter, "")
+            would_createList = would_createList.replace(commaBefore, "")
+            would_createList = would_createList.replace(userName, "")
         } else {
             const withComma = ", " + userName
 
-            if (will_wantList.length === 0) {
-                will_wantList = userName    
+            if (would_createList.length === 0) {
+                would_createList = userName    
             } else {
-                will_wantList = will_wantList + withComma
+                would_createList = would_createList + withComma
             }
         }
         
-        supporterCell.innerText = will_wantList
+        supporterCell.innerText = would_createList
     }
 </script>
 {% endblock %}

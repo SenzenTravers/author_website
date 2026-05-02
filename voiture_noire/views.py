@@ -135,14 +135,14 @@ class PromptView(View):
         form = self.form_class(initial=self.initial)
         criteria = request.POST['sort_value']
         match criteria:
-            case "will_want":
-                prompt_list = Prompt.objects.annotate(number_of_will_want=Count('will_want')).order_by("number_of_will_want")
+            case "would_create":
+                prompt_list = Prompt.objects.annotate(number_of_would_create=Count('would_create')).order_by("number_of_would_create")
             case "pairing_type":
                 prompt_list = Prompt.objects.order_by(criteria, "body")
             case "user_likes":
                 prompt_list = Prompt.objects.annotate(
                     has_supporter=Count(
-                        'will_want', filter=Q(will_want__id=request.user.id)
+                        'would_create', filter=Q(would_create__id=request.user.id)
                     )).order_by('-has_supporter', 'body')
             case _:
                 prompt_list = Prompt.objects.order_by(criteria)
@@ -155,14 +155,14 @@ def post_prompt(request):
     new_prompt = PromptForm(request.POST)
     if new_prompt.is_valid():
         saved_prompt = new_prompt.save()
-        saved_prompt.will_want.add(request.user)
+        saved_prompt.would_create.add(request.user)
         return redirect('voiture_noire:prompts')
     # Todo: return message for ano
 
 def favourite(request, prompt_id):
     try:
         prompt = Prompt.objects.get(id=prompt_id)
-        prompt.will_want.add(request.user)
+        prompt.would_create.add(request.user)
     except:
         return redirect('500')
     return redirect('voiture_noire:prompts')
@@ -170,7 +170,7 @@ def favourite(request, prompt_id):
 def unfavourite(request, prompt_id):
     try:
         prompt = Prompt.objects.get(id=prompt_id)
-        prompt.will_want.remove(request.user)
+        prompt.would_create.remove(request.user)
     except:
         return redirect('500')
     return redirect('voiture_noire:prompts')
