@@ -44,9 +44,9 @@
                     {{ person.exchange_participant.likes | safe }}
                 <h3>N'AIME PAS</h3>
                     {{ person.exchange_participant.dislikes | safe}}
-                <h3>INTÉRESSÉ.E PAR :</h3>
+                <h3>VOUDRAIT :</h3>
                 <ul>
-                    {% for prompt in person.prompt_set.all|dictsort:"pairing_type" %} 
+                    {% for prompt in person.would_receive.all|dictsort:"pairing_type" %} 
                         <li>
                             <b>{{ prompt.get_pairing_type_display }}</b> : {{prompt.body}}
                         </li>

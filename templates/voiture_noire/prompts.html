@@ -14,7 +14,6 @@
 <hr>
 
 <section class="prompt-handler">
-    <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
     <details class="detail-prompt-post">
         <summary>
           Proposer un thème
@@ -22,20 +21,19 @@
 
         <form method="post" action="{% url 'voiture_noire:post_prompt' %} "class="form-prompt-post form-main">
             {% csrf_token %}
-            <label for="id_likes">Type :</label>
+            <label for="id_pairing_types">Type :</label>
             {{ form.pairing_type }}
-            <label for="id_dislikes">Thème :</label>
+            <label for="id_body">Thème :</label>
             {{ form.body }}
             <button type="submit">Envoyer</button>
         </form>    
     </details>
 
-        <!-- <p>Les thèmes peuvent être choisis par type de couple ou par demandeur.</p> -->
     <section class="section-prompt-list">
         <h2 class="h2-prompt-table">Les thèmes</h2>
 
         <p class="p-prompt-table-explanation">
-            Les thèmes peuvent être triés par type de couple, par demandeur, par ordre alphabétique
+            Les thèmes peuvent être triés par type de couple, par demandeuse, par ordre alphabétique
             (chacun ses fantasmes) et, enfin, par s'ils sont ou non dans vos requêtes.
         </p>
 
@@ -65,7 +63,21 @@
                 <th class="prompt-button">
                     <form method="post" class="form-prompt-table-sorter">
                         {% csrf_token %}
-                        <input type="text" hidden name="sort_value" value="user_likes">
+                        <input type="text" hidden name="sort_value" value="user_likes_create">
+                        <button type="submit">⇓⇓⇓</button>
+                    </form>
+                </th>
+                <th class="prompt-would_receive">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="would_receive">
+                        <button type="submit">⇓ Veulent recevoir</button>
+                    </form>
+                </th>
+                <th class="prompt-button">
+                    <form method="post" class="form-prompt-table-sorter">
+                        {% csrf_token %}
+                        <input type="text" hidden name="sort_value" value="user_likes_receive">
                         <button type="submit">⇓⇓⇓</button>
                     </form>
                 </th>
@@ -95,7 +107,7 @@
                     {% if user in prompt.would_create.all %}
                         <form
                             class="form-favourite-logic"
-                            action="{% url 'voiture_noire:unfavourite' prompt.id %} "
+                            action="{% url 'voiture_noire:would_not_create' prompt.id %} "
                             method="post"
                         >
                             {% csrf_token %}
@@ -104,7 +116,39 @@
                     {% else %}
                         <form 
                             class="form-favourite-logic"
-                            action="{% url 'voiture_noire:favourite' prompt.id %} "
+                            action="{% url 'voiture_noire:would_create' prompt.id %} "
+                            method="post"
+                        >
+                            {% csrf_token %}
+                            <button type="submit" title="Ajouter aux favoris">💛</button>
+                        </form>
+                    {% endif %}
+                </td>
+
+                <td class="prompt-would_receive">
+                    {% for person in prompt.would_receive.all %}
+                        {% if forloop.last %}
+                            {{ person.username.capitalize }}
+                        {% else %}
+                            {{ person.username.capitalize }},
+                        {% endif %}
+                    {% endfor %}
+                </td>
+
+                <td class="prompt-button">
+                    {% if user in prompt.would_receive.all %}
+                        <form
+                            class="form-favourite-logic"
+                            action="{% url 'voiture_noire:would_not_receive' prompt.id %} "
+                            method="post"
+                        >
+                            {% csrf_token %}
+                            <button type="submit" titre="Retirer des favoris">💔</button>
+                        </form>
+                    {% else %}
+                        <form 
+                            class="form-favourite-logic"
+                            action="{% url 'voiture_noire:would_receive' prompt.id %} "
                             method="post"
                         >
                             {% csrf_token %}

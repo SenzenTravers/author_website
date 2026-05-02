@@ -16,7 +16,9 @@ urlpatterns = [
     path('everyone', login_required(views.MemberList.as_view()), name='everyone'),
     path('prompts', login_required(views.PromptView.as_view()), name='prompts'),
     path('post_prompt', login_required(views.post_prompt), name='post_prompt'),
-    path('unfavourite/<int:prompt_id>', views.unfavourite, name='unfavourite'),
-    path('favourite/<int:prompt_id>', views.favourite, name='favourite'),
+    path('would_not_create/<int:prompt_id>', views.would_not_create, name='would_not_create'),
+    path('would_create/<int:prompt_id>', views.would_create, name='would_create'),
+    path('would_not_receive/<int:prompt_id>', views.would_not_receive, name='would_not_receive'),
+    path('would_receive/<int:prompt_id>', views.would_receive, name='would_receive'),
     path('accuse/<int:author_id>', login_required(views.brand_as_criminal), name='brand_as_criminal'),
 ]

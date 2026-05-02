@@ -137,13 +137,20 @@ class PromptView(View):
         match criteria:
             case "would_create":
                 prompt_list = Prompt.objects.annotate(number_of_would_create=Count('would_create')).order_by("number_of_would_create")
+            case "would_receive":
+                prompt_list = Prompt.objects.annotate(number_of_would_receive=Count('would_receive')).order_by("number_of_would_receive")
             case "pairing_type":
                 prompt_list = Prompt.objects.order_by(criteria, "body")
-            case "user_likes":
+            case "user_likes_create":
                 prompt_list = Prompt.objects.annotate(
-                    has_supporter=Count(
+                    has_creators=Count(
                         'would_create', filter=Q(would_create__id=request.user.id)
-                    )).order_by('-has_supporter', 'body')
+                    )).order_by('-has_creators', 'body')
+            case "user_likes_receive":
+                prompt_list = Prompt.objects.annotate(
+                    has_creators=Count(
+                        'would_receive', filter=Q(would_receive__id=request.user.id)
+                    )).order_by('-has_receivers', 'body')
             case _:
                 prompt_list = Prompt.objects.order_by(criteria)
         return render(request, self.template_name, {
@@ -159,7 +166,7 @@ def post_prompt(request):
         return redirect('voiture_noire:prompts')
     # Todo: return message for ano
 
-def favourite(request, prompt_id):
+def would_create(request, prompt_id):
     try:
         prompt = Prompt.objects.get(id=prompt_id)
         prompt.would_create.add(request.user)
@@ -167,10 +174,26 @@ def favourite(request, prompt_id):
         return redirect('500')
     return redirect('voiture_noire:prompts')
 
-def unfavourite(request, prompt_id):
+def would_not_create(request, prompt_id):
     try:
         prompt = Prompt.objects.get(id=prompt_id)
         prompt.would_create.remove(request.user)
+    except:
+        return redirect('500')
+    return redirect('voiture_noire:prompts')
+
+def would_receive(request, prompt_id):
+    try:
+        prompt = Prompt.objects.get(id=prompt_id)
+        prompt.would_receive.add(request.user)
+    except:
+        return redirect('500')
+    return redirect('voiture_noire:prompts')
+
+def would_not_receive(request, prompt_id):
+    try:
+        prompt = Prompt.objects.get(id=prompt_id)
+        prompt.would_receive.remove(request.user)
     except:
         return redirect('500')
     return redirect('voiture_noire:prompts')
