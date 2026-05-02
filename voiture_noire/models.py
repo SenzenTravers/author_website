@@ -28,10 +28,10 @@ class Prompt(models.Model):
     would_create = models.ManyToManyField(
         Member, 
         blank=True,
-        # related_name="would_create"
+        related_name="would_create"
     )
-    # would_receive = models.ManyToManyField(
-    #     Member, 
-    #     blank=True,
-    #     related_name="would_receive"
-    # )
+    would_receive = models.ManyToManyField(
+        Member, 
+        blank=True,
+        related_name="would_receive"
+    )
