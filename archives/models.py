@@ -137,3 +137,33 @@ class Comment(models.Model):
     chapter = models.ForeignKey(Chapter, on_delete=models.CASCADE, blank=True, related_name="comments")
     author = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, related_name="comments")
     content = models.TextField(max_length=3000)
+
+
+class Reaction(models.Model):
+    text_emoji = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.text_emoji
+
+
+class ReactionsRelationships(models.Model):
+    member = models.ForeignKey(
+        Member,
+        on_delete=models.CASCADE,
+        related_name="member_reacted_as"
+    )
+    story = models.ForeignKey(
+        Story,
+        on_delete=models.CASCADE,
+        related_name="story_reacted_as"
+    )
+    reaction = models.ForeignKey(
+        Reaction,
+        on_delete=models.CASCADE,
+        related_name="reacted_as"
+    )
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['story', 'member'], name="members_can_only_react_one_way")
+        ]

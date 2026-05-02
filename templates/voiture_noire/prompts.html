@@ -55,10 +55,10 @@
                         <button type="submit">⇓ Thème</button>
                     </form>
                 </th>
-                <th class="prompt-supporters">
+                <th class="prompt-will_want">
                     <form method="post" class="form-prompt-table-sorter">
                         {% csrf_token %}
-                        <input type="text" hidden name="sort_value" value="supporters">
+                        <input type="text" hidden name="sort_value" value="will_want">
                         <button type="submit">⇓ Intéressés</button>
                     </form>
                 </th>
@@ -80,9 +80,8 @@
                     {{ prompt.body }}
                 </td>
 
-                <td class="prompt-supporters">
-                    <!-- NOTE : Gérer les virgules -->
-                    {% for person in prompt.supporters.all %}
+                <td class="prompt-will_want">
+                    {% for person in prompt.will_want.all %}
                         {% if forloop.last %}
                             {{ person.username.capitalize }}
                         {% else %}
@@ -93,7 +92,7 @@
                 </td>
 
                 <td class="prompt-button">
-                    {% if user in prompt.supporters.all %}
+                    {% if user in prompt.will_want.all %}
                         <form
                             class="form-favourite-logic"
                             action="{% url 'voiture_noire:unfavourite' prompt.id %} "
@@ -157,26 +156,26 @@
     function handleSupporterNames(form) {
         const parentCell = form.parentElement;
         const supporterCell = parentCell.previousSibling.previousSibling
-        let supportersList = supporterCell.innerText
+        let will_wantList = supporterCell.innerText
 
-        if (supportersList.includes(userName)) {
+        if (will_wantList.includes(userName)) {
             const commaAfter = userName + ", "
             const commaBefore = ", " + userName
 
-            supportersList = supportersList.replace(commaAfter, "")
-            supportersList = supportersList.replace(commaBefore, "")
-            supportersList = supportersList.replace(userName, "")
+            will_wantList = will_wantList.replace(commaAfter, "")
+            will_wantList = will_wantList.replace(commaBefore, "")
+            will_wantList = will_wantList.replace(userName, "")
         } else {
             const withComma = ", " + userName
 
-            if (supportersList.length === 0) {
-                supportersList = userName    
+            if (will_wantList.length === 0) {
+                will_wantList = userName    
             } else {
-                supportersList = supportersList + withComma
+                will_wantList = will_wantList + withComma
             }
         }
         
-        supporterCell.innerText = supportersList
+        supporterCell.innerText = will_wantList
     }
 </script>
 {% endblock %}

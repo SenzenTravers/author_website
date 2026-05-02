@@ -26,8 +26,7 @@
 ~~- [ARCHIVES] Gérer avec/sans serif~~
 ~~- [PROFILE] Changing settings activating change in javascript~~
 ~~- [ARCHIVES] Sorting with authors and pairing types~~
-
-- [STORIES] User Reaction?
+- [STORIES] User Reaction (ongoing: back done)
 
 ### Must-have
 - [ARCHIVES] Post : preview fic
@@ -42,6 +41,7 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 - [STORIES] Add HTML support for multiple chapters
 
 ### Nice to have
+- [STORIES] Add settings buttons to stories themselves
 - [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
 - [STORIES] Handle last_updated field
