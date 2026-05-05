@@ -27,6 +27,8 @@
 ~~- [PROFILE] Changing settings activating change in javascript~~
 ~~- [ARCHIVES] Sorting with authors and pairing types~~
 - [STORIES] User Reaction (ongoing: back done)
+- [WRITER] Add buttons to filter rants
+- [FIX] User profile
 
 ### Must-have
 - [ARCHIVES] Post : preview fic
@@ -42,9 +44,7 @@ available [here](https://github.com/jorisschellekens/borb?tab=readme-ov-file). I
 
 ### Nice to have
 - [STORIES] Add settings buttons to stories themselves
-- [WRITER] Add buttons to filter rants
 - [PROMPTS] Search prompts through text
-- [STORIES] Handle last_updated field
 - [STORIES] Replace ratings as instances by rating as choices? 
 
 ### Last priority
