@@ -1,8 +1,10 @@
 from datetime import date, datetime
 
 from django.contrib import messages
+from django.core import serializers
 from django.core.exceptions import PermissionDenied
 from django.db.models import Count, Q
+from django.http import JsonResponse
 from django.shortcuts import render, redirect
 from django.views import generic, View
 
@@ -12,7 +14,7 @@ from archives.forms import AuthorForm, ReaderForm
 from archives.models import Author, Reader, Story
 
 from .models import ExchangeParticipant, Prompt
-from .forms import ExchangeParticipantForm, PromptForm
+from .forms import ExchangeParticipantForm, PromptForm, PromptFilterForm
             
 
 class MemberList(generic.ListView):
@@ -125,9 +127,13 @@ class PromptView(View):
         form = self.form_class(initial=self.initial)
         prompt_list = Prompt.objects.order_by('-id')
 
-        return render(request, self.template_name, {
-            "form": form,
-            "prompt_list": prompt_list
+        return render(
+            request,
+            self.template_name,
+            {
+                "form": form,
+                "prompt_list": prompt_list,
+                "prompt_filter_form": PromptFilterForm
             }
         )
 
@@ -157,6 +163,29 @@ class PromptView(View):
             "form": form,
             "prompt_list": prompt_list
             })
+
+
+class FilteredPromptsList(generic.list.MultipleObjectMixin, View):
+    context_object_name = 'FilteredPrompts'
+
+    def get_queryset(self):
+        return Prompt.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        pairing_types = self.request.GET.getlist('pairing_types')
+        will_create_for = self.request.GET.getlist('will_create_for')
+        will_receive_for = self.request.GET.getlist('will_receive_for')
+        body = self.request.GET.get('body')
+        request_filters = {
+            "pairing_types": pairing_types,
+            "will_create_for": will_create_for,
+            "will_receive_for": will_receive_for,
+            "body": body
+        }
+        self.filtered_prompts = self.get_queryset()
+
+        return JsonResponse({"oh": "ah"})
+
 
 def post_prompt(request):
     new_prompt = PromptForm(request.POST)
@@ -198,6 +227,7 @@ def would_not_receive(request, prompt_id):
         return redirect('500')
     return redirect('voiture_noire:prompts')
 
+# Brand author as criminal
 def brand_as_criminal(request, author_id):
     author = Author.objects.filter(member=request.user).first()
 
